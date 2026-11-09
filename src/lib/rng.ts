@@ -43,3 +43,8 @@ export function createRng(seed: string): Rng {
   };
   return { next, int, pick };
 }
+
+/** A fresh, unique seed string for a new pack or game (call from event handlers, not render). */
+export function freshSeed(): string {
+  return `${Date.now().toString(36)}-${Math.floor(Math.random() * 1e9).toString(36)}`;
+}

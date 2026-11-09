@@ -1,0 +1,1468 @@
+/* Feel prototype styles. Mobile-first; ≥ 820px puts the stall and the book side by side. */
+
+:root {
+  --t-seed: #f4c542;
+  --t-verb: #5b8def;
+  --t-look: #4caf7d;
+  --t-twist: #a26bd6;
+  --card-paper: #fffaf0;
+  --accent: #d9452b;
+  --cw: clamp(62px, 21vw, 132px);
+}
+
+.proto {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.proto button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.proto button:focus-visible,
+.proto input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.proto button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+/* ── Top bar ───────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  font-size: 14px;
+  border-bottom: 2px dashed var(--paper-edge);
+}
+.purse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 18px;
+}
+.coin {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe38a, #e0a91c 70%);
+  border: 2px solid #8a6410;
+  color: #6b4d0a;
+  font-size: 12px;
+  font-weight: 700;
+}
+.counts {
+  color: var(--ink-soft);
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.toggles {
+  display: flex;
+  gap: 6px;
+}
+.toggles button {
+  min-height: 36px;
+  padding: 0 8px;
+  white-space: nowrap;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 12px;
+}
+.toggles button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+.rm-note {
+  font-size: 12px;
+  padding: 4px 16px;
+  color: var(--ink-soft);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px 0;
+}
+@media (min-width: 820px) {
+  .layout {
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 16px 16px;
+  }
+  .stage {
+    flex: 1.3;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+.tabs button {
+  flex: 1;
+  min-height: 40px;
+  border: 2px solid var(--ink);
+  border-bottom-width: 4px;
+  background: var(--card-paper);
+  border-radius: 8px 8px 0 0;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 0 8px;
+}
+.tabs button[aria-current="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.station {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12px;
+  text-align: center;
+}
+.stall-sign {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(14px, 4vw, 20px);
+  padding: 22px 18px 8px;
+  background:
+    repeating-linear-gradient(90deg, var(--accent) 0 18px, #fff3e0 18px 36px) top / 100% 14px
+      no-repeat,
+    var(--card-paper);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+.stall-sign.tailor {
+  background:
+    repeating-linear-gradient(90deg, var(--t-look) 0 18px, #fff3e0 18px 36px) top / 100% 14px
+      no-repeat,
+    var(--card-paper);
+}
+.stall-sign.trickster {
+  background:
+    repeating-linear-gradient(90deg, var(--t-twist) 0 18px, #fff3e0 18px 36px) top / 100% 14px
+      no-repeat,
+    var(--card-paper);
+}
+.keeper {
+  font-family: var(--font-hand), cursive;
+  font-size: 22px;
+  color: var(--ink-soft);
+}
+.hint {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.big-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--card-paper);
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 14px !important;
+}
+.big-btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.link-btn {
+  min-height: 36px;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+/* ── Bin ───────────────────────────────────────────────── */
+.bin {
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  width: 64px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 2px solid var(--ink);
+  border-top-width: 6px;
+  border-radius: 4px 4px 12px 12px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 10px, rgba(0, 0, 0, 0.08) 10px 12px), #cfc6b2;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  color: #2b2620;
+  transition: transform 0.15s;
+  z-index: 1;
+}
+.bin.hover {
+  transform: scale(1.15) rotate(-4deg);
+  background-color: #e8a99c;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: var(--cw);
+  aspect-ratio: 5 / 7;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--card-paper);
+  color: #2b2620;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  font-size: calc(var(--cw) * 0.075);
+  text-align: left;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.18);
+}
+.card.face::before {
+  /* Type band with the type's pattern. */
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 26%;
+  background: var(--tc);
+  opacity: 0.9;
+  z-index: 0;
+}
+.t-seed {
+  --tc:
+    radial-gradient(circle, rgba(0, 0, 0, 0.18) 1.5px, transparent 2px) 0 0 / 8px 8px, var(--t-seed);
+}
+.t-verb {
+  --tc:
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.16) 0 3px, transparent 3px 8px), var(--t-verb);
+}
+.t-look {
+  --tc:
+    linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px) 0 0 / 8px 8px,
+    linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px) 0 0 / 8px 8px, var(--t-look);
+}
+.t-twist {
+  --tc:
+    radial-gradient(circle at 50% 120%, transparent 5px, rgba(0, 0, 0, 0.16) 6px, transparent 7px) 0
+      0 / 12px 8px,
+    var(--t-twist);
+}
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-pixel), monospace;
+  font-size: 0.95em;
+}
+.card-word {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: 1.5em;
+  line-height: 1.15;
+  padding-top: 12%;
+  overflow-wrap: anywhere;
+}
+.card-word.long {
+  font-size: 1.05em;
+}
+.card-tags {
+  font-size: 0.85em;
+  color: #6b6152;
+}
+.card-flavor {
+  font-family: var(--font-hand), cursive;
+  font-size: 1.15em;
+  line-height: 1.1;
+  border-top: 1px solid #d8cfba;
+  padding-top: 2px;
+  margin-top: 2px;
+}
+.card-foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75em;
+  color: #6b6152;
+}
+.swatch {
+  display: flex;
+  height: 10%;
+  border: 1px solid #2b2620;
+  margin-bottom: 4px;
+}
+.swatch span {
+  flex: 1;
+}
+.card.small .card-word {
+  font-size: 1.15em;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
+}
+.card.small {
+  width: 100%;
+  font-size: clamp(7px, 1.8vw, 10px);
+  padding: 4px;
+}
+
+/* Rarity: ceremony, not usefulness. */
+.r-uncommon {
+  border-color: #3a7bd5;
+  box-shadow:
+    0 0 0 2px #9cc1f2 inset,
+    0 3px 0 rgba(0, 0, 0, 0.18);
+}
+.foil {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.r-rare .foil {
+  opacity: 0.55;
+  mix-blend-mode: color-dodge;
+  background:
+    radial-gradient(
+      circle at var(--mx, 30%) var(--my, 30%),
+      rgba(255, 255, 255, 0.9),
+      transparent 35%
+    ),
+    conic-gradient(
+      from 0deg at var(--mx, 30%) var(--my, 30%),
+      #ff7eb3,
+      #ffd36e,
+      #7effc4,
+      #7ec8ff,
+      #c47eff,
+      #ff7eb3
+    );
+}
+.r-mythic {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--card-paper), var(--card-paper)) padding-box,
+    conic-gradient(from var(--spin, 0deg), #b8860b, #ffe28a, #b8860b, #fff4c2, #b8860b) border-box;
+  animation: mythic-spin 3s linear infinite;
+}
+.r-mythic .foil {
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 40%),
+    #fff6c9,
+    #d4a017 60%,
+    transparent 80%
+  );
+}
+@property --spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes mythic-spin {
+  to {
+    --spin: 360deg;
+  }
+}
+
+.card.back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08) 0 6px, transparent 6px 12px),
+    radial-gradient(circle at 50% 50%, #3d342a, #241e18);
+  color: #f6f0e1;
+  font-family: var(--font-pixel), monospace;
+  font-size: calc(var(--cw) * 0.16);
+  backface-visibility: hidden;
+}
+
+/* ── Hand card (flip + drag) ───────────────────────────── */
+.hand-card {
+  position: relative;
+  width: var(--cw);
+  flex: none;
+  transition:
+    width 0.25s,
+    margin 0.25s;
+}
+.hand-card.gone {
+  width: 0;
+  margin: 0 !important;
+}
+.hand-card-body {
+  perspective: 700px;
+  touch-action: none;
+  will-change: transform;
+}
+.hand-card-body.up {
+  cursor: grab;
+}
+.hand-card-body.up:active {
+  cursor: grabbing;
+}
+.card-button {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  transition:
+    transform 0.26s cubic-bezier(0.3, 1.6, 0.5, 1),
+    filter 0.26s,
+    clip-path 0.26s;
+}
+.crumpled .card-button {
+  transform: scale(0.6) rotate(-9deg);
+  filter: contrast(1.2) brightness(0.92);
+  clip-path: polygon(
+    8% 4%,
+    30% 0,
+    52% 7%,
+    74% 1%,
+    96% 9%,
+    100% 33%,
+    93% 55%,
+    100% 78%,
+    90% 97%,
+    63% 92%,
+    40% 100%,
+    18% 93%,
+    0 98%,
+    6% 72%,
+    0 47%,
+    5% 24%
+  );
+}
+.flipper {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.flipper > .card.face {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.flipper.flipped {
+  transform: rotateY(180deg);
+}
+.selected .hand-card-body {
+  filter: drop-shadow(0 0 0 var(--accent)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+.card-actions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 30;
+}
+.act {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--card-paper);
+  color: #2b2620 !important;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.act.keep {
+  background: var(--t-seed);
+}
+.rip-halves {
+  position: relative;
+}
+.rip-halves > :last-child {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Pack ──────────────────────────────────────────────── */
+.shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.pack-shelf {
+  display: flex;
+  gap: 10px;
+}
+.pack {
+  position: relative;
+  width: min(200px, 52vw);
+  aspect-ratio: 3 / 4.2;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background:
+    linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%),
+    repeating-linear-gradient(
+      -45deg,
+      var(--t-seed) 0 14px,
+      var(--t-verb) 14px 28px,
+      var(--t-twist) 28px 42px
+    );
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+.pack.mini {
+  width: 48px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+.pack-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.pack-flap {
+  position: relative;
+  height: 22%;
+  background: rgba(255, 255, 255, 0.55);
+  border-bottom: 2px dashed var(--ink);
+  touch-action: none;
+  cursor: ew-resize;
+  display: grid;
+  place-items: center;
+}
+.tear-hint {
+  font-size: 11px;
+  font-family: var(--font-pixel), monospace;
+  color: #2b2620;
+  animation: nudge 1.2s ease-in-out infinite;
+}
+@keyframes nudge {
+  50% {
+    transform: translateX(6px);
+  }
+}
+.tear-line {
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 8px;
+  width: calc(var(--tear, 0) * 100%);
+  background: #2b2620;
+  clip-path: polygon(
+    0 50%,
+    4% 0,
+    8% 100%,
+    12% 0,
+    16% 100%,
+    20% 0,
+    24% 100%,
+    28% 0,
+    32% 100%,
+    36% 0,
+    40% 100%,
+    44% 0,
+    48% 100%,
+    52% 0,
+    56% 100%,
+    60% 0,
+    64% 100%,
+    68% 0,
+    72% 100%,
+    76% 0,
+    80% 100%,
+    84% 0,
+    88% 100%,
+    92% 0,
+    96% 100%,
+    100% 50%
+  );
+}
+.pack-body {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  text-align: center;
+}
+.pack-label {
+  font-family: var(--font-pixel), monospace;
+  font-size: 18px;
+  background: var(--card-paper);
+  color: #2b2620;
+  padding: 4px 8px;
+  border: 2px solid var(--ink);
+}
+.pack-sub {
+  font-family: var(--font-hand), cursive;
+  font-size: 18px;
+  color: #2b2620;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Fan ───────────────────────────────────────────────── */
+.fan {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 0 56px;
+  width: 100%;
+}
+.fan .hand-card {
+  margin-inline: calc(var(--cw) * -0.14);
+}
+.fan-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-right: 72px;
+}
+.single-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding-top: 8px;
+}
+
+/* ── Tailor reels ─────────────────────────────────────── */
+.reels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: min(460px, 100%);
+}
+.reel-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reel-label {
+  font-size: 11px;
+  font-family: var(--font-pixel), monospace;
+}
+.reel {
+  height: 72px;
+  padding: 4px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--card-paper);
+  color: #2b2620 !important;
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 11px !important;
+  line-height: 1.2;
+}
+.reel:disabled {
+  opacity: 1 !important;
+}
+.reel.spinning {
+  background: repeating-linear-gradient(0deg, var(--card-paper) 0 10px, #efe6d0 10px 12px);
+  animation: reel-blur 0.14s linear infinite;
+  border-color: var(--t-look);
+}
+@keyframes reel-blur {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 24px;
+  }
+}
+.reel.locked {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent) inset;
+}
+.lock {
+  min-height: 36px;
+  border: 2px dashed var(--ink);
+  border-radius: 8px;
+  background: none;
+  font-size: 12px;
+}
+.lock.on {
+  border-style: solid;
+  background: var(--accent);
+  color: #fff !important;
+}
+
+/* ── Trickster cups ───────────────────────────────────── */
+.cups {
+  position: relative;
+  width: min(340px, 100%);
+  height: 150px;
+  margin-top: 8px;
+}
+.cup-spot {
+  position: absolute;
+  top: 40px;
+  width: 33.33%;
+  left: calc(var(--pos) * 33.33%);
+  display: grid;
+  justify-items: center;
+  transition: left var(--swap) cubic-bezier(0.5, 0, 0.3, 1);
+}
+.cup {
+  width: 84px;
+  height: 96px;
+  border: none;
+  clip-path: polygon(16% 0, 84% 0, 100% 100%, 0 100%);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 12px, rgba(255, 255, 255, 0.25) 12px 20px),
+    linear-gradient(#c0392b, #8e2a1f);
+  transition: transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+  position: relative;
+  z-index: 2;
+}
+.cup:not(:disabled):hover {
+  transform: translateY(-6px);
+}
+.cup:disabled {
+  opacity: 1 !important;
+}
+.cup.lifted {
+  transform: translateY(-46px);
+  opacity: 0.35 !important;
+}
+.cup.picked {
+  opacity: 0.9 !important;
+}
+.ghost-card {
+  position: absolute;
+  top: 40px;
+  width: 64px;
+  opacity: 0.6;
+  transform: rotate(-4deg);
+  z-index: 1;
+}
+
+/* ── Spread (book page) ───────────────────────────────── */
+.spread {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  background: linear-gradient(var(--paper), var(--paper));
+  border-top: 2px solid var(--ink);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.08);
+  z-index: 5;
+}
+@media (min-width: 820px) {
+  .spread {
+    flex: 1;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    padding: 16px;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    margin-top: 16px;
+    background:
+      linear-gradient(
+        90deg,
+        transparent calc(50% - 1px),
+        rgba(0, 0, 0, 0.25) 50%,
+        transparent calc(50% + 1px)
+      ),
+      #fbf6ea;
+  }
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+}
+.progress {
+  color: var(--accent);
+}
+.slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (min-width: 820px) {
+  .slots {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 4px 10%;
+  }
+}
+.slot {
+  position: relative;
+  aspect-ratio: 5 / 7;
+  border: 2px dashed var(--ink-soft);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  transition:
+    transform 0.15s,
+    border-color 0.15s,
+    background-color 0.15s;
+}
+.slot-label {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(8px, 2vw, 12px);
+  color: var(--ink-soft);
+  text-align: center;
+}
+.slot.want {
+  border-color: var(--accent);
+  animation: pulse 0.9s ease-in-out infinite;
+}
+.slot.hover {
+  transform: scale(1.06);
+  background: rgba(217, 69, 43, 0.12);
+  border-style: solid;
+}
+.slot.filled {
+  border-color: transparent;
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.04);
+    background: rgba(217, 69, 43, 0.08);
+  }
+}
+.stamped {
+  position: relative;
+  width: 100%;
+}
+.tape {
+  position: absolute;
+  top: -7px;
+  left: 18%;
+  width: 64%;
+  height: 16%;
+  max-height: 18px;
+  opacity: 0.7;
+  transform: rotate(-4deg);
+  clip-path: polygon(
+    0 10%,
+    4% 0,
+    8% 12%,
+    12% 0,
+    88% 0,
+    92% 14%,
+    96% 0,
+    100% 10%,
+    100% 90%,
+    96% 100%,
+    92% 88%,
+    88% 100%,
+    12% 100%,
+    8% 86%,
+    4% 100%,
+    0 90%
+  );
+}
+.ink {
+  position: absolute;
+  right: 4%;
+  bottom: 6%;
+  display: grid;
+  padding: 1px 4px;
+  border: 2px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(8px, 1.8vw, 11px);
+  line-height: 1.1;
+  transform: rotate(-14deg);
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.ink small {
+  font-size: 0.7em;
+}
+.peel {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  min-width: 36px;
+  min-height: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card-paper);
+  color: #2b2620 !important;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.stamped:hover .peel,
+.peel:focus-visible {
+  opacity: 1;
+}
+@media (hover: none) {
+  .peel {
+    opacity: 0.85;
+  }
+}
+
+.page.right {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (min-width: 820px) {
+  .page.right {
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+.concept-area {
+  display: grid;
+  place-items: center;
+}
+.concept-empty {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-family: var(--font-hand), cursive;
+  font-size: 20px;
+}
+.concept-empty small {
+  font-size: 15px;
+}
+@media (max-width: 819px) {
+  .concept-empty {
+    display: none;
+  }
+}
+.forge.lit {
+  background: linear-gradient(90deg, #ffd36e, #ff9a5a, #ffd36e);
+  background-size: 200% 100%;
+  animation: forge-glow 1.2s linear infinite;
+}
+@keyframes forge-glow {
+  to {
+    background-position: 200% 0;
+  }
+}
+.polaroid {
+  width: min(240px, 42vw);
+  padding: 8px 8px 6px;
+  background: #fff;
+  color: #2b2620;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: rotate(-2deg);
+}
+.polaroid-img {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background:
+    radial-gradient(rgba(0, 0, 0, 0.18) 1px, transparent 1px) 0 0 / 4px 4px,
+    linear-gradient(
+      var(--p0, #333) 0 30%,
+      var(--p1, #666) 30% 60%,
+      var(--p2, #999) 60% 85%,
+      var(--p3, #f80) 85%
+    );
+}
+.polaroid-img span {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(12px, 3vw, 20px);
+  color: #fff;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000;
+  text-align: center;
+}
+.polaroid-title {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-hand), cursive;
+  font-size: 22px;
+  text-align: center;
+  color: #2b2620;
+}
+.logline {
+  font-size: 11px;
+  color: #6b6152;
+}
+
+.flash {
+  position: fixed;
+  inset: 0;
+  background: #fffbe8;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ── Duck ─────────────────────────────────────────────── */
+.duck {
+  position: absolute;
+  left: 16px;
+  bottom: 8px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 40;
+  pointer-events: none;
+}
+.bubble {
+  max-width: min(200px, calc(100vw - 170px));
+  padding: 6px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 12px 12px 12px 2px;
+  margin-bottom: 30px;
+  background: var(--card-paper);
+  color: #2b2620;
+  font-family: var(--font-hand), cursive;
+  font-size: 18px;
+  line-height: 1.1;
+  animation: pop 0.2s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot.want,
+  .forge.lit,
+  .r-mythic,
+  .tear-hint,
+  .reel.spinning {
+    animation: none;
+  }
+  .card-button,
+  .cup,
+  .cup-spot {
+    transition-duration: 0.01s;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   Pixel skin: notched pixel borders, hard shadows, no rounding.
+   Borders are drawn with 4 box-shadows (like the quackle.bit site's
+   duck bubble), which leaves the corners notched like a sprite.
+   ══════════════════════════════════════════════════════════ */
+.proto {
+  --px: 3px;
+  --pxc: var(--ink);
+  --pxshadow: rgba(43, 38, 32, 0.28);
+  --pxb:
+    0 calc(-1 * var(--px)) 0 0 var(--pxc), 0 var(--px) 0 0 var(--pxc),
+    calc(-1 * var(--px)) 0 0 0 var(--pxc), var(--px) 0 0 0 var(--pxc);
+  --pxb-drop: var(--pxb), calc(2 * var(--px)) calc(2 * var(--px)) 0 var(--px) var(--pxshadow);
+  image-rendering: pixelated;
+}
+@media (max-width: 480px) {
+  .proto {
+    --px: 2px;
+  }
+}
+
+.proto .card,
+.proto .big-btn,
+.proto .tabs button,
+.proto .toggles button,
+.proto .act,
+.proto .stall-sign,
+.proto .bin,
+.proto .pack,
+.proto .pack-label,
+.proto .reel,
+.proto .lock.on,
+.proto .bubble,
+.proto .polaroid,
+.proto .peel {
+  border: 0;
+  border-radius: 0;
+  box-shadow: var(--pxb-drop);
+}
+.proto .card.small {
+  box-shadow: var(--pxb);
+}
+.proto .r-uncommon {
+  --pxc: #3a7bd5;
+  box-shadow:
+    var(--pxb-drop),
+    inset 0 0 0 var(--px) #9cc1f2;
+}
+.proto .card.r-mythic {
+  /* Gold animated border: pixel frame drawn by an outline + the spinning conic border. */
+  border: var(--px) solid transparent;
+  box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 var(--px) var(--pxshadow);
+}
+.proto .card.back {
+  box-shadow: none;
+}
+.proto .rip-halves .card {
+  box-shadow: none;
+}
+
+/* Buttons: press down into their shadow, 1 pixel step. */
+.proto .big-btn:active:not(:disabled),
+.proto .act:active,
+.proto .tabs button:active {
+  transform: translate(var(--px), var(--px));
+  box-shadow: var(--pxb);
+}
+.proto .tabs {
+  gap: calc(3 * var(--px));
+  padding: var(--px) var(--px) calc(2 * var(--px));
+}
+.proto .tabs button {
+  border-bottom-width: 0;
+}
+.proto .lock {
+  border-radius: 0;
+  border-width: var(--px);
+}
+.proto .toggles button[aria-pressed="true"],
+.proto .tabs button[aria-current="true"] {
+  --pxc: var(--ink);
+}
+
+/* Coins: chunky stepped circle. */
+.proto .coin {
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(
+    30% 0,
+    70% 0,
+    70% 10%,
+    90% 10%,
+    90% 30%,
+    100% 30%,
+    100% 70%,
+    90% 70%,
+    90% 90%,
+    70% 90%,
+    70% 100%,
+    30% 100%,
+    30% 90%,
+    10% 90%,
+    10% 70%,
+    0 70%,
+    0 30%,
+    10% 30%,
+    10% 10%,
+    30% 10%
+  );
+  background: linear-gradient(135deg, #fff1b0 0 25%, transparent 25%), #e8b22a;
+  color: #6b4d0a;
+  font-family: var(--font-pixel), monospace;
+}
+
+/* Slots: dashed pixel outline, square corners. */
+.proto .slot {
+  border-radius: 0;
+  border: 0;
+  background:
+    repeating-linear-gradient(90deg, var(--ink-soft) 0 6px, transparent 6px 12px) top / 100%
+      var(--px) no-repeat,
+    repeating-linear-gradient(90deg, var(--ink-soft) 0 6px, transparent 6px 12px) bottom / 100%
+      var(--px) no-repeat,
+    repeating-linear-gradient(0deg, var(--ink-soft) 0 6px, transparent 6px 12px) left / var(--px)
+      100% no-repeat,
+    repeating-linear-gradient(0deg, var(--ink-soft) 0 6px, transparent 6px 12px) right / var(--px)
+      100% no-repeat;
+}
+.proto .slot.filled {
+  background: none;
+}
+.proto .slot.hover,
+.proto .slot.want {
+  background-color: rgba(217, 69, 43, 0.12);
+  box-shadow: 0 0 0 var(--px) var(--accent);
+}
+
+/* Washi tape: stepped (not torn-curvy) ends. */
+.proto .tape {
+  clip-path: polygon(
+    0 0,
+    8% 0,
+    8% 25%,
+    16% 25%,
+    16% 0,
+    84% 0,
+    84% 25%,
+    92% 25%,
+    92% 0,
+    100% 0,
+    100% 100%,
+    92% 100%,
+    92% 75%,
+    84% 75%,
+    84% 100%,
+    16% 100%,
+    16% 75%,
+    8% 75%,
+    8% 100%,
+    0 100%
+  );
+  transform: rotate(-4deg);
+  image-rendering: pixelated;
+}
+/* Ink stamp: hard pixel box. */
+.proto .ink {
+  border-radius: 0;
+  border-width: var(--px);
+}
+
+/* Dithered fills instead of smooth gradients. */
+.proto .card.back {
+  background:
+    conic-gradient(
+        rgba(255, 255, 255, 0.09) 25%,
+        transparent 0 50%,
+        rgba(255, 255, 255, 0.09) 0 75%,
+        transparent 0
+      )
+      0 0 / 4px 4px,
+    #2f2821;
+}
+.proto .pack {
+  background:
+    conic-gradient(
+        rgba(255, 255, 255, 0.25) 25%,
+        transparent 0 50%,
+        rgba(255, 255, 255, 0.25) 0 75%,
+        transparent 0
+      )
+      0 0 / 4px 4px,
+    repeating-linear-gradient(
+      -45deg,
+      var(--t-seed) 0 16px,
+      var(--t-verb) 16px 32px,
+      var(--t-twist) 32px 48px
+    );
+}
+.proto .bin {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(0, 0, 0, 0.14) 9px 12px), #cfc6b2;
+}
+.proto .reel.spinning {
+  background: repeating-linear-gradient(0deg, var(--card-paper) 0 9px, #e3d8bd 9px 12px);
+}
+.proto .r-rare .foil {
+  /* Holo, then quantized into a pixel grid by a dither overlay. */
+  background:
+    conic-gradient(
+        rgba(0, 0, 0, 0.12) 25%,
+        transparent 0 50%,
+        rgba(0, 0, 0, 0.12) 0 75%,
+        transparent 0
+      )
+      0 0 / 4px 4px,
+    radial-gradient(
+      circle at var(--mx, 30%) var(--my, 30%),
+      rgba(255, 255, 255, 0.9),
+      transparent 35%
+    ),
+    conic-gradient(
+      from 0deg at var(--mx, 30%) var(--my, 30%),
+      #ff7eb3,
+      #ffd36e,
+      #7effc4,
+      #7ec8ff,
+      #c47eff,
+      #ff7eb3
+    );
+}
+.proto .forge.lit {
+  background:
+    conic-gradient(
+        rgba(255, 255, 255, 0.3) 25%,
+        transparent 0 50%,
+        rgba(255, 255, 255, 0.3) 0 75%,
+        transparent 0
+      )
+      0 0 / 4px 4px,
+    linear-gradient(90deg, #ffd36e, #ff9a5a, #ffd36e);
+  background-size:
+    4px 4px,
+    200% 100%;
+}
+
+/* Cup: stepped trapezoid. */
+.proto .cup {
+  clip-path: polygon(
+    20% 0,
+    80% 0,
+    80% 20%,
+    86% 20%,
+    86% 45%,
+    92% 45%,
+    92% 70%,
+    100% 70%,
+    100% 100%,
+    0 100%,
+    0 70%,
+    8% 70%,
+    8% 45%,
+    14% 45%,
+    14% 20%,
+    20% 20%
+  );
+  background:
+    repeating-linear-gradient(90deg, transparent 0 12px, rgba(255, 255, 255, 0.22) 12px 18px),
+    #b8382a;
+}
+
+/* Speech bubble: the website duck's pixel box with a stepped tail. */
+.proto .bubble {
+  position: relative;
+  margin-bottom: calc(26px * 1.6);
+  margin-left: -12px;
+  font-family: var(--font-body), monospace;
+  font-size: 14px;
+  line-height: 1.3;
+  padding: 8px 11px;
+  animation: pop 0.16s steps(3);
+}
+.proto .bubble::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 100%;
+  width: 18px;
+  height: 9px;
+  background: var(--ink);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 33.3%,
+    83.3% 33.3%,
+    83.3% 66.6%,
+    66.6% 66.6%,
+    66.6% 100%,
+    33.3% 100%,
+    33.3% 66.6%,
+    16.6% 66.6%,
+    16.6% 33.3%,
+    0 33.3%
+  );
+}
+.proto .duck {
+  align-items: flex-end;
+  gap: 0;
+}
+.duck-sprite {
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.25));
+  flex: none;
+}
+
+/* Motion feels more "sprite" with stepped easing on small UI pops. */
+.proto .slot.want {
+  animation: pulse 0.8s steps(2) infinite;
+}
+.proto .tear-hint {
+  animation: nudge 0.8s steps(2) infinite;
+}
+
+/* Typography: UI text in the readable pixel face. */
+.proto,
+.proto .keeper,
+.proto .hint,
+.proto .counts {
+  font-family: var(--font-body), monospace;
+}
+.proto .keeper {
+  font-size: 16px;
+}
+.proto .card-word {
+  -webkit-font-smoothing: none;
+}
+
+/* In the fan, the action row centres under the whole hand so it never runs off-screen. */
+.fan {
+  position: relative;
+}
+.fan .hand-card {
+  position: static;
+}
+.fan .hand-card-body {
+  position: relative;
+}
+.fan .card-actions {
+  top: auto;
+  bottom: 6px;
+}
+
+/* Phone polish: small corner peel tag, compact polaroid. */
+.proto .peel {
+  top: -6px;
+  right: -6px;
+  min-width: 0;
+  min-height: 0;
+  padding: 3px 5px;
+  font-size: 9px;
+  line-height: 1;
+}
+@media (max-width: 819px) {
+  .proto .polaroid {
+    width: min(150px, 40vw);
+    padding: 6px 6px 4px;
+  }
+  .proto .polaroid-title {
+    font-size: 18px;
+  }
+  .proto .logline {
+    font-size: 10px;
+  }
+}

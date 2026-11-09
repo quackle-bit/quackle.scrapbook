@@ -26,6 +26,7 @@ body {
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
   color: var(--ink);
   background-color: var(--paper);
   /* Paper: soft vignette + faint fibre noise, all CSS. */
@@ -35,7 +36,7 @@ body {
   background-attachment: fixed;
 }
 
-.page {
+.home {
   min-height: 100dvh;
   display: grid;
   place-content: center;
@@ -48,6 +49,13 @@ body {
   font-family: var(--font-pixel), monospace;
   font-size: clamp(1.75rem, 7vw, 4rem);
   letter-spacing: 0.02em;
+}
+
+.home-link {
+  color: var(--ink);
+  font-family: var(--font-pixel), monospace;
+  font-size: 14px;
+  padding: 12px;
 }
 
 .note {
