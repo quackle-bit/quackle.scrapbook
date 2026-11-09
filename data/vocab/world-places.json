@@ -1,0 +1,103 @@
+{
+  "slot": "world",
+  "part": "place",
+  "target": 600,
+  "entries": [
+    {
+      "word": "night market",
+      "tags": ["social", "urban", "light", "warm"],
+      "rarity": "common",
+      "flavor": "Lanterns until dawn."
+    },
+    {
+      "word": "lighthouse island",
+      "tags": ["sea", "serene", "vast"],
+      "rarity": "common",
+      "flavor": "One light, one keeper."
+    },
+    {
+      "word": "sunken library",
+      "tags": ["sea", "silence", "eerie"],
+      "rarity": "uncommon",
+      "flavor": "Pages float like fish."
+    },
+    {
+      "word": "rooftop garden",
+      "tags": ["urban", "nature", "hopeful"],
+      "rarity": "common",
+      "flavor": "Green above the traffic."
+    },
+    {
+      "word": "mine shaft",
+      "tags": ["underground", "dark", "grim"],
+      "rarity": "common",
+      "flavor": "Deeper than the maps go."
+    },
+    {
+      "word": "train that never stops",
+      "tags": ["machine", "time", "eerie"],
+      "rarity": "rare",
+      "flavor": "Every station is the same."
+    },
+    {
+      "word": "bathhouse",
+      "tags": ["warm", "social", "cozy"],
+      "rarity": "common",
+      "flavor": "Steam and gossip."
+    },
+    {
+      "word": "abandoned theme park",
+      "tags": ["eerie", "melancholy"],
+      "rarity": "uncommon",
+      "flavor": "The rides still turn."
+    },
+    {
+      "word": "mountain monastery",
+      "tags": ["serene", "cold", "silence", "vast"],
+      "rarity": "uncommon",
+      "flavor": "Bells at every hour."
+    },
+    {
+      "word": "laundromat at 3am",
+      "tags": ["urban", "calm", "melancholy"],
+      "rarity": "common",
+      "flavor": "Spin cycle hum."
+    },
+    {
+      "word": "cloud harbor",
+      "tags": ["sky", "whimsical", "vast"],
+      "rarity": "rare",
+      "flavor": "Ships dock on fog."
+    },
+    {
+      "word": "greenhouse",
+      "tags": ["nature", "warm", "calm"],
+      "rarity": "common",
+      "flavor": "Fogged windows."
+    },
+    {
+      "word": "frozen lake",
+      "tags": ["cold", "silence", "serene"],
+      "rarity": "common",
+      "flavor": "Something moves below."
+    },
+    {
+      "word": "toy shop",
+      "tags": ["whimsical", "tiny", "cozy"],
+      "rarity": "common",
+      "flavor": "Everything is watching."
+    },
+    {
+      "word": "volcano bakery",
+      "tags": ["warm", "food", "chaotic"],
+      "rarity": "rare",
+      "flavor": "Best bread, worst location."
+    },
+    {
+      "word": "the inside of a clock",
+      "tags": ["machine", "time", "tiny"],
+      "rarity": "uncommon",
+      "flavor": "Tick. Tick. Tick."
+    }
+  ]
+}

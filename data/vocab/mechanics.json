@@ -1,0 +1,126 @@
+{
+  "slot": "verb",
+  "target": 250,
+  "entries": [
+    {
+      "word": "deckbuilding",
+      "tags": ["social", "calm"],
+      "rarity": "common",
+      "flavor": "Your choices become your hand."
+    },
+    {
+      "word": "tile placement",
+      "tags": ["calm", "tiny"],
+      "rarity": "common",
+      "flavor": "Every tile changes the board."
+    },
+    {
+      "word": "roguelite runs",
+      "tags": ["tense", "frantic"],
+      "rarity": "common",
+      "flavor": "Die, learn, go again."
+    },
+    {
+      "word": "time loop",
+      "tags": ["time", "magic", "tense"],
+      "rarity": "rare",
+      "flavor": "The same day, smarter."
+    },
+    {
+      "word": "rhythm input",
+      "tags": ["sound", "frantic"],
+      "rarity": "uncommon",
+      "flavor": "Move on the beat."
+    },
+    {
+      "word": "physics stacking",
+      "tags": ["tense", "machine"],
+      "rarity": "common",
+      "flavor": "Gravity is the opponent."
+    },
+    {
+      "word": "light and shadow",
+      "tags": ["light", "dark", "eerie"],
+      "rarity": "uncommon",
+      "flavor": "Only walk where it's lit."
+    },
+    {
+      "word": "resource juggling",
+      "tags": ["frantic", "machine"],
+      "rarity": "common",
+      "flavor": "Never enough of everything."
+    },
+    {
+      "word": "programming by cards",
+      "tags": ["machine", "calm"],
+      "rarity": "uncommon",
+      "flavor": "Plan the moves, watch them run."
+    },
+    {
+      "word": "tower defense",
+      "tags": ["tense", "frantic"],
+      "rarity": "common",
+      "flavor": "Hold the line."
+    },
+    {
+      "word": "match three",
+      "tags": ["calm", "whimsical"],
+      "rarity": "common",
+      "flavor": "Three in a row, satisfying."
+    },
+    {
+      "word": "stealth patrols",
+      "tags": ["tense", "silence", "dark"],
+      "rarity": "common",
+      "flavor": "Learn the pattern."
+    },
+    {
+      "word": "gardening sim",
+      "tags": ["nature", "cozy", "calm"],
+      "rarity": "common",
+      "flavor": "Water, wait, harvest."
+    },
+    {
+      "word": "grappling hook",
+      "tags": ["frantic", "sky"],
+      "rarity": "uncommon",
+      "flavor": "Swing past the gap."
+    },
+    {
+      "word": "sound-based navigation",
+      "tags": ["sound", "dark", "eerie"],
+      "rarity": "rare",
+      "flavor": "Find your way by echo."
+    },
+    {
+      "word": "asymmetric co-op",
+      "tags": ["social", "tense"],
+      "rarity": "uncommon",
+      "flavor": "You see what I can't."
+    },
+    {
+      "word": "one-button",
+      "tags": ["calm", "tiny"],
+      "rarity": "common",
+      "flavor": "Everything with a single press."
+    },
+    {
+      "word": "draw your own path",
+      "tags": ["whimsical", "touch"],
+      "rarity": "uncommon",
+      "flavor": "The line you draw is the road."
+    },
+    {
+      "word": "body swapping",
+      "tags": ["chaotic", "body", "magic"],
+      "rarity": "rare",
+      "flavor": "Borrow a different skill."
+    },
+    {
+      "word": "weight and inventory",
+      "tags": ["human", "tense"],
+      "rarity": "common",
+      "flavor": "Every item has a cost."
+    }
+  ]
+}

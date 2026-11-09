@@ -1,0 +1,61 @@
+{
+  "slot": "world",
+  "part": "era",
+  "target": 80,
+  "entries": [
+    {
+      "word": "stone age",
+      "tags": ["nature", "grim"],
+      "rarity": "common",
+      "flavor": "Fire is new."
+    },
+    {
+      "word": "medieval",
+      "tags": ["social", "grim"],
+      "rarity": "common",
+      "flavor": "Plague and festivals."
+    },
+    {
+      "word": "age of sail",
+      "tags": ["sea", "hopeful"],
+      "rarity": "common",
+      "flavor": "Maps are guesses."
+    },
+    {
+      "word": "steam era",
+      "tags": ["machine", "frantic"],
+      "rarity": "common",
+      "flavor": "Everything hisses."
+    },
+    {
+      "word": "1980s suburb",
+      "tags": ["domestic", "cozy"],
+      "rarity": "common",
+      "flavor": "Bikes and walkie-talkies."
+    },
+    {
+      "word": "near future",
+      "tags": ["machine", "urban"],
+      "rarity": "common",
+      "flavor": "Just slightly wrong."
+    },
+    {
+      "word": "after the flood",
+      "tags": ["sea", "melancholy", "hopeful"],
+      "rarity": "uncommon",
+      "flavor": "Rooftops are the new streets."
+    },
+    {
+      "word": "mythic dawn",
+      "tags": ["magic", "vast"],
+      "rarity": "rare",
+      "flavor": "The gods are still young."
+    },
+    {
+      "word": "last day on earth",
+      "tags": ["grim", "time", "serene"],
+      "rarity": "mythic",
+      "flavor": "Make it count."
+    }
+  ]
+}

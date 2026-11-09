@@ -1,0 +1,52 @@
+{
+  "slot": "look",
+  "part": "camera",
+  "target": 9,
+  "entries": [
+    {
+      "word": "top-down",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "three-quarter",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "isometric",
+      "tags": ["tiny"],
+      "rarity": "common"
+    },
+    {
+      "word": "side",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "side with lanes",
+      "tags": ["frantic"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "first-person",
+      "tags": ["tense"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "third-person",
+      "tags": ["human"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "fixed diorama",
+      "tags": ["tiny"],
+      "rarity": "rare"
+    },
+    {
+      "word": "free orbit",
+      "tags": ["vast"],
+      "rarity": "rare"
+    }
+  ]
+}

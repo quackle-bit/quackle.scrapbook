@@ -1,0 +1,42 @@
+{
+  "slot": "look",
+  "part": "treatment",
+  "target": 7,
+  "entries": [
+    {
+      "word": "native sprites",
+      "tags": ["tiny"],
+      "rarity": "common"
+    },
+    {
+      "word": "low-res render target",
+      "tags": ["machine"],
+      "rarity": "common"
+    },
+    {
+      "word": "pixel shader / dither",
+      "tags": ["light"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "pixel textures on low-poly",
+      "tags": ["machine"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "voxels",
+      "tags": ["tiny"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "3D baked to sprites",
+      "tags": ["machine"],
+      "rarity": "rare"
+    },
+    {
+      "word": "pixel UI/FX over a non-pixel world",
+      "tags": ["light"],
+      "rarity": "rare"
+    }
+  ]
+}

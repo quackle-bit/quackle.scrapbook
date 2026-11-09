@@ -2,6 +2,7 @@
   "name": "quackle-scrapbook",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,9 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "vocab:lint": "node scripts/vocab.mts lint",
+    "vocab:sample": "node scripts/vocab.mts sample"
   },
   "dependencies": {
     "next": "16.4.5",

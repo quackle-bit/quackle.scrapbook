@@ -1,0 +1,67 @@
+{
+  "slot": "world",
+  "part": "inhabitant",
+  "target": 500,
+  "entries": [
+    {
+      "word": "ducks",
+      "tags": ["whimsical", "nature"],
+      "rarity": "common",
+      "flavor": "Quack."
+    },
+    {
+      "word": "moths",
+      "tags": ["eerie", "light", "tiny"],
+      "rarity": "common",
+      "flavor": "Drawn to you."
+    },
+    {
+      "word": "ghosts",
+      "tags": ["eerie", "silence"],
+      "rarity": "common",
+      "flavor": "Polite, mostly."
+    },
+    {
+      "word": "robots",
+      "tags": ["machine", "cozy"],
+      "rarity": "common",
+      "flavor": "Learning to feel."
+    },
+    {
+      "word": "frogs",
+      "tags": ["nature", "sound"],
+      "rarity": "common",
+      "flavor": "Loud at night."
+    },
+    {
+      "word": "librarians",
+      "tags": ["silence", "social"],
+      "rarity": "common",
+      "flavor": "Shh."
+    },
+    {
+      "word": "crows",
+      "tags": ["grim", "sky", "social"],
+      "rarity": "common",
+      "flavor": "They remember faces."
+    },
+    {
+      "word": "mushroom folk",
+      "tags": ["underground", "whimsical"],
+      "rarity": "uncommon",
+      "flavor": "Slow and wise."
+    },
+    {
+      "word": "tiny knights",
+      "tags": ["tiny", "whimsical", "tense"],
+      "rarity": "uncommon",
+      "flavor": "Brave as anything."
+    },
+    {
+      "word": "living furniture",
+      "tags": ["domestic", "whimsical", "eerie"],
+      "rarity": "rare",
+      "flavor": "The chair has opinions."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "slot": "look",
+  "part": "dimension",
+  "target": 5,
+  "entries": [
+    {
+      "word": "2D",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "2.5D",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "3D world, 2D actors",
+      "tags": ["whimsical"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "2D world, 3D actors",
+      "tags": ["whimsical"],
+      "rarity": "rare"
+    },
+    {
+      "word": "full 3D",
+      "tags": ["vast"],
+      "rarity": "uncommon"
+    }
+  ]
+}

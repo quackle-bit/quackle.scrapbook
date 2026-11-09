@@ -1,0 +1,186 @@
+{
+  "slot": "verb",
+  "target": 800,
+  "entries": [
+    {
+      "word": "stack",
+      "tags": ["calm", "human"],
+      "rarity": "common",
+      "flavor": "Up, carefully, up."
+    },
+    {
+      "word": "dig",
+      "tags": ["underground", "human"],
+      "rarity": "common",
+      "flavor": "There's always more below."
+    },
+    {
+      "word": "sneak",
+      "tags": ["tense", "silence"],
+      "rarity": "common",
+      "flavor": "Hold your breath."
+    },
+    {
+      "word": "plant",
+      "tags": ["nature", "calm", "hopeful"],
+      "rarity": "common",
+      "flavor": "Wait for it."
+    },
+    {
+      "word": "cook",
+      "tags": ["food", "cozy", "warm"],
+      "rarity": "common",
+      "flavor": "A pinch of this."
+    },
+    {
+      "word": "trade",
+      "tags": ["social", "human"],
+      "rarity": "common",
+      "flavor": "Fair is a feeling."
+    },
+    {
+      "word": "deliver",
+      "tags": ["urban", "frantic", "social"],
+      "rarity": "common",
+      "flavor": "On time, mostly."
+    },
+    {
+      "word": "fish",
+      "tags": ["sea", "calm", "serene"],
+      "rarity": "common",
+      "flavor": "Patience pays."
+    },
+    {
+      "word": "build",
+      "tags": ["machine", "human"],
+      "rarity": "common",
+      "flavor": "Bolt by bolt."
+    },
+    {
+      "word": "repair",
+      "tags": ["machine", "cozy"],
+      "rarity": "common",
+      "flavor": "Broken is a start."
+    },
+    {
+      "word": "herd",
+      "tags": ["nature", "frantic", "whimsical"],
+      "rarity": "common",
+      "flavor": "They never go where you want."
+    },
+    {
+      "word": "paint",
+      "tags": ["light", "whimsical"],
+      "rarity": "common",
+      "flavor": "One colour at a time."
+    },
+    {
+      "word": "climb",
+      "tags": ["vast", "tense"],
+      "rarity": "common",
+      "flavor": "Don't look down."
+    },
+    {
+      "word": "sort",
+      "tags": ["calm", "domestic"],
+      "rarity": "common",
+      "flavor": "Everything in its place."
+    },
+    {
+      "word": "swap places",
+      "tags": ["chaotic", "whimsical"],
+      "rarity": "uncommon",
+      "flavor": "You're them now."
+    },
+    {
+      "word": "rewind",
+      "tags": ["time", "magic"],
+      "rarity": "rare",
+      "flavor": "Try that again."
+    },
+    {
+      "word": "echo",
+      "tags": ["sound", "eerie"],
+      "rarity": "uncommon",
+      "flavor": "Say it back."
+    },
+    {
+      "word": "grow",
+      "tags": ["nature", "hopeful", "vast"],
+      "rarity": "common",
+      "flavor": "Bigger every turn."
+    },
+    {
+      "word": "shrink",
+      "tags": ["tiny", "whimsical"],
+      "rarity": "uncommon",
+      "flavor": "Smaller than a seed."
+    },
+    {
+      "word": "throw",
+      "tags": ["frantic", "human"],
+      "rarity": "common",
+      "flavor": "Aim, then hope."
+    },
+    {
+      "word": "catch",
+      "tags": ["frantic", "human"],
+      "rarity": "common",
+      "flavor": "Hands out."
+    },
+    {
+      "word": "light up",
+      "tags": ["light", "dark", "hopeful"],
+      "rarity": "common",
+      "flavor": "Push back the dark."
+    },
+    {
+      "word": "hide",
+      "tags": ["tense", "dark", "silence"],
+      "rarity": "common",
+      "flavor": "Not here."
+    },
+    {
+      "word": "guide",
+      "tags": ["social", "hopeful"],
+      "rarity": "common",
+      "flavor": "Follow me."
+    },
+    {
+      "word": "listen",
+      "tags": ["sound", "silence", "calm"],
+      "rarity": "uncommon",
+      "flavor": "What's that?"
+    },
+    {
+      "word": "balance",
+      "tags": ["tense", "calm"],
+      "rarity": "common",
+      "flavor": "Easy. Easy."
+    },
+    {
+      "word": "connect",
+      "tags": ["machine", "social"],
+      "rarity": "common",
+      "flavor": "Wire to wire."
+    },
+    {
+      "word": "bake",
+      "tags": ["food", "warm", "cozy"],
+      "rarity": "common",
+      "flavor": "Out of the oven in three."
+    },
+    {
+      "word": "explore",
+      "tags": ["vast", "hopeful"],
+      "rarity": "common",
+      "flavor": "What's over there?"
+    },
+    {
+      "word": "map",
+      "tags": ["nature", "vast"],
+      "rarity": "uncommon",
+      "flavor": "Draw as you go."
+    }
+  ]
+}

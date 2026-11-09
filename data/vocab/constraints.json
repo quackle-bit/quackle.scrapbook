@@ -1,0 +1,71 @@
+{
+  "slot": "constraint",
+  "target": 150,
+  "entries": [
+    {
+      "word": "One button only.",
+      "tags": ["tiny"],
+      "rarity": "common"
+    },
+    {
+      "word": "No text, anywhere.",
+      "tags": ["silence"],
+      "rarity": "common"
+    },
+    {
+      "word": "Four colours.",
+      "tags": ["light"],
+      "rarity": "common"
+    },
+    {
+      "word": "Under five minutes to finish.",
+      "tags": ["time", "frantic"],
+      "rarity": "common"
+    },
+    {
+      "word": "One screen, no scrolling.",
+      "tags": ["tiny"],
+      "rarity": "common"
+    },
+    {
+      "word": "No combat.",
+      "tags": ["calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "The player never dies.",
+      "tags": ["hopeful"],
+      "rarity": "common"
+    },
+    {
+      "word": "Every sound is your own voice.",
+      "tags": ["sound"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "Playable with eyes closed.",
+      "tags": ["sound", "dark"],
+      "rarity": "rare"
+    },
+    {
+      "word": "16x16 sprites, max.",
+      "tags": ["tiny"],
+      "rarity": "common"
+    },
+    {
+      "word": "Only one level.",
+      "tags": ["tiny"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "Must be played by two people on one device.",
+      "tags": ["social"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "No UI at all.",
+      "tags": ["silence"],
+      "rarity": "rare"
+    }
+  ]
+}

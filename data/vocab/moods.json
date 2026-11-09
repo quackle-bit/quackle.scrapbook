@@ -1,0 +1,81 @@
+{
+  "slot": "mood",
+  "target": 300,
+  "entries": [
+    {
+      "word": "The rain hasn't stopped in years, and nobody minds.",
+      "tags": ["melancholy", "calm", "sound"],
+      "rarity": "common"
+    },
+    {
+      "word": "Everyone is asleep except you.",
+      "tags": ["eerie", "silence", "dark"],
+      "rarity": "common"
+    },
+    {
+      "word": "It smells like bread and old paper.",
+      "tags": ["cozy", "smell", "warm"],
+      "rarity": "common"
+    },
+    {
+      "word": "The lights flicker every time you lie.",
+      "tags": ["eerie", "light", "tense"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "You're late, and the whole world knows it.",
+      "tags": ["frantic", "tense", "social"],
+      "rarity": "common"
+    },
+    {
+      "word": "Somewhere a radio plays your favourite song, slightly wrong.",
+      "tags": ["eerie", "sound", "melancholy"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "The snow is soft, and so is everything else.",
+      "tags": ["serene", "cold", "calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "You are the last one who remembers.",
+      "tags": ["melancholy", "time", "silence"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "Something huge is breathing under the floor.",
+      "tags": ["grim", "underground", "tense"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "The market is loud, bright and full of friends.",
+      "tags": ["social", "light", "hopeful"],
+      "rarity": "common"
+    },
+    {
+      "word": "Every door you open is warmer than the last.",
+      "tags": ["cozy", "warm", "hopeful"],
+      "rarity": "common"
+    },
+    {
+      "word": "The sea took the town, but left the bells.",
+      "tags": ["melancholy", "sea", "sound"],
+      "rarity": "rare"
+    },
+    {
+      "word": "It is the first morning of something new.",
+      "tags": ["hopeful", "light", "calm"],
+      "rarity": "common"
+    },
+    {
+      "word": "The stars are close enough to touch.",
+      "tags": ["serene", "sky", "vast"],
+      "rarity": "rare"
+    },
+    {
+      "word": "You were happy here once. You will be again.",
+      "tags": ["hopeful", "melancholy"],
+      "rarity": "mythic"
+    }
+  ]
+}

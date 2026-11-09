@@ -1,0 +1,306 @@
+{
+  "slot": "seed",
+  "target": 2000,
+  "entries": [
+    {
+      "word": "lantern",
+      "tags": ["cozy", "light", "domestic", "human"],
+      "rarity": "common",
+      "flavor": "A light you carry."
+    },
+    {
+      "word": "teacup",
+      "tags": ["cozy", "domestic", "warm", "tiny"],
+      "rarity": "common",
+      "flavor": "Still warm. Nobody's home."
+    },
+    {
+      "word": "umbrella",
+      "tags": ["melancholy", "urban", "human"],
+      "rarity": "common",
+      "flavor": "Opens like a sigh."
+    },
+    {
+      "word": "key",
+      "tags": ["tense", "domestic", "tiny"],
+      "rarity": "common",
+      "flavor": "Fits nothing you own."
+    },
+    {
+      "word": "compass",
+      "tags": ["hopeful", "nature", "human"],
+      "rarity": "common",
+      "flavor": "Points somewhere else."
+    },
+    {
+      "word": "music box",
+      "tags": ["whimsical", "sound", "domestic", "tiny"],
+      "rarity": "uncommon",
+      "flavor": "Plays one song, slowly."
+    },
+    {
+      "word": "kite",
+      "tags": ["hopeful", "sky", "whimsical"],
+      "rarity": "common",
+      "flavor": "Pulls toward the clouds."
+    },
+    {
+      "word": "bell",
+      "tags": ["sound", "social", "serene"],
+      "rarity": "common",
+      "flavor": "Somebody is always ringing it."
+    },
+    {
+      "word": "mirror",
+      "tags": ["eerie", "domestic", "light"],
+      "rarity": "uncommon",
+      "flavor": "Shows you a second late."
+    },
+    {
+      "word": "clock",
+      "tags": ["tense", "time", "sound"],
+      "rarity": "common",
+      "flavor": "Running a little fast."
+    },
+    {
+      "word": "map",
+      "tags": ["hopeful", "human", "nature"],
+      "rarity": "common",
+      "flavor": "Half the coast is missing."
+    },
+    {
+      "word": "lighthouse",
+      "tags": ["serene", "sea", "light", "vast"],
+      "rarity": "uncommon",
+      "flavor": "Awake all night for strangers."
+    },
+    {
+      "word": "anchor",
+      "tags": ["grim", "sea", "human"],
+      "rarity": "common",
+      "flavor": "Heavier on the way up."
+    },
+    {
+      "word": "bread",
+      "tags": ["cozy", "food", "warm", "smell"],
+      "rarity": "common",
+      "flavor": "Baked before sunrise."
+    },
+    {
+      "word": "jar of fireflies",
+      "tags": ["whimsical", "light", "nature", "tiny"],
+      "rarity": "rare",
+      "flavor": "A summer you can keep."
+    },
+    {
+      "word": "coin",
+      "tags": ["social", "tiny", "touch"],
+      "rarity": "common",
+      "flavor": "Warm from someone's pocket."
+    },
+    {
+      "word": "letter",
+      "tags": ["melancholy", "social", "silence"],
+      "rarity": "common",
+      "flavor": "Never sent."
+    },
+    {
+      "word": "mask",
+      "tags": ["eerie", "social", "human"],
+      "rarity": "uncommon",
+      "flavor": "Smiles on both sides."
+    },
+    {
+      "word": "bicycle",
+      "tags": ["hopeful", "urban", "human", "frantic"],
+      "rarity": "common",
+      "flavor": "Squeaks on every turn."
+    },
+    {
+      "word": "seed",
+      "tags": ["hopeful", "nature", "tiny"],
+      "rarity": "common",
+      "flavor": "Something is waiting inside."
+    },
+    {
+      "word": "bone",
+      "tags": ["grim", "body", "underground"],
+      "rarity": "common",
+      "flavor": "Older than the town."
+    },
+    {
+      "word": "crown",
+      "tags": ["tense", "social", "magic"],
+      "rarity": "rare",
+      "flavor": "Too big for anyone."
+    },
+    {
+      "word": "radio",
+      "tags": ["eerie", "sound", "machine"],
+      "rarity": "uncommon",
+      "flavor": "Static, then a voice."
+    },
+    {
+      "word": "snow globe",
+      "tags": ["serene", "cold", "whimsical", "tiny"],
+      "rarity": "uncommon",
+      "flavor": "A town that never melts."
+    },
+    {
+      "word": "candle",
+      "tags": ["cozy", "light", "warm", "calm"],
+      "rarity": "common",
+      "flavor": "Burns down, never out."
+    },
+    {
+      "word": "rope",
+      "tags": ["tense", "human", "touch"],
+      "rarity": "common",
+      "flavor": "Frayed at exactly one spot."
+    },
+    {
+      "word": "egg",
+      "tags": ["hopeful", "nature", "tiny"],
+      "rarity": "common",
+      "flavor": "Warmer than it should be."
+    },
+    {
+      "word": "feather",
+      "tags": ["serene", "sky", "tiny", "touch"],
+      "rarity": "common",
+      "flavor": "Falls up, sometimes."
+    },
+    {
+      "word": "cage",
+      "tags": ["grim", "tense", "human"],
+      "rarity": "uncommon",
+      "flavor": "The door is open."
+    },
+    {
+      "word": "mailbox",
+      "tags": ["melancholy", "urban", "social"],
+      "rarity": "common",
+      "flavor": "Full of old postcards."
+    },
+    {
+      "word": "telescope",
+      "tags": ["hopeful", "sky", "vast"],
+      "rarity": "uncommon",
+      "flavor": "Something looked back."
+    },
+    {
+      "word": "quilt",
+      "tags": ["cozy", "domestic", "warm", "touch"],
+      "rarity": "common",
+      "flavor": "Every patch is a story."
+    },
+    {
+      "word": "train ticket",
+      "tags": ["melancholy", "urban", "time"],
+      "rarity": "common",
+      "flavor": "One way, smudged date."
+    },
+    {
+      "word": "balloon",
+      "tags": ["whimsical", "sky", "hopeful"],
+      "rarity": "common",
+      "flavor": "Escaped a birthday."
+    },
+    {
+      "word": "fishing rod",
+      "tags": ["serene", "sea", "calm"],
+      "rarity": "common",
+      "flavor": "Patience on a stick."
+    },
+    {
+      "word": "gear",
+      "tags": ["machine", "frantic", "tiny"],
+      "rarity": "common",
+      "flavor": "Turns something you can't see."
+    },
+    {
+      "word": "paper boat",
+      "tags": ["whimsical", "sea", "tiny"],
+      "rarity": "common",
+      "flavor": "Folded from homework."
+    },
+    {
+      "word": "chalk",
+      "tags": ["whimsical", "urban", "touch"],
+      "rarity": "common",
+      "flavor": "Erases in the rain."
+    },
+    {
+      "word": "hourglass",
+      "tags": ["tense", "time", "silence"],
+      "rarity": "uncommon",
+      "flavor": "Running both ways."
+    },
+    {
+      "word": "mushroom",
+      "tags": ["eerie", "nature", "underground", "tiny"],
+      "rarity": "common",
+      "flavor": "Glows after midnight."
+    },
+    {
+      "word": "bottle",
+      "tags": ["melancholy", "sea", "tiny"],
+      "rarity": "common",
+      "flavor": "A message, mostly smudged."
+    },
+    {
+      "word": "shovel",
+      "tags": ["grim", "underground", "human"],
+      "rarity": "common",
+      "flavor": "Already dirty."
+    },
+    {
+      "word": "broom",
+      "tags": ["whimsical", "domestic", "magic"],
+      "rarity": "common",
+      "flavor": "Sweeps by itself on Sundays."
+    },
+    {
+      "word": "star chart",
+      "tags": ["serene", "sky", "vast", "magic"],
+      "rarity": "rare",
+      "flavor": "Lists one star too many."
+    },
+    {
+      "word": "tooth",
+      "tags": ["grim", "body", "tiny"],
+      "rarity": "uncommon",
+      "flavor": "Not a human one."
+    },
+    {
+      "word": "puppet",
+      "tags": ["eerie", "whimsical", "social"],
+      "rarity": "uncommon",
+      "flavor": "The strings are cut."
+    },
+    {
+      "word": "honey",
+      "tags": ["cozy", "food", "taste", "warm"],
+      "rarity": "common",
+      "flavor": "Sticky with sunlight."
+    },
+    {
+      "word": "glass eye",
+      "tags": ["eerie", "body", "tiny"],
+      "rarity": "rare",
+      "flavor": "Still blinks."
+    },
+    {
+      "word": "thunder in a jar",
+      "tags": ["chaotic", "sky", "sound", "magic"],
+      "rarity": "mythic",
+      "flavor": "Do not open indoors."
+    },
+    {
+      "word": "the last page",
+      "tags": ["melancholy", "time", "silence"],
+      "rarity": "mythic",
+      "flavor": "Of a book nobody finished."
+    }
+  ]
+}

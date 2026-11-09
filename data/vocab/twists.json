@@ -1,0 +1,77 @@
+{
+  "slot": "twist",
+  "target": 300,
+  "entries": [
+    {
+      "word": "You can't stop moving.",
+      "tags": ["frantic", "tense"],
+      "rarity": "common"
+    },
+    {
+      "word": "The map rearranges every night.",
+      "tags": ["eerie", "time"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "You play as the villain's pet.",
+      "tags": ["whimsical", "social"],
+      "rarity": "common"
+    },
+    {
+      "word": "Every enemy is someone you helped before.",
+      "tags": ["melancholy", "social"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "Gravity flips when you blink.",
+      "tags": ["chaotic", "body"],
+      "rarity": "rare"
+    },
+    {
+      "word": "The game is played in reverse.",
+      "tags": ["time", "magic"],
+      "rarity": "rare"
+    },
+    {
+      "word": "You share your body with a stranger.",
+      "tags": ["chaotic", "body", "social"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "Sound is the only light.",
+      "tags": ["sound", "dark"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "The world ends in ten minutes, every time.",
+      "tags": ["time", "tense"],
+      "rarity": "rare"
+    },
+    {
+      "word": "You're tiny, and the house is the world.",
+      "tags": ["tiny", "domestic", "whimsical"],
+      "rarity": "common"
+    },
+    {
+      "word": "The shopkeeper is the final boss.",
+      "tags": ["social", "tense"],
+      "rarity": "common"
+    },
+    {
+      "word": "Everything you build, someone else inherits.",
+      "tags": ["time", "social", "hopeful"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "You can only talk in questions.",
+      "tags": ["social", "whimsical"],
+      "rarity": "uncommon"
+    },
+    {
+      "word": "The duck knows more than you do.",
+      "tags": ["whimsical"],
+      "rarity": "mythic",
+      "flavor": "Quack."
+    }
+  ]
+}
