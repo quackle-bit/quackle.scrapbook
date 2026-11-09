@@ -18,6 +18,7 @@ import { CardFace } from "../Card";
 import { DuckSprite } from "../Duck";
 import { COVER_COLORS } from "../route/Gate";
 import { SpreadDetail } from "./SpreadDetail";
+import { pitchOf } from "@/lib/pitch";
 
 /** Studio mode (CLAUDE.md §6.3): the team's library, the Back Room and the way into jam rooms. */
 export function StudioApp() {
@@ -276,10 +277,11 @@ function Library({ repo }: { repo: StudioRepo }) {
                             <i key={c} style={{ background: c }} />
                           ))}
                         </span>
-                        <strong>{s.concept?.title ?? "Untitled"}</strong>
+                        <strong>{pitchOf(s).title || "Untitled"}</strong>
                         <span className={`chip status-${s.status}`}>{s.status}</span>
                         <small>
-                          ▲{s.votes.up} · 💬{s.comments.length}
+                          {pitchOf(s).genre ? `${pitchOf(s).genre} · ` : ""}▲{s.votes.up} · 💬
+                          {s.comments.length}
                           {s.creditedTo ? ` · by ${s.creditedTo}` : ""}
                         </small>
                       </button>

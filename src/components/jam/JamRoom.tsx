@@ -12,6 +12,8 @@ import { activeBook, useStudioAccess } from "@/lib/studio/useStudio";
 import { CardFace } from "../Card";
 import { DuckSprite, say } from "../Duck";
 import { SpreadView } from "../book/SpreadView";
+import { pitchOf } from "@/lib/pitch";
+import { PitchCard } from "../pitch/PitchCard";
 import { Route } from "../route/Route";
 
 type Tab = "walk" | "album" | "trade";
@@ -155,6 +157,7 @@ function JamRoom({ roomId }: { roomId: string }) {
                     cards: run.cards,
                     concept: run.concept,
                     notes: run.notes,
+                    pitch: run.pitch,
                   });
                   say("Your page is in the Jam Album!", {
                     tag: "fly",
@@ -245,7 +248,11 @@ function Album({
   const studio = useStudioAccess();
   const [cutFor, setCutFor] = useState<string | null>(null);
   const [adopted, setAdopted] = useState<Set<string>>(new Set());
-  const score = (p: Page) => snap.reactions.filter((r) => r.pageId === p.id).length;
+  // Votes rank the pitches; reactions break ties.
+  const votes = (p: Page) =>
+    snap.reactions.filter((r) => r.pageId === p.id && r.kind === "vote").length;
+  const score = (p: Page) =>
+    votes(p) * 100 + snap.reactions.filter((r) => r.pageId === p.id).length;
   const pages = snap.pages
     .filter((p) => !p.hidden || canHost)
     .sort((a, b) => (open ? 0 : score(b) - score(a)));
@@ -281,8 +288,29 @@ function Album({
               </strong>
               {top.has(p.id) && <span className="chip on">top idea</span>}
             </div>
-            <SpreadView slots={p.slots} cards={p.cards} concept={p.concept} notes={p.notes} />
+            <PitchCard
+              pitch={pitchOf(p)}
+              cards={p.cards}
+              palette={p.concept?.palette ?? p.cards.look?.palette}
+            />
+            <details className="behind">
+              <summary>The cards behind it</summary>
+              <SpreadView slots={p.slots} cards={p.cards} concept={p.concept} notes={p.notes} />
+            </details>
             <div className="row reactions" role="group" aria-label="React">
+              <button
+                type="button"
+                className={`big-btn vote${mine("vote") ? " forge lit" : ""}`}
+                aria-pressed={mine("vote")}
+                disabled={p.userId === me}
+                title={p.userId === me ? "You can't vote for your own pitch" : undefined}
+                onClick={() => {
+                  sfx.tink();
+                  void act(() => jam.react(p.id, "vote", !mine("vote")));
+                }}
+              >
+                ⭐ {mine("vote") ? "Voted" : "Vote"} · {votes(p)}
+              </button>
               {REACTIONS.map((r) => {
                 const n = snap.reactions.filter(
                   (x) => x.pageId === p.id && x.kind === r.kind,

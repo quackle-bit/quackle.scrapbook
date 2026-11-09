@@ -20,6 +20,9 @@ import {
 import { CardFace } from "../Card";
 import { DuckSprite } from "../Duck";
 import { COVER_COLORS } from "../route/Gate";
+import { pitchOf } from "@/lib/pitch";
+import { PitchCard } from "../pitch/PitchCard";
+import { PitchEditor } from "../pitch/PitchEditor";
 import { SpreadView } from "./SpreadView";
 
 type Page = { key: string; label: string; render: () => ReactNode };
@@ -41,7 +44,7 @@ export function BookViewer() {
     { key: "inside", label: "Inside cover", render: () => <InsideCover book={book} /> },
     ...book.spreads.map((sp, i) => ({
       key: sp.id,
-      label: sp.concept?.title ?? `Spread ${i + 1}`,
+      label: pitchOf(sp).title || `Spread ${i + 1}`,
       render: () => <SpreadPage sp={sp} n={i + 1} book={book} />,
     })),
     ...(book.spreads.length === 0
@@ -316,11 +319,12 @@ function EmptyPage() {
 function SpreadPage({ sp, n, book }: { sp: SavedSpread; n: number; book: LocalBook }) {
   const [copied, setCopied] = useState<string | null>(null);
   const [confirm, setConfirm] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const pitch = pitchOf(sp);
   async function share() {
     const url = shareUrl(sp, book);
     try {
-      if (navigator.share)
-        await navigator.share({ title: sp.concept?.title ?? "A game idea", url });
+      if (navigator.share) await navigator.share({ title: pitch.title || "A game idea", url });
       else {
         await navigator.clipboard.writeText(url);
         setCopied("Link copied!");
@@ -367,7 +371,28 @@ function SpreadPage({ sp, n, book }: { sp: SavedSpread; n: number; book: LocalBo
           {copied}
         </p>
       )}
-      <SpreadView slots={sp.slots} cards={sp.cards} concept={sp.concept} notes={sp.notes} />
+      {editing ? (
+        <PitchEditor
+          pitch={pitch}
+          cards={sp.cards}
+          onChange={(p) => store.updatePitch(sp.id, p)}
+          slots={sp.slots}
+          preview={false}
+        />
+      ) : (
+        <PitchCard
+          pitch={pitch}
+          cards={sp.cards}
+          palette={sp.concept?.palette ?? sp.cards.look?.palette}
+        />
+      )}
+      <button type="button" className="act" onClick={() => setEditing((e) => !e)}>
+        {editing ? "Done editing" : "Edit pitch"}
+      </button>
+      <details className="behind">
+        <summary>The cards behind it</summary>
+        <SpreadView slots={sp.slots} cards={sp.cards} concept={sp.concept} notes={sp.notes} />
+      </details>
     </div>
   );
 }

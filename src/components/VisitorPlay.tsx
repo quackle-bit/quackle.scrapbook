@@ -48,6 +48,7 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
             cards: run.cards,
             concept: run.concept,
             notes: run.notes,
+            pitch: run.pitch,
           });
           await studioRepo.updateSpread(id, { ledger: estimateLedger(run.cards) });
           setSaved({ ok: true });
@@ -72,6 +73,7 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
         cards: run.cards,
         concept: run.concept,
         notes: run.notes,
+        pitch: run.pitch,
       },
       run.discard,
       { title: run.gate.title, color: run.gate.color, antiGoal: run.gate.antiGoal },

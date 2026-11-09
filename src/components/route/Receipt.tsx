@@ -17,7 +17,9 @@ export function Receipt({
   stats,
   concept,
   actions,
+  pitchCard,
 }: {
+  pitchCard?: React.ReactNode;
   bookTitle: string;
   routeLabel: string;
   stats: RunStats;
@@ -36,6 +38,7 @@ export function Receipt({
   );
   return (
     <div className="stop-play">
+      {pitchCard}
       <div className="receipt" role="document" aria-label="Receipt">
         <div className="r-head">
           <strong>QUACKLE BAZAAR</strong>

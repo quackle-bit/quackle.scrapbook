@@ -34,6 +34,9 @@ import { Receipt, type RunStats } from "./Receipt";
 import { BookOverlay, BookPeek, RouteBar, SparkCard } from "./RouteParts";
 import { Scrolls } from "./Scrolls";
 import { Tarot } from "./Tarot";
+import { emptyPitch, type Pitch } from "@/lib/pitch";
+import { PitchCard } from "../pitch/PitchCard";
+import { PitchEditor } from "../pitch/PitchEditor";
 
 /** A finished run, handed to whoever hosts the route (Phase 2 saves it into the book). */
 export type FinishedSpread = {
@@ -44,6 +47,7 @@ export type FinishedSpread = {
   notes: SparkNote[];
   discard: CardData[];
   stats: RunStats;
+  pitch: Pitch;
 };
 
 type View =
@@ -103,6 +107,7 @@ export function Route({
   const [notes, setNotes] = useState<SparkNote[]>([]);
   const [spark, setSpark] = useState({ q: "", a: "" });
   const [concept, setConcept] = useState<Concept | null>(null);
+  const [pitch, setPitch] = useState<Pitch>(emptyPitch);
   const [ownCoins, setOwnCoins] = useState<number>(route.coins ?? Infinity);
   const [stats, setStats] = useState<RunStats>({
     packs: 0,
@@ -144,6 +149,18 @@ export function Route({
     }, 1000);
     return () => clearInterval(t);
   }, [route.timer, view, stopId, phase]);
+
+  // Reaching the Pitch Desk: spark answers become the pitch's notes (once, if notes are empty).
+  const notesSeeded = useRef(false);
+  useEffect(() => {
+    if (stopId !== "desk" || notesSeeded.current) return;
+    notesSeeded.current = true;
+    const answered = notes.filter((n) => n.a.trim() && n.stop !== "gate");
+    if (answered.length)
+      setPitch((p) =>
+        p.notes.trim() ? p : { ...p, notes: answered.map((n) => `• ${n.a.trim()}`).join("\n") },
+      );
+  }, [stopId, notes]);
 
   // Cards received elsewhere (the jam trading post) can be stamped into any matching empty slot.
   const cardsRef = useRef(cards);
@@ -324,7 +341,28 @@ export function Route({
   }
 
   function snapshot(): FinishedSpread {
-    return { gate, slots, cards, concept, notes, discard, stats };
+    const title = pitch.title.trim() || concept?.title || "";
+    return {
+      gate,
+      slots,
+      cards,
+      concept: concept ? { ...concept, title } : null,
+      notes,
+      discard,
+      stats,
+      pitch: { ...pitch, title },
+    };
+  }
+
+  /** Which stall fills a detail line (for "walk there" buttons). */
+  function stallName(slot: SlotId) {
+    const id = stops.find((s) => STOPS[s].slot === slot);
+    return id ? STOPS[id].name.replace("THE ", "").toLowerCase() : undefined;
+  }
+  /** Tap a pitch line → walk straight to the stall that fills it (any order). */
+  function jumpToSlot(slot: SlotId) {
+    const i = stops.findIndex((s) => STOPS[s].slot === slot);
+    if (i >= 0) goTo(i);
   }
 
   function finish() {
@@ -341,10 +379,12 @@ export function Route({
 
   function restart(keepGate = true) {
     hand.current = [];
+    notesSeeded.current = false;
     setCards({});
     setDiscard([]);
     setNotes([]);
     setConcept(null);
+    setPitch(emptyPitch());
     setLit(keepGate ? ["gate"] : []);
     setSkipped([]);
     setStats({ packs: 0, cards: 0, kept: 0, trashed: 0, sparks: 0 });
@@ -393,6 +433,13 @@ export function Route({
       const snap = snapshot();
       return (
         <Receipt
+          pitchCard={
+            <PitchCard
+              pitch={{ ...pitch, title: pitch.title || concept?.title || "" }}
+              cards={cards}
+              palette={concept?.palette ?? cards.look?.palette}
+            />
+          }
           bookTitle={gate.title}
           routeLabel={route.label}
           stats={stats}
@@ -484,12 +531,31 @@ export function Route({
             slots={slots}
             cards={cards}
             existing={concept}
+            presetTitle={pitch.title}
             onForged={(c) => {
               setConcept(c);
+              setPitch((p) => ({ ...p, title: c.title }));
               lightLamp("forge");
               askSpark("forge");
             }}
           />
+        );
+      case "desk":
+        return (
+          <div className="stop-play desk">
+            <PitchEditor
+              pitch={pitch}
+              cards={cards}
+              onChange={setPitch}
+              slots={slots}
+              onJump={jumpToSlot}
+              stallName={stallName}
+              palette={concept?.palette ?? cards.look?.palette}
+            />
+            <button type="button" className="big-btn" onClick={finish}>
+              Pin it up →
+            </button>
+          </div>
         );
       case "night":
         return (
@@ -678,6 +744,20 @@ export function Route({
           concept={concept}
           notes={notes}
           onClose={() => setBookOpen(false)}
+          pitchPanel={
+            <PitchEditor
+              pitch={pitch}
+              cards={cards}
+              onChange={setPitch}
+              slots={slots}
+              onJump={(slot) => {
+                setBookOpen(false);
+                jumpToSlot(slot);
+              }}
+              stallName={stallName}
+              palette={concept?.palette ?? cards.look?.palette}
+            />
+          }
         />
       )}
     </div>

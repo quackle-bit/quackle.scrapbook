@@ -4,6 +4,7 @@
  */
 import type { Concept, SparkNote } from "@/components/book/SpreadView";
 import type { CardData, SlotId } from "./deck";
+import { emptyPitch, pitchOf, type Pitch } from "./pitch";
 import type { SavedSpread } from "./store";
 
 type Packed = {
@@ -17,6 +18,15 @@ type Packed = {
   p?: string[];
   n?: [string, string][];
   d: string;
+  /** pitch: title, tagline, genre, platforms, typed detail lines, notes */
+  q?: {
+    t: string;
+    l: string;
+    g: string;
+    p: string[];
+    d: Partial<Record<SlotId, string>>;
+    n: string;
+  };
 };
 
 const VALID_SLOTS: SlotId[] = [
@@ -74,6 +84,10 @@ export function encodeSpread(sp: SavedSpread, book: { title: string; color: stri
     p: sp.concept?.palette,
     n: sp.notes.filter((n) => n.a.trim()).map((n) => [n.q, n.a]),
     d: sp.createdAt.slice(0, 10),
+    q: (() => {
+      const p = pitchOf(sp);
+      return { t: p.title, l: p.tagline, g: p.genre, p: p.platforms, d: p.details, n: p.notes };
+    })(),
   };
   return b64urlEncode(JSON.stringify(packed));
 }
@@ -90,7 +104,10 @@ export type SharedSpread = {
   cards: Partial<Record<SlotId, CardData>>;
   concept: Concept | null;
   notes: SparkNote[];
+  pitch: Pitch;
 };
+
+const str = (v: unknown, max: number) => (typeof v === "string" ? v.slice(0, max) : "");
 
 export function decodeSpread(hash: string): SharedSpread | null {
   try {
@@ -123,6 +140,21 @@ export function decodeSpread(hash: string): SharedSpread | null {
             palette: safeColors(p.p ?? []),
           }
         : null,
+      pitch: p.q
+        ? {
+            ...emptyPitch(),
+            title: str(p.q.t, 60),
+            tagline: str(p.q.l, 110),
+            genre: str(p.q.g, 30),
+            platforms: (Array.isArray(p.q.p) ? p.q.p : []).map((x) => str(x, 20)).slice(0, 8),
+            details: Object.fromEntries(
+              Object.entries(p.q.d ?? {})
+                .filter(([k]) => VALID_SLOTS.includes(k as SlotId))
+                .map(([k, v]) => [k, str(v, 60)]),
+            ),
+            notes: str(p.q.n, 800),
+          }
+        : { ...emptyPitch(), title: p.t ? p.t.slice(0, 60) : "" },
       notes: (p.n ?? [])
         .slice(0, 12)
         .map(([q, a]) => ({ stop: "", q: String(q).slice(0, 140), a: String(a).slice(0, 140) })),

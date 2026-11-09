@@ -70,6 +70,7 @@ create table public.spreads (
   cards jsonb not null default '{}'::jsonb,
   concept jsonb,
   notes jsonb not null default '[]'::jsonb,
+  pitch jsonb, -- title, tagline, genre, platforms, detail lines, notes
   ledger jsonb,
   appraisal jsonb,
   status text not null default 'idea' check (status in ('idea', 'prototype', 'production')),
@@ -190,7 +191,7 @@ create table public.trades (
 create table public.reactions (
   spread_id uuid not null references public.spreads (id) on delete cascade,
   user_id uuid not null default auth.uid() references auth.users (id),
-  kind text not null check (kind in ('heart', 'fire', 'think')),
+  kind text not null check (kind in ('heart', 'fire', 'think', 'vote')),
   created_at timestamptz not null default now(),
   primary key (spread_id, user_id, kind)
 );
@@ -425,7 +426,10 @@ create policy "decline trades" on public.trades for update using (to_user = auth
 -- reactions: guests react to album pages, members to anything they can read.
 create policy "read reactions" on public.reactions for select using (true);
 create policy "react" on public.reactions for insert with check (
-  user_id = auth.uid() and (
+  user_id = auth.uid()
+  -- no voting for your own pitch
+  and (kind <> 'vote' or not exists (select 1 from public.spreads s where s.id = spread_id and s.created_by = auth.uid()))
+  and (
     public.is_member()
     or exists (select 1 from public.spreads s where s.id = spread_id and public.is_guest(public.room_of_book(s.book_id)))
   )

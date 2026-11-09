@@ -21,7 +21,10 @@ export function ForgeStop({
   cards,
   existing,
   onForged,
+  presetTitle,
 }: {
+  /** A title the player already typed or spun on the pitch: keep it as the first choice. */
+  presetTitle?: string;
   slots: SlotId[];
   cards: Partial<Record<SlotId, CardData>>;
   existing: Concept | null;
@@ -112,7 +115,12 @@ export function ForgeStop({
     const rng = createRng(freshSeed());
     const opts = titleOptions(rng, cards);
     setOptions(opts);
-    setTitle(opts[0]);
+    setOptions(
+      presetTitle?.trim() && !opts.includes(presetTitle.trim())
+        ? [presetTitle.trim(), ...opts.slice(0, 2)]
+        : opts,
+    );
+    setTitle(presetTitle?.trim() || opts[0]);
     setPalette(cards.look?.palette ?? makePalette(rng));
     setPhase("naming");
     sfx.fanfare();

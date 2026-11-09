@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { decodeSpread, type SharedSpread } from "@/lib/share";
 import { DuckSprite } from "../Duck";
+import { PitchCard } from "../pitch/PitchCard";
 import { SpreadView } from "./SpreadView";
 
 // The spread lives in the URL hash, which only exists in the browser.
@@ -43,15 +44,19 @@ export function SharedView() {
             {sp ? (
               <div className="paper-page">
                 <div className="spread-head">
-                  <span>a page from someone&apos;s idea book</span>
+                  <span>a game pitch</span>
                   <span className="read-only">read-only</span>
                 </div>
-                <SpreadView
-                  slots={sp.slots}
-                  cards={sp.cards}
-                  concept={sp.concept}
-                  notes={sp.notes}
-                />
+                <PitchCard pitch={sp.pitch} cards={sp.cards} palette={sp.concept?.palette} />
+                <details className="behind">
+                  <summary>The cards behind it</summary>
+                  <SpreadView
+                    slots={sp.slots}
+                    cards={sp.cards}
+                    concept={sp.concept}
+                    notes={sp.notes}
+                  />
+                </details>
               </div>
             ) : (
               <div className="paper-page center">

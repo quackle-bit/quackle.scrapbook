@@ -4,6 +4,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Concept, SparkNote } from "@/components/book/SpreadView";
 import type { CardData, CardType, SlotId } from "../deck";
 import type { Ledger } from "../ledger";
+import type { Pitch } from "../pitch";
 
 /**
  * Studio data (CLAUDE.md §6.3): a shared library of books, spreads with status, comments,
@@ -31,6 +32,7 @@ export type StudioSpread = {
   cards: Partial<Record<SlotId, CardData>>;
   concept: Concept | null;
   notes: SparkNote[];
+  pitch?: Pitch | null;
   status: Status;
   ledger?: Ledger | null;
   appraisal?: unknown;
@@ -57,11 +59,16 @@ export interface StudioRepo {
   listSpreads(bookId: string): Promise<StudioSpread[]>;
   addSpread(
     bookId: string,
-    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & { creditedTo?: string },
+    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & {
+      creditedTo?: string;
+      pitch?: Pitch | null;
+    },
   ): Promise<string>;
   updateSpread(
     id: string,
-    patch: Partial<Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal">>,
+    patch: Partial<
+      Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal" | "pitch">
+    >,
   ): Promise<void>;
   addComment(spreadId: string, body: string): Promise<void>;
   vote(spreadId: string, value: -1 | 0 | 1): Promise<void>;
@@ -124,7 +131,10 @@ export class LocalStudioRepo implements StudioRepo {
   }
   async addSpread(
     bookId: string,
-    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & { creditedTo?: string },
+    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & {
+      creditedTo?: string;
+      pitch?: Pitch | null;
+    },
   ) {
     const id = uid();
     this.mutate((st) =>
@@ -143,7 +153,9 @@ export class LocalStudioRepo implements StudioRepo {
   }
   async updateSpread(
     id: string,
-    patch: Partial<Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal">>,
+    patch: Partial<
+      Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal" | "pitch">
+    >,
   ) {
     this.mutate((s) => {
       const sp = s.spreads.find((x) => x.id === id);
@@ -193,6 +205,7 @@ type SpreadRow = {
   cards: Partial<Record<SlotId, CardData>>;
   concept: Concept | null;
   notes: SparkNote[];
+  pitch: Pitch | null;
   status: Status;
   ledger: Ledger | null;
   appraisal: unknown;
@@ -277,6 +290,7 @@ export class SupabaseStudioRepo implements StudioRepo {
       cards: r.cards,
       concept: r.concept,
       notes: r.notes,
+      pitch: r.pitch,
       status: r.status,
       ledger: r.ledger,
       appraisal: r.appraisal,
@@ -302,7 +316,10 @@ export class SupabaseStudioRepo implements StudioRepo {
   }
   async addSpread(
     bookId: string,
-    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & { creditedTo?: string },
+    s: Pick<StudioSpread, "slots" | "cards" | "concept" | "notes"> & {
+      creditedTo?: string;
+      pitch?: Pitch | null;
+    },
   ) {
     const row = this.check(
       await this.sb
@@ -313,6 +330,7 @@ export class SupabaseStudioRepo implements StudioRepo {
           cards: s.cards,
           concept: s.concept,
           notes: s.notes,
+          pitch: s.pitch ?? null,
           credited_to: s.creditedTo ?? null,
         })
         .select("id")
@@ -325,7 +343,9 @@ export class SupabaseStudioRepo implements StudioRepo {
   }
   async updateSpread(
     id: string,
-    patch: Partial<Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal">>,
+    patch: Partial<
+      Pick<StudioSpread, "status" | "concept" | "cards" | "ledger" | "appraisal" | "pitch">
+    >,
   ) {
     await this.sb
       .from("spreads")

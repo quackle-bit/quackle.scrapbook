@@ -135,7 +135,7 @@ export function BookPeek({
         {slot && !card && <span className="hint">drag a card down here</span>}
       </div>
       <button type="button" className="big-btn book-btn" onClick={onOpenBook}>
-        Book
+        Pitch
       </button>
     </div>
   );
@@ -214,7 +214,9 @@ export function BookOverlay({
   concept,
   notes,
   onClose,
+  pitchPanel,
 }: {
+  pitchPanel?: React.ReactNode;
   title: string;
   color: string;
   antiGoal: string;
@@ -224,7 +226,7 @@ export function BookOverlay({
   notes: SparkNote[];
   onClose: () => void;
 }) {
-  const [page, setPage] = useState<"cover" | "spread">("spread");
+  const [page, setPage] = useState<"pitch" | "cover" | "spread">(pitchPanel ? "pitch" : "spread");
   useEffect(() => {
     sfx.peel();
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -243,6 +245,16 @@ export function BookOverlay({
         <div className="overlay-head">
           <strong>{title}</strong>
           <div className="row">
+            {pitchPanel && (
+              <button
+                type="button"
+                className="act"
+                aria-pressed={page === "pitch"}
+                onClick={() => setPage("pitch")}
+              >
+                pitch
+              </button>
+            )}
             <button
               type="button"
               className="act"
@@ -257,14 +269,16 @@ export function BookOverlay({
               aria-pressed={page === "spread"}
               onClick={() => setPage("spread")}
             >
-              spread
+              cards
             </button>
             <button type="button" className="act" onClick={onClose} aria-label="Close book">
               ✕
             </button>
           </div>
         </div>
-        {page === "cover" ? (
+        {page === "pitch" && pitchPanel ? (
+          <div className="overlay-pitch">{pitchPanel}</div>
+        ) : page === "cover" ? (
           <div className="inside-cover">
             <small>Today I will NOT make…</small>
             <p className="hand-note">{antiGoal || "(nothing written)"}</p>

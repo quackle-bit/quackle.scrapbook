@@ -142,6 +142,7 @@ export class SupabaseJam implements JamTransport {
         cards: p.cards,
         concept: p.concept,
         notes: p.notes,
+        pitch: p.pitch,
         hidden: p.hidden,
         createdAt: p.created_at,
       })),
@@ -211,7 +212,10 @@ export class SupabaseJam implements JamTransport {
     else
       await this.sb.from("trades").update({ state: "declined" }).eq("id", tradeId).throwOnError();
   }
-  async publishPage(roomId: string, page: Pick<Page, "slots" | "cards" | "concept" | "notes">) {
+  async publishPage(
+    roomId: string,
+    page: Pick<Page, "slots" | "cards" | "concept" | "notes" | "pitch">,
+  ) {
     const me = await this.userId();
     const book = await this.album(roomId);
     const { data: existing } = await this.sb

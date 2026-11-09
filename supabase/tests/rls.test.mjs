@@ -273,4 +273,16 @@ await expectFail(
     [room.id],
   ),
 );
+await expectFail(
+  "vote for your own pitch",
+  as(GUEST1, `insert into public.reactions (spread_id, kind) values ($1, 'vote')`, [albumSpread]),
+);
+await as(GUEST2, `insert into public.reactions (spread_id, kind) values ($1, 'vote')`, [
+  albumSpread,
+]);
+ok(
+  "another guest can vote",
+  (await as(GUEST2, `select count(*)::int n from public.reactions where kind='vote'`)).rows[0].n ===
+    1,
+);
 console.log(process.exitCode ? "SOME CHECKS FAILED" : "ALL CHECKS PASSED");

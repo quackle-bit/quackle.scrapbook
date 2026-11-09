@@ -6,6 +6,9 @@ import { estimateLedger, type Ledger } from "@/lib/ledger";
 import { STATUSES, type StudioRepo, type StudioSpread } from "@/lib/studio/repo";
 import { sfx } from "@/lib/sound";
 import { SpreadView } from "../book/SpreadView";
+import { pitchMarkdown, pitchOf, type Pitch } from "@/lib/pitch";
+import { PitchCard } from "../pitch/PitchCard";
+import { PitchEditor } from "../pitch/PitchEditor";
 
 type Appraisal = {
   pitch: {
@@ -43,7 +46,10 @@ export function SpreadDetail({
   const pageRef = useRef<HTMLDivElement>(null);
   const ledger: Ledger = (sp.ledger as Ledger | null) ?? estimateLedger(sp.cards);
   const appraisal = sp.appraisal as Appraisal | undefined;
-  const title = sp.concept?.title ?? "Untitled";
+  const savedPitch = pitchOf(sp);
+  const [draft, setDraft] = useState<Pitch | null>(null);
+  const pitch = draft ?? savedPitch;
+  const title = pitch.title || "Untitled";
 
   async function run(label: string, fn: () => Promise<void>) {
     setBusy(label);
@@ -65,7 +71,9 @@ export function SpreadDetail({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           title,
-          logline: sp.concept?.logline,
+          logline:
+            [pitch.tagline, pitch.genre, pitch.platforms.join("/")].filter(Boolean).join(" · ") ||
+            sp.concept?.logline,
           cards: sp.slots
             .filter((s) => sp.cards[s])
             .map((s) => ({ slot: s, type: sp.cards[s]!.slot, text: sp.cards[s]!.text })),
@@ -93,8 +101,53 @@ export function SpreadDetail({
       </div>
 
       <div ref={pageRef} className="studio-page">
-        <SpreadView slots={sp.slots} cards={sp.cards} concept={sp.concept} notes={sp.notes} />
+        <PitchCard
+          pitch={pitch}
+          cards={sp.cards}
+          palette={sp.concept?.palette ?? sp.cards.look?.palette}
+        />
       </div>
+      {draft ? (
+        <section className="panel">
+          <PitchEditor
+            pitch={draft}
+            cards={sp.cards}
+            onChange={setDraft}
+            slots={sp.slots}
+            preview={false}
+          />
+          <div className="row">
+            <button
+              type="button"
+              className="big-btn"
+              onClick={() =>
+                void run("pitch", async () => {
+                  await repo.updateSpread(sp.id, {
+                    pitch: draft,
+                    concept: sp.concept
+                      ? { ...sp.concept, title: draft.title || sp.concept.title }
+                      : sp.concept,
+                  });
+                  setDraft(null);
+                })
+              }
+            >
+              Save pitch
+            </button>
+            <button type="button" className="link-btn" onClick={() => setDraft(null)}>
+              cancel
+            </button>
+          </div>
+        </section>
+      ) : (
+        <button type="button" className="act" onClick={() => setDraft(savedPitch)}>
+          Edit pitch
+        </button>
+      )}
+      <details className="behind panel">
+        <summary>The cards behind it</summary>
+        <SpreadView slots={sp.slots} cards={sp.cards} concept={sp.concept} notes={sp.notes} />
+      </details>
 
       <section className="panel">
         <h3>Status</h3>
@@ -263,7 +316,9 @@ export function SpreadDetail({
             onClick={() =>
               download(
                 `${slug(title)}.md`,
-                spreadMarkdown({ ...sp, ledger }, bookTitle),
+                pitchMarkdown(pitch, sp.cards) +
+                  "\n---\n\n" +
+                  spreadMarkdown({ ...sp, ledger }, bookTitle),
                 "text/markdown",
               )
             }

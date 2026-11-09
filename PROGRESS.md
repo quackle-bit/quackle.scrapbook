@@ -70,6 +70,7 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - README rewritten.
 
 ## Phase 6 — Motion trial (branch `phase-6-motion`)
+
 - Added Motion (`motion`): cards are driven by motion values with spring physics (`src/lib/physics.ts`, tuning in `feel.spring`).
   - Stamping: the card flies from your finger into the slot (spring, scaled to the slot), then lands with the thud.
   - Fling: keeps your throw velocity and glides out (inertia), spinning with the throw.
@@ -81,6 +82,17 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
   - The crumple timer could stay armed after a press ended (lost pointer capture) and crumple a card nobody was touching; it now only fires while pressed, and lost capture springs the card home.
   - Local jam preview showed host tools to every guest; only the tab that opened the room is host now.
 - Page turns and the forge still use the earlier animation code.
+
+## Phase 7 — The pitch (branch `phase-7-pitch`)
+Every walk now produces a **pitch** in one readable shape (see `docs/pitch-structure.md`):
+title · tagline · genre · platform · details (short keyword lines: mechanic, world, mood, look, twist, rule, seed) · notes.
+- Free order: open **Pitch** from the bottom bar anytime; tap a detail's 🎴 to walk straight to its stall; skip anything; type over any line. Filling one line never changes another.
+- Title: type or 🎰 spin (names from your own keywords). Tagline: type or ✎ draft from the details. Genre/Platform: pick chips (itch.io genres) or 🎰 spin — you choose in the end. Notes: spark answers drop in automatically.
+- New last stop on every street: **the Pitch Desk** (full editor + live card + copy as Markdown / itch.io text / save image).
+- "READY TO PITCH" stamp when title, genre and 3 details are filled (a nudge, not a lock).
+- The pitch card is what the receipt, book, share link, studio library and Jam Album show; the cards fold away under "The cards behind it".
+- Jam Album: ⭐ Vote per pitch (not your own; enforced in the DB too), ranked by votes after close.
+- DB: `spreads.pitch` column, `vote` reaction kind, no self-votes (34 checks).
 
 ## Known issues / next
 

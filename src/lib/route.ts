@@ -17,7 +17,8 @@ export type StopId =
   | "trickster"
   | "rule"
   | "forge"
-  | "night";
+  | "night"
+  | "desk";
 
 export type AlleyId = "crate" | "echo" | "backroom";
 
@@ -205,6 +206,13 @@ export const STOPS: Record<StopId, StopDef> = {
       "What's the one-line review you want?",
     ],
   },
+  desk: {
+    id: "desk",
+    name: "THE PITCH DESK",
+    keeper: "Put it all on one card. Type, pick or spin anything.",
+    color: "#2b2620",
+    sparks: ["Read it out loud. What would you cut?"],
+  },
   night: {
     id: "night",
     name: "THE NIGHT MARKET",
@@ -237,7 +245,7 @@ export const ROUTES: Record<Mode, RouteDef> = {
     mode: "visitor",
     label: "Visitor",
     blurb: "Short street · 5 stops · ~30 s each",
-    stops: ["gate", "word", "gear", "tailor", "trickster", "forge"],
+    stops: ["gate", "word", "gear", "tailor", "trickster", "forge", "desk"],
     coins: 10,
     sparksPerStop: 1,
   },
@@ -245,7 +253,7 @@ export const ROUTES: Record<Mode, RouteDef> = {
     mode: "jam",
     label: "Jam",
     blurb: "Sprint street · theme · 1 min per stop",
-    stops: ["gate", "theme", "gear", "tailor", "trickster", "forge"],
+    stops: ["gate", "theme", "gear", "tailor", "trickster", "forge", "desk"],
     coins: 6,
     timer: 60,
     sparksPerStop: 1,
@@ -265,6 +273,7 @@ export const ROUTES: Record<Mode, RouteDef> = {
       "rule",
       "forge",
       "night",
+      "desk",
     ],
     coins: null,
     sparksPerStop: 1,

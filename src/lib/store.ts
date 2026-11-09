@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import type { Concept, SparkNote } from "@/components/book/SpreadView";
 import type { CardData, SlotId } from "./deck";
+import type { Pitch } from "./pitch";
 import type { Mode } from "./route";
 
 /**
@@ -22,6 +23,7 @@ export type SavedSpread = {
   cards: Partial<Record<SlotId, CardData>>;
   concept: Concept | null;
   notes: SparkNote[];
+  pitch?: Pitch;
 };
 
 export type CollectionEntry = {
@@ -210,6 +212,26 @@ export const store = {
   deleteSpread(id: string) {
     load();
     set({ book: { ...state.book, spreads: state.book.spreads.filter((s) => s.id !== id) } });
+  },
+
+  updatePitch(id: string, pitch: Pitch) {
+    load();
+    set({
+      book: {
+        ...state.book,
+        spreads: state.book.spreads.map((s) =>
+          s.id === id
+            ? {
+                ...s,
+                pitch,
+                concept: s.concept
+                  ? { ...s.concept, title: pitch.title || s.concept.title }
+                  : s.concept,
+              }
+            : s,
+        ),
+      },
+    });
   },
 
   renameSpread(id: string, title: string) {

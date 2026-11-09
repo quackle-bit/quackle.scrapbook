@@ -209,7 +209,10 @@ export class LocalJam implements JamTransport {
       t.state = "accepted";
     });
   }
-  async publishPage(roomId: string, page: Pick<Page, "slots" | "cards" | "concept" | "notes">) {
+  async publishPage(
+    roomId: string,
+    page: Pick<Page, "slots" | "cards" | "concept" | "notes" | "pitch">,
+  ) {
     const me = await this.guard(roomId);
     if (Object.values(page.cards).some((c) => c?.rarity === "mythic"))
       fail("Mythic cards aren't allowed in jams.");
@@ -232,6 +235,8 @@ export class LocalJam implements JamTransport {
   async react(pageId: string, kind: ReactionKind, on: boolean) {
     const me = await this.userId();
     tx((d) => {
+      if (kind === "vote" && d.pages.find((p) => p.id === pageId)?.userId === me)
+        fail("You can't vote for your own pitch.");
       d.reactions = d.reactions.filter(
         (r) => !(r.pageId === pageId && r.userId === me && r.kind === kind),
       );

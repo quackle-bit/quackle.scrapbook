@@ -1,5 +1,6 @@
 import type { Concept, SparkNote } from "@/components/book/SpreadView";
 import type { CardData, SlotId } from "../deck";
+import type { Pitch } from "../pitch";
 
 /** Jam rooms (CLAUDE.md §6.2). */
 
@@ -21,10 +22,11 @@ export type Page = {
   cards: Partial<Record<SlotId, CardData>>;
   concept: Concept | null;
   notes: SparkNote[];
+  pitch?: Pitch | null;
   hidden: boolean;
   createdAt: string;
 };
-export type ReactionKind = "heart" | "fire" | "think";
+export type ReactionKind = "heart" | "fire" | "think" | "vote";
 export type Reaction = { pageId: string; userId: string; kind: ReactionKind };
 export type Pull = {
   id: string;
@@ -80,7 +82,7 @@ export interface JamTransport {
   respondTrade(tradeId: string, accept: boolean): Promise<void>;
   publishPage(
     roomId: string,
-    page: Pick<Page, "slots" | "cards" | "concept" | "notes">,
+    page: Pick<Page, "slots" | "cards" | "concept" | "notes" | "pitch">,
   ): Promise<void>;
   react(pageId: string, kind: ReactionKind, on: boolean): Promise<void>;
   joinIdea(pageId: string, on: boolean): Promise<void>;

@@ -4,6 +4,7 @@ import { PlayFromQuery } from "@/components/VisitorPlay";
 import "@/styles/scrapbook.css";
 import "@/styles/route.css";
 import "@/styles/book.css";
+import "@/styles/pitch.css";
 
 export const metadata: Metadata = {
   title: "The Street · quackle.scrapbook",
