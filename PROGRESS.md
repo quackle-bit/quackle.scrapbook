@@ -50,7 +50,20 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Without Supabase keys everything runs as a local preview (`LocalStudioRepo`); with keys the same UI uses `SupabaseStudioRepo`.
 - New deps: @anthropic-ai/sdk, zod, @supabase/supabase-js, @supabase/ssr, server-only, html-to-image; dev: @electric-sql/pglite.
 
+## Phase 4 — Jam rooms (branch `phase-4-jam`) at `/jam`
+
+- Lobby: join with a room code + nickname (guests sign in anonymously on Supabase); studio members open a Jam Bazaar (theme, minutes, guest cap, starting coins).
+- Room (`/jam/room?code=…`): live countdown, guest count, Walk / Album / Trading post tabs.
+- Walk: the jam street with the theme locked on the Gate and a theme card in every pack; coins are the room's (spent through `spend_room_coin`).
+- Trading post: trashed and leftover cards go up on the post; pick someone's card, offer one of yours; the other guest accepts or declines live; received cards can be taped into the matching empty slot.
+- Jam Album: one page per guest (revisable while open), ❤ 🔥 🤔 reactions, a 48h cut list per page; after close the top 3 pages get "Join this idea" (team forming). Hosts can hide pages, close the market and adopt a page into a studio book credited to the guest.
+- Server rules (in `0001_init.sql`, tested by `npm run db:test`, 32 checks): guest cap, unique nicknames, coins, room open/closed, one page per guest, no Mythic/studio-only cards for guests, atomic trades, team joins only after close, adopt credits the guest.
+- Two backends: `LocalJam` (each browser tab is a guest; live through storage events) and `SupabaseJam` (RPCs + Realtime).
+
 ## Known issues / next
+
+- Jam card draws happen in the browser: coins are enforced on the server, but a modified client could draw without paying. Server-side draws (an API route that spends + draws + records pulls) would close that.
+- Local jam preview lets every tab host (hide/adopt/close); with Supabase only members can.
 
 - Not verified against a live Supabase project or with a real Anthropic key (no keys here): the SQL is tested in PGlite, the TypeScript type-checks, the UI runs on the local backend.
 

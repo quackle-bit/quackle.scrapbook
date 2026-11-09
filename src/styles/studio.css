@@ -341,3 +341,113 @@
   max-width: 420px;
   margin: 10vh auto 0;
 }
+
+/* ── Jam rooms ──────────────────────────────────────────── */
+.jam-head .counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.jam-tabs {
+  padding: 8px 16px 0;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+.jam-note {
+  padding: 8px 16px;
+  text-align: center;
+}
+.jam-walk[hidden] {
+  display: none;
+}
+.jam-walk .proto {
+  height: calc(100dvh - 96px);
+}
+.code-input {
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 22px !important;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+.gate-theme {
+  text-align: center;
+  font-size: 16px;
+}
+.gate-theme strong {
+  font-family: var(--font-pixel), monospace;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+}
+.album {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.album-page .book-spread {
+  box-shadow: none;
+  padding: 0;
+}
+.hidden-page {
+  opacity: 0.5;
+}
+.reactions {
+  justify-content: flex-start;
+}
+.cut-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.host-row {
+  justify-content: flex-start;
+}
+.host-tools code {
+  font-size: 12px;
+  word-break: break-all;
+}
+.trade {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.offer {
+  display: grid;
+  gap: 6px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #e3d8bd;
+}
+.offer-cards {
+  display: grid;
+  grid-template-columns: 80px auto 80px;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+}
+.pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: #2b2620 !important;
+}
+.pick.on {
+  outline: 3px solid var(--accent);
+}
+.pick small {
+  font-size: 10px;
+  color: #6b6152;
+}

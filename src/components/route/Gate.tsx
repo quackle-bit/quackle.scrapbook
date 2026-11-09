@@ -20,12 +20,14 @@ export function Gate({
   spark,
   modes,
   onEnter,
+  themeLocked,
 }: {
   initial: GateResult;
   spark: string;
   /** Which streets this player may walk (Studio needs a login later). */
   modes: Mode[];
   onEnter: (g: GateResult) => void;
+  themeLocked?: boolean;
 }) {
   const [g, setG] = useState<GateResult>(initial);
   const set = (patch: Partial<GateResult>) => setG((prev) => ({ ...prev, ...patch }));
@@ -82,7 +84,12 @@ export function Gate({
         </fieldset>
       )}
 
-      {g.mode === "jam" && (
+      {g.mode === "jam" && themeLocked && (
+        <p className="gate-theme">
+          Today&apos;s theme: <strong>{g.theme}</strong>
+        </p>
+      )}
+      {g.mode === "jam" && !themeLocked && (
         <label className="field">
           <span>Jam theme (written on the gate)</span>
           <input

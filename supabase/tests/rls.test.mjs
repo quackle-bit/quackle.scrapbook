@@ -181,6 +181,33 @@ await expectFail(
   ]),
 );
 
+// Card pool: no Mythic for guests.
+await expectFail(
+  "guest posts a mythic card",
+  as(
+    GUEST2,
+    `insert into public.pulls (room_id, owner_id, card) values ($1, auth.uid(), '{"text":"x","rarity":"mythic"}')`,
+    [room.id],
+  ),
+);
+await as(
+  GUEST2,
+  `insert into public.pulls (room_id, owner_id, card) values ($1, auth.uid(), '{"text":"ok","rarity":"rare"}')`,
+  [room.id],
+);
+await expectFail(
+  "guest page with a mythic card",
+  as(
+    GUEST2,
+    `insert into public.spreads (book_id, slots, cards) values ($1, '{seed}', '{"seed":{"text":"x","rarity":"mythic"}}')`,
+    [room.album_book_id],
+  ),
+);
+await expectFail(
+  "join an idea while the market is open",
+  as(GUEST2, `insert into public.team_joins (spread_id) values ($1)`, [albumSpread]),
+);
+
 // Trades: seed pulls as the server would, then trade.
 const [p1, p2] = (
   await db.query(
@@ -228,5 +255,22 @@ await expectFail(
 await expectFail(
   "join a closed room",
   as(STRANGER, `select * from public.join_room($1, 'late')`, [room.code]),
+);
+await as(GUEST2, `insert into public.team_joins (spread_id) values ($1)`, [albumSpread]);
+ok(
+  "guest joins an idea after close",
+  (await as(GUEST2, `select count(*)::int n from public.team_joins`)).rows[0].n === 1,
+);
+await expectFail(
+  "stranger joins an idea",
+  as(STRANGER, `insert into public.team_joins (spread_id) values ($1)`, [albumSpread]),
+);
+await expectFail(
+  "guest posts a card after close",
+  as(
+    GUEST1,
+    `insert into public.pulls (room_id, owner_id, card) values ($1, auth.uid(), '{"text":"late"}')`,
+    [room.id],
+  ),
 );
 console.log(process.exitCode ? "SOME CHECKS FAILED" : "ALL CHECKS PASSED");

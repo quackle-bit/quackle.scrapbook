@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { feel } from "@/feel";
 import { backroomPack, drawCards, themeCard, type CardData, type SlotId } from "@/lib/deck";
 import { shake } from "@/lib/motion";
@@ -60,6 +60,9 @@ export function Route({
   onSpendCoin,
   onFinish,
   finishActions,
+  onDiscarded,
+  coinsLabel,
+  lockTheme,
 }: {
   modes?: Mode[];
   initialGate?: Partial<GateResult>;
@@ -68,6 +71,12 @@ export function Route({
   onSpendCoin?: () => boolean;
   onFinish?: (s: FinishedSpread) => void;
   finishActions?: (s: FinishedSpread, restart: () => void) => React.ReactNode;
+  /** Trashed and leftover cards (Jam: they go up on the trading post). */
+  onDiscarded?: (cards: CardData[]) => void;
+  /** Extra text after the purse (e.g. the jam countdown). */
+  coinsLabel?: React.ReactNode;
+  /** Jam rooms set the theme; the Gate shows it instead of asking. */
+  lockTheme?: boolean;
 }) {
   const { muted, speed } = useSettings();
   const [gate, setGate] = useState<GateResult>({
@@ -80,7 +89,7 @@ export function Route({
   });
   const route = ROUTES[gate.mode];
   const stops = route.stops;
-  const slots = routeSlots(route);
+  const slots = useMemo(() => routeSlots(route), [route]);
 
   const [view, setView] = useState<View>({ kind: "stop", index: 0 });
   const [furthest, setFurthest] = useState(0);
@@ -136,6 +145,28 @@ export function Route({
     return () => clearInterval(t);
   }, [route.timer, view, stopId, phase]);
 
+  // Cards received elsewhere (the jam trading post) can be stamped into any matching empty slot.
+  const cardsRef = useRef(cards);
+  cardsRef.current = cards;
+  useEffect(() => {
+    const onStamp = (e: Event) => {
+      const { card, done } = (
+        e as CustomEvent<{ card: CardData; done: (ok: boolean, why?: string) => void }>
+      ).detail;
+      const slot = card.slot as SlotId;
+      if (!slots.includes(slot)) return done(false, "This street has no slot for that card.");
+      if (cardsRef.current[slot])
+        return done(false, "That slot is already stamped. Peel it first.");
+      setCards((c) => ({ ...c, [slot]: card }));
+      setStats((s) => ({ ...s, kept: s.kept + 1, cards: s.cards + 1 }));
+      sfx.thud();
+      say("Traded and taped in!", { tag: "jump", ms: 250, then: { tag: "land", ms: 120 } });
+      done(true);
+    };
+    window.addEventListener("qs-stamp-card", onStamp);
+    return () => window.removeEventListener("qs-stamp-card", onStamp);
+  }, [slots]);
+
   const spend = useCallback(() => {
     if (unlimited) {
       setStats((s) => ({ ...s, packs: s.packs + 1 }));
@@ -171,6 +202,7 @@ export function Route({
     const left = hand.current;
     hand.current = [];
     setDiscard((d) => [...left, ...d]);
+    onDiscarded?.(left);
   }
 
   function lightLamp(id: StopId) {
@@ -231,6 +263,7 @@ export function Route({
 
   function trash(card: CardData, how: TrashHow) {
     setDiscard((d) => [card, ...d]);
+    onDiscarded?.([card]);
     const counted = fromHand(card);
     setStats((s) => ({ ...s, trashed: s.trashed + 1, cards: s.cards + (counted ? 0 : 1) }));
     sfx.quack();
@@ -397,7 +430,15 @@ export function Route({
     }
     switch (stopId) {
       case "gate":
-        return <Gate initial={gate} spark={gateSpark} modes={modes} onEnter={enterGate} />;
+        return (
+          <Gate
+            initial={gate}
+            spark={gateSpark}
+            modes={modes}
+            onEnter={enterGate}
+            themeLocked={lockTheme}
+          />
+        );
       case "word":
         return (
           <PackStation
@@ -512,6 +553,7 @@ export function Route({
           </span>
           {unlimited ? "∞" : coins}
         </span>
+        {coinsLabel}
         <span className="counts">
           {gate.title} · {stats.kept} kept · {stats.trashed} quacked
         </span>

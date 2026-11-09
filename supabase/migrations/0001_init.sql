@@ -195,6 +195,24 @@ create table public.reactions (
   primary key (spread_id, user_id, kind)
 );
 
+-- Team forming: after the market closes, guests can join the top ideas.
+create table public.team_joins (
+  spread_id uuid not null references public.spreads (id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users (id),
+  created_at timestamptz not null default now(),
+  primary key (spread_id, user_id)
+);
+
+-- Jam card pool rule: guests never hold Mythic or studio-only cards.
+create or replace function public.guest_safe_card(c jsonb) returns boolean
+language sql immutable as $$
+  select coalesce(c->>'rarity', 'common') <> 'mythic' and coalesce((c->>'studioOnly')::boolean, false) = false;
+$$;
+create or replace function public.guest_safe_cards(cards jsonb) returns boolean
+language sql immutable as $$
+  select coalesce(bool_and(public.guest_safe_card(v)), true) from jsonb_each(cards) as e(k, v);
+$$;
+
 create or replace function public.room_is_open(r uuid) returns boolean
 language sql stable security definer set search_path = public as $$
   select exists (select 1 from public.rooms where id = r and not closed and ends_at > now());
@@ -320,6 +338,7 @@ alter table public.room_guests enable row level security;
 alter table public.pulls enable row level security;
 alter table public.trades enable row level security;
 alter table public.reactions enable row level security;
+alter table public.team_joins enable row level security;
 
 -- allowlist / members: admins manage, members can see the team.
 create policy "admins manage allowlist" on public.allowlist for all using (public.is_admin()) with check (public.is_admin());
@@ -351,11 +370,12 @@ create policy "guests add one page while open" on public.spreads for insert
     and public.is_guest(public.room_of_book(book_id))
     and public.room_is_open(public.room_of_book(book_id))
     and not public.has_page(book_id)
+    and public.guest_safe_cards(cards)
   );
 create policy "members update spreads" on public.spreads for update using (public.is_member());
 create policy "guests revise own page while open" on public.spreads for update
   using (created_by = auth.uid() and public.room_is_open(public.room_of_book(book_id)))
-  with check (created_by = auth.uid() and hidden = false);
+  with check (created_by = auth.uid() and hidden = false and public.guest_safe_cards(cards));
 create policy "members delete spreads" on public.spreads for delete using (public.is_member());
 
 create policy "members read versions" on public.spread_versions for select using (public.is_member());
@@ -387,6 +407,9 @@ create policy "room sees guests" on public.room_guests for select using (public.
 
 -- pulls: owners manage their own while the room is open; the room sees held cards for trading.
 create policy "room sees pulls" on public.pulls for select using (public.is_guest(room_id) or public.is_member());
+create policy "guests post cards while open" on public.pulls for insert with check (
+  owner_id = auth.uid() and public.is_guest(room_id) and public.room_is_open(room_id) and public.guest_safe_card(card)
+);
 create policy "own pulls while open" on public.pulls for update
   using (owner_id = auth.uid() and public.room_is_open(room_id)) with check (owner_id = auth.uid());
 
@@ -409,5 +432,16 @@ create policy "react" on public.reactions for insert with check (
 );
 create policy "unreact" on public.reactions for delete using (user_id = auth.uid());
 
+-- team forming: guests of the room (or members) join ideas once the market has closed.
+create policy "read team joins" on public.team_joins for select using (true);
+create policy "join an idea after close" on public.team_joins for insert with check (
+  user_id = auth.uid() and exists (
+    select 1 from public.spreads s where s.id = spread_id
+      and (public.is_member() or public.is_guest(public.room_of_book(s.book_id)))
+      and not public.room_is_open(public.room_of_book(s.book_id))
+  )
+);
+create policy "leave an idea" on public.team_joins for delete using (user_id = auth.uid());
+
 -- Realtime for the jam room (album, trades, reactions, guests).
-alter publication supabase_realtime add table public.spreads, public.trades, public.reactions, public.room_guests, public.pulls;
+alter publication supabase_realtime add table public.spreads, public.trades, public.reactions, public.room_guests, public.pulls, public.team_joins, public.rooms;
