@@ -13,7 +13,15 @@ import type { CardData, Pull, StopProps } from "./types";
  * The Gear Booth: three verb cards sit face-down under a press. Pull the lever down and the
  * press stamps them face-up one by one, ka-chunk.
  */
-export function GearPress({ coins, spend, context, onStamp, onTrash, onDragSlot }: StopProps) {
+export function GearPress({
+  coins,
+  spend,
+  context,
+  onStamp,
+  onTrash,
+  onDragSlot,
+  onPulled,
+}: StopProps) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [left, setLeft] = useState<Set<string>>(new Set());
   const [pressed, setPressed] = useState(false);
@@ -28,6 +36,7 @@ export function GearPress({ coins, spend, context, onStamp, onTrash, onDragSlot 
     if (!spend()) return;
     const c = drawCards(createRng(freshSeed()), "verb", 3, context, pull);
     setCards(c);
+    onPulled?.(c);
     setLeft(new Set(c.map((x) => x.id)));
     setPressed(false);
     setLever(0);

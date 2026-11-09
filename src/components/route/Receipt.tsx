@@ -47,7 +47,7 @@ export function Receipt({
         <div className="r-rule" />
         {line("book", bookTitle)}
         {line("packs bought", stats.packs)}
-        {line("cards sorted", stats.cards)}
+        {line("cards pulled", stats.cards)}
         {line("kept", stats.kept)}
         {line("QUACKED", stats.trashed)}
         {line("sparks answered", stats.sparks)}

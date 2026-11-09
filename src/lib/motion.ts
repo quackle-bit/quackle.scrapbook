@@ -28,9 +28,18 @@ export function play(
     easing: opts.easing ?? "cubic-bezier(.2,.8,.2,1)",
     fill: opts.fill ?? "none",
   });
+  // Hidden tabs pause animations; never let a sequence hang on one. Finish it on a timer.
+  const total = duration + (s.speed ? 0 : (opts.delay ?? 0));
+  const timer = setTimeout(() => {
+    try {
+      if (anim.playState === "running" || anim.playState === "paused") anim.finish();
+    } catch {
+      /* already done or cancelled */
+    }
+  }, total + 150);
   return anim.finished.then(
-    () => undefined,
-    () => undefined,
+    () => clearTimeout(timer),
+    () => clearTimeout(timer),
   );
 }
 

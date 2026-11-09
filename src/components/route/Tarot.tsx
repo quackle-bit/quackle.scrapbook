@@ -14,7 +14,15 @@ const SPREAD = ["Past", "Present", "Future"];
  * The Fortune Teller: three face-down mood cards, Past / Present / Future.
  * Flip them one by one; she reads the spread; keep the one that rings true.
  */
-export function Tarot({ coins, spend, context, onStamp, onTrash, onDragSlot }: StopProps) {
+export function Tarot({
+  coins,
+  spend,
+  context,
+  onStamp,
+  onTrash,
+  onDragSlot,
+  onPulled,
+}: StopProps) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [left, setLeft] = useState<Set<string>>(new Set());
   const [up, setUp] = useState<Set<string>>(new Set());
@@ -24,6 +32,7 @@ export function Tarot({ coins, spend, context, onStamp, onTrash, onDragSlot }: S
     if (!spend()) return;
     const c = drawCards(createRng(freshSeed()), "mood", 3, context, "fresh");
     setCards(c);
+    onPulled?.(c);
     setLeft(new Set(c.map((x) => x.id)));
     setUp(new Set());
     sfx.riffle();

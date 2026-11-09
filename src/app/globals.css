@@ -38,16 +38,21 @@ body {
 
 .home {
   min-height: 100dvh;
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  overflow-x: hidden;
   padding: 16px;
   text-align: center;
 }
 
 .title {
   font-family: var(--font-pixel), monospace;
-  font-size: clamp(1.75rem, 7vw, 4rem);
+  font-size: clamp(1.1rem, 5.6vw, 4rem);
+  max-width: 100%;
+  overflow-wrap: anywhere;
   letter-spacing: 0.02em;
 }
 
@@ -63,4 +68,72 @@ body {
   font-size: clamp(1.25rem, 4vw, 1.75rem);
   color: var(--ink-soft);
   transform: rotate(-2deg);
+}
+
+/* ── Home (pixel buttons without the full scrapbook stylesheet) ── */
+.home-duck .duck-sprite {
+  image-rendering: pixelated;
+}
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 20px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 14px;
+  color: #2b2620;
+  text-decoration: none;
+  background: #fffaf0;
+  box-shadow:
+    0 -3px 0 0 var(--ink),
+    0 3px 0 0 var(--ink),
+    -3px 0 0 0 var(--ink),
+    3px 0 0 0 var(--ink),
+    6px 6px 0 3px rgba(43, 38, 32, 0.28);
+}
+.home-btn.primary {
+  background: #f4c542;
+}
+.home-btn:active {
+  transform: translate(3px, 3px);
+}
+.home-btn:focus-visible,
+.home a:focus-visible,
+.site-footer a:focus-visible {
+  outline: 3px solid #d9452b;
+  outline-offset: 4px;
+}
+.home-sub {
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.home-small {
+  font-size: 13px;
+}
+.home-small a {
+  color: var(--ink-soft);
+}
+.site-footer {
+  padding: 24px 16px 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  border-top: 2px dashed var(--paper-edge);
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.site-footer p {
+  max-width: 560px;
+}
+.site-footer a {
+  color: var(--ink);
 }

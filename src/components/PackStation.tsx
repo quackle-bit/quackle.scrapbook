@@ -24,6 +24,7 @@ type Props = {
   /** The first pack at this stall is free. */
   firstFree?: boolean;
   packLabel?: string;
+  onPulled?: (cards: CardData[]) => void;
 };
 
 export function PackStation({
@@ -37,6 +38,7 @@ export function PackStation({
   pulls,
   firstFree,
   packLabel = "SCRAP PACK",
+  onPulled,
 }: Props) {
   const [bought, setBought] = useState(0);
   const [pull, setPull] = useState<Pull>("wild");
@@ -105,6 +107,7 @@ export function PackStation({
     );
     const cards = draw ? draw(seed, pull) : drawPack(createRng(seed));
     setUp(new Set());
+    onPulled?.(cards);
     setHand(cards);
     setLeft(new Set(cards.map((c) => c.id)));
     setPhase("fan");

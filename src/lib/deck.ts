@@ -79,8 +79,20 @@ const RANK: Record<Rarity, number> = { common: 0, uncommon: 1, rare: 2, mythic: 
 let uid = 0;
 export const nextId = () => `c${Date.now().toString(36)}${(uid++).toString(36)}`;
 
+/**
+ * Card-pool rules for the current player (CLAUDE.md §6): Visitors and Jam guests never see
+ * Mythic or studio-only cards. Display-side only; the server enforces it once accounts exist.
+ */
+export const poolRules = { allowMythic: true, allowStudioOnly: true };
+export function setPoolRules(rules: Partial<typeof poolRules>) {
+  Object.assign(poolRules, rules);
+}
+const allowed = (e: VocabEntry) =>
+  (poolRules.allowMythic || e.rarity !== "mythic") && (poolRules.allowStudioOnly || !e.studioOnly);
+
 export function draw(rng: Rng, entries: VocabEntry[]): VocabEntry {
-  return rng.pick(entries, (e) => (e.weight ?? 1) * RARITY_WEIGHT[e.rarity]);
+  const pool = entries.filter(allowed);
+  return rng.pick(pool.length ? pool : entries, (e) => (e.weight ?? 1) * RARITY_WEIGHT[e.rarity]);
 }
 
 export function toCard(rng: Rng, slot: CardType, e: VocabEntry): CardData {
@@ -199,7 +211,7 @@ export function drawFrom(
 ): VocabEntry[] {
   const ctx = new Set(context);
   const shared = (e: VocabEntry) => e.tags.filter((t) => ctx.has(t)).length;
-  const avail = entries.filter((e) => !exclude.includes(e.word));
+  const avail = entries.filter((e) => !exclude.includes(e.word) && allowed(e));
   let pool = avail;
   if (ctx.size) {
     const tiers =

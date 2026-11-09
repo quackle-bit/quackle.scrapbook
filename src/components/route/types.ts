@@ -11,6 +11,8 @@ export type StopProps = {
   onStamp: (card: CardData, slot: SlotId) => boolean;
   onTrash: (card: CardData, how: TrashHow) => void;
   onDragSlot: (slot: SlotId | null) => void;
+  /** Cards dealt face-down/up into the hand (unsorted ones get swept into the discard pile). */
+  onPulled?: (cards: CardData[]) => void;
 };
 
 export type { CardData, Pull };

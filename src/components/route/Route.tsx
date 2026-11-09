@@ -89,6 +89,8 @@ export function Route({
   const [skipped, setSkipped] = useState<StopId[]>([]);
   const [cards, setCards] = useState<Partial<Record<SlotId, CardData>>>({});
   const [discard, setDiscard] = useState<CardData[]>([]);
+  /** Dealt but not yet stamped or trashed; swept into the discard pile when you walk on. */
+  const hand = useRef<CardData[]>([]);
   const [notes, setNotes] = useState<SparkNote[]>([]);
   const [spark, setSpark] = useState({ q: "", a: "" });
   const [concept, setConcept] = useState<Concept | null>(null);
@@ -154,6 +156,23 @@ export function Route({
     return true;
   }, [unlimited, onSpendCoin, ownCoins]);
 
+  function pulled(cs: CardData[]) {
+    hand.current = [...hand.current, ...cs];
+    setStats((s) => ({ ...s, cards: s.cards + cs.length }));
+  }
+  /** Take a card out of the hand; returns true if it was dealt there (already counted). */
+  function fromHand(card: CardData) {
+    const had = hand.current.some((c) => c.id === card.id);
+    hand.current = hand.current.filter((c) => c.id !== card.id);
+    return had;
+  }
+  function sweepHand() {
+    if (!hand.current.length) return;
+    const left = hand.current;
+    hand.current = [];
+    setDiscard((d) => [...left, ...d]);
+  }
+
   function lightLamp(id: StopId) {
     setLit((l) => (l.includes(id) ? l : [...l, id]));
     setSkipped((s) => s.filter((x) => x !== id));
@@ -179,7 +198,8 @@ export function Route({
     }
     setCards((c) => ({ ...c, [target]: card }));
     setJustStamped(card.id);
-    setStats((s) => ({ ...s, kept: s.kept + 1, cards: s.cards + 1 }));
+    const counted = fromHand(card);
+    setStats((s) => ({ ...s, kept: s.kept + 1, cards: s.cards + (counted ? 0 : 1) }));
     if (target === "mood")
       setTimeout(() => say("The weather's turning…", { tag: "idle", ms: 500 }), 900);
     setTimeout(() => {
@@ -205,7 +225,8 @@ export function Route({
 
   function trash(card: CardData, how: TrashHow) {
     setDiscard((d) => [card, ...d]);
-    setStats((s) => ({ ...s, trashed: s.trashed + 1, cards: s.cards + 1 }));
+    const counted = fromHand(card);
+    setStats((s) => ({ ...s, trashed: s.trashed + 1, cards: s.cards + (counted ? 0 : 1) }));
     sfx.quack();
     sayRandom("trash");
     if (how === "rip")
@@ -228,6 +249,7 @@ export function Route({
   }
 
   function goTo(index: number) {
+    sweepHand();
     setView({ kind: "stop", index });
     setFurthest((f) => Math.max(f, index));
     setPhase("play");
@@ -267,6 +289,7 @@ export function Route({
   }
 
   function finish() {
+    sweepHand();
     // Light every lamp in a wave.
     stops.forEach((s, i) =>
       setTimeout(() => setLit((l) => (l.includes(s) ? l : [...l, s])), i * 80),
@@ -278,6 +301,7 @@ export function Route({
   }
 
   function restart(keepGate = true) {
+    hand.current = [];
     setCards({});
     setDiscard([]);
     setNotes([]);
@@ -322,6 +346,7 @@ export function Route({
     onStamp: (c: CardData) => stamp(c),
     onTrash: trash,
     onDragSlot: setDraggingSlot,
+    onPulled: pulled,
   };
 
   function renderStop() {

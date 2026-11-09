@@ -17,13 +17,14 @@ type Props = {
   onTrash: (card: CardData, how: TrashHow) => void;
   onDragSlot: (slot: SlotId | null) => void;
   bare?: boolean;
+  onPulled?: (cards: CardData[]) => void;
 };
 
 /**
  * The Trickster: a twist hides under each of three cups. Cups shuffle, you pick one,
  * then the others lift too ("…or this") to plant a second idea.
  */
-export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot, bare }: Props) {
+export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot, bare, onPulled }: Props) {
   const [twists, setTwists] = useState<CardData[]>([]);
   /** order[cup] = position (0..2) of that cup. */
   const [order, setOrder] = useState([0, 1, 2]);
@@ -34,7 +35,9 @@ export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot, bare }: 
   async function play() {
     if (!spend()) return;
     const rng = createRng(freshSeed());
-    setTwists(drawTwists(rng));
+    const tw = drawTwists(rng);
+    setTwists(tw);
+    onPulled?.(tw);
     setPicked(null);
     setPhase("shuffling");
     say("Keep your eye on the cups…");
