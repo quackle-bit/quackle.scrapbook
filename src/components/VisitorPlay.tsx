@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { setPoolRules } from "@/lib/deck";
+import { estimateLedger } from "@/lib/ledger";
+import { activeBook, loadBackRoom, useStudioAccess } from "@/lib/studio/useStudio";
 import type { Mode } from "@/lib/route";
 import { STICKERS, store, useStore, VISITOR_MAX_SPREADS } from "@/lib/store";
 import { say } from "./Duck";
@@ -18,6 +20,12 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
   const { book, wallet, ready } = useStore();
   const [saved, setSaved] = useState<{ ok: boolean; reason?: string } | null>(null);
   const savedRun = useRef<FinishedSpread | null>(null);
+  const studio = useStudioAccess();
+  const studioRepo = mode === "studio" && studio.state === "ready" ? studio.repo : null;
+
+  useEffect(() => {
+    if (studioRepo) void loadBackRoom(studioRepo);
+  }, [studioRepo]);
 
   useEffect(() => {
     setPoolRules({ allowMythic: mode === "studio", allowStudioOnly: mode === "studio" });
@@ -30,6 +38,33 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
   function onFinish(run: FinishedSpread) {
     if (savedRun.current === run) return;
     savedRun.current = run;
+    if (studioRepo) {
+      void (async () => {
+        try {
+          const books = await studioRepo.listBooks();
+          const target = books.find((b) => b.id === activeBook.get()) ?? books[0];
+          const id = await studioRepo.addSpread(target.id, {
+            slots: run.slots,
+            cards: run.cards,
+            concept: run.concept,
+            notes: run.notes,
+          });
+          await studioRepo.updateSpread(id, { ledger: estimateLedger(run.cards) });
+          setSaved({ ok: true });
+          say(`Filed in “${target.title}”.`, {
+            tag: "jump",
+            ms: 300,
+            then: { tag: "land", ms: 120 },
+          });
+        } catch (e) {
+          setSaved({
+            ok: false,
+            reason: e instanceof Error ? e.message : "Couldn't save to the library.",
+          });
+        }
+      })();
+      return;
+    }
     const res = store.saveSpread(
       {
         mode: run.gate.mode,
@@ -60,8 +95,11 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
     <>
       {mode !== "visitor" && (
         <div className="preview-banner" role="note">
-          {mode === "studio" ? "Studio" : "Jam"} street preview: runs locally. Accounts and rooms
-          come later.
+          {mode === "studio"
+            ? studioRepo?.kind === "supabase"
+              ? "Studio street · saving to the shared library"
+              : "Studio street · local preview (sign-in not configured)"
+            : "Jam street preview · open a jam room at /jam"}
         </div>
       )}
       <Route
@@ -73,8 +111,8 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
         onFinish={onFinish}
         finishActions={(_run, restart) => (
           <>
-            <Link className="big-btn" href="/book">
-              Open my book →
+            <Link className="big-btn" href={mode === "studio" ? "/studio" : "/book"}>
+              {mode === "studio" ? "Open the library →" : "Open my book →"}
             </Link>
             {!full && (
               <button

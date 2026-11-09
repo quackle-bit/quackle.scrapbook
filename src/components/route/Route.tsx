@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { feel } from "@/feel";
-import { drawCards, themeCard, type CardData, type SlotId } from "@/lib/deck";
+import { backroomPack, drawCards, themeCard, type CardData, type SlotId } from "@/lib/deck";
 import { shake } from "@/lib/motion";
 import { createRng } from "@/lib/rng";
 import {
@@ -115,7 +115,7 @@ export function Route({
   const stopId: StopId | null = view.kind === "stop" ? stops[view.index] : null;
   const stop = stopId ? STOPS[stopId] : null;
   const currentSlot: SlotId | undefined =
-    view.kind === "alley" ? (view.id === "crate" ? "free" : undefined) : stop?.slot;
+    view.kind === "alley" ? (view.id === "echo" ? undefined : "free") : stop?.slot;
   const context = Object.values(cards).flatMap((c) => c?.tags ?? []);
   const weather = weatherFor(cards.mood?.tags);
 
@@ -215,7 +215,13 @@ export function Route({
         } else if (view.kind === "alley") {
           sfx.tink();
           setPhase("spark");
-          setSpark({ q: "Why did the crate pick this for you?", a: "" });
+          setSpark({
+            q:
+              view.id === "backroom"
+                ? "Which studio pillar does this card serve?"
+                : "Why did the crate pick this for you?",
+            a: "",
+          });
         }
       },
       settings.get().speed ? 0 : 900,
@@ -376,7 +382,18 @@ export function Route({
       );
     }
     if (view.kind === "alley") {
-      return view.id === "crate" ? <MysteryCrate {...stopProps} /> : <EchoWell context={context} />;
+      if (view.id === "crate") return <MysteryCrate {...stopProps} />;
+      if (view.id === "backroom")
+        return (
+          <PackStation
+            key="backroom"
+            {...stopProps}
+            bare
+            packLabel="BACK ROOM"
+            draw={(seed) => backroomPack(createRng(seed))}
+          />
+        );
+      return <EchoWell context={context} />;
     }
     switch (stopId) {
       case "gate":

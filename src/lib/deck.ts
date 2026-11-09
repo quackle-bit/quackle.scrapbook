@@ -263,6 +263,51 @@ export function worldCard(rng: Rng, picks: VocabEntry[]): CardData {
   };
 }
 
+// ── Back Room (Studio) ────────────────────────────────────────
+type Minted = {
+  id: string;
+  type: CardType;
+  text: string;
+  rarity: Rarity;
+  flavor?: string;
+  tags: string[];
+};
+let minted: Minted[] = [];
+/** Load the studio's minted cards (from the Studio repo) into the Back Room stall. */
+export function setCustomCards(cards: Minted[]) {
+  minted = cards;
+}
+export const customCardCount = () => minted.length;
+
+/** Back Room pack: the studio's own cards first, topped up with rare and Mythic vocab. */
+export function backroomPack(rng: Rng, size = 5): CardData[] {
+  const out: CardData[] = [];
+  const pool = [...minted];
+  while (out.length < Math.min(3, pool.length)) {
+    const m = pool.splice(rng.int(pool.length), 1)[0];
+    out.push({
+      id: nextId(),
+      slot: m.type,
+      text: m.text,
+      rarity: m.rarity,
+      tags: m.tags,
+      flavor: m.flavor ?? "Minted in the Back Room.",
+      serial: 1 + rng.int(9999),
+    });
+  }
+  const types = ["seed", "verb", "twist", "mood", "constraint"] as const;
+  let guard = 0;
+  while (out.length < size && guard++ < 200) {
+    const type = rng.pick(types);
+    const special = POOLS[type].filter((e) => e.rarity === "rare" || e.rarity === "mythic");
+    if (!special.length) continue;
+    const e = rng.pick(special);
+    if (out.some((c) => c.text === e.word)) continue;
+    out.push(toCard(rng, type, e));
+  }
+  return out;
+}
+
 /** Mystery Crate: one random card of any type. */
 export function mysteryCard(rng: Rng): CardData {
   const type = rng.pick(["seed", "verb", "twist", "mood", "constraint"] as const);

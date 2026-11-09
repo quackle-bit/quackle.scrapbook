@@ -27,6 +27,7 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Lint: React Compiler hint rules (purity, set-state-in-effect, refs) are warnings, not errors (no compiler in use).
 
 ## Phase 2 — Visitor version (branch `phase-2-visitor`)
+
 - Home page (`/`): duck, "Walk the street", "Open my book", footer explaining the toy + link to quacklebit.com.
 - `/play`: Visitor street by default; `?mode=jam` / `?mode=studio` are local previews until accounts exist.
 - Daily purse: 10 coins, resets at local midnight (`src/lib/store.ts`). First word pack is free.
@@ -37,7 +38,21 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Unsorted cards are swept into the discard pile when you leave a stop (recoverable at the Night Market).
 - Animations finish on a timer if the tab is hidden, so sequences never hang.
 
+## Phase 3 — Studio (branch `phase-3-studio`) at `/studio`
+
+- Library: shelf of books, spreads with status (Idea → Prototype → Production), votes, comments, version history with restore, delete.
+- The Ledger (`src/lib/ledger.ts`): sprites × directions × frames, tiles, props, UI, FX → hours + tier, risks and a milestone sketch; plus a jam cut list.
+- The Appraiser: `POST /api/appraise` → Claude Opus 5.5 (structured output via zod: pitch, 3 alternative twists, risks, suggestion), server-side refusal fallback on. Members only; per-member daily cap in Postgres + in-memory burst limit; refuses in production when auth isn't configured.
+- Back Room: mint custom cards (incl. Mythic); Studio street has a Back Room detour after the Word Merchant selling minted + rare/Mythic cards into the FREE slot.
+- Export: Markdown, JSON and PNG (html-to-image) per spread.
+- Auth: Supabase magic link + email allowlist (`/auth/callback`), members table filled by trigger.
+- Database: `supabase/migrations/0001_init.sql` covers Studio and Jam rooms with RLS and definer functions; `npm run db:test` checks 24 rules in PGlite.
+- Without Supabase keys everything runs as a local preview (`LocalStudioRepo`); with keys the same UI uses `SupabaseStudioRepo`.
+- New deps: @anthropic-ai/sdk, zod, @supabase/supabase-js, @supabase/ssr, server-only, html-to-image; dev: @electric-sql/pglite.
+
 ## Known issues / next
+
+- Not verified against a live Supabase project or with a real Anthropic key (no keys here): the SQL is tested in PGlite, the TypeScript type-checks, the UI runs on the local backend.
 
 - Holding still >420 ms before dragging crumples the card (by design, but may need tuning in `feel.ts`).
 - "Flip all" stays visible after every card is up.

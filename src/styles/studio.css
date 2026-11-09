@@ -1,0 +1,343 @@
+/* Studio (/studio) and Jam (/jam): library shelf, spread detail panels, forms. */
+
+.studio-app,
+.jam-app {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+}
+.studio-main,
+.jam-main {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 12px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.row.between {
+  justify-content: space-between;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: #fbf6ea;
+  color: #2b2620;
+  box-shadow: var(--pxb-drop);
+}
+.panel h3 {
+  font-family: var(--font-pixel), monospace;
+  font-size: 13px;
+  font-weight: 400;
+}
+.panel h4 {
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 6px;
+}
+.error {
+  color: var(--accent);
+  font-size: 14px;
+}
+.studio-tabs .tab-link {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  color: #2b2620;
+  text-decoration: none;
+  background: var(--card-paper);
+  box-shadow: var(--pxb-drop);
+}
+
+/* Shelf of book spines */
+.shelf {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 4px 14px;
+  border-bottom: 8px solid #8b6b45;
+}
+.spine {
+  flex: none;
+  width: 54px;
+  height: 160px;
+  border: 0;
+  padding: 8px 4px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.25),
+      transparent 30%,
+      rgba(255, 255, 255, 0.12) 50%,
+      transparent 70%
+    ),
+    var(--cover);
+  box-shadow: var(--pxb);
+  color: #fff3e0 !important;
+  writing-mode: vertical-rl;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  text-align: left;
+  transition: transform 0.15s steps(2);
+}
+.spine.on {
+  transform: translateY(-10px);
+  box-shadow: var(--pxb-drop);
+}
+.spine.new {
+  writing-mode: horizontal-tb;
+  width: 150px;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(45deg, #efe6d0 0 6px, #e3d8bd 6px 12px);
+  color: #2b2620 !important;
+}
+.spine.new input {
+  width: 100%;
+  border: 0;
+  padding: 6px;
+  font: inherit;
+  font-family: var(--font-body), monospace;
+  background: var(--card-paper);
+}
+
+.filters {
+  justify-content: flex-start;
+}
+.chip {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  font-size: 12px;
+  background: #efe6d0;
+  box-shadow: var(--pxb);
+  color: #2b2620 !important;
+}
+.chip.on {
+  background: var(--t-seed);
+}
+.status-prototype {
+  background: #9cc1f2;
+}
+.status-production {
+  background: #7fd1a0;
+}
+.spread-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.spread-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "sw title chip" "sw meta meta";
+  align-items: center;
+  gap: 2px 10px;
+  padding: 10px;
+  border: 0;
+  text-align: left;
+  background: var(--card-paper);
+  box-shadow: var(--pxb);
+  color: #2b2620 !important;
+}
+.spread-row strong {
+  grid-area: title;
+  font-family: var(--font-pixel), monospace;
+  font-weight: 400;
+  font-size: 13px;
+}
+.spread-row .chip {
+  grid-area: chip;
+  min-height: 24px;
+  display: grid;
+  place-items: center;
+}
+.spread-row small {
+  grid-area: meta;
+  color: #6b6152;
+}
+.swatch-mini {
+  grid-area: sw;
+  display: grid;
+  grid-template-columns: repeat(2, 12px);
+  gap: 1px;
+}
+.swatch-mini i {
+  width: 12px;
+  height: 12px;
+}
+
+/* Spread detail */
+.studio-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.studio-page {
+  padding: 16px;
+  background: #fbf6ea;
+  box-shadow: var(--pxb-drop);
+}
+.studio-page .book-spread {
+  box-shadow: none;
+  padding: 0;
+}
+.status-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.status-step {
+  min-height: 40px;
+  border: 0;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  background: #efe6d0;
+  box-shadow: var(--pxb);
+  color: #2b2620 !important;
+}
+.status-step.on {
+  background: var(--t-seed);
+  box-shadow: var(--pxb-drop);
+}
+.votes {
+  display: flex;
+  gap: 8px;
+}
+.appraisal dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 14px;
+}
+.appraisal dt {
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  padding-top: 3px;
+}
+.appraisal dd {
+  margin: 0;
+}
+.appraisal ul {
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+.sev {
+  font-family: var(--font-pixel), monospace;
+  font-size: 9px;
+  padding: 1px 4px;
+  background: #efe6d0;
+}
+.sev-high {
+  background: var(--accent);
+  color: #fff;
+}
+.sev-medium {
+  background: var(--t-seed);
+}
+.suggestion {
+  font-size: 15px;
+}
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.ledger td {
+  padding: 4px 6px;
+  border-bottom: 1px dashed #d8cfba;
+  vertical-align: top;
+}
+.ledger td:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+}
+.ledger small {
+  display: block;
+  font-size: 11px;
+  color: #6b6152;
+}
+.milestones,
+.risks {
+  padding-left: 18px;
+  font-size: 14px;
+  display: grid;
+  gap: 4px;
+}
+.risks {
+  list-style: none;
+  padding-left: 0;
+}
+.comments {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.comments li {
+  padding: 6px 8px;
+  background: var(--card-paper);
+  box-shadow: var(--pxb);
+}
+.comments small {
+  font-size: 11px;
+  color: #6b6152;
+}
+.comment-form,
+.mint-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.comment-form input,
+.mint-form input,
+.mint-form select,
+.jam-form input,
+.jam-form select {
+  flex: 1;
+  min-width: 140px;
+  min-height: 40px;
+  padding: 6px 8px;
+  border: 0;
+  font: inherit;
+  background: var(--card-paper);
+  box-shadow: var(--pxb);
+  color: #2b2620;
+}
+.versions {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.versions li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.minted {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+.minted-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.login {
+  max-width: 420px;
+  margin: 10vh auto 0;
+}

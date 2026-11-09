@@ -19,7 +19,7 @@ export type StopId =
   | "forge"
   | "night";
 
-export type AlleyId = "crate" | "echo";
+export type AlleyId = "crate" | "echo" | "backroom";
 
 export type StopDef = {
   id: StopId;
@@ -268,19 +268,25 @@ export const ROUTES: Record<Mode, RouteDef> = {
     ],
     coins: null,
     sparksPerStop: 1,
-    alleys: { gear: "echo", trickster: "crate" },
+    alleys: { word: "backroom", gear: "echo", trickster: "crate" },
   },
 };
 
 export const ALLEYS: Record<AlleyId, { name: string; sign: string; keeper: string }> = {
   crate: { name: "THE MYSTERY CRATE", sign: "Mystery Crate", keeper: "No refunds." },
   echo: { name: "THE ECHO WELL", sign: "Echo Well", keeper: "Shout a word in. It shouts back." },
+  backroom: {
+    name: "THE BACK ROOM",
+    sign: "Back Room (staff only)",
+    keeper: "Members only. Mind the Mythics.",
+  },
 };
 
 /** Slots on the spread for a route (stops in order + FREE when it has the crate alley). */
 export function routeSlots(route: RouteDef): SlotId[] {
   const slots = route.stops.map((s) => STOPS[s].slot).filter((s): s is SlotId => !!s);
-  if (route.alleys && Object.values(route.alleys).includes("crate")) slots.push("free");
+  const alleys = Object.values(route.alleys ?? {});
+  if (alleys.includes("crate") || alleys.includes("backroom")) slots.push("free");
   return slots;
 }
 
