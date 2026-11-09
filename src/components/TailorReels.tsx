@@ -16,12 +16,13 @@ type Props = {
   onStamp: (card: CardData, slot: SlotId) => boolean;
   onTrash: (card: CardData, how: TrashHow) => void;
   onDragSlot: (slot: SlotId | null) => void;
+  bare?: boolean;
 };
 
 const N = LOOK_REELS.length;
 
 /** The Tailor: three reels (dimension · pixel treatment · camera). Tap to stop, lock, respin. */
-export function TailorReels({ coins, spend, onStamp, onTrash, onDragSlot }: Props) {
+export function TailorReels({ coins, spend, onStamp, onTrash, onDragSlot, bare }: Props) {
   const { speed } = useSettings();
   const [shown, setShown] = useState<number[]>(() => Array(N).fill(0));
   const [spinning, setSpinning] = useState<boolean[]>(() => Array(N).fill(false));
@@ -99,8 +100,12 @@ export function TailorReels({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
 
   return (
     <section className="station" aria-label="The Tailor">
-      <div className="stall-sign tailor">THE TAILOR</div>
-      <p className="keeper">“Let&apos;s dress your game in pixels.”</p>
+      {!bare && (
+        <>
+          <div className="stall-sign tailor">THE TAILOR</div>
+          <p className="keeper">“Let&apos;s dress your game in pixels.”</p>
+        </>
+      )}
 
       {!result && (
         <>

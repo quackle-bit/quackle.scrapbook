@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { feel } from "@/feel";
-import { drawPack, type CardData, type SlotId } from "@/lib/deck";
+import { drawPack, type CardData, type Pull, type SlotId } from "@/lib/deck";
 import { haptic, OVERSHOOT, play } from "@/lib/motion";
 import { createRng, freshSeed } from "@/lib/rng";
 import { sfx } from "@/lib/sound";
@@ -15,9 +15,32 @@ type Props = {
   onStamp: (card: CardData, slot: SlotId) => boolean;
   onTrash: (card: CardData, how: TrashHow) => void;
   onDragSlot: (slot: SlotId | null) => void;
+  /** Route mode: the shell draws the sign and keeper line. */
+  bare?: boolean;
+  /** Custom contents (defaults to the mixed prototype pack). */
+  draw?: (seed: string, pull: Pull) => CardData[];
+  /** Offer a Fresh (related) and a Wild pack instead of one. */
+  pulls?: boolean;
+  /** The first pack at this stall is free. */
+  firstFree?: boolean;
+  packLabel?: string;
 };
 
-export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Props) {
+export function PackStation({
+  coins,
+  spend,
+  onStamp,
+  onTrash,
+  onDragSlot,
+  bare,
+  draw,
+  pulls,
+  firstFree,
+  packLabel = "SCRAP PACK",
+}: Props) {
+  const [bought, setBought] = useState(0);
+  const [pull, setPull] = useState<Pull>("wild");
+  const [up, setUp] = useState<Set<string>>(new Set());
   const [phase, setPhase] = useState<"shop" | "pack" | "fan">("shop");
   const [hand, setHand] = useState<CardData[]>([]);
   const [left, setLeft] = useState<Set<string>>(new Set());
@@ -31,8 +54,11 @@ export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
   const tearDrag = useRef<{ x0: number; w: number; lastStep: number } | null>(null);
   const [seed, setSeed] = useState("");
 
-  async function buy() {
-    if (!spend()) return;
+  const free = firstFree && bought === 0;
+  async function buy(p: Pull = "wild") {
+    if (!free && !spend()) return;
+    setBought((b) => b + 1);
+    setPull(p);
     const s = freshSeed();
     setSeed(s);
     sfx.clink();
@@ -77,7 +103,8 @@ export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
       feel.tearFlyOff,
       { fill: "forwards" },
     );
-    const cards = drawPack(createRng(seed));
+    const cards = draw ? draw(seed, pull) : drawPack(createRng(seed));
+    setUp(new Set());
     setHand(cards);
     setLeft(new Set(cards.map((c) => c.id)));
     setPhase("fan");
@@ -135,30 +162,63 @@ export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
   }
 
   const n = hand.length;
-  const faceDown = hand.filter((c) => left.has(c.id)).length;
+  const faceDown = hand.filter((c) => left.has(c.id) && !up.has(c.id)).length;
 
   return (
     <section className="station" aria-label="Pack stall">
       {phase === "shop" && (
         <div className="shop">
-          <div className="stall-sign">THE WORD MERCHANT</div>
-          <p className="keeper">“Fresh words! One coin a pack!”</p>
+          {!bare && (
+            <>
+              <div className="stall-sign">THE WORD MERCHANT</div>
+              <p className="keeper">“Fresh words! One coin a pack!”</p>
+            </>
+          )}
           <div className="pack-shelf" aria-hidden>
             <div className="pack mini" />
             <div className="pack mini" />
             <div className="pack mini" />
           </div>
-          <button
-            type="button"
-            className="big-btn"
-            onClick={() => void buy()}
-            disabled={coins <= 0}
-          >
-            <span ref={coinRef} className="coin" aria-hidden>
-              ¢
-            </span>
-            Buy a pack · 1 coin
-          </button>
+          {pulls && !free ? (
+            <div className="row">
+              <button
+                type="button"
+                className="big-btn"
+                onClick={() => void buy("fresh")}
+                disabled={coins <= 0}
+                title="Cards related to what you've stamped"
+              >
+                <span ref={coinRef} className="coin" aria-hidden>
+                  ¢
+                </span>
+                Fresh pack
+              </button>
+              <button
+                type="button"
+                className="big-btn"
+                onClick={() => void buy("wild")}
+                disabled={coins <= 0}
+                title="Anything goes"
+              >
+                Wild pack
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="big-btn"
+              onClick={() => void buy()}
+              disabled={!free && coins <= 0}
+            >
+              <span ref={coinRef} className="coin" aria-hidden>
+                ¢
+              </span>
+              {free ? "Take a free pack" : "Buy a pack · 1 coin"}
+            </button>
+          )}
+          {pulls && !free && (
+            <span className="hint">fresh = related to your stamps · wild = anything</span>
+          )}
         </div>
       )}
 
@@ -177,7 +237,7 @@ export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
               <span className="tear-hint">drag across to tear →</span>
             </div>
             <div className="pack-body">
-              <div className="pack-label">SCRAP PACK</div>
+              <div className="pack-label">{packLabel}</div>
               <div className="pack-sub">5 ideas inside</div>
             </div>
           </div>
@@ -204,6 +264,7 @@ export function PackStation({ coins, spend, onStamp, onTrash, onDragSlot }: Prop
                   lift={Math.abs(k) * Math.abs(k) * 6}
                   flipSignal={flipSignal}
                   flipDelay={i * 110}
+                  onFlipped={(card) => setUp((u) => new Set(u).add(card.id))}
                   selected={selected === c.id}
                   onSelect={setSelected}
                   onStamp={(card, slot) => {

@@ -1,0 +1,1021 @@
+/* The Route (/play): one stop per screen. Builds on scrapbook.css (pixel skin, cards, bin, duck). */
+
+:root {
+  --t-world: #d98c3f;
+  --t-mood: #4a5a8c;
+  --t-constraint: #8c4a4a;
+}
+.t-world {
+  --tc:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.14) 2px, transparent 2px) 0 0 / 10px 10px,
+    linear-gradient(rgba(255, 255, 255, 0.18) 2px, transparent 2px) 0 0 / 10px 10px, var(--t-world);
+}
+.t-mood {
+  --tc:
+    radial-gradient(circle, rgba(255, 255, 255, 0.35) 1px, transparent 1.5px) 0 0 / 6px 6px,
+    var(--t-mood);
+}
+.t-mood .card-top {
+  color: #fff;
+}
+.t-constraint {
+  --tc:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px 6px),
+    var(--t-constraint);
+}
+.t-constraint .card-top {
+  color: #fff;
+}
+
+/* ── Shell ─────────────────────────────────────────────── */
+.route {
+  position: relative;
+}
+.route-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px 96px;
+}
+.stall-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.proto .stall-sign {
+  background:
+    repeating-linear-gradient(90deg, var(--awning, var(--accent)) 0 18px, #fff3e0 18px 36px) top /
+      100% 14px no-repeat,
+    var(--card-paper);
+}
+.theme-tag {
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--accent);
+  color: #fff;
+}
+.stop-body {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stop-play {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+.back-street {
+  margin-top: 8px;
+}
+
+/* ── Route bar (street lamps) ─────────────────────────── */
+.route-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-bottom: 2px dashed var(--paper-edge);
+}
+.lamps {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+.lamp {
+  position: relative;
+  width: 18px;
+  height: 26px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.lamp::before {
+  /* the post */
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  width: 2px;
+  height: 16px;
+  background: var(--ink-soft);
+}
+.lamp::after {
+  /* the light: a pixel diamond */
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: #b9b09a;
+  clip-path: polygon(
+    33% 0,
+    66% 0,
+    66% 33%,
+    100% 33%,
+    100% 66%,
+    66% 66%,
+    66% 100%,
+    33% 100%,
+    33% 66%,
+    0 66%,
+    0 33%,
+    33% 33%
+  );
+}
+.lamp.lit::after {
+  background: #ffd36e;
+  filter: drop-shadow(0 0 4px #ffb02e) drop-shadow(0 0 8px rgba(255, 176, 46, 0.6));
+}
+.lamp.current::after {
+  background: #fff;
+  outline: 0;
+  animation: lamp-blink 0.8s steps(2) infinite;
+}
+.lamp.skipped::after {
+  background: #d6cbb4;
+  opacity: 0.6;
+}
+.lamp:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+@keyframes lamp-blink {
+  50% {
+    background: #ffd36e;
+  }
+}
+.route-count {
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.route-timer {
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.route-timer.low {
+  background: var(--accent);
+  animation: lamp-blink 0.5s steps(2) infinite;
+}
+.skip {
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  font-size: 13px;
+  min-height: 36px;
+}
+
+/* ── Book peek ─────────────────────────────────────────── */
+.book-peek {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  border-top: 2px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.08);
+  z-index: 5;
+}
+.peek-slot {
+  width: clamp(64px, 18vw, 92px);
+}
+.peek-spacer {
+  width: 1px;
+}
+.peek-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+}
+.book-btn {
+  min-height: 44px !important;
+  padding: 0 14px !important;
+}
+
+/* ── Spark card ───────────────────────────────────────── */
+.spark {
+  width: min(520px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  background: var(--card-paper);
+  color: #2b2620;
+  box-shadow: var(--pxb-drop);
+}
+.spark-q {
+  font-size: 18px;
+  line-height: 1.3;
+}
+.hand,
+.proto input.hand {
+  font-family: var(--font-hand), cursive;
+  font-size: 22px;
+  border: 0;
+  border-bottom: 2px dashed var(--ink-soft);
+  background: transparent;
+  padding: 4px 2px;
+  color: inherit;
+  width: 100%;
+}
+.signpost {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: #7a6a4f;
+  color: #fff3e0 !important;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
+  padding-right: 22px;
+}
+
+/* ── Gate ──────────────────────────────────────────────── */
+.gate {
+  width: min(520px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+.book-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 16px 16px;
+  background:
+    conic-gradient(
+        rgba(255, 255, 255, 0.07) 25%,
+        transparent 0 50%,
+        rgba(255, 255, 255, 0.07) 0 75%,
+        transparent 0
+      )
+      0 0 / 4px 4px,
+    var(--cover);
+  box-shadow:
+    var(--pxb-drop),
+    inset 10px 0 0 rgba(0, 0, 0, 0.18);
+}
+.cover-title {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(16px, 5vw, 24px);
+  padding: 8px;
+  border: 0;
+  background: var(--card-paper);
+  color: #2b2620;
+  box-shadow: var(--pxb);
+}
+.swatches {
+  display: flex;
+  gap: 10px;
+}
+.swatch-btn {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  box-shadow: 0 0 0 2px #fff3e0;
+}
+.swatch-btn.on {
+  box-shadow:
+    0 0 0 3px #fff3e0,
+    0 0 0 6px var(--ink);
+}
+.mode-pick {
+  border: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.mode-pick legend {
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.mode-opt {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  padding: 10px 12px;
+  background: var(--card-paper);
+  color: #2b2620;
+  box-shadow: var(--pxb);
+  cursor: pointer;
+}
+.mode-opt input {
+  grid-row: span 2;
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+}
+.mode-opt.on {
+  box-shadow: var(--pxb-drop);
+  background: #fff3c4;
+}
+.mode-opt small {
+  color: #6b6152;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+.field input:not(.hand) {
+  font: inherit;
+  padding: 8px;
+  border: 0;
+  background: var(--card-paper);
+  box-shadow: var(--pxb);
+  color: #2b2620;
+}
+
+/* ── Gear press ────────────────────────────────────────── */
+.press-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+.press-frame {
+  position: relative;
+  padding: 36px 12px 12px;
+  background:
+    repeating-linear-gradient(90deg, #4a5560 0 6px, #56626e 6px 12px) top / 100% 18px no-repeat,
+    #c9c1ad;
+  box-shadow: var(--pxb-drop);
+}
+.press-frame.idle {
+  width: min(320px, 80vw);
+  height: 150px;
+}
+.press-plate {
+  position: absolute;
+  top: 18px;
+  left: calc(12px + (100% - 24px) / 3);
+  width: calc((100% - 24px) / 3);
+  height: 50%;
+  background: repeating-linear-gradient(0deg, #3d4650 0 4px, #4d5864 4px 8px);
+  box-shadow: 0 4px 0 #2b2620;
+  z-index: 3;
+  pointer-events: none;
+}
+.press-frame.idle .press-plate {
+  left: 33%;
+  width: 34%;
+  height: 30%;
+}
+.press-bed {
+  display: flex;
+  gap: 8px;
+}
+.press-bed .hand-card {
+  --cw: clamp(70px, 24vw, 120px);
+}
+.lever-track {
+  position: relative;
+  width: 28px;
+  background: repeating-linear-gradient(0deg, #8b8370 0 4px, #9a927e 4px 8px);
+  box-shadow: var(--pxb);
+  touch-action: none;
+  cursor: ns-resize;
+}
+.lever-knob {
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 44px;
+  height: 36px;
+  border: 0;
+  background: var(--accent);
+  box-shadow: var(--pxb);
+  transition: transform 0.12s steps(3);
+}
+
+/* ── Folded map ───────────────────────────────────────── */
+.map {
+  display: flex;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  perspective: 800px;
+}
+.map.folded {
+  width: 120px;
+  height: 150px;
+}
+.map-panel {
+  width: clamp(90px, 28vw, 150px);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(rgba(120, 90, 40, 0.12) 1px, transparent 1px) 0 0 / 12px 12px,
+    linear-gradient(90deg, rgba(120, 90, 40, 0.12) 1px, transparent 1px) 0 0 / 12px 12px,
+    #f1e2bf;
+  box-shadow: var(--pxb);
+  color: #2b2620;
+  transform-origin: left center;
+}
+.map-panel:not(.open) {
+  background: repeating-linear-gradient(45deg, #e6d3a8 0 6px, #dcc896 6px 12px);
+}
+.map-panel.back {
+  width: 100%;
+  height: 100%;
+}
+.map-panel small {
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  color: #8a6a3a;
+}
+.map-panel strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(11px, 3vw, 15px);
+  text-align: center;
+}
+.fold-mark {
+  font-family: var(--font-pixel), monospace;
+  font-size: 22px;
+  color: #8a6a3a;
+}
+
+/* ── Tarot ─────────────────────────────────────────────── */
+.tarot-table,
+.tarot-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.tarot-table span {
+  width: 72px;
+  aspect-ratio: 5 / 7;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  color: #f6f0e1;
+  background: #2f3a6b;
+  box-shadow: var(--pxb);
+}
+.tarot-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  --cw: clamp(84px, 27vw, 130px);
+}
+.tarot-label {
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+}
+.tarot-empty {
+  width: var(--cw);
+  aspect-ratio: 5 / 7;
+  opacity: 0.2;
+  background: repeating-linear-gradient(45deg, var(--ink-soft) 0 2px, transparent 2px 8px);
+}
+
+/* ── Scrolls ──────────────────────────────────────────── */
+.scroll-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  min-height: 170px;
+  align-items: center;
+}
+.scroll {
+  position: relative;
+  width: 70px;
+  height: 150px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(#cdb98d 0 8%, #f1e2bf 8% 92%, #cdb98d 92%);
+  box-shadow: var(--pxb-drop);
+}
+.scroll.chosen {
+  width: 110px;
+  height: 170px;
+}
+.scroll-pick {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: none;
+  display: grid;
+  place-items: center;
+}
+.seal {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: #b8382a;
+  clip-path: polygon(
+    30% 0,
+    70% 0,
+    70% 10%,
+    90% 10%,
+    90% 30%,
+    100% 30%,
+    100% 70%,
+    90% 70%,
+    90% 90%,
+    70% 90%,
+    70% 100%,
+    30% 100%,
+    30% 90%,
+    10% 90%,
+    10% 70%,
+    0 70%,
+    0 30%,
+    10% 30%,
+    10% 10%,
+    30% 10%
+  );
+}
+.seal.big {
+  width: 64px;
+  height: 64px;
+  border: 0;
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.35) calc(var(--hold, 0) * 100%), transparent 0), #b8382a;
+  transform: scale(calc(1 - var(--hold, 0) * 0.12)) rotate(calc(var(--hold, 0) * 8deg));
+  touch-action: none;
+}
+
+/* ── Forge ─────────────────────────────────────────────── */
+.hold-btn {
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+}
+.hold-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: calc(var(--hold, 0) * 100%);
+  background: rgba(217, 69, 43, 0.45);
+  pointer-events: none;
+}
+.forge-naming {
+  gap: 16px;
+}
+.forged-card .polaroid {
+  width: min(240px, 60vw);
+}
+.title-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.book-spread.glow .stamped {
+  filter: drop-shadow(0 0 6px #ffd36e);
+}
+
+/* ── Book spread (shared with the Phase 2 book) ───────── */
+.book-spread {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 12px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      rgba(0, 0, 0, 0.18) 50%,
+      transparent calc(50% + 1px)
+    ),
+    #fbf6ea;
+  color: #2b2620;
+  box-shadow: var(--pxb-drop);
+}
+@media (min-width: 720px) {
+  .book-spread {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+@media (max-width: 719px) {
+  .book-spread {
+    background: #fbf6ea;
+  }
+}
+.book-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.book-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.book-slot .slot-label {
+  font-size: 8px;
+  margin-bottom: 8px;
+}
+.book-slot.active {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.slot-empty {
+  aspect-ratio: 5 / 7;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: 18px;
+  color: var(--ink-soft);
+  border: 0;
+  background:
+    repeating-linear-gradient(90deg, #b9b09a 0 4px, transparent 4px 8px) top / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, #b9b09a 0 4px, transparent 4px 8px) bottom / 100% 2px no-repeat,
+    repeating-linear-gradient(0deg, #b9b09a 0 4px, transparent 4px 8px) left / 2px 100% no-repeat,
+    repeating-linear-gradient(0deg, #b9b09a 0 4px, transparent 4px 8px) right / 2px 100% no-repeat;
+}
+.stamped-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  display: block;
+}
+.book-page.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.book-page .concept-empty {
+  display: grid;
+}
+.polaroid-title.static {
+  font-family: var(--font-hand), cursive;
+  font-size: 22px;
+  text-align: center;
+}
+.notes {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+.notes li {
+  display: grid;
+  gap: 2px;
+  padding-left: 8px;
+  border-left: 3px solid #e3d8bd;
+}
+.notes small {
+  font-size: 11px;
+  color: #6b6152;
+}
+.notes span {
+  font-family: var(--font-hand), cursive;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+/* ── Book overlay ─────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(30, 26, 20, 0.55);
+}
+.overlay-book {
+  width: min(900px, 100%);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--cover);
+  box-shadow: var(--pxb-drop);
+}
+.overlay-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px;
+  color: #fff3e0;
+  font-family: var(--font-pixel), monospace;
+}
+.overlay-head .act[aria-pressed="true"] {
+  background: var(--t-seed);
+}
+.inside-cover {
+  min-height: 240px;
+  padding: 24px;
+  background: #fbf6ea;
+  color: #2b2620;
+  box-shadow: var(--pxb);
+}
+.hand-note {
+  font-family: var(--font-hand), cursive;
+  font-size: 26px;
+  margin-top: 8px;
+  transform: rotate(-1.5deg);
+}
+
+/* ── Night market ─────────────────────────────────────── */
+.night .book-spread {
+  background: #f3ecdc;
+}
+.route.at-night {
+  --paper: #2a2a3a;
+}
+.discard-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.discard-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 6px;
+}
+.discard-card {
+  flex: none;
+  width: 72px;
+  padding: 0;
+  border: 0;
+  background: none;
+  filter: grayscale(0.4);
+}
+.discard-card:hover,
+.discard-card:focus-visible {
+  filter: none;
+  transform: translateY(-4px);
+}
+
+/* ── Alleys ───────────────────────────────────────────── */
+.crate {
+  width: 140px;
+  height: 120px;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(0deg, #9c7442 0 18px, #7d5a31 18px 21px), #9c7442;
+  box-shadow: var(--pxb-drop);
+  font-family: var(--font-pixel), monospace;
+  font-size: 36px;
+  color: #fff3e0 !important;
+}
+.echo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: min(360px, 100%);
+}
+.echo-form input {
+  width: 100%;
+  font: inherit;
+  font-size: 18px;
+  text-align: center;
+  padding: 8px;
+  border: 0;
+  background: var(--card-paper);
+  box-shadow: var(--pxb);
+  color: #2b2620;
+}
+.well {
+  width: 120px;
+  height: 60px;
+  background:
+    radial-gradient(ellipse at 50% 30%, #1d2230 40%, transparent 41%),
+    repeating-linear-gradient(90deg, #8b8370 0 14px, #6f6858 14px 16px);
+  box-shadow: var(--pxb);
+}
+.echoes {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.echo-word {
+  font-family: var(--font-pixel), monospace;
+  font-size: 13px;
+  padding: 6px 10px;
+  background: var(--card-paper);
+  color: #2b2620;
+  box-shadow: var(--pxb);
+}
+
+/* ── Receipt ──────────────────────────────────────────── */
+.receipt {
+  position: relative;
+  width: min(320px, 100%);
+  padding: 18px 16px 26px;
+  background: #fffef8;
+  color: #2b2620;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.2);
+  /* zig-zag torn bottom edge */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 8px),
+    95% 100%,
+    90% calc(100% - 8px),
+    85% 100%,
+    80% calc(100% - 8px),
+    75% 100%,
+    70% calc(100% - 8px),
+    65% 100%,
+    60% calc(100% - 8px),
+    55% 100%,
+    50% calc(100% - 8px),
+    45% 100%,
+    40% calc(100% - 8px),
+    35% 100%,
+    30% calc(100% - 8px),
+    25% 100%,
+    20% calc(100% - 8px),
+    15% 100%,
+    10% calc(100% - 8px),
+    5% 100%,
+    0 calc(100% - 8px)
+  );
+}
+.r-head {
+  display: grid;
+  text-align: center;
+  gap: 2px;
+}
+.r-head strong {
+  font-size: 16px;
+}
+.r-head small {
+  font-size: 10px;
+  color: #6b6152;
+}
+.r-rule {
+  margin: 10px 0;
+  border-top: 2px dashed #2b2620;
+}
+.r-line {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  margin: 4px 0;
+}
+.r-dots {
+  flex: 1;
+  border-bottom: 2px dotted #b9b09a;
+}
+.r-total {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+.r-total strong {
+  font-size: 16px;
+}
+.r-small {
+  font-family: var(--font-body), monospace;
+  font-size: 11px;
+  text-align: center;
+  margin-top: 8px;
+  color: #6b6152;
+}
+.r-stamp {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  padding: 2px 6px;
+  border: 3px solid var(--accent);
+  color: var(--accent);
+  transform: rotate(-14deg);
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+}
+.r-foot {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 10px;
+}
+
+/* ── Weather (from the stamped MOOD card) ─────────────── */
+.route::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 1.2s;
+  opacity: 0;
+}
+.route > * {
+  position: relative;
+  z-index: 1;
+}
+.route > .overlay {
+  position: fixed;
+  z-index: 60;
+}
+.weather-fog::before {
+  opacity: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 205, 215, 0.55),
+    rgba(230, 230, 235, 0.15) 60%,
+    rgba(200, 205, 215, 0.4)
+  );
+}
+.weather-dusk::before {
+  opacity: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 170, 110, 0.32),
+    rgba(255, 210, 160, 0.08) 60%,
+    rgba(150, 90, 140, 0.18)
+  );
+}
+.weather-neon::before {
+  opacity: 1;
+  background:
+    linear-gradient(180deg, rgba(255, 60, 200, 0.12), transparent 50%, rgba(60, 220, 255, 0.14)),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0 2px, transparent 2px 4px);
+}
+.weather-rain::before {
+  opacity: 1;
+  background:
+    repeating-linear-gradient(105deg, transparent 0 22px, rgba(70, 100, 150, 0.22) 22px 24px),
+    linear-gradient(180deg, rgba(70, 90, 130, 0.22), rgba(70, 90, 130, 0.06));
+  animation: rain 0.5s linear infinite;
+}
+.weather-snow::before {
+  opacity: 1;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.95) 1.5px, transparent 2px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1.5px) 14px 10px / 22px 22px,
+    linear-gradient(180deg, rgba(190, 210, 230, 0.35), rgba(190, 210, 230, 0.08));
+  animation: snow 6s linear infinite;
+}
+@keyframes rain {
+  to {
+    background-position:
+      -12px 48px,
+      0 0;
+  }
+}
+@keyframes snow {
+  to {
+    background-position:
+      0 280px,
+      14px 230px,
+      0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-rain::before,
+  .weather-snow::before,
+  .lamp.current::after,
+  .route-timer.low {
+    animation: none;
+  }
+}

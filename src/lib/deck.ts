@@ -7,13 +7,32 @@ import lookCamera from "../../data/vocab/look-camera.json";
 import lookDimension from "../../data/vocab/look-dimension.json";
 import lookTreatment from "../../data/vocab/look-treatment.json";
 import mechanics from "../../data/vocab/mechanics.json";
+import moods from "../../data/vocab/moods.json";
 import seedObjects from "../../data/vocab/seed-objects.json";
 import twists from "../../data/vocab/twists.json";
 import verbs from "../../data/vocab/verbs.json";
+import worldEras from "../../data/vocab/world-eras.json";
+import worldInhabitants from "../../data/vocab/world-inhabitants.json";
+import worldPlaces from "../../data/vocab/world-places.json";
 import type { Rng } from "./rng";
 import type { BankFile, Rarity, VocabEntry } from "./vocab";
 
-export type SlotId = "seed" | "verb" | "look" | "twist";
+export type SlotId = "seed" | "verb" | "world" | "mood" | "look" | "twist" | "constraint" | "free";
+/** Card types (a FREE slot holds any of them). */
+export type CardType = Exclude<SlotId, "free">;
+
+export const SLOT_LABEL: Record<SlotId, string> = {
+  seed: "SEED",
+  verb: "CORE VERB",
+  world: "WORLD",
+  mood: "MOOD",
+  look: "LOOK",
+  twist: "TWIST",
+  constraint: "CONSTRAINT",
+  free: "FREE",
+};
+
+/** The 4-slot mini page used by the /prototype feel lab. */
 export const SLOTS: { id: SlotId; label: string }[] = [
   { id: "seed", label: "SEED" },
   { id: "verb", label: "CORE VERB" },
@@ -23,7 +42,8 @@ export const SLOTS: { id: SlotId; label: string }[] = [
 
 export type CardData = {
   id: string;
-  slot: SlotId;
+  /** The card's type (named `slot` because it decides which slot it fits). */
+  slot: CardType;
   text: string;
   rarity: Rarity;
   tags: string[];
@@ -34,11 +54,18 @@ export type CardData = {
 };
 
 const bank = (b: unknown) => (b as BankFile).entries;
-const POOLS: Record<"seed" | "verb" | "twist", VocabEntry[]> = {
+const POOLS: Record<"seed" | "verb" | "twist" | "mood" | "constraint", VocabEntry[]> = {
   seed: bank(seedObjects),
   verb: [...bank(verbs), ...bank(mechanics)],
   twist: bank(twists),
+  mood: bank(moods),
+  constraint: bank(constraints),
 };
+export const WORLD_PARTS = [
+  { label: "Place", entries: bank(worldPlaces) },
+  { label: "Era", entries: bank(worldEras) },
+  { label: "Inhabitant", entries: bank(worldInhabitants) },
+];
 export const LOOK_REELS = [
   { label: "Dimension", entries: bank(lookDimension) },
   { label: "Pixel", entries: bank(lookTreatment) },
@@ -56,7 +83,7 @@ export function draw(rng: Rng, entries: VocabEntry[]): VocabEntry {
   return rng.pick(entries, (e) => (e.weight ?? 1) * RARITY_WEIGHT[e.rarity]);
 }
 
-export function toCard(rng: Rng, slot: SlotId, e: VocabEntry): CardData {
+export function toCard(rng: Rng, slot: CardType, e: VocabEntry): CardData {
   return {
     id: nextId(),
     slot,
@@ -128,6 +155,9 @@ export function lookCard(rng: Rng, picks: VocabEntry[]): CardData {
   };
 }
 
+/** "a" or "an" + word. */
+export const article = (w: string) => `${/^[aeiou]/i.test(w) ? "an" : "a"} ${w}`;
+
 const cap = (s: string) => s.replace(/\b\w/g, (m) => m.toUpperCase());
 
 /** Concept title from the stamped cards. Placeholder grammar; Studio will polish with Claude. */
@@ -147,5 +177,130 @@ export function conceptTitle(rng: Rng, cards: Partial<Record<SlotId, CardData>>)
 
 export function logline(cards: Partial<Record<SlotId, CardData>>): string {
   const twist = cards.twist?.text.replace(/\.$/, "") ?? "nothing is as it seems";
-  return `A ${cards.verb?.text ?? "quacking"} game about a ${cards.seed?.text ?? "duck"}. ${twist}.`;
+  return `A ${cards.verb?.text ?? "quacking"} game about ${article(cards.seed?.text ?? "duck")}. ${twist}.`;
+}
+
+// ── Route draws ────────────────────────────────────────────────
+
+/** Tags of everything stamped so far; drives the "Fresh" pull and keeper lines. */
+export type Pull = "fresh" | "wild";
+
+/**
+ * Draw `n` distinct entries. Fresh = prefer entries sharing 2+ tags with `context`
+ * (falls back to 1+, then anything); Wild = prefer entries sharing none.
+ */
+export function drawFrom(
+  rng: Rng,
+  entries: VocabEntry[],
+  n: number,
+  context: string[] = [],
+  pull: Pull = "wild",
+  exclude: string[] = [],
+): VocabEntry[] {
+  const ctx = new Set(context);
+  const shared = (e: VocabEntry) => e.tags.filter((t) => ctx.has(t)).length;
+  const avail = entries.filter((e) => !exclude.includes(e.word));
+  let pool = avail;
+  if (ctx.size) {
+    const tiers =
+      pull === "fresh"
+        ? [avail.filter((e) => shared(e) >= 2), avail.filter((e) => shared(e) >= 1)]
+        : [avail.filter((e) => shared(e) === 0)];
+    pool = tiers.find((t) => t.length >= n) ?? avail;
+  }
+  const out: VocabEntry[] = [];
+  let guard = 0;
+  while (out.length < Math.min(n, pool.length) && guard++ < 200) {
+    const e = draw(rng, pool);
+    if (!out.includes(e)) out.push(e);
+  }
+  return out;
+}
+
+export function drawCards(
+  rng: Rng,
+  type: "seed" | "verb" | "twist" | "mood" | "constraint",
+  n: number,
+  context: string[] = [],
+  pull: Pull = "wild",
+): CardData[] {
+  return drawFrom(rng, POOLS[type], n, context, pull).map((e) => toCard(rng, type, e));
+}
+
+/** A card made by the jam theme (always in Jam packs). */
+export function themeCard(rng: Rng, theme: string): CardData {
+  return {
+    id: nextId(),
+    slot: "seed",
+    text: theme.trim() || "duck",
+    rarity: "uncommon",
+    tags: [],
+    flavor: "Today's jam theme.",
+    serial: 1 + rng.int(9999),
+  };
+}
+
+export function worldCard(rng: Rng, picks: VocabEntry[]): CardData {
+  return {
+    id: nextId(),
+    slot: "world",
+    text: picks.map((p) => p.word).join(" · "),
+    rarity: highest(picks.map((p) => p.rarity)),
+    tags: [...new Set(picks.flatMap((p) => p.tags))],
+    serial: 1 + rng.int(9999),
+  };
+}
+
+/** Mystery Crate: one random card of any type. */
+export function mysteryCard(rng: Rng): CardData {
+  const type = rng.pick(["seed", "verb", "twist", "mood", "constraint"] as const);
+  return drawCards(rng, type, 1)[0];
+}
+
+/** Echo Well: words that share tags with the shouted word (or with the stamped tags). */
+export function echo(rng: Rng, word: string, context: string[]): string[] {
+  const w = word.trim().toLowerCase();
+  const all = [...POOLS.seed, ...bank(worldPlaces), ...bank(worldInhabitants)];
+  const hit = all.find((e) => e.word.toLowerCase() === w);
+  const tags = hit?.tags ?? context;
+  return drawFrom(rng, all, 5, tags, "fresh", [hit?.word ?? ""]).map((e) => e.word);
+}
+
+/** Three title options for the forge, from different templates. */
+export function titleOptions(rng: Rng, cards: Partial<Record<SlotId, CardData>>): string[] {
+  const seed = cap(
+    (cards.seed?.text ?? cards.free?.text ?? "duck").split(" ").slice(0, 2).join(" "),
+  );
+  const verb = cap((cards.verb?.text ?? "quack").split(" ")[0]);
+  const place = cap((cards.world?.text ?? "").split(" · ")[0] || "the street");
+  const templates = [
+    `${seed} ${verb}`,
+    `The ${seed} Job`,
+    `${verb} the ${seed}`,
+    `${seed}fall`,
+    `Last ${seed}`,
+    `${seed} & Co.`,
+    `${seed} of ${place}`,
+    `${place} ${verb}ers`,
+    `Tiny ${seed}`,
+    `${seed}.exe`,
+  ];
+  const out: string[] = [];
+  while (out.length < 3) {
+    const t = rng.pick(templates);
+    if (!out.includes(t)) out.push(t);
+  }
+  return out;
+}
+
+/** Logline that reads the full spread. */
+export function spreadLogline(cards: Partial<Record<SlotId, CardData>>): string {
+  const parts = [
+    `A ${cards.verb?.text ?? "quacking"} game about ${article(cards.seed?.text ?? cards.free?.text ?? "duck")}`,
+    cards.world ? ` in ${cards.world.text.split(" · ")[0]}` : "",
+    ".",
+    cards.twist ? ` ${cards.twist.text.replace(/\.$/, "")}.` : "",
+    cards.constraint ? ` Rule: ${cards.constraint.text.replace(/\.$/, "").toLowerCase()}.` : "",
+  ];
+  return parts.join("");
 }

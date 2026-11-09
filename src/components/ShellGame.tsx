@@ -16,13 +16,14 @@ type Props = {
   onStamp: (card: CardData, slot: SlotId) => boolean;
   onTrash: (card: CardData, how: TrashHow) => void;
   onDragSlot: (slot: SlotId | null) => void;
+  bare?: boolean;
 };
 
 /**
  * The Trickster: a twist hides under each of three cups. Cups shuffle, you pick one,
  * then the others lift too ("…or this") to plant a second idea.
  */
-export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot }: Props) {
+export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot, bare }: Props) {
   const [twists, setTwists] = useState<CardData[]>([]);
   /** order[cup] = position (0..2) of that cup. */
   const [order, setOrder] = useState([0, 1, 2]);
@@ -69,8 +70,12 @@ export function ShellGame({ coins, spend, onStamp, onTrash, onDragSlot }: Props)
 
   return (
     <section className="station" aria-label="The Trickster">
-      <div className="stall-sign trickster">THE TRICKSTER</div>
-      <p className="keeper">“Want to make it weird?”</p>
+      {!bare && (
+        <>
+          <div className="stall-sign trickster">THE TRICKSTER</div>
+          <p className="keeper">“Want to make it weird?”</p>
+        </>
+      )}
 
       <div className="cups" style={{ ["--swap" as string]: `${feel.shellSwap}ms` }}>
         {[0, 1, 2].map((cup) => {

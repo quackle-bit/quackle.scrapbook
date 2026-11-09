@@ -11,23 +11,27 @@ import { FORGE_ACT, say } from "./Duck";
 
 export type Concept = { title: string; logline: string; palette: string[] };
 
-const TAPE: Record<SlotId, string> = {
-  seed: "var(--t-seed)",
-  verb: "var(--t-verb)",
-  look: "var(--t-look)",
-  twist: "var(--t-twist)",
-};
-
 function today() {
   const d = new Date();
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 }
 
-function StampedCard({ card, tilt, onPeel }: { card: CardData; tilt: number; onPeel: () => void }) {
+export function StampedCard({
+  card,
+  tilt,
+  onPeel,
+  animate = true,
+}: {
+  card: CardData;
+  tilt: number;
+  onPeel: () => void;
+  animate?: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const tape = useRef<HTMLDivElement>(null);
   const ink = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (!animate) return;
     // Land: snap with overshoot → THUD → tape slaps over the corner → ink stamp fades in.
     void (async () => {
       await play(
@@ -62,11 +66,11 @@ function StampedCard({ card, tilt, onPeel }: { card: CardData; tilt: number; onP
         ),
       ]);
     })();
-  }, [tilt]);
+  }, [tilt, animate]);
   return (
     <div ref={ref} className="stamped" style={{ transform: `rotate(${tilt}deg)` }}>
       <CardFace card={card} small />
-      <div ref={tape} className="tape" style={{ background: TAPE[card.slot] }} />
+      <div ref={tape} className="tape" style={{ background: `var(--t-${card.slot})` }} />
       <div ref={ink} className="ink">
         KEPT
         <small>{today()}</small>

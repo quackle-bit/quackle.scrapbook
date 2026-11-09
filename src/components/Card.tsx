@@ -6,8 +6,11 @@ import type { CardData } from "@/lib/deck";
 const TYPE_LABEL: Record<CardData["slot"], string> = {
   seed: "WORD",
   verb: "VERB",
+  world: "WORLD",
+  mood: "MOOD",
   look: "LOOK",
   twist: "TWIST",
+  constraint: "RULE",
 };
 const PIPS: Record<CardData["rarity"], string> = {
   common: "◆◇◇",

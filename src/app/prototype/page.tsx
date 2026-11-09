@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Prototype } from "@/components/Prototype";
-import "./prototype.css";
+import "@/styles/scrapbook.css";
 
 export const metadata: Metadata = { title: "Feel prototype · quackle.scrapbook" };
 
