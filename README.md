@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# quackle.scrapbook
 
-## Getting Started
+A game-idea toy by [quackle.bit](https://quacklebit.com). You're a card hunter on a market street:
+open card packs, **QUACK** the bad ideas into the bin, tape the good ones into your scrapbook, and
+forge each finished spread into a pixel-art game concept.
 
-First, run the development server:
+| Route        | What                                                                     |
+| ------------ | ------------------------------------------------------------------------ |
+| `/`          | Home                                                                     |
+| `/play`      | The street (Visitor). `?mode=jam` / `?mode=studio` for the other streets |
+| `/book`      | Your local book: cover, spreads, discard pile, collection                |
+| `/s#…`       | A read-only shared spread (encoded in the URL hash)                      |
+| `/studio`    | Studio library, Back Room, Ledger, Appraiser (members)                   |
+| `/jam`       | Jam rooms: join with a code, or open one (members)                       |
+| `/about`     | Case study                                                               |
+| `/prototype` | The original feel lab                                                    |
+
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Everything works without any keys: Studio and Jam run as **local
+previews** (Jam: open the room in a second tab to play as a second guest).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script                                       |                                                                 |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| `npm run dev` / `build` / `start`            | Next.js                                                         |
+| `npm run lint` / `typecheck` / `format`      | Quality                                                         |
+| `npm run vocab:lint` / `vocab:sample [seed]` | Card banks in `data/vocab`                                      |
+| `npm run db:test`                            | Runs the Supabase migration in PGlite and checks every RLS rule |
+| `python3 scripts/make-brand-assets.py`       | Regenerates icons + link-preview image from the duck sprite     |
 
-## Learn More
+## Going live
 
-To learn more about Next.js, take a look at the following resources:
+1. **Vercel:** import the GitHub repo; defaults are fine. Set `NEXT_PUBLIC_SITE_URL` to the final URL.
+2. **Supabase** (Studio + Jam): follow [`supabase/README.md`](supabase/README.md).
+3. **Claude Appraiser:** set `ANTHROPIC_API_KEY` on the server (never `NEXT_PUBLIC_`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Keys go in `.env.local` locally (git-ignored) and in Vercel's environment variables; see `.env.example`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Where things live
 
-## Deploy on Vercel
+- `src/feel.ts`: every timing, gesture threshold and sound level.
+- `src/lib/deck.ts`, `data/vocab/`: cards, packs, the Back Room, pool rules.
+- `src/lib/route.ts`: stops, streets per mode, spark questions, weather.
+- `src/components/route/`: the street and every stop's mini-game.
+- `src/lib/store.ts`: the visitor's local book and daily coins.
+- `src/lib/studio/`, `src/lib/jam/`: local and Supabase backends behind one interface each.
+- `src/lib/server/appraiser.ts`, `src/app/api/appraise/`: the Appraiser (server-only).
+- `supabase/migrations/`: schema, RLS and server-side rules.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `CLAUDE.md` for the original plan and `PROGRESS.md` for what was built, phase by phase.

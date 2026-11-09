@@ -60,6 +60,15 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Server rules (in `0001_init.sql`, tested by `npm run db:test`, 32 checks): guest cap, unique nicknames, coins, room open/closed, one page per guest, no Mythic/studio-only cards for guests, atomic trades, team joins only after close, adopt credits the guest.
 - Two backends: `LocalJam` (each browser tab is a guest; live through storage events) and `SupabaseJam` (RPCs + Realtime).
 
+## Phase 5 — Portfolio polish (branch `phase-5-polish`)
+
+- quackle.bit branding: pixel-art app icons and a link-preview image drawn from the studio duck sprite (`scripts/make-brand-assets.py`), manifest (installable), theme colour.
+- SEO: metadata base from `NEXT_PUBLIC_SITE_URL`, Open Graph/Twitter cards, `robots.txt` (Studio, API, rooms and shared links not indexed), `sitemap.xml`.
+- `/about` case-study page, styled 404, footer links.
+- Vercel Analytics (`@vercel/analytics`, active only on Vercel).
+- Performance: every page is static except the two API routes; html-to-image loads only when exporting a PNG; no animation libraries.
+- README rewritten.
+
 ## Known issues / next
 
 - Jam card draws happen in the browser: coins are enforced on the server, but a modified client could draw without paying. Server-side draws (an API route that spends + draws + records pulls) would close that.

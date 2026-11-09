@@ -19,6 +19,7 @@
     "@anthropic-ai/sdk": "^1.6.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.0",
+    "@vercel/analytics": "^2.0.1",
     "html-to-image": "^1.11.13",
     "next": "16.4.5",
     "react": "19.3.0",

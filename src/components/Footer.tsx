@@ -11,6 +11,7 @@ export function Footer() {
         spread is a game concept. Your book is saved in this browser only.
       </p>
       <p>
+        <a href="/about">How it&apos;s made</a> ·{" "}
         <a href="https://quacklebit.com/portfolio" rel="noopener">
           See what we make →
         </a>

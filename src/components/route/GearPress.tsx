@@ -23,7 +23,7 @@ export function GearPress({
   onPulled,
 }: StopProps) {
   const [cards, setCards] = useState<CardData[]>([]);
-  const [left, setLeft] = useState<Set<string>>(new Set());
+  const [, setLeft] = useState<Set<string>>(new Set());
   const [pressed, setPressed] = useState(false);
   const [lever, setLever] = useState(0);
   const [flipSignal, setFlipSignal] = useState(0);

@@ -137,3 +137,32 @@ body {
 .site-footer a {
   color: var(--ink);
 }
+
+/* ── About / case study ── */
+.about {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 48px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.about section {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  line-height: 1.55;
+  font-size: 17px;
+}
+.about h2 {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 12px;
+}
+.about ul {
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
