@@ -21,7 +21,7 @@ import {
  */
 
 type Db = {
-  rooms: Room[];
+  rooms: (Room & { hostId?: string })[];
   guests: (Guest & { roomId: string })[];
   pages: (Page & { roomId: string })[];
   reactions: { pageId: string; userId: string; kind: ReactionKind }[];
@@ -83,8 +83,13 @@ export class LocalJam implements JamTransport {
       startCoins: o.startCoins,
       closed: false,
     };
-    tx((d) => d.rooms.push(room));
+    const hostId = await this.userId();
+    tx((d) => d.rooms.push({ ...room, hostId }));
     return room;
+  }
+  async isHost(roomId: string) {
+    const me = await this.userId();
+    return read().rooms.find((r) => r.id === roomId)?.hostId === me;
   }
   async roomByCode(code: string) {
     return read().rooms.find((r) => r.code === code.trim().toUpperCase()) ?? null;

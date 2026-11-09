@@ -69,10 +69,22 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Performance: every page is static except the two API routes; html-to-image loads only when exporting a PNG; no animation libraries.
 - README rewritten.
 
+## Phase 6 — Motion trial (branch `phase-6-motion`)
+- Added Motion (`motion`): cards are driven by motion values with spring physics (`src/lib/physics.ts`, tuning in `feel.spring`).
+  - Stamping: the card flies from your finger into the slot (spring, scaled to the slot), then lands with the thud.
+  - Fling: keeps your throw velocity and glides out (inertia), spinning with the throw.
+  - Snap-back starts with your release velocity; grabbing a card mid-animation continues from where it is.
+  - The fan springs into place when a card leaves.
+  - Speed mode, reduced motion and the hidden-tab fallback carry over.
+- Bug fixes:
+  - A card held a moment before dragging got crumpled and binned even when dropped on its slot; now a crumpled card dropped on a valid slot is smoothed out and stamped. Hold-to-crumple raised to 520 ms.
+  - The crumple timer could stay armed after a press ended (lost pointer capture) and crumple a card nobody was touching; it now only fires while pressed, and lost capture springs the card home.
+  - Local jam preview showed host tools to every guest; only the tab that opened the room is host now.
+- Page turns and the forge still use the earlier animation code.
+
 ## Known issues / next
 
 - Jam card draws happen in the browser: coins are enforced on the server, but a modified client could draw without paying. Server-side draws (an API route that spends + draws + records pulls) would close that.
-- Local jam preview lets every tab host (hide/adopt/close); with Supabase only members can.
 
 - Not verified against a live Supabase project or with a real Anthropic key (no keys here): the SQL is tested in PGlite, the TypeScript type-checks, the UI runs on the local backend.
 

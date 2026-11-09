@@ -37,7 +37,7 @@ export function StampedCard({
       await play(
         ref.current,
         [
-          { transform: `scale(1.35) rotate(${tilt * 3}deg)`, opacity: 0.4 },
+          { transform: `scale(1.1) rotate(${tilt * 1.5}deg)`, opacity: 0.85 },
           { transform: `scale(.94) rotate(${tilt}deg)`, opacity: 1, offset: 0.7 },
           { transform: `scale(1) rotate(${tilt}deg)`, opacity: 1 },
         ],

@@ -51,6 +51,9 @@ export class SupabaseJam implements JamTransport {
       .maybeSingle();
     return !!m;
   }
+  async isHost() {
+    return this.canHost(); // RLS lets any studio member run a room
+  }
   private async rpc<T>(fn: string, args: Record<string, unknown>): Promise<T> {
     const { data, error } = await this.sb.rpc(fn, args);
     if (error) throw new Error(error.message);

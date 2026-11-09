@@ -25,7 +25,7 @@ export const feel = {
 
   // Gestures
   /** Hold still this long to crumple a card. */
-  holdToCrumple: 420,
+  holdToCrumple: 520,
   /** Pointer travel (px) that cancels the hold and starts a drag. */
   dragSlop: 8,
   /** Release speed (px/ms) that counts as a fling / rip. */
@@ -56,6 +56,20 @@ export const feel = {
   respins: 2,
   shellSwap: 280,
   shellSwaps: 7,
+
+  // Springs (Motion). Stiffness/damping: higher stiffness = snappier, lower damping = bouncier.
+  spring: {
+    /** Snap back to the hand. */
+    snap: { type: "spring", stiffness: 520, damping: 30 } as const,
+    /** Fly into a slot. */
+    stamp: { type: "spring", stiffness: 380, damping: 32 } as const,
+    /** Fly into the bin. */
+    bin: { type: "spring", stiffness: 260, damping: 26 } as const,
+    /** Fan re-spacing when a card leaves. */
+    fan: { type: "spring", stiffness: 300, damping: 26 } as const,
+    /** Fling glide (Motion inertia). */
+    glide: { power: 0.9, timeConstant: 420, distance: 0.38 },
+  },
 
   // Duck
   duckLine: 1700,

@@ -58,8 +58,8 @@ function JamRoom({ roomId }: { roomId: string }) {
 
   useEffect(() => {
     setPoolRules({ allowMythic: false, allowStudioOnly: false });
-    void jam.canHost().then(setCanHost, () => setCanHost(false));
-  }, [jam]);
+    void jam.isHost(roomId).then(setCanHost, () => setCanHost(false));
+  }, [jam, roomId]);
 
   if (!snap || !me) return <div className="proto" aria-busy="true" />;
   const room = snap.room;

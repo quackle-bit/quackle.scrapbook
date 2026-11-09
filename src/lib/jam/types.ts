@@ -59,7 +59,10 @@ export interface JamTransport {
   readonly kind: "local" | "supabase";
   /** Current user id (a per-tab id locally; an anonymous or member auth id on Supabase). */
   userId(): Promise<string>;
+  /** May this user open rooms? */
   canHost(): Promise<boolean>;
+  /** May this user run this room (hide pages, adopt, close)? */
+  isHost(roomId: string): Promise<boolean>;
   createRoom(o: {
     theme: string;
     minutes: number;
