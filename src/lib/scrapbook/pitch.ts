@@ -1,4 +1,5 @@
 import {
+  ASSET_KINDS,
   SCOPE_AREAS,
   type CollectedCard,
   type Concept,
@@ -40,6 +41,9 @@ export type PitchModel = {
   audio: PitchCardLine[];
   scope: { label: string; points: number }[];
   mvp: Mvp;
+  /** Asset counts and notes, only the rows that have something. */
+  assets: { label: string; count: number; note: string }[];
+  assetNotes: string;
   project: {
     name: string;
     jamTheme: string;
@@ -115,6 +119,12 @@ export function buildPitchModel(book: Scrapbook, concept: Concept): PitchModel {
       (s) => s.points > 0,
     ),
     mvp: concept.mvp,
+    assets: ASSET_KINDS.map((k) => ({
+      label: k.label,
+      count: concept.assets?.counts[k.id] ?? 0,
+      note: (concept.assets?.notes[k.id] ?? "").trim(),
+    })).filter((a) => a.count > 0 || a.note),
+    assetNotes: (concept.assets?.general ?? "").trim(),
     project: {
       name: book.name.trim(),
       jamTheme: book.jamTheme.trim(),
@@ -278,6 +288,13 @@ export function pitchMarkdown(m: PitchModel): string {
       if (items.length) L.push(`**${label}**`, ...items.map((i) => `- ${i}`), "");
     });
   }
+  if (m.assets?.length || m.assetNotes) {
+    h("Assets");
+    (m.assets ?? []).forEach((a) =>
+      L.push(`- ${a.label}: ${a.count}${a.note ? ` (${a.note})` : ""}`),
+    );
+    if (m.assetNotes) L.push("", m.assetNotes);
+  }
   L.push("", "_Made with Quackle Scrapbook_");
   return (
     L.join("\n")
@@ -366,6 +383,14 @@ export function decodePitch(hash: string): PitchModel | null {
         nice: strs(mvp.nice, 20, 80),
         cut: strs(mvp.cut, 20, 80),
       },
+      assets: (Array.isArray(m.assets) ? m.assets.slice(0, 5) : [])
+        .map((a: Record<string, unknown>) => ({
+          label: str(a?.label, 20),
+          count: Math.max(0, Math.min(999, Number(a?.count) | 0)),
+          note: str(a?.note, 80),
+        }))
+        .filter((a) => a.label && (a.count || a.note)),
+      assetNotes: str(m.assetNotes, 600),
       project: {
         name: str(proj.name, 60),
         jamTheme: str(proj.jamTheme, 80),

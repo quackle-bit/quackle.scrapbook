@@ -1,5 +1,6 @@
 "use client";
 
+import { AssetPanel } from "./AssetPanel";
 import { Icon } from "../ui/Icon";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -109,6 +110,7 @@ export function SummaryRoute() {
 
       <main className="dk-summary-main">
         <PitchSpread ref={spread} model={model} editHref={editHref} />
+        <AssetPanel concept={concept} />
 
         <div className="pp-actions no-print">
           <button

@@ -2563,3 +2563,128 @@
 .dk[data-rm="1"] .pb-pack * {
   animation: none !important;
 }
+
+/* ══════════ ASSET LIST & NOTES (under the pitch) ══════════ */
+.ap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  margin: 16px auto 0;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+.ap summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  list-style: none;
+}
+.ap summary::-webkit-details-marker {
+  display: none;
+}
+.ap summary::after {
+  content: "+";
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+}
+.ap[open] summary::after {
+  content: "−";
+}
+.ap summary small {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.ap-rows {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 4px 14px 0;
+  list-style: none;
+}
+.ap-rows li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 10px;
+  align-items: center;
+}
+.ap-label {
+  font-size: 16px;
+}
+.ap-step {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--ink);
+}
+.ap-step button {
+  width: 36px;
+  height: 34px;
+  border: 0;
+  background: #fff;
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+.ap-step button:disabled {
+  color: #c9c3b8;
+}
+.ap-step output {
+  min-width: 34px;
+  text-align: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  border-left: 2px solid var(--ink);
+  border-right: 2px solid var(--ink);
+  line-height: 34px;
+}
+.ap-note {
+  grid-column: 1 / -1;
+  min-height: 36px !important;
+  font-size: 14px !important;
+}
+.ap-total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 14px 0;
+  font-size: 15px;
+}
+.ap-notes {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px 14px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.ap-notes textarea {
+  resize: vertical;
+  font-size: 15px;
+  color: var(--ink);
+}
+.pp-assets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+}
+.pp-assets strong {
+  font-family: var(--font-pixel), monospace;
+  font-weight: 400;
+}
+.pp-assets small,
+.pp-notes {
+  color: var(--ink-soft);
+}
+.pp-notes {
+  margin: 4px 0 0;
+  white-space: pre-wrap;
+}

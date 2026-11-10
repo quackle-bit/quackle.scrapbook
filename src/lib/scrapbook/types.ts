@@ -67,6 +67,21 @@ export type PrimaryPicks = {
   audio?: CardRef;
 };
 
+/** Rough asset counts for a detailed planner; optional, lives under the pitch. */
+export type AssetKind = "character" | "npc" | "prop" | "environment" | "sound";
+export const ASSET_KINDS: { id: AssetKind; label: string }[] = [
+  { id: "character", label: "Characters" },
+  { id: "npc", label: "NPCs" },
+  { id: "prop", label: "Props" },
+  { id: "environment", label: "Environments" },
+  { id: "sound", label: "Sounds" },
+];
+export type AssetSheet = {
+  counts: Partial<Record<AssetKind, number>>;
+  notes: Partial<Record<AssetKind, string>>;
+  general?: string;
+};
+
 export type Concept = {
   id: string;
   scrapbookId: string;
@@ -90,6 +105,8 @@ export type Concept = {
   primary: PrimaryPicks;
   scope: Partial<Record<ScopeArea, number>>;
   mvp: Mvp;
+  /** Optional production detail (added later; older saves have none). */
+  assets?: AssetSheet;
   status: "draft" | "pitched";
   createdAt: string;
   updatedAt: string;

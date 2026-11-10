@@ -100,7 +100,7 @@ export const PitchSpread = forwardRef<
         {!m.title && <span className="no-export">{edit("title")}</span>}
       </header>
 
-      {filledCount(m) === 0 && (
+      {filledCount(m) === 0 && !m.assets?.length && !m.assetNotes && (
         <p className="pp-nothing">
           Nothing here yet. Fill in a scrapbook page and it shows up here.
         </p>
@@ -261,6 +261,22 @@ export const PitchSpread = forwardRef<
               </li>
             ))}
           </ul>
+        </Section>
+      )}
+
+      {(m.assets?.length > 0 || !!m.assetNotes) && (
+        <Section label="Assets">
+          {m.assets?.length > 0 && (
+            <ul className="pp-assets">
+              {m.assets.map((a) => (
+                <li key={a.label}>
+                  <strong>{a.count}</strong> {a.label}
+                  {a.note && <small> · {a.note}</small>}
+                </li>
+              ))}
+            </ul>
+          )}
+          {m.assetNotes && <p className="pp-notes">{m.assetNotes}</p>}
         </Section>
       )}
 
