@@ -3,13 +3,13 @@
 import { FullscreenButton } from "../ui/FullscreenButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PAGES } from "../scrapbook/pages/registry";
 import { RadioButton } from "../radio/Radio";
 import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
-import { DuckSprite } from "../Duck";
+import { CoverDuck } from "./CoverDuck";
 import { scrapbookStore, useScrapbooks } from "@/lib/scrapbook/store";
 import { importDone, importOldSpreads, markImportDone } from "@/lib/scrapbook/import";
 import { useStore } from "@/lib/store";
@@ -29,6 +29,12 @@ export function DeskHome() {
   const [skipImport, setSkipImport] = useState(false);
   const oldCount = old.ready && !skipImport && !importDone() ? old.book.spreads.length : 0;
 
+  const stage = useRef<HTMLDivElement>(null);
+  const bookRef = useRef<HTMLButtonElement>(null);
+  const visited = last
+    ? last.progress.visitedPages.filter((id) => PAGES.some((p) => p.id === id)).length
+    : 0;
+
   function start() {
     const id = scrapbookStore.createScrapbook();
     router.push(`/scrapbook?id=${id}&page=setup`);
@@ -43,17 +49,33 @@ export function DeskHome() {
           <SettingsButton />
         </div>
 
-        <h1 className="dk-cover-title">Quackle Scrapbook</h1>
-
-        <div className="dk-desk-middle">
-          <div className="dk-book" aria-hidden>
-            <div className="dk-book-label">
-              <strong>{last?.name.trim() || "Game ideas"}</strong>
-            </div>
-          </div>
-          <div className="dk-desk-duck">
-            <DuckSprite act={null} scale={3} />
-          </div>
+        {/* The cover: the scrapbook itself, with the duck living on it. */}
+        <div ref={stage} className="cv-stage">
+          <button
+            ref={bookRef}
+            type="button"
+            className="cv-book"
+            onClick={() => (last ? router.push(`/scrapbook?id=${last.id}`) : start())}
+            disabled={!ready}
+            aria-label={last ? `Open ${last.name.trim() || "your scrapbook"}` : "Start a scrapbook"}
+          >
+            <span className="cv-spine" aria-hidden />
+            <span className="cv-plate">
+              <h1>
+                Quackle
+                <br />
+                Scrapbook
+              </h1>
+              <span className="cv-rule" aria-hidden />
+              <small>
+                {last
+                  ? `${last.name.trim() || "Untitled scrapbook"} · ${visited} / ${PAGES.length} pages`
+                  : "Game ideas, one pack at a time"}
+              </small>
+            </span>
+            <span className="cv-ribbon" aria-hidden />
+          </button>
+          <CoverDuck stage={stage} book={bookRef} />
         </div>
 
         <div className="dk-desk-actions">
