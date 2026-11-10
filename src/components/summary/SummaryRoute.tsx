@@ -8,10 +8,11 @@ import { useSearchParams } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import { download, slug } from "@/lib/export";
 import { buildPitchModel, pitchMarkdown, pitchUrl } from "@/lib/scrapbook/pitch";
-import { scrapbookStore, useScrapbooks } from "@/lib/scrapbook/store";
+import { useScrapbooks } from "@/lib/scrapbook/store";
 import type { PageId } from "@/lib/scrapbook/types";
 import { sfx } from "@/lib/sound";
 import { DeskRoot } from "../ui/DeskRoot";
+import { PitchCard } from "./PitchCard";
 import { PitchSpread } from "./PitchSpread";
 
 /** Stage 07: the pitch spread, with actions to save, duplicate, export and share. */
@@ -19,6 +20,7 @@ export function SummaryRoute() {
   const params = useSearchParams();
   const { ready, scrapbooks, concepts, lastId } = useScrapbooks();
   const spread = useRef<HTMLDivElement>(null);
+  const card = useRef<HTMLDivElement>(null);
   const [note, setNote] = useState<string | null>(null);
   const book = scrapbooks.find((s) => s.id === (params.get("id") ?? lastId));
   const list = book ? concepts.filter((c) => c.scrapbookId === book.id) : [];
@@ -51,35 +53,59 @@ export function SummaryRoute() {
   const editHref = (page: PageId) => `/scrapbook?id=${book.id}&page=${page}`;
   const fname = slug(model.title || "game-pitch");
 
-  async function exportImage() {
-    if (!spread.current) return;
+  /** The pitch card as a PNG file (1080×1350). */
+  async function cardFile() {
+    if (!card.current) return null;
+    const { toBlob } = await import("html-to-image");
+    const blob = await toBlob(card.current, {
+      pixelRatio: 2,
+      backgroundColor: "#ffffff",
+      cacheBust: true,
+    });
+    return blob ? new File([blob], `${fname}.png`, { type: "image/png" }) : null;
+  }
+  function saveFile(f: File) {
+    const url = URL.createObjectURL(f);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = f.name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  /** Share the card image through the phone's share sheet; fall back to saving it. */
+  async function shareImage() {
     try {
-      const { toPng } = await import("html-to-image");
-      const url = await toPng(spread.current, {
-        pixelRatio: 2,
-        backgroundColor: "#ffffff",
-        cacheBust: true,
-        filter: (n) => !(n instanceof HTMLElement && n.classList.contains("no-export")),
-      });
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${fname}.png`;
-      a.click();
+      const f = await cardFile();
+      if (!f) throw new Error("no image");
+      if (navigator.canShare?.({ files: [f] })) {
+        await navigator.share({ files: [f], title: model!.title || "A game pitch" });
+        sfx.thud();
+      } else {
+        saveFile(f);
+        say("Image saved. Post it where your team votes.");
+      }
+    } catch (e) {
+      if ((e as Error)?.name === "AbortError") return; // closed the share sheet
+      say("Couldn't make the image. Try Print / PDF instead.");
+    }
+  }
+  async function saveImage() {
+    try {
+      const f = await cardFile();
+      if (!f) throw new Error("no image");
+      saveFile(f);
       say("Image saved.");
     } catch {
       say("Couldn't make the image. Try Print / PDF instead.");
     }
   }
-  async function share() {
+  async function copyLink() {
     const url = pitchUrl(model!);
     try {
-      if (navigator.share) await navigator.share({ title: model!.title || "A game pitch", url });
-      else {
-        await navigator.clipboard.writeText(url);
-        say("Link copied. It holds the whole pitch, nothing is uploaded.");
-      }
+      await navigator.clipboard.writeText(url);
+      say("Link copied. It holds the whole pitch, nothing is uploaded.");
     } catch {
-      say("Sharing was cancelled.");
+      say("Couldn't copy the link.");
     }
   }
   async function copyText() {
@@ -117,40 +143,32 @@ export function SummaryRoute() {
         <div className="pp-actions no-print">
           <button
             type="button"
-            className={`dk-btn${concept.status === "pitched" ? "" : " primary"} pp-main`}
-            onClick={() => {
-              scrapbookStore.updateConcept(concept.id, {
-                status: concept.status === "pitched" ? "draft" : "pitched",
-              });
-              sfx.thud();
-              say(
-                concept.status === "pitched"
-                  ? "Moved back to draft."
-                  : "Saved as pitched. It's ready for the Pitch Wall.",
-              );
-            }}
+            className="dk-btn primary pp-main"
+            onClick={() => void shareImage()}
           >
-            {concept.status === "pitched" ? "Back to draft" : "Save as pitched"}
+            <Icon name="share" size={18} /> Share pitch image
           </button>
           <div className="pp-share">
-            <button type="button" className="dk-btn" onClick={() => void share()}>
-              <Icon name="share" size={18} /> Share
+            <button type="button" className="dk-btn" onClick={() => void saveImage()}>
+              <Icon name="image" size={18} /> Save
             </button>
-            <button type="button" className="dk-btn" onClick={() => void exportImage()}>
-              <Icon name="image" size={18} /> Image
+            <button type="button" className="dk-btn" onClick={() => void copyLink()}>
+              <Icon name="copy" size={18} /> Link
             </button>
             <button type="button" className="dk-btn" onClick={() => void copyText()}>
-              <Icon name="copy" size={18} /> Copy
+              <Icon name="copy" size={18} /> Text
             </button>
           </div>
+          <p className="pp-hint">Post the image in your team chat and vote with reactions.</p>
           <div className="pp-more">
             <button type="button" className="dk-link-btn" onClick={() => window.print()}>
               Print / PDF
             </button>
-            <Link className="dk-link-btn" href={`/wall?id=${book.id}`}>
-              Pitch Wall
-            </Link>
           </div>
+        </div>
+        {/* Off-screen: the image that gets shared. */}
+        <div className="pcard-holder" aria-hidden>
+          <PitchCard ref={card} model={model} />
         </div>
         {note && (
           <p className="dk-toast no-print" role="status">

@@ -1,5 +1,6 @@
 "use client";
 
+import { scrapbookStore } from "@/lib/scrapbook/store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSettings } from "@/lib/settings";
@@ -100,6 +101,8 @@ export function ClosePage({ book, concept, page, goTo }: PageCtx) {
           title={cur.title}
           onOpen={() => {
             setForging(false);
+            // Forging stamps it: the pitch (and its image) shows PITCHED.
+            scrapbookStore.updateConcept(concept.id, { status: "pitched" });
             router.push(`/scrapbook/summary?id=${book.id}&concept=${concept.id}`);
           }}
           onClose={() => setForging(false)}

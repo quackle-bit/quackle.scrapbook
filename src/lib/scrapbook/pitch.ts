@@ -11,7 +11,7 @@ import {
 /**
  * The pitch as it's read: one display model made from a concept (and its scrapbook's cards).
  * Only things the user actually provided are included; nothing is invented to fill gaps.
- * The same model feeds the summary spread, exports, share links and the Pitch Wall.
+ * The same model feeds the pitch page, the share image, exports and share links.
  */
 
 export type PitchCardLine = {
