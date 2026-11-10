@@ -3837,3 +3837,64 @@ html[data-dark="1"] .dk.dk-desk {
   text-align: left;
   line-height: 1.5;
 }
+@media (min-width: 900px) {
+  /* PC: the open scrapbook lies on the same green cutting mat as the cover, filling the window. */
+  .dk.dk-shell,
+  .dk.dk-summary {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.22) 2px, transparent 2px) 0 0 / 80px 80px,
+      linear-gradient(90deg, rgba(255, 255, 255, 0.22) 2px, transparent 2px) 0 0 / 80px 80px,
+      linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+      linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+      #3d7356 !important;
+  }
+  .dk-shell .dk-stage,
+  .dk-summary .dk-summary-main {
+    background: transparent !important;
+  }
+  .dk-shell .dk-topbar,
+  .dk-shell .dk-progress,
+  .dk-shell .dk-bottomnav {
+    max-width: 1240px;
+  }
+  .dk-shell .dk-topbar,
+  .dk-shell .dk-bottomnav {
+    margin-top: 12px;
+    border: 2px solid var(--ink) !important;
+    background: var(--paper) !important;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+  }
+  .dk-shell .dk-bottomnav {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  .dk-shell .dk-progress {
+    padding: 8px 0 0 !important;
+  }
+  .dk-shell .dk-stage {
+    grid-template-columns: 300px minmax(0, 900px) !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  .dk-leftpage,
+  .dk-shell .dk-leaf {
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35) !important;
+  }
+  /* The pitch page's header bar lies on the mat too. */
+  .dk-summary .dk-topbar {
+    background: var(--paper) !important;
+    border-bottom: 2px solid var(--ink);
+  }
+  /* Cover: Start / Continue never wraps. */
+  .dk-desk .dk-desk-actions .dk-btn.primary {
+    width: 100%;
+    white-space: nowrap;
+  }
+}
+@media (min-width: 900px) {
+  .dk-summary .pp-hint,
+  .dk-summary .pp-more .dk-link-btn {
+    color: #f4fff6 !important;
+    text-shadow: 0 2px 0 rgba(10, 30, 18, 0.6);
+  }
+}
