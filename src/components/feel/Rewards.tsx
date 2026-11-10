@@ -30,11 +30,10 @@ export function PageStamps({
       role="img"
       aria-label={`${visited.length} of ${pages.length} pages explored, ${filled.size} filled in`}
     >
-      {pages.map((p, i) => (
+      {pages.map((p) => (
         <i
           key={p.id}
           className={`${visited.includes(p.id) ? "on" : ""}${filled.has(p.id) ? " full" : ""}${p.id === current ? " here" : ""}${p.id === fresh ? " fresh" : ""}`}
-          style={{ rotate: `${((i * 53) % 11) - 5}deg` }}
         />
       ))}
     </span>

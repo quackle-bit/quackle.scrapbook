@@ -28,12 +28,12 @@
   box-shadow: var(--pxb-drop);
 }
 .panel h3 {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 13px;
   font-weight: 400;
 }
 .panel h4 {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   font-weight: 400;
   margin-top: 6px;
@@ -47,7 +47,7 @@
   display: grid;
   place-items: center;
   min-height: 40px;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   color: #2b2620;
   text-decoration: none;
@@ -81,7 +81,7 @@
   box-shadow: var(--pxb);
   color: #fff3e0 !important;
   writing-mode: vertical-rl;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   text-align: left;
   transition: transform 0.15s steps(2);
@@ -150,7 +150,7 @@
 }
 .spread-row strong {
   grid-area: title;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-weight: 400;
   font-size: 13px;
 }
@@ -198,7 +198,7 @@
 .status-step {
   min-height: 40px;
   border: 0;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   background: #efe6d0;
   box-shadow: var(--pxb);
@@ -219,7 +219,7 @@
   font-size: 14px;
 }
 .appraisal dt {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px;
   padding-top: 3px;
 }
@@ -233,7 +233,7 @@
   font-size: 14px;
 }
 .sev {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 9px;
   padding: 1px 4px;
   background: #efe6d0;
@@ -261,7 +261,7 @@
 .ledger td:not(:first-child) {
   text-align: right;
   white-space: nowrap;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
 }
 .ledger small {
@@ -367,7 +367,7 @@
 }
 .code-input {
   font-family: var(--font-pixel), monospace !important;
-  font-size: 22px !important;
+  font-size: 24px !important;
   letter-spacing: 0.2em;
   text-align: center;
 }

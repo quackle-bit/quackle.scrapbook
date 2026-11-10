@@ -144,7 +144,7 @@
 .sticker {
   min-width: 44px;
   padding: 6px 8px;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px;
   background: rgba(255, 255, 255, 0.12);
   color: rgba(255, 243, 224, 0.5);
@@ -177,7 +177,7 @@
 }
 .book-stats dd {
   font-family: var(--font-pixel), monospace;
-  font-size: 22px;
+  font-size: 24px;
   margin: 0;
 }
 
@@ -199,7 +199,7 @@
   word-break: break-all;
 }
 .read-only {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px;
   padding: 2px 6px;
   border: 2px solid var(--ink-soft);
@@ -227,7 +227,7 @@
   padding: 1px 4px;
   border: 2px solid var(--accent);
   color: var(--accent);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 9px;
   background: rgba(255, 255, 255, 0.6);
 }
@@ -237,7 +237,7 @@
   gap: 8px;
 }
 .rarity-chip {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   padding: 4px 8px;
   background: var(--card-paper);
@@ -246,7 +246,7 @@
   overflow: hidden;
 }
 .collection-group h3 {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   font-weight: 400;
   margin: 8px 0 4px;

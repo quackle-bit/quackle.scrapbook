@@ -18,7 +18,7 @@
   --ink: #24211f;
   --ink-soft: #6b645c;
   --line: #24211f;
-  --px: 3px 3px 0 #24211f;
+  --px: 4px 4px 0 #24211f;
   --px-sm: 2px 2px 0 #24211f;
   --shadow: var(--px);
   --grain: none;
@@ -98,7 +98,7 @@
   box-shadow: var(--px-sm) !important;
   font-family: var(--font-pixel), monospace;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0.02em;
 }
 .dk-btn:active:not(:disabled),
@@ -185,7 +185,7 @@
   background-image: linear-gradient(#efeae0 1px, transparent 1px) !important;
   background-size: 100% 24px !important;
   border: 2px solid var(--ink);
-  box-shadow: 4px 4px 0 var(--ink) !important;
+  box-shadow: var(--px) !important;
 }
 .dk-stack {
   background: repeating-linear-gradient(90deg, var(--ink) 0 2px, #fff 2px 4px) !important;
@@ -204,7 +204,7 @@
 }
 .dk-card-title {
   font-family: var(--font-pixel), monospace !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.2;
 }
 .dk-card-back {
@@ -223,7 +223,7 @@
 .dk-duck-line {
   border: 2px solid var(--ink);
   box-shadow: var(--px-sm) !important;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-weight: 400;
   font-size: 12px;
 }
@@ -246,7 +246,7 @@
   font-size: 15px;
 }
 .dk-nav-page {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 /* ── Book page turn: a fold sweeping right → left (Web Animations in usePageCurl) ── */
@@ -263,7 +263,7 @@
 }
 .dk-under {
   z-index: 1;
-  box-shadow: 4px 4px 0 var(--ink) !important;
+  box-shadow: var(--px) !important;
 }
 .dk-leaf-dim {
   display: block;
@@ -307,7 +307,7 @@
   gap: 2px !important;
 }
 .dk-eyebrow {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px !important;
   letter-spacing: 0.1em;
   color: var(--terra) !important;
@@ -325,7 +325,7 @@
 }
 .dk-field > span,
 .dk-label {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-weight: 400;
   font-size: 12px;
 }
@@ -358,7 +358,7 @@
   box-shadow: var(--px-sm);
 }
 .px-stall-head strong {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 13px;
 }
 .px-stall-head span {
@@ -379,7 +379,7 @@
   padding: 4px 0;
   border: 2px solid var(--ink);
   background: var(--paper-2);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   box-shadow: var(--px-sm);
 }
@@ -388,7 +388,7 @@
   height: 18px;
   background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px);
   border: 2px solid var(--ink);
-  border-top-width: 4px;
+  border-top-width: 2px;
 }
 .px-stall-body {
   min-height: 0;
@@ -402,7 +402,7 @@
   border: 2px dashed var(--ink-soft);
   text-align: center;
   color: var(--ink-soft);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 .px-taped {
@@ -422,7 +422,7 @@
   background: #fff;
   border: 2px solid var(--ink);
   box-shadow: var(--px-sm);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 .px-taped li::before {
@@ -477,7 +477,7 @@
   gap: 8px;
   padding: 4px 4px 4px 10px;
   border: 2px solid var(--ink);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 .px-envelope {
@@ -554,7 +554,7 @@
     var(--tc);
   color: #fff;
   font-family: var(--font-pixel), monospace;
-  font-size: 28px;
+  font-size: 32px;
 }
 .px-card-face {
   display: grid;
@@ -572,12 +572,12 @@
   padding: 3px 8px;
   background: var(--tc);
   color: #fff;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 9px;
   letter-spacing: 0.08em;
 }
 .px-card-face strong {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 13px;
   line-height: 1.15;
 }
@@ -592,7 +592,7 @@
   overflow: hidden;
 }
 .px-card.chosen .px-card-face {
-  outline: 3px solid var(--amber);
+  outline: 2px solid var(--amber);
   outline-offset: 1px;
 }
 .px-check {
@@ -607,7 +607,7 @@
   background: var(--amber);
   border: 2px solid var(--ink);
   font-family: var(--font-pixel), monospace;
-  font-size: 14px;
+  font-size: 16px;
   rotate: 8deg;
 }
 .px-card.t-genre {
@@ -682,7 +682,7 @@
 .op-reel {
   background: #fff !important;
   border: 2px solid var(--ink) !important;
-  font-family: var(--font-pixel), monospace !important;
+  font-family: var(--font-body), monospace !important;
   font-size: 11px !important;
   height: 70px !important;
 }
@@ -801,7 +801,7 @@
   border: 2px dashed var(--ink);
   background: #fff8e6;
   text-align: left;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   line-height: 1.25;
 }
@@ -838,7 +838,7 @@
 }
 .dk-loop-glance {
   padding: 6px 8px !important;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
 }
 .dk-receipt {
@@ -922,7 +922,7 @@
   border: 2px solid var(--ink);
 }
 .dk-radio-label {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   color: var(--ink) !important;
   bottom: -18px !important;
   font-size: 10px !important;
@@ -933,7 +933,7 @@
 }
 .dk-desk-title p {
   color: var(--ink-soft) !important;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
 }
 .dk-desk-middle {
@@ -948,7 +948,7 @@
   background:
     repeating-linear-gradient(var(--ink) 0 4px, transparent 4px 12px) 12px 0 / 2px 100% no-repeat,
     var(--terra) !important;
-  box-shadow: 6px 6px 0 var(--ink) !important;
+  box-shadow: var(--px) !important;
   transform: rotate(-2deg);
 }
 .dk-book::before {
@@ -978,7 +978,7 @@
 }
 .dk-book-label strong {
   font-family: var(--font-pixel), monospace !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 .dk-book-label small {
   font-size: 11px !important;
@@ -999,7 +999,7 @@
 .dk-desk-foot,
 .dk-desk-foot a {
   color: var(--ink-soft) !important;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
 }
 /* Radio sheet */
@@ -1022,7 +1022,7 @@
 .dk-spread {
   border: 2px solid var(--ink);
   border-radius: 0 !important;
-  box-shadow: 4px 4px 0 var(--ink) !important;
+  box-shadow: var(--px) !important;
   background: #fff !important;
 }
 .dk-spread [class*="tape"] {
@@ -1036,7 +1036,7 @@
 .dk-spread {
   border: 2px solid var(--ink);
   border-radius: 0 !important;
-  box-shadow: 4px 4px 0 var(--ink) !important;
+  box-shadow: var(--px) !important;
   background: #fff !important;
 }
 .px-card {
@@ -1084,7 +1084,7 @@
   box-shadow: none !important;
 }
 .dk-chip {
-  border-width: 1.5px !important;
+  border-width: 2px !important;
 }
 
 /* ══════════ COVER: title, book, one button ══════════ */
@@ -1197,7 +1197,7 @@
   place-items: center;
   padding: 0 6px;
   height: var(--reel-h);
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-weight: 400;
   font-size: 11px;
   line-height: 1.2;
@@ -1239,7 +1239,7 @@
   display: inline-block !important;
   width: auto !important;
   padding: 6px 8px !important;
-  border: 1.5px solid var(--ink) !important;
+  border: 2px solid var(--ink) !important;
   background: #fff !important;
   box-shadow: none !important;
   font-size: 11px;
@@ -1249,4 +1249,72 @@
 }
 .px-actions {
   justify-items: center;
+}
+
+/* ══════════ PIXEL GRID (Phase 10.9): 2 px units everywhere ══════════ */
+/* Progress: one flat segmented bar. Ink = filled in, grey = visited, amber = this page. */
+.dk-stamps {
+  display: flex !important;
+  gap: 2px !important;
+  width: min(180px, 100%);
+  height: 10px;
+  margin-top: 4px !important;
+  padding: 2px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  box-sizing: content-box;
+}
+.dk-stamps i {
+  flex: 1;
+  width: auto !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  rotate: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+.dk-stamps i.on {
+  background: #d9d3c7 !important;
+}
+.dk-stamps i.full {
+  background: var(--ink) !important;
+}
+.dk-stamps i.here {
+  background: var(--amber) !important;
+}
+
+/* The bin: a pixel trash can with its count. */
+.px-bin {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px !important;
+  border: 2px solid var(--ink) !important;
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 16px !important;
+  line-height: 1;
+}
+.px-bin svg {
+  display: block;
+}
+.px-bin[aria-expanded="true"] {
+  background: var(--amber) !important;
+}
+.dk-page h2 {
+  font-size: 24px !important;
+  line-height: 1.2;
+}
+.dk-cover-title {
+  font-size: 32px !important;
+}
+.px-stall-head .px-bin span {
+  font-size: 16px;
+  color: var(--ink);
+}
+.px-taped li {
+  rotate: none !important;
 }

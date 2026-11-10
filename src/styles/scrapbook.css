@@ -50,7 +50,7 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-pixel), monospace;
-  font-size: 18px;
+  font-size: 16px;
 }
 .coin {
   display: inline-grid;
@@ -131,7 +131,7 @@
   border-bottom-width: 4px;
   background: var(--card-paper);
   border-radius: 8px 8px 0 0;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   white-space: nowrap;
   padding: 0 8px;
@@ -201,7 +201,7 @@
   background: var(--card-paper);
   box-shadow: 0 4px 0 var(--ink);
   font-family: var(--font-pixel), monospace !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 .big-btn:active:not(:disabled) {
   transform: translateY(3px);
@@ -230,7 +230,7 @@
   border-radius: 4px 4px 12px 12px;
   background:
     repeating-linear-gradient(90deg, transparent 0 10px, rgba(0, 0, 0, 0.08) 10px 12px), #cfc6b2;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   color: #2b2620;
   transition: transform 0.15s;
@@ -578,7 +578,7 @@
 }
 .tear-hint {
   font-size: 11px;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   color: #2b2620;
   animation: nudge 1.2s ease-in-out infinite;
 }
@@ -632,7 +632,7 @@
 }
 .pack-label {
   font-family: var(--font-pixel), monospace;
-  font-size: 18px;
+  font-size: 16px;
   background: var(--card-paper);
   color: #2b2620;
   padding: 4px 8px;
@@ -685,7 +685,7 @@
 }
 .reel-label {
   font-size: 11px;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
 }
 .reel {
   height: 72px;
@@ -694,7 +694,7 @@
   border-radius: 8px;
   background: var(--card-paper);
   color: #2b2620 !important;
-  font-family: var(--font-pixel), monospace !important;
+  font-family: var(--font-body), monospace !important;
   font-size: 11px !important;
   line-height: 1.2;
 }
@@ -820,7 +820,7 @@
 .page-head {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 .progress {

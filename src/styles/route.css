@@ -56,7 +56,7 @@
     var(--card-paper);
 }
 .theme-tag {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   padding: 2px 6px;
   background: var(--accent);
@@ -163,12 +163,12 @@
   }
 }
 .route-count {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
   white-space: nowrap;
 }
 .route-timer {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   padding: 2px 6px;
   background: var(--ink);
@@ -208,7 +208,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
 }
 .book-btn {
@@ -249,7 +249,7 @@
   border: 0;
   background: #7a6a4f;
   color: #fff3e0 !important;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
   padding-right: 22px;
@@ -315,7 +315,7 @@
   gap: 8px;
 }
 .mode-pick legend {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   margin-bottom: 6px;
 }
@@ -456,7 +456,7 @@
   height: 100%;
 }
 .map-panel small {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px;
   color: #8a6a3a;
 }
@@ -467,7 +467,7 @@
 }
 .fold-mark {
   font-family: var(--font-pixel), monospace;
-  font-size: 22px;
+  font-size: 24px;
   color: #8a6a3a;
 }
 
@@ -483,7 +483,7 @@
   aspect-ratio: 5 / 7;
   display: grid;
   place-items: center;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 10px;
   color: #f6f0e1;
   background: #2f3a6b;
@@ -497,7 +497,7 @@
   --cw: clamp(84px, 27vw, 130px);
 }
 .tarot-label {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 11px;
 }
 .tarot-empty {
@@ -655,7 +655,7 @@
   display: grid;
   place-items: center;
   font-family: var(--font-pixel), monospace;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--ink-soft);
   border: 0;
   background:
@@ -797,7 +797,7 @@
   background: repeating-linear-gradient(0deg, #9c7442 0 18px, #7d5a31 18px 21px), #9c7442;
   box-shadow: var(--pxb-drop);
   font-family: var(--font-pixel), monospace;
-  font-size: 36px;
+  font-size: 32px;
   color: #fff3e0 !important;
 }
 .echo-form {
@@ -835,7 +835,7 @@
   justify-content: center;
 }
 .echo-word {
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 13px;
   padding: 6px 10px;
   background: var(--card-paper);
@@ -850,7 +850,7 @@
   padding: 18px 16px 26px;
   background: #fffef8;
   color: #2b2620;
-  font-family: var(--font-pixel), monospace;
+  font-family: var(--font-body), monospace;
   font-size: 12px;
   box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.2);
   /* zig-zag torn bottom edge */
