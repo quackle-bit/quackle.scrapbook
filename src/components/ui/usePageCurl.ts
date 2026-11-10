@@ -46,7 +46,6 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     if (!turn) return;
     const root = binding.current;
     const leaf = root?.querySelector<HTMLElement>(".dk-moving");
-    const under = root?.querySelector<HTMLElement>(".dk-under");
     const flap = root?.querySelector<HTMLElement>(".dk-flap");
     const fold = root?.querySelector<HTMLElement>(".dk-fold-shadow");
     const fwd = turn.dir === 1;
@@ -86,12 +85,17 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
         opts,
       ),
     );
-    add(under?.querySelector<HTMLElement>(".dk-leaf-dim")?.animate({ opacity: [0.35, 0] }, opts));
+    // The next page sits in the turning leaf's shadow until it's uncovered. This overlay lives in the
+    // book, not inside the page, so nothing on the page itself changes when the turn ends (phones
+    // re-draw a page whose layers change, which shows as a blink).
+    add(root?.querySelector<HTMLElement>(".dk-under-dim")?.animate({ opacity: [0.25, 0] }, opts));
 
     let done = false;
-    const finish = () => {
+    const finish = (stalled = false) => {
       if (done) return;
       done = true;
+      // A stalled turn (hidden tab, frozen frames) must not leave a page clipped: clear it now.
+      if (stalled) all.forEach((a) => a.cancel());
       haptic(feel.haptic.tear);
       setIndex(turn.to);
       setTurn(null);
@@ -99,10 +103,14 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
       // Drop the finished animations once React has drawn the new page.
       requestAnimationFrame(() => all.forEach((a) => a.cancel()));
     };
-    if (main) void main.finished.then(finish, finish);
+    if (main)
+      void main.finished.then(
+        () => finish(),
+        () => finish(),
+      );
     else finish();
     // Safety net only: a hidden tab can pause animations.
-    const t = setTimeout(finish, TURN_MS * 4);
+    const t = setTimeout(() => finish(true), TURN_MS * 4);
     return () => {
       clearTimeout(t);
       if (!done) all.forEach((a) => a.cancel());

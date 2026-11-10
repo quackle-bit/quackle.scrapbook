@@ -146,6 +146,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         >
           {active && <span className="dk-flap" aria-hidden />}
           {active && <span className="dk-fold-shadow" aria-hidden />}
+          {active && <span className="dk-under-dim" aria-hidden />}
           <div className="dk-stack" aria-hidden />
           {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
             const moving = active && i === (active.dir === 1 ? active.from : active.to);
@@ -158,7 +159,6 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
                 inert={!!active}
               >
                 <PageScreen book={book} concept={concept} page={PAGES[i]} goTo={goToId} />
-                <span className="dk-leaf-dim" aria-hidden />
               </div>
             );
           })}

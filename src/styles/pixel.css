@@ -250,12 +250,9 @@
   font-size: 12px;
 }
 /* ── Book page turn: a fold sweeping right → left (Web Animations in usePageCurl) ── */
-.dk-leaf {
-  transform: none;
-}
 .dk-moving {
   z-index: 3;
-  transform: none !important;
+  transform: translateZ(0) !important;
   box-shadow: none !important;
 }
 .dk-moving::after {
@@ -1013,8 +1010,8 @@
 .turn-back .dk-moving {
   clip-path: inset(0 100% 0 0);
 }
-.turn-fwd .dk-under .dk-leaf-dim {
-  opacity: 0.35;
+.turn-fwd .dk-under-dim {
+  opacity: 0.25;
 }
 
 /* ══════════ CLEANER (Phase 10.7) ══════════ */
@@ -2007,4 +2004,18 @@
   min-width: 0;
   padding-left: 6px !important;
   padding-right: 6px !important;
+}
+
+/* Every page is always its own layer, so finishing a turn never re-draws its content (no blink). */
+.dk-leaf {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.dk-under-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--ink);
 }
