@@ -152,3 +152,25 @@ Follows `docs/phase-10-plan.md` (from phone testing). Supersedes Phase 9's "no p
 
 - Not tried on a real phone yet. Long twist titles leave room for only a line of description on the 2×2 cards.
 - Wall, About and sheets inherit the theme but weren't individually redesigned. Studio/Jam still use the old street look.
+
+## Phase 10.7+ — Phone feedback rounds (branch `phase-10-pixel`)
+
+- **Look:** one 2 px pixel grid (Silkscreen only at 16/24/32 px), Lucide icons, flat segmented progress bar on its own
+  row, simpler cover (title, book, duck, Continue), cleaner page content, dark mode (invert; art keeps its colours;
+  every visit starts light), full screen button in the top bars.
+- **Page turn:** content fades out, the page switches instantly, a blank paper sheet swings over the spine, new content
+  fades in. Earlier 3D, fold and slide versions blinked on phones.
+- **Packs:** mechanics hands you one pixel pack to tear; visual uses a lever slot machine; mood uses the envelope; bin
+  scrolls; no dead ends (Back / Cancel / Done everywhere).
+- **Pages:** Mood & world has five tabs (Mood, Setting, Look, Perspective, Audio) and Next walks through them;
+  Perspective is a new 20-card deck of 2D / 2.5D / 3D view types; title gacha redrawn as symmetric pixel art; the last
+  page is a pitch checklist plus a "Stamp it" forge (pixel scrapbook page, taped pieces, PITCHED stamp).
+- **Pitch:** readable sheet; Share pitch image (1080×1350 card via the share sheet), Save, Copy link, Copy text;
+  optional Asset list & notes under it. Concepts hidden (one game per scrapbook); Pitch Wall hidden for static hosting.
+- **Duck:** wanders the bottom bar, dozes, chats; tap to quack, drag to pick up and drop.
+
+### Known gaps
+
+- The blank-sheet page turn still needs checking on a real phone.
+- Static hosting (GitHub Pages) needs a static export and the server-only routes removed; see `HANDOFF.md`.
+- Studio and Jam still use the old street look.
