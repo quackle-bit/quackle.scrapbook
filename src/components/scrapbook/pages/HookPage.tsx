@@ -41,7 +41,16 @@ export function HookPage({ book, concept, page }: PageCtx) {
       <BoosterPack
         type="twist"
         label="Twist pack"
-        count={3}
+        count={4}
+        boardExtra={
+          <TextField
+            label="In one line: how does the twist change play?"
+            value={concept.uniqueHook}
+            onChange={set}
+            placeholder="e.g. You can only move when the music stops"
+            maxLength={300}
+          />
+        }
         kept={twists}
         max={extras ? undefined : 1}
         onRemove={(id) => removeFromConcept(book.id, concept.id, "twist", id)}
@@ -55,13 +64,6 @@ export function HookPage({ book, concept, page }: PageCtx) {
         onAddCustom={(c) => addCustom(book.id, concept.id, "twist", c)}
         onOpened={() => scrapbookStore.countPack(book.id)}
         onTrashed={() => scrapbookStore.countTrash(book.id)}
-      />
-      <TextField
-        label="In one line: how does the twist change play?"
-        value={concept.uniqueHook}
-        onChange={set}
-        placeholder="e.g. You can only move when the music stops"
-        maxLength={300}
       />
 
       {extras && (

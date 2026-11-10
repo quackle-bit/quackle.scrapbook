@@ -1007,3 +1007,13 @@
   box-shadow: 4px 4px 0 var(--ink) !important;
   background: #fff !important;
 }
+.px-card {
+  height: 100px;
+}
+.px-card-face em {
+  -webkit-line-clamp: 2;
+}
+.dk-page .dk-chips[aria-label="Moodboard section"] .dk-chip,
+.dk-page [role="group"][aria-label="Moodboard section"] .dk-chip {
+  min-height: 32px;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { feel } from "@/feel";
 import { drawPack, TYPE_LABEL, type InspirationCard } from "@/lib/inspiration";
 import { haptic, OVERSHOOT, play } from "@/lib/motion";
@@ -34,6 +34,8 @@ type Props = {
   canFavorite?: boolean;
   keepLabel?: string;
   keptLabel?: string;
+  /** Shown under the board only (hidden while a pack is open, so the page never scrolls). */
+  boardExtra?: ReactNode;
 };
 
 /** Stalls with their own reveal; the others use a pixel envelope. */
@@ -65,6 +67,7 @@ export function BoosterPack({
   kept = [],
   onRemove,
   max,
+  boardExtra,
 }: Props) {
   const keeper = KEEPERS[type];
   const [line, setLine] = useState(keeper.greet[0]);
@@ -280,6 +283,7 @@ export function BoosterPack({
             ) : (
               <p className="px-board-empty">Nothing kept yet. Open a pack!</p>
             )}
+            {boardExtra}
             {empty && (
               <p className="dk-hint">
                 You&apos;ve seen every {TYPE_LABEL[type].toLowerCase()} card.{" "}

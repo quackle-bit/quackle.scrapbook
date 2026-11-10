@@ -137,3 +137,18 @@ Follows `docs/feel-plan.md`: the desk's structure with the bazaar's game, no pix
 
 - No two-page spread on desktop; stickers not on the desk's book cover; not tried on a real phone.
 - The duck is still the small pixel sprite (the one planned drawn asset).
+
+## Phase 10 — Pixel scrapbook, one screen per page (branch `phase-10-pixel`)
+
+Follows `docs/phase-10-plan.md` (from phone testing). Supersedes Phase 9's "no pixel UI".
+
+- **10.1** `src/styles/pixel.css` over desk.css: white paper, ink outlines, hard pixel shadows, pixel fonts; sharp duck (whole-number scale, no smoothing); big Back / Next bar; stepped page turn, no swipe or corner drag.
+- **10.2–10.3** Short 10-page flow (jam, mechanics, loop, twist, mood & world, scope, genre, title, tagline, close); high concept, objective, audio and other options behind Settings → "Show extra pages". Packs are 4 cards in a 2×2 grid: tap to flip, tap to choose, Keep chosen; rest to the bin; kept cards taped on the page.
+- **10.4** Title gacha (3 ideas per spin from the word bank + your picks); tagline as tap-to-use ideas; tagline off the front (close list, wall cards, polaroid).
+- **10.5** Desk home, radio, lamp and pitch in pixels.
+- **10.6** Checked at 375×667 and 390×844: no page scrolls, including with a pack open on Mood and Twist.
+
+### Known gaps
+
+- Not tried on a real phone yet. Long twist titles leave room for only a line of description on the 2×2 cards.
+- Wall, About and sheets inherit the theme but weren't individually redesigned. Studio/Jam still use the old street look.
