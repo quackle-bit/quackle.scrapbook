@@ -10,7 +10,7 @@ import { ConceptSwitcher } from "./ConceptSwitcher";
 import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
-import { usePageTurn } from "../ui/usePageTurn";
+import { usePageCurl } from "../ui/usePageCurl";
 import { PAGES, PageScreen } from "./pages/registry";
 
 /** The open scrapbook: one page at a time, any order, with swipe, buttons and a page index. */
@@ -41,13 +41,20 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
   }, [book, index, page.id]);
 
   const set = useCallback((i: number) => setIndex(i), []);
-  const turn = usePageTurn(Math.max(0, index), PAGES.length, set);
+  const {
+    binding,
+    turn: active,
+    goTo,
+    onPointerDown,
+    onPointerUp,
+    corner,
+  } = usePageCurl(Math.max(0, index), PAGES.length, set);
   const goToId = useCallback(
     (id: PageId) => {
       const i = PAGES.findIndex((p) => p.id === id);
-      if (i >= 0) void turn.goTo(i);
+      if (i >= 0) void goTo(i);
     },
-    [turn],
+    [goTo],
   );
 
   const groups = useMemo(() => {
@@ -107,11 +114,42 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         </Link>
       </div>
 
-      <main className="dk-stage" onPointerDown={turn.onPointerDown} onPointerUp={turn.onPointerUp}>
-        <div className="dk-binding">
-          <div ref={turn.leaf} className="dk-leaf" aria-live="polite">
-            <PageScreen book={book} concept={concept} page={page} goTo={goToId} />
-          </div>
+      <main className="dk-stage" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+        <div ref={binding} className={`dk-binding${active ? " turning" : ""}`}>
+          <div className="dk-stack" aria-hidden />
+          {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
+            const moving = active && i === (active.dir === 1 ? active.from : active.to);
+            const under = active && !moving;
+            return (
+              <div
+                key={PAGES[i].id}
+                className={`dk-leaf${moving ? " dk-moving" : ""}${under ? " dk-under" : ""}`}
+                aria-live={moving || under ? undefined : "polite"}
+                inert={!!active}
+              >
+                <PageScreen book={book} concept={concept} page={PAGES[i]} goTo={goToId} />
+                <span className="dk-leaf-back" aria-hidden />
+              </div>
+            );
+          })}
+          <button
+            type="button"
+            className="dk-corner next"
+            aria-label="Turn to the next page (or drag this corner)"
+            disabled={index === PAGES.length - 1}
+            data-noswipe
+            {...corner(1)}
+            onClick={(e) => e.detail === 0 && void goTo(index + 1)}
+          />
+          <button
+            type="button"
+            className="dk-corner prev"
+            aria-label="Turn back a page (or drag this corner)"
+            disabled={index === 0}
+            data-noswipe
+            {...corner(-1)}
+            onClick={(e) => e.detail === 0 && void goTo(index - 1)}
+          />
         </div>
       </main>
 
@@ -119,7 +157,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <button
           type="button"
           className="dk-btn"
-          onClick={() => void turn.goTo(index - 1)}
+          onClick={() => void goTo(index - 1)}
           disabled={index === 0}
           aria-label="Previous page"
         >
@@ -136,7 +174,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <button
           type="button"
           className="dk-btn primary"
-          onClick={() => void turn.goTo(index + 1)}
+          onClick={() => void goTo(index + 1)}
           disabled={index === PAGES.length - 1}
           aria-label="Next page"
         >
