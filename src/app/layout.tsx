@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Caveat, Fraunces, Nunito, Pixelify_Sans, Silkscreen } from "next/font/google";
-import { SITE_URL } from "@/lib/site";
+import { METADATA_BASE } from "@/lib/site";
 import "./globals.css";
 import "@/styles/desk.css";
 import "@/styles/pixel.css";
@@ -15,7 +15,7 @@ const display = Fraunces({ variable: "--font-display", subsets: ["latin"] });
 const nunito = Nunito({ variable: "--font-ui", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(METADATA_BASE),
   title: { default: "quackle.scrapbook", template: "%s" },
   description:
     "A cozy desk for game ideas by quackle.bit. Open packs, collect what sparks something, stamp it into your scrapbook and end up with a game pitch. Less thinking. More tinkering.",
