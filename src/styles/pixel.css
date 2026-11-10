@@ -2067,3 +2067,22 @@
 .dk-duck-lane .dk-duck-line.left {
   left: 0;
 }
+
+.px-opening {
+  display: grid;
+  gap: 10px;
+}
+.px-opening-links,
+.px-write {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.px-write .dk-input {
+  flex: 1;
+  min-width: 0;
+}
+.px-write {
+  gap: 10px;
+}

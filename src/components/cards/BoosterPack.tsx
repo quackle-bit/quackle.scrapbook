@@ -41,6 +41,9 @@ type Props = {
 };
 
 /** Stalls with their own reveal; the others use a pixel envelope. */
+/** Stalls whose opener is a box of packs you return to after choosing. */
+const BOX_STALLS = new Set<CardType>(["mechanic"]);
+
 const OPENERS: Partial<Record<CardType, typeof SlotLever>> = {
   mechanic: MechanicPackBox,
   visual: SlotLever,
@@ -204,10 +207,39 @@ export function BoosterPack({
       say(pickLine(keeper.trashed), ACTS.trash);
     }
     setCards([]);
-    setPhase("board");
+    // Stalls with a box of packs go straight back to the box (if there's room for more).
+    const added = keep.filter((c) => !isKept(c)).length;
+    const roomLeft = max === undefined || kept.length + added < max;
+    if (BOX_STALLS.has(type) && roomLeft) {
+      pending.current = null;
+      setChosen(new Set());
+      setUp(new Set());
+      setPhase("opening");
+    } else setPhase("board");
   }
 
   const Opener = OPENERS[type];
+  const tapedList =
+    kept.length > 0 ? (
+      <ul className="px-taped">
+        {kept.map((c) => (
+          <li key={c.id}>
+            <span>{c.title}</span>
+            {onRemove && (
+              <button type="button" aria-label={`Remove ${c.title}`} onClick={() => onRemove(c.id)}>
+                <Icon name="close" size={14} />
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : null;
+  // Way out of an opener or the write form, back to the stall board.
+  const backToBoard = (
+    <button type="button" className="dk-link-btn" onClick={() => setPhase("board")}>
+      Back
+    </button>
+  );
 
   return (
     <div className="px-stall">
@@ -256,24 +288,7 @@ export function BoosterPack({
           </div>
         ) : phase === "board" ? (
           <div className="px-board">
-            {kept.length > 0 ? (
-              <ul className="px-taped">
-                {kept.map((c) => (
-                  <li key={c.id}>
-                    <span>{c.title}</span>
-                    {onRemove && (
-                      <button
-                        type="button"
-                        aria-label={`Remove ${c.title}`}
-                        onClick={() => onRemove(c.id)}
-                      >
-                        <Icon name="close" size={14} />
-                      </button>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            {tapedList}
             {boardExtra}
             {empty && (
               <p className="dk-hint">
@@ -314,6 +329,16 @@ export function BoosterPack({
                 <button type="submit" className="dk-btn small primary" disabled={!draft.trim()}>
                   Add
                 </button>
+                <button
+                  type="button"
+                  className="dk-link-btn"
+                  onClick={() => {
+                    setWriting(false);
+                    setDraft("");
+                  }}
+                >
+                  Cancel
+                </button>
               </form>
             ) : (
               <div className="px-actions">
@@ -338,19 +363,43 @@ export function BoosterPack({
             )}
           </div>
         ) : phase === "opening" ? (
-          Opener ? (
-            <Opener
-              // Torn packs come out face-down (flip each one); slot reels already show their looks.
-              open={() => (type === "visual" ? deal(true, false) : deal(type !== "mechanic"))}
-              titles={() => peek().map((c) => c.title)}
-            />
-          ) : (
-            <button type="button" className="px-envelope" onClick={() => deal(false)}>
-              <span className="px-envelope-flap" aria-hidden />
-              <strong>{label}</strong>
-              <small>tap to open</small>
-            </button>
-          )
+          <div className="px-opening">
+            {BOX_STALLS.has(type) && tapedList}
+            {Opener ? (
+              <Opener
+                // Torn packs come out face-down (flip each one); slot reels already show their looks.
+                open={() => (type === "visual" ? deal(true, false) : deal(type !== "mechanic"))}
+                titles={() => peek().map((c) => c.title)}
+              />
+            ) : (
+              <button type="button" className="px-envelope" onClick={() => deal(false)}>
+                <span className="px-envelope-flap" aria-hidden />
+                <strong>{label}</strong>
+                <small>tap to open</small>
+              </button>
+            )}
+            <div className="px-opening-links">
+              {BOX_STALLS.has(type) ? (
+                <button type="button" className="dk-link-btn" onClick={() => setPhase("board")}>
+                  Done
+                </button>
+              ) : (
+                backToBoard
+              )}
+              {onAddCustom && (
+                <button
+                  type="button"
+                  className="dk-link-btn"
+                  onClick={() => {
+                    setPhase("board");
+                    setWriting(true);
+                  }}
+                >
+                  Write my own
+                </button>
+              )}
+            </div>
+          </div>
         ) : (
           <div className="px-choose">
             <div ref={grid} className="px-grid">
