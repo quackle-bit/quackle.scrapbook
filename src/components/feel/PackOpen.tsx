@@ -36,6 +36,8 @@ export function PackOpen<T extends { id: string }>({
   onDone,
   onOpened,
   card,
+  opener,
+  faceUp = false,
 }: {
   skin?: FeelSkin;
   /** Called once when the pack opens. */
@@ -47,6 +49,13 @@ export function PackOpen<T extends { id: string }>({
   onDone?: () => void;
   onOpened?: (cards: T[]) => void;
   card: CardBits<T>;
+  /**
+   * A stall's own way to reveal the pack (gear press, folded map, reels...) instead of the envelope.
+   * `peek` draws the cards early (same cards `open` will deal), for openers that show them first.
+   */
+  opener?: (api: { open: () => void; peek: () => T[] }) => ReactNode;
+  /** Deal the cards face-up (when the opener already revealed them). */
+  faceUp?: boolean;
 }) {
   const k = (n: string) => (skin === "paper" ? `fc-${n}` : n);
   const [phase, setPhase] = useState<"pack" | "fan">("pack");
@@ -61,6 +70,8 @@ export function PackOpen<T extends { id: string }>({
   const fanRef = useRef<HTMLDivElement>(null);
   const tearDrag = useRef<{ x0: number; w: number; lastStep: number } | null>(null);
   const opening = useRef(false);
+  const drawn = useRef<T[] | null>(null);
+  const peek = () => (drawn.current ??= draw());
 
   useEffect(() => {
     if (phase !== "pack") return;
@@ -82,23 +93,26 @@ export function PackOpen<T extends { id: string }>({
     if (phase !== "pack" || opening.current) return;
     opening.current = true;
     tearDrag.current = null;
-    sfx.tearOff();
-    haptic(feel.haptic.tear);
-    setTear(1);
+    if (!opener) {
+      sfx.tearOff();
+      haptic(feel.haptic.tear);
+      setTear(1);
+    }
     sayRandom("open");
-    await play(
-      flapRef.current,
-      [{ transform: "none" }, { transform: "translate(80px,-160px) rotate(35deg)", opacity: 0 }],
-      feel.tearFlyOff,
-      {
-        fill: "forwards",
-      },
-    );
-    const cards = draw();
+    if (!opener)
+      await play(
+        flapRef.current,
+        [{ transform: "none" }, { transform: "translate(80px,-160px) rotate(35deg)", opacity: 0 }],
+        feel.tearFlyOff,
+        {
+          fill: "forwards",
+        },
+      );
+    const cards = peek();
     onOpened?.(cards);
     setHand(cards);
     setLeft(new Set(cards.map((c) => c.id)));
-    setUp(new Set());
+    setUp(new Set(faceUp ? cards.map((c) => c.id) : []));
     setPhase("fan");
   }
 
@@ -156,6 +170,7 @@ export function PackOpen<T extends { id: string }>({
     });
   }
 
+  if (phase === "pack" && opener) return <>{opener({ open: () => void openPack(), peek })}</>;
   if (phase === "pack")
     return (
       <div className={k("pack-stage")}>
@@ -202,6 +217,7 @@ export function PackOpen<T extends { id: string }>({
               key={c.id}
               {...card}
               skin={skin}
+              faceUp={faceUp}
               card={c}
               tilt={off * feel.fanSpreadDeg}
               lift={off * off * 6}

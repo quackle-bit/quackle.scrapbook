@@ -2882,3 +2882,250 @@ textarea.dk-input {
 .dk[data-rm="1"] .dk-polaroid {
   animation: none;
 }
+
+/* ══════════ STALL MINI-GAMES (openers) ══════════ */
+.op {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 14px 0 6px;
+}
+/* Gear press */
+.op-press {
+  grid-template-columns: auto auto;
+  align-items: start;
+  column-gap: 18px;
+}
+.op-press > .dk-btn,
+.op-press > .dk-hint {
+  grid-column: 1 / -1;
+}
+.op-press-frame {
+  position: relative;
+  width: 190px;
+  height: 170px;
+  border-radius: 10px;
+  background: linear-gradient(#6f5a48, #4f3f33);
+  box-shadow:
+    inset 0 0 0 4px rgba(0, 0, 0, 0.2),
+    0 8px 18px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.op-press-head {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 10px;
+  height: 46px;
+  border-radius: 6px;
+  background: linear-gradient(#c9b79a, #9c8a6f);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+.op-gear {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #6f5a48 30%, transparent 32%),
+    conic-gradient(
+      #6f5a48 0 10%,
+      transparent 0 15%,
+      #6f5a48 0 35%,
+      transparent 0 40%,
+      #6f5a48 0 60%,
+      transparent 0 65%,
+      #6f5a48 0 85%,
+      transparent 0 90%,
+      #6f5a48 0
+    );
+}
+.op-press-bed {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.op-press-bed i {
+  width: 42px;
+  height: 58px;
+  border-radius: 5px;
+  background: var(--grain), #fffdf6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.op-lever-track {
+  position: relative;
+  width: 44px;
+  height: 170px;
+  border-radius: 22px;
+  background: rgba(0, 0, 0, 0.12);
+  touch-action: none;
+  cursor: grab;
+}
+.op-lever {
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  width: 36px;
+  height: 46px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 40% 35%, #d86b52, #8a2d25);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+}
+/* Folded map */
+.op-map-paper {
+  position: relative;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: var(--grain), #efe2c2;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  transition:
+    width 0.35s cubic-bezier(0.3, 1.4, 0.5, 1),
+    height 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+  overflow: hidden;
+}
+.op-map-paper.f0 {
+  width: 70px;
+  height: 90px;
+}
+.op-map-paper.f1 {
+  width: 140px;
+  height: 90px;
+}
+.op-map-paper.f2 {
+  width: 140px;
+  height: 180px;
+}
+.op-map-paper.f3 {
+  width: min(280px, 80vw);
+  height: 180px;
+}
+.op-map-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(90, 70, 40, 0.18) 1px, transparent 1px) 0 0 / 70px 100%,
+    linear-gradient(rgba(90, 70, 40, 0.18) 1px, transparent 1px) 0 0 / 100% 90px,
+    radial-gradient(circle at 30% 60%, rgba(95, 125, 106, 0.45) 0 22px, transparent 24px),
+    radial-gradient(circle at 70% 35%, rgba(79, 111, 143, 0.4) 0 30px, transparent 32px);
+}
+.op-map-x {
+  position: absolute;
+  right: 22%;
+  bottom: 24%;
+  color: var(--terra);
+  font-weight: 900;
+  font-size: 22px;
+  opacity: 0;
+  transition: opacity 0.3s 0.2s;
+}
+.op-map-paper.f3 .op-map-x {
+  opacity: 1;
+}
+/* Tarot */
+.op-velvet {
+  width: min(300px, 86vw);
+  min-height: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 40%, #5b2c4a, #2c1424);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+.op-velvet-line {
+  color: #e9c98f;
+  font-style: italic;
+}
+.op-tarot-row {
+  display: flex;
+  gap: 12px;
+}
+.op-tarot-card {
+  width: 70px;
+  height: 108px;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  padding-bottom: 8px;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 50% 38%, #e9c98f 0 10px, transparent 11px),
+    repeating-linear-gradient(45deg, #3e1d33 0 6px, #4a2440 6px 12px);
+  box-shadow:
+    0 0 0 2px #e9c98f,
+    0 6px 12px rgba(0, 0, 0, 0.4);
+}
+.op-tarot-card small {
+  color: #e9c98f;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* Reels */
+.op-reel-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(#7a5a3a, #4f3a26);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+.op-reel {
+  width: min(96px, 26vw);
+  height: 84px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(#e8dcc4, #fffdf6 30%, #fffdf6 70%, #e8dcc4);
+  color: var(--ink);
+  font:
+    700 14px var(--font-display),
+    serif;
+  line-height: 1.15;
+  overflow: hidden;
+  cursor: pointer;
+}
+.op-reel:not(.stopped) span {
+  filter: blur(0.6px);
+  opacity: 0.8;
+}
+.op-reel.stopped {
+  box-shadow: inset 0 0 0 3px var(--amber);
+}
+/* Shell game */
+.op-cups {
+  display: flex;
+  gap: 24px;
+  padding: 20px 10px 6px;
+}
+.op-cup {
+  width: 72px;
+  height: 84px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.op-cup span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+  background: linear-gradient(90deg, #8a2d25, #c45a4a 45%, #8a2d25);
+  border-radius: 4px;
+}
+.op-cup:disabled {
+  cursor: default;
+}
+.op-cup:not(:disabled):hover span,
+.op-cup:not(:disabled):focus-visible span {
+  filter: brightness(1.15);
+}

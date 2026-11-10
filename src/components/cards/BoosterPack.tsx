@@ -10,6 +10,18 @@ import { sfx } from "@/lib/sound";
 import { sayRandom } from "../Duck";
 import { KEEPERS, pickLine } from "../feel/keepers";
 import { PackOpen } from "../feel/PackOpen";
+import { FoldedMap, GearPress, ShellGame, TailorReels, TarotSpread } from "../feel/openers";
+
+/** Stalls with their own mini-game; the rest use the envelope. faceUp = the game already revealed them. */
+const OPENERS: Partial<
+  Record<CardType, { Game: typeof GearPress; faceUp: boolean; hint: string }>
+> = {
+  mechanic: { Game: GearPress, faceUp: true, hint: "Press the cards out" },
+  setting: { Game: FoldedMap, faceUp: true, hint: "Unfold the map" },
+  mood: { Game: TarotSpread, faceUp: false, hint: "Flip the cards: past, present, future" },
+  visual: { Game: TailorReels, faceUp: true, hint: "Spin the reels" },
+  twist: { Game: ShellGame, faceUp: true, hint: "Find the twist under the cups" },
+};
 import { CardBack, PaperCard } from "./PaperCard";
 
 type Props = {
@@ -125,6 +137,15 @@ export function BoosterPack({
           sub={`${count} cards inside`}
           hint="drag a card onto the page · hold to crumple · swipe down to rip · fling it away"
           draw={draw}
+          faceUp={OPENERS[type]?.faceUp}
+          opener={
+            OPENERS[type]
+              ? ({ open, peek }) => {
+                  const { Game } = OPENERS[type]!;
+                  return <Game open={open} titles={() => peek().map((c) => c.title)} />;
+                }
+              : undefined
+          }
           onOpened={() => onOpened?.()}
           onDone={() => setPhase("done")}
           card={{

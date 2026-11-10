@@ -122,3 +122,18 @@ Follows `docs/redesign-plan.md`. The street is replaced by a scrapbook of pages 
 - Studio and Jam (from the first version) still use the old street (`src/components/route/*`, `/play?mode=`); they were not redesigned. The old street files are kept for them only.
 - Not tried on a real phone (only in phone-sized browser windows); radio audio not listened to.
 - Moodboard image references are not supported (text cards only).
+
+## Phase 9 — Bring the feel back (branch `phase-9-feel`)
+
+Follows `docs/feel-plan.md`: the desk's structure with the bazaar's game, no pixel UI.
+
+- **9.1** `src/components/feel/`: DragCard + PackOpen lifted out of the street, generic, with a paper skin. Studio/Jam unchanged.
+- **9.2** Pack pages are stalls with keepers (`keepers.ts`); drag cards onto the page (thud, tape, KEPT stamp), crumple / rip / fling into a bin you can fish from; duck reacts in a paper bubble.
+- **9.3** Page curl: drag the corner, the page lifts with the next page underneath; buttons/keys/swipes play the same turn.
+- **9.4** Rewards: page stamps in the top bar, section stickers, receipt, forge to a polaroid on the Close page.
+- **9.5** Stall mini-games: Gear press (mechanics), Folded map (setting), Tarot (mood), Tailor reels (visual), Shell game (twist). Word, genre, objective and audio keep the envelope.
+
+### Known gaps
+
+- No two-page spread on desktop; stickers not on the desk's book cover; not tried on a real phone.
+- The duck is still the small pixel sprite (the one planned drawn asset).
