@@ -3256,3 +3256,15 @@ html[data-dark="1"] .dk.dk-desk {
 .cv-book {
   width: min(270px, 72vw, 38dvh);
 }
+/* Footer links: plain light text (no tag), readable on the green mat. */
+.dk-desk .dk-desk-foot a,
+.dk-desk .dk-desk-foot a:visited {
+  padding: 2px 0;
+  background: none;
+  border: 0;
+  color: #f4fff6 !important;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-shadow: 0 2px 0 rgba(10, 30, 18, 0.6);
+}
