@@ -3931,3 +3931,90 @@ html[data-dark="1"] .dk.dk-desk {
     transparent 80%
   );
 }
+
+/* ══════════ PC: centred, card-sized gamification; duck stays in the book (900 px+ only) ══════════ */
+@media (min-width: 900px) {
+  /* Pages with a stall or the gacha: the playable area fills the page and sits in its middle. */
+  .dk-shell .dk-leaf {
+    display: flex;
+    flex-direction: column;
+  }
+  .dk-shell .dk-page {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column;
+  }
+  .dk-shell .dk-page-body:has(.px-stall),
+  .dk-shell .dk-page-body:has(.px-gacha) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .dk-shell .px-stall {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .dk-shell .px-stall-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .dk-shell .px-board,
+  .dk-shell .px-choose,
+  .dk-shell .px-opening,
+  .dk-shell .px-binlist {
+    width: min(560px, 100%);
+  }
+  .dk-shell .px-gacha {
+    flex: 1;
+    align-content: center;
+  }
+
+  /* Cards are cards, not strips: fixed size, 2×2, centred. */
+  .dk-shell .px-grid {
+    grid-template-columns: repeat(2, 240px) !important;
+    justify-content: center;
+    gap: 14px;
+  }
+  .dk-shell .px-card {
+    height: 150px !important;
+  }
+  .dk-shell .px-card-face strong {
+    font-size: 16px;
+  }
+  .dk-shell .px-card-face em {
+    font-size: 14px;
+  }
+  .dk-shell .px-taped {
+    justify-content: center;
+  }
+
+  /* Bigger toys, still crisp (1.5× turns 2 px lines into 3 px). */
+  .dk-shell .pb-pack,
+  .dk-shell .px-gacha-machine,
+  .dk-shell .px-envelope,
+  .dk-shell .op-press,
+  .dk-shell .op-map,
+  .dk-shell .op-cups,
+  .dk-shell .op-shell {
+    zoom: 1.5;
+  }
+  .dk-shell .sl-stage {
+    width: 400px;
+    zoom: 1.4;
+  }
+  .dk-shell .px-tickets {
+    width: min(460px, 100%);
+    margin: 0 auto;
+  }
+
+  /* The duck walks along the bottom of the book, not across the mat. */
+  .dk-shell .dk-duck-lane {
+    left: max(20px, calc(50% - 600px));
+    right: max(20px, calc(50% - 600px));
+    bottom: 96px;
+  }
+}
