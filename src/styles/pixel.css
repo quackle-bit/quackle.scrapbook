@@ -710,99 +710,54 @@
 /* ── Title gacha ─────────────────────────────────────────────── */
 .px-gacha {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  justify-items: center;
   gap: 12px;
-  align-items: start;
 }
+/* Machine is 28×36 art pixels at 4 px each. */
 .px-gacha-machine {
-  display: grid;
-  justify-items: center;
-}
-.px-gacha-dome {
-  display: grid;
-  grid-template-columns: repeat(3, 18px);
-  gap: 6px;
-  padding: 12px;
-  width: 104px;
-  border: 2px solid var(--ink);
-  border-bottom: 0;
-  background: #e8f2f7;
-}
-.px-gacha-dome i {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--ink);
-  background: var(--terra);
-}
-.px-gacha-dome i.c1 {
-  background: var(--amber);
-}
-.px-gacha-dome i.c2 {
-  background: var(--dusty);
-}
-.px-gacha-dome i.c3 {
-  background: var(--olive);
-}
-.px-gacha-body {
   position: relative;
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-  width: 116px;
-  padding: 10px 0;
-  border: 2px solid var(--ink);
-  background: var(--terra);
-  box-shadow: var(--px);
+  width: 112px;
+  height: 144px;
+}
+.px-gacha-machine svg {
+  display: block;
 }
 .px-gacha-knob {
-  width: 32px;
-  height: 32px;
-  border: 2px solid var(--ink);
-  background:
-    linear-gradient(var(--ink), var(--ink)) center / 4px 100% no-repeat,
-    #fff;
-}
-.px-gacha-slot {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 32px;
-  border: 2px solid var(--ink);
-  background: var(--ink);
-  overflow: hidden;
+  position: absolute;
+  left: 24px; /* art x = 6 */
+  top: 92px; /* art y = 23 */
+  width: 28px;
+  height: 28px;
 }
 .px-gacha-capsule {
-  width: 22px;
-  height: 22px;
-  border: 2px solid var(--ink);
-  background: linear-gradient(var(--amber) 50%, #fff 50%);
+  position: absolute;
+  left: 60px; /* art x = 15, in the chute */
+  top: 96px; /* art y = 24 */
   opacity: 0;
 }
-.px-gacha-capsule.open {
+.px-gacha-capsule.out {
   opacity: 1;
-  background: linear-gradient(var(--amber) 35%, transparent 35% 65%, #fff 65%);
 }
-.px-gacha-side {
-  display: grid;
-  gap: 10px;
-  align-content: start;
+.px-gacha-go {
+  min-width: 200px;
 }
 .px-tickets {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  width: 100%;
 }
 .px-tickets button {
   width: 100%;
-  min-height: 40px;
-  padding: 6px 10px;
-  border: 2px dashed var(--ink);
-  background: #fff8e6;
-  text-align: left;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  text-align: center;
   font-family: var(--font-body), monospace;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.25;
 }
 .px-tickets button[aria-pressed="true"] {
@@ -1317,4 +1272,19 @@
 }
 .px-taped li {
   rotate: none !important;
+}
+/* Short phones: draw the gacha at 3 px per pixel (still whole pixels) so names fit below. */
+@media (max-height: 760px) {
+  .px-gacha-machine {
+    transform: scale(0.75);
+    transform-origin: top center;
+    margin-bottom: -36px;
+  }
+  .px-tickets button {
+    min-height: 40px;
+    padding: 6px 12px;
+  }
+  .px-gacha {
+    gap: 10px;
+  }
 }

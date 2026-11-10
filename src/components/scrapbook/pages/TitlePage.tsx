@@ -10,6 +10,7 @@ import { settings, useSettings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
 import { say } from "../../Duck";
 import { TextField } from "../../ui/TextField";
+import { CAPSULE, KNOB, MACHINE, PixelArt } from "./gachaArt";
 import { PageFrame } from "./PageFrame";
 import type { PageCtx } from "./registry";
 
@@ -34,17 +35,18 @@ export function TitlePage({ book, concept, page }: PageCtx) {
     const quick = settings.get().reducedMotion || settings.get().speed;
     sfx.clink();
     if (!quick) {
-      await play(knob.current, [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }], 480, {
-        easing: "steps(8)",
+      // Two full turns in quarter clicks, like a real gacha crank.
+      await play(knob.current, [{ transform: "rotate(0)" }, { transform: "rotate(720deg)" }], 640, {
+        easing: "steps(8, end)",
       });
       sfx.slide();
       await play(
         capsule.current,
         [
-          { transform: "translateY(-60px)", opacity: 0 },
-          { transform: "translateY(0)", opacity: 1, offset: 0.7 },
-          { transform: "translateY(-6px)" },
-          { transform: "translateY(0)" },
+          { transform: "translateY(-16px)", opacity: 0 },
+          { transform: "translateY(0)", opacity: 1, offset: 0.6 },
+          { transform: "translateY(-8px)", offset: 0.8 },
+          { transform: "translateY(0)", opacity: 1 },
         ],
         420,
         {
@@ -73,50 +75,42 @@ export function TitlePage({ book, concept, page }: PageCtx) {
 
       <div className="px-gacha">
         <div className="px-gacha-machine" aria-hidden>
-          <span className="px-gacha-dome">
-            {Array.from({ length: 9 }, (_, i) => (
-              <i key={i} className={`c${i % 4}`} />
+          <PixelArt rows={MACHINE} />
+          <span ref={knob} className="px-gacha-knob">
+            <PixelArt rows={KNOB} />
+          </span>
+          <span ref={capsule} className={`px-gacha-capsule${spins ? " out" : ""}`}>
+            <PixelArt rows={CAPSULE} />
+          </span>
+        </div>
+        <button
+          type="button"
+          className="dk-btn primary px-gacha-go"
+          onClick={() => void spin()}
+          disabled={spinning}
+        >
+          {spins ? "Spin again" : "Turn the knob"}
+        </button>
+        {ideas.length > 0 && (
+          <ul className="px-tickets">
+            {ideas.map((t) => (
+              <li key={t}>
+                <button
+                  type="button"
+                  aria-pressed={concept.title === t}
+                  aria-label={`Use “${t}” as the title`}
+                  onClick={() => {
+                    update({ title: t });
+                    sfx.thud();
+                  }}
+                >
+                  {t}
+                </button>
+              </li>
             ))}
-          </span>
-          <span className="px-gacha-body">
-            <span ref={knob} className="px-gacha-knob" />
-            <span className="px-gacha-slot">
-              <span ref={capsule} className={`px-gacha-capsule${ideas.length ? " open" : ""}`} />
-            </span>
-          </span>
-        </div>
-        <div className="px-gacha-side">
-          {ideas.length ? (
-            <ul className="px-tickets">
-              {ideas.map((t) => (
-                <li key={t}>
-                  <button
-                    type="button"
-                    aria-pressed={concept.title === t}
-                    onClick={() => {
-                      update({ title: t });
-                      sfx.thud();
-                    }}
-                  >
-                    {t}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="dk-hint">{spinning ? "…" : "Turn the knob for three name ideas."}</p>
-          )}
-          <button
-            type="button"
-            className="dk-btn primary"
-            onClick={() => void spin()}
-            disabled={spinning}
-          >
-            {spins ? "Spin again" : "Turn the knob"}
-          </button>
-        </div>
+          </ul>
+        )}
       </div>
-      <p className="dk-hint">Tap a name to use it. You can still edit it above.</p>
 
       {extras && !!concept.titleCandidates.length && (
         <div className="dk-chips" aria-label="Saved candidates">
