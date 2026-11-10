@@ -824,3 +824,186 @@
 .dk-page .dk-chip {
   min-height: 34px;
 }
+
+/* ══════════ DESK HOME in pixels ══════════ */
+.dk-desk {
+  color: var(--ink) !important;
+  background:
+    radial-gradient(#d9d3c7 1px, transparent 1.5px) 0 0 / 12px 12px,
+    var(--walnut-2) !important;
+}
+.dk-desk-main {
+  gap: 12px !important;
+  padding-top: 12px !important;
+  grid-template-rows: auto auto 1fr auto auto !important;
+}
+.dk-desk-top {
+  flex-direction: row-reverse;
+}
+.dk-desk-top > div {
+  display: flex !important;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+/* Pixel pocket radio: flat body, striped grille, square dial, blinking LED. */
+.dk-radio-obj {
+  width: 132px !important;
+  height: 70px !important;
+  border: 2px solid var(--ink) !important;
+  border-radius: 0 !important;
+  background: var(--dusty) !important;
+  box-shadow: var(--px) !important;
+}
+.dk-radio-obj::before {
+  left: 8px !important;
+  top: 8px !important;
+  width: 56px !important;
+  height: 50px !important;
+  border-radius: 0 !important;
+  border: 2px solid var(--ink);
+  background: repeating-linear-gradient(0deg, var(--ink) 0 2px, #fff 2px 6px) !important;
+}
+.dk-radio-dial {
+  right: 12px !important;
+  top: 10px !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 0 !important;
+  border: 2px solid var(--ink);
+  background: var(--amber) !important;
+  box-shadow: none !important;
+}
+.dk-radio-dial::after {
+  top: 3px !important;
+  height: 12px !important;
+  width: 4px !important;
+  border-radius: 0 !important;
+  background: var(--ink) !important;
+  transform-origin: 50% 13px !important;
+}
+.dk-radio-led {
+  right: 14px !important;
+  bottom: 8px !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 0 !important;
+  border: 2px solid var(--ink);
+}
+.dk-radio-label {
+  font-family: var(--font-pixel), monospace;
+  color: var(--ink) !important;
+  bottom: -18px !important;
+  font-size: 10px !important;
+}
+.dk-desk-title h1 {
+  font-size: 26px !important;
+  text-shadow: 3px 3px 0 var(--amber);
+}
+.dk-desk-title p {
+  color: var(--ink-soft) !important;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+}
+.dk-desk-middle {
+  min-height: 200px !important;
+}
+/* Pixel scrapbook: flat cover, stitched spine, square label, tape. */
+.dk-book {
+  width: 160px !important;
+  height: 196px !important;
+  border: 2px solid var(--ink);
+  border-radius: 0 !important;
+  background:
+    repeating-linear-gradient(var(--ink) 0 4px, transparent 4px 12px) 12px 0 / 2px 100% no-repeat,
+    var(--terra) !important;
+  box-shadow: 6px 6px 0 var(--ink) !important;
+  transform: rotate(-2deg);
+}
+.dk-book::before {
+  border: 2px solid var(--ink);
+  border-top: 0;
+}
+.dk-book-label {
+  border: 2px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  position: relative;
+}
+.dk-book-label::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 40px;
+  height: 12px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(245, 184, 61, 0.85) 0 4px,
+    rgba(245, 184, 61, 0.6) 4px 8px
+  );
+}
+.dk-book-label strong {
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 14px !important;
+}
+.dk-book-label small {
+  font-size: 11px !important;
+}
+.dk-envelope {
+  border: 2px solid var(--ink);
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: var(--px-sm) !important;
+}
+.dk-envelope::before,
+.dk-envelope::after {
+  border-radius: 0 !important;
+}
+.dk-desk-actions .dk-btn {
+  min-height: 48px;
+}
+.dk-desk-foot,
+.dk-desk-foot a {
+  color: var(--ink-soft) !important;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+}
+/* Radio sheet */
+.dk-radio-panel,
+.dk-radio-panel * {
+  border-radius: 0 !important;
+}
+.dk-lamp-glow {
+  display: none !important;
+}
+.dk-lamp {
+  width: 96px !important;
+  height: 104px !important;
+}
+
+/* The old serif display face becomes the pixel body face everywhere inside the app. */
+.dk {
+  --font-display: var(--font-body);
+}
+.dk-spread {
+  border: 2px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: #fff !important;
+}
+.dk-spread [class*="tape"] {
+  border-radius: 0 !important;
+}
+
+/* The old serif display face becomes the pixel body face everywhere inside the app. */
+.dk {
+  --font-display: var(--font-body);
+}
+.dk-spread {
+  border: 2px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: #fff !important;
+}

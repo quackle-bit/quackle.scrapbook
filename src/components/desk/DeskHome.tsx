@@ -18,23 +18,20 @@ function Lamp() {
   return (
     <div className="dk-lamp" aria-hidden>
       <div className="dk-lamp-glow" />
-      <svg width="120" height="130" viewBox="0 0 120 130">
-        <ellipse cx="38" cy="122" rx="28" ry="6" fill="#1d130e" />
-        <ellipse cx="38" cy="119" rx="24" ry="5" fill="#3a2a20" />
-        <path
-          d="M38 118 L48 66 L86 44"
-          fill="none"
-          stroke="#b68a45"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="48" cy="66" r="5" fill="#d9a85a" />
-        <g transform="rotate(-20 92 40)">
-          <path d="M68 22 H116 L128 56 H56 Z" fill="#c4623f" />
-          <path d="M68 22 H116 L121 36 H63 Z" fill="#d97a55" />
-        </g>
-        <ellipse cx="94" cy="56" rx="14" ry="5" fill="#ffe2a1" />
+      <svg width="96" height="104" viewBox="0 0 24 26" shapeRendering="crispEdges">
+        {/* pixel desk lamp: base, arm, joint, shade, bulb */}
+        <rect x="3" y="23" width="12" height="2" fill="#24211f" />
+        <rect x="4" y="22" width="10" height="1" fill="#6b645c" />
+        <rect x="8" y="14" width="2" height="8" fill="#24211f" />
+        <rect x="9" y="12" width="2" height="2" fill="#24211f" />
+        <rect x="10" y="10" width="2" height="2" fill="#24211f" />
+        <rect x="11" y="9" width="2" height="2" fill="#f5b83d" />
+        <rect x="13" y="7" width="2" height="2" fill="#24211f" />
+        <rect x="15" y="5" width="2" height="2" fill="#24211f" />
+        <rect x="14" y="2" width="8" height="2" fill="#24211f" />
+        <rect x="13" y="4" width="10" height="3" fill="#e05a3a" />
+        <rect x="12" y="7" width="12" height="1" fill="#24211f" />
+        <rect x="16" y="8" width="4" height="1" fill="#f5b83d" />
       </svg>
     </div>
   );
@@ -96,7 +93,7 @@ export function DeskHome() {
               <strong>{last?.name.trim() || "Game ideas"}</strong>
               <small>
                 {last
-                  ? `${last.progress.visitedPages.length} / ${PAGES.length} pages`
+                  ? `${last.progress.visitedPages.filter((id) => PAGES.some((p) => p.id === id)).length} / ${PAGES.length} pages`
                   : "an empty scrapbook"}
               </small>
             </div>

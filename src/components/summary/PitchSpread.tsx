@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useSettings } from "@/lib/settings";
+import { pagesFor } from "../scrapbook/pages/registry";
 import { forwardRef, type ReactNode } from "react";
 import {
   filledCount,
@@ -52,6 +54,7 @@ export const PitchSpread = forwardRef<
   HTMLDivElement,
   { model: PitchModel; editHref?: (page: PageId) => string }
 >(function PitchSpread({ model: m, editHref }, ref) {
+  const { showExtras } = useSettings();
   const has = (id: SectionId) => sectionHasContent(m, id);
   const edit = (page: PageId) =>
     editHref ? (
@@ -59,7 +62,9 @@ export const PitchSpread = forwardRef<
         ✎ Edit
       </Link>
     ) : null;
-  const missing = SECTIONS.filter((s) => !has(s.id));
+  // Only ask for sections whose page is in the current flow (extras hidden by default).
+  const visible = new Set(pagesFor(showExtras).map((p) => p.id));
+  const missing = SECTIONS.filter((s) => !has(s.id) && visible.has(s.page));
   const meta = [m.genres.join(" + "), m.platforms.join(" / ")].filter(Boolean).join("  ·  ");
   const proj = [
     m.project.jamTheme && `Theme: ${m.project.jamTheme}`,
