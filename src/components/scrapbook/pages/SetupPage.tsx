@@ -1,5 +1,6 @@
 "use client";
 
+import { useSettings } from "@/lib/settings";
 import { scrapbookStore } from "@/lib/scrapbook/store";
 import type { Duration, TeamSize } from "@/lib/scrapbook/types";
 import { Chips } from "../../ui/Chips";
@@ -24,6 +25,7 @@ const TEAMS: { value: TeamSize; label: string }[] = [
 
 /** Plain controls on purpose: this page is information, not a game. Everything is editable later. */
 export function SetupPage({ book, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const set = (patch: Parameters<typeof scrapbookStore.updateScrapbook>[1]) =>
     scrapbookStore.updateScrapbook(book.id, patch);
   return (
@@ -34,7 +36,6 @@ export function SetupPage({ book, page }: PageCtx) {
         onChange={(name) => set({ name })}
         placeholder="e.g. Rainy Day Jam entry"
         maxLength={60}
-        hint="Optional."
       />
       <TextField
         label="Game jam theme"
@@ -42,7 +43,6 @@ export function SetupPage({ book, page }: PageCtx) {
         onChange={(jamTheme) => set({ jamTheme })}
         placeholder="The official theme, if there is one"
         maxLength={80}
-        hint="Optional."
       />
       <div className="dk-field">
         <span>Target platform</span>
@@ -80,15 +80,16 @@ export function SetupPage({ book, page }: PageCtx) {
           onChange={(v) => set({ teamSize: v as TeamSize })}
         />
       </div>
-      <TextField
-        label="Restrictions"
-        value={book.restrictions}
-        onChange={(restrictions) => set({ restrictions })}
-        placeholder="No external assets. Must support controllers. No multiplayer…"
-        multiline
-        maxLength={400}
-        hint="Optional."
-      />
+      {extras && (
+        <TextField
+          label="Restrictions"
+          value={book.restrictions}
+          onChange={(restrictions) => set({ restrictions })}
+          placeholder="No external assets. Must support controllers. No multiplayer…"
+          multiline
+          maxLength={400}
+        />
+      )}
     </PageFrame>
   );
 }

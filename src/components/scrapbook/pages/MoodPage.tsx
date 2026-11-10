@@ -1,5 +1,6 @@
 "use client";
 
+import { useSettings } from "@/lib/settings";
 import { useState } from "react";
 import { INSPIRATION } from "@/lib/inspiration";
 import { scrapbookStore } from "@/lib/scrapbook/store";
@@ -56,6 +57,7 @@ const TABS: {
 
 /** A physical moodboard in four collections. None of it is required. */
 export function MoodPage({ book, concept, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const [tabId, setTabId] = useState<ListType>("mood");
   const tab = TABS.find((t) => t.id === tabId)!;
   const type = tab.id as CardType;
@@ -70,37 +72,40 @@ export function MoodPage({ book, concept, page }: PageCtx) {
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
       <Chips
         label="Moodboard section"
-        options={TABS.map((t) => ({
+        options={TABS.filter((t) => extras || t.id !== "audio").map((t) => ({
           value: t.id,
           label: `${t.label}${counts[t.id] ? ` · ${counts[t.id]}` : ""}`,
         }))}
         value={tabId}
         onChange={(v) => v && setTabId(v as ListType)}
       />
-      <p className="dk-hint">{tab.hint}</p>
 
-      <section className="dk-corkboard" aria-label={`${tab.label} board`}>
-        <PinnedShelf
-          cards={cards}
-          onFavorite={(id) => toggleFavoriteById(book.id, id)}
-          onRemove={(id) => removeFromConcept(book.id, concept.id, tab.id, id)}
-          removeLabel="Unpin"
-          primaryId={primaryId}
-          onPrimary={(id) =>
-            scrapbookStore.updateConcept(concept.id, {
-              primary: { ...concept.primary, [tab.prim]: id },
-            })
-          }
-          onNote={(id, note) => scrapbookStore.updateCard(book.id, id, { note })}
-          empty={`Nothing pinned yet. Open a pack or browse the list below.`}
-        />
-      </section>
-
+      {extras && (
+        <section className="dk-corkboard" aria-label={`${tab.label} board`}>
+          <PinnedShelf
+            cards={cards}
+            onFavorite={(id) => toggleFavoriteById(book.id, id)}
+            onRemove={(id) => removeFromConcept(book.id, concept.id, tab.id, id)}
+            removeLabel="Unpin"
+            primaryId={primaryId}
+            onPrimary={(id) =>
+              scrapbookStore.updateConcept(concept.id, {
+                primary: { ...concept.primary, [tab.prim]: id },
+              })
+            }
+            onNote={(id, note) => scrapbookStore.updateCard(book.id, id, { note })}
+            empty={`Nothing pinned yet. Open a pack or browse the list below.`}
+          />
+        </section>
+      )}
       <BoosterPack
         key={tab.id}
         type={type}
         label={tab.pack}
         count={4}
+        kept={cards}
+        max={extras ? undefined : 3}
+        onRemove={(id) => removeFromConcept(book.id, concept.id, tab.id, id)}
         hideIds={book.collected
           .filter((c) => c.type === type && c.contentId)
           .map((c) => c.contentId!)}
@@ -115,32 +120,36 @@ export function MoodPage({ book, concept, page }: PageCtx) {
         keptLabel="✓ Pinned (undo)"
       />
 
-      <details className="dk-details">
-        <summary>Browse all {INSPIRATION[type].length}</summary>
-        <div className="dk-chips" style={{ padding: "6px 0 12px" }}>
-          {INSPIRATION[type].map((c) => {
-            const on = isKept(book, concept, tab.id, c);
-            return (
-              <button
-                key={c.id}
-                type="button"
-                className="dk-chip"
-                aria-pressed={on}
-                onClick={() => toggleKeep(book.id, concept.id, tab.id, c)}
-                title={c.description}
-              >
-                {c.title}
-              </button>
-            );
-          })}
-        </div>
-      </details>
-      <CollectionShelf
-        cards={spare}
-        onUse={(id) => addToConcept(book.id, concept.id, tab.id, id)}
-        onFavorite={(id) => toggleFavoriteById(book.id, id)}
-        title={`Other ${tab.label.toLowerCase()} cards you've collected`}
-      />
+      {extras && (
+        <>
+          <details className="dk-details">
+            <summary>Browse all {INSPIRATION[type].length}</summary>
+            <div className="dk-chips" style={{ padding: "6px 0 12px" }}>
+              {INSPIRATION[type].map((c) => {
+                const on = isKept(book, concept, tab.id, c);
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    className="dk-chip"
+                    aria-pressed={on}
+                    onClick={() => toggleKeep(book.id, concept.id, tab.id, c)}
+                    title={c.description}
+                  >
+                    {c.title}
+                  </button>
+                );
+              })}
+            </div>
+          </details>
+          <CollectionShelf
+            cards={spare}
+            onUse={(id) => addToConcept(book.id, concept.id, tab.id, id)}
+            onFavorite={(id) => toggleFavoriteById(book.id, id)}
+            title={`Other ${tab.label.toLowerCase()} cards you've collected`}
+          />
+        </>
+      )}
     </PageFrame>
   );
 }

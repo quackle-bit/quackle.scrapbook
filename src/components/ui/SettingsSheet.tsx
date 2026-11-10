@@ -56,6 +56,14 @@ export function SettingsButton() {
             />
             <span>Skip animations (speed mode)</span>
           </label>
+          <label className="dk-switch">
+            <input
+              type="checkbox"
+              checked={s.showExtras}
+              onChange={(e) => settings.set({ showExtras: e.target.checked })}
+            />
+            <span>Show extra pages (high concept, objective, sound, more options)</span>
+          </label>
           {s.motionOverride !== null && (
             <button
               type="button"

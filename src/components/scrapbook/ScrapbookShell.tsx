@@ -14,11 +14,14 @@ import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
 import { usePageCurl } from "../ui/usePageCurl";
-import { PAGES, PageScreen } from "./pages/registry";
+import { pagesFor, PageScreen } from "./pages/registry";
+import { useSettings } from "@/lib/settings";
 
 /** The open scrapbook: one page at a time, any order, with swipe, buttons and a page index. */
 export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPage?: PageId }) {
   const { ready, book, concept, concepts } = useScrapbook(bookId);
+  const { showExtras } = useSettings();
+  const PAGES = useMemo(() => pagesFor(showExtras), [showExtras]);
   const [index, setIndex] = useState(() => {
     const i = PAGES.findIndex((p) => p.id === startPage);
     return i >= 0 ? i : -1;
@@ -127,21 +130,6 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <SettingsButton />
       </header>
 
-      <div className="dk-concept-bar">
-        <ConceptSwitcher
-          book={book}
-          concepts={concepts}
-          activeId={concept.id}
-          onSelect={(id) => scrapbookStore.setActiveConcept(book.id, id)}
-        />
-        <Link
-          className="dk-link-light"
-          href={`/scrapbook/summary?id=${book.id}&concept=${concept.id}`}
-        >
-          View pitch →
-        </Link>
-      </div>
-
       <main className="dk-stage">
         <div ref={binding} className={`dk-binding${active ? " turning" : ""}`}>
           <div className="dk-stack" aria-hidden />
@@ -193,6 +181,21 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </nav>
 
       <BottomSheet open={sheet} title="Pages" onClose={() => setSheet(false)}>
+        <div className="dk-concept-bar in-sheet">
+          <ConceptSwitcher
+            book={book}
+            concepts={concepts}
+            activeId={concept.id}
+            onSelect={(id) => scrapbookStore.setActiveConcept(book.id, id)}
+          />
+          <Link
+            className="dk-link-light"
+            href={`/scrapbook/summary?id=${book.id}&concept=${concept.id}`}
+          >
+            View pitch →
+          </Link>
+        </div>
+
         <StickerRow earned={earned} />
         <div className="dk-index">
           {groups.map((g) => (

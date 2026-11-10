@@ -3,11 +3,11 @@ import type { Concept, PageId, Scrapbook } from "./types";
 
 /** Stickers earned by filling a whole part of the scrapbook (for the current concept). */
 export const STICKERS = [
-  { id: "identity", label: "Named it", pages: ["title", "tagline", "concept"] as PageId[] },
+  { id: "identity", label: "Named it", pages: ["genre", "title"] as PageId[] },
   {
     id: "playground",
     label: "Found the fun",
-    pages: ["genre", "mechanics", "loop", "objective", "hook"] as PageId[],
+    pages: ["mechanics", "loop", "hook"] as PageId[],
   },
   { id: "atmosphere", label: "Set the mood", pages: ["mood"] as PageId[] },
   { id: "production", label: "Scoped it", pages: ["scope"] as PageId[] },

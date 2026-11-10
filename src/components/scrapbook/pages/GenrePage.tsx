@@ -1,5 +1,6 @@
 "use client";
 
+import { useSettings } from "@/lib/settings";
 import { toCollected } from "@/lib/inspiration";
 import { scrapbookStore } from "@/lib/scrapbook/store";
 import type { CollectedCard } from "@/lib/scrapbook/types";
@@ -11,6 +12,7 @@ import type { PageCtx } from "./registry";
 
 /** Genres: pick a primary, maybe a secondary. Combinations are encouraged, never required. */
 export function GenrePage({ book, concept, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const { primary, secondary } = concept.genres;
   const setGenres = (g: { primary?: string; secondary?: string }) =>
     scrapbookStore.updateConcept(concept.id, { genres: g });
@@ -77,20 +79,26 @@ export function GenrePage({ book, concept, page }: PageCtx) {
 
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
-      <div className="dk-genre-slots">
-        {slot(primary, "Primary")}
-        {slot(secondary, "Secondary")}
-      </div>
-      {primary && secondary && (
-        <p className="dk-note">
-          {cardsOf(book, [primary])[0]?.title} + {cardsOf(book, [secondary])[0]?.title}
-        </p>
+      {extras && (
+        <>
+          <div className="dk-genre-slots">
+            {slot(primary, "Primary")}
+            {slot(secondary, "Secondary")}
+          </div>
+          {primary && secondary && (
+            <p className="dk-note">
+              {cardsOf(book, [primary])[0]?.title} + {cardsOf(book, [secondary])[0]?.title}
+            </p>
+          )}
+        </>
       )}
-
       <BoosterPack
         type="genre"
         label="Genre pack"
-        count={5}
+        count={4}
+        kept={extras ? [] : cardsOf(book, primary ? [primary] : [])}
+        max={extras ? undefined : 1}
+        onRemove={unassign}
         hideIds={book.collected
           .filter((c) => c.type === "genre" && c.contentId)
           .map((c) => c.contentId!)}
@@ -118,12 +126,14 @@ export function GenrePage({ book, concept, page }: PageCtx) {
         onOpened={() => scrapbookStore.countPack(book.id)}
         onTrashed={() => scrapbookStore.countTrash(book.id)}
       />
-      <CollectionShelf
-        cards={others}
-        onUse={assign}
-        onFavorite={(id) => toggleFavoriteById(book.id, id)}
-        title="Other genres you've collected"
-      />
+      {extras && (
+        <CollectionShelf
+          cards={others}
+          onUse={assign}
+          onFavorite={(id) => toggleFavoriteById(book.id, id)}
+          title="Other genres you've collected"
+        />
+      )}
     </PageFrame>
   );
 }

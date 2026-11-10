@@ -14,6 +14,8 @@ export type Settings = {
   musicOn: boolean;
   /** Player override for reduced motion (null = follow the OS). */
   motionOverride: boolean | null;
+  /** Show the pages hidden from the short pitch (high concept, objective, audio, extra options). */
+  showExtras: boolean;
 };
 
 const KEY = "qs.settings";
@@ -25,6 +27,7 @@ let state: Settings = {
   station: "lofi",
   musicOn: false,
   motionOverride: null,
+  showExtras: false,
 };
 let osReduced = false;
 const listeners = new Set<() => void>();
@@ -45,6 +48,7 @@ function start() {
         ? saved.station
         : "lofi",
       motionOverride: typeof saved.motionOverride === "boolean" ? saved.motionOverride : null,
+      showExtras: !!saved.showExtras,
     };
   } catch {
     /* storage unavailable: keep defaults */
@@ -70,6 +74,7 @@ function setState(patch: Partial<Settings>) {
         musicVolume: state.musicVolume,
         station: state.station,
         motionOverride: state.motionOverride,
+        showExtras: state.showExtras,
       }),
     );
   } catch {
@@ -99,6 +104,7 @@ const SERVER: Settings = {
   station: "lofi",
   musicOn: false,
   motionOverride: null,
+  showExtras: false,
 };
 
 export function useSettings(): Settings {

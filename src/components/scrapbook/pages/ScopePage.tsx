@@ -1,5 +1,6 @@
 "use client";
 
+import { useSettings } from "@/lib/settings";
 import { useState } from "react";
 import { scrapbookStore } from "@/lib/scrapbook/store";
 import { SCOPE_AREAS, SCOPE_POINTS, type Mvp, type ScopeArea } from "@/lib/scrapbook/types";
@@ -16,6 +17,7 @@ const BUCKETS: { id: Bucket; label: string; hint: string }[] = [
 
 /** A planning aid, not an estimate: spread 10 points, then sort features into three lists. */
 export function ScopePage({ book, concept, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const used = SCOPE_AREAS.reduce((n, a) => n + (concept.scope[a.id] ?? 0), 0);
   const left = SCOPE_POINTS - used;
   const [drafts, setDrafts] = useState<Record<Bucket, string>>({ must: "", nice: "", cut: "" });
@@ -47,62 +49,63 @@ export function ScopePage({ book, concept, page }: PageCtx) {
 
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
+      {extras && (
+        <section className="dk-block">
+          <div className="dk-pack-head">
+            <h3>Development points</h3>
+            <span className={`dk-points${left === 0 ? " full" : ""}`} aria-live="polite">
+              {left} left of {SCOPE_POINTS}
+            </span>
+          </div>
+          <p className="dk-hint">Where would the effort go? There&apos;s no right answer.</p>
+          <ul className="dk-alloc">
+            {SCOPE_AREAS.map((a) => {
+              const n = concept.scope[a.id] ?? 0;
+              return (
+                <li key={a.id}>
+                  <span>{a.label}</span>
+                  <span className="dk-pips" aria-hidden>
+                    {Array.from({ length: SCOPE_POINTS }, (_, i) => (
+                      <i key={i} className={i < n ? "on" : ""} />
+                    ))}
+                  </span>
+                  <button
+                    type="button"
+                    className="dk-icon-btn"
+                    onClick={() => setScope(a.id, -1)}
+                    disabled={n === 0}
+                    aria-label={`Fewer points for ${a.label}`}
+                  >
+                    −
+                  </button>
+                  <b aria-label={`${n} points`}>{n}</b>
+                  <button
+                    type="button"
+                    className="dk-icon-btn"
+                    onClick={() => setScope(a.id, 1)}
+                    disabled={left === 0}
+                    aria-label={`More points for ${a.label}`}
+                  >
+                    +
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          {used > 0 && (
+            <button
+              type="button"
+              className="dk-btn small ghost"
+              onClick={() => scrapbookStore.updateConcept(concept.id, { scope: {} })}
+            >
+              Reset points
+            </button>
+          )}
+        </section>
+      )}
       <section className="dk-block">
-        <div className="dk-pack-head">
-          <h3>Development points</h3>
-          <span className={`dk-points${left === 0 ? " full" : ""}`} aria-live="polite">
-            {left} left of {SCOPE_POINTS}
-          </span>
-        </div>
-        <p className="dk-hint">Where would the effort go? There&apos;s no right answer.</p>
-        <ul className="dk-alloc">
-          {SCOPE_AREAS.map((a) => {
-            const n = concept.scope[a.id] ?? 0;
-            return (
-              <li key={a.id}>
-                <span>{a.label}</span>
-                <span className="dk-pips" aria-hidden>
-                  {Array.from({ length: SCOPE_POINTS }, (_, i) => (
-                    <i key={i} className={i < n ? "on" : ""} />
-                  ))}
-                </span>
-                <button
-                  type="button"
-                  className="dk-icon-btn"
-                  onClick={() => setScope(a.id, -1)}
-                  disabled={n === 0}
-                  aria-label={`Fewer points for ${a.label}`}
-                >
-                  −
-                </button>
-                <b aria-label={`${n} points`}>{n}</b>
-                <button
-                  type="button"
-                  className="dk-icon-btn"
-                  onClick={() => setScope(a.id, 1)}
-                  disabled={left === 0}
-                  aria-label={`More points for ${a.label}`}
-                >
-                  +
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        {used > 0 && (
-          <button
-            type="button"
-            className="dk-btn small ghost"
-            onClick={() => scrapbookStore.updateConcept(concept.id, { scope: {} })}
-          >
-            Reset points
-          </button>
-        )}
-      </section>
-
-      <section className="dk-block">
-        <h3>What is the smallest playable version?</h3>
-        {BUCKETS.map((b) => (
+        {extras && <h3>What is the smallest playable version?</h3>}
+        {BUCKETS.filter((b) => extras || b.id !== "nice").map((b) => (
           <div key={b.id} className="dk-bucket">
             <h4>
               {b.label} <small>{b.hint}</small>
@@ -112,17 +115,19 @@ export function ScopePage({ book, concept, page }: PageCtx) {
                 <li key={t}>
                   <span>{t}</span>
                   <span className="dk-row" style={{ gap: 4 }}>
-                    {BUCKETS.filter((o) => o.id !== b.id).map((o) => (
-                      <button
-                        key={o.id}
-                        type="button"
-                        className="dk-btn small"
-                        onClick={() => move(b.id, i, o.id)}
-                        aria-label={`Move to ${o.label}`}
-                      >
-                        → {o.label.split(" ")[0]}
-                      </button>
-                    ))}
+                    {BUCKETS.filter((o) => o.id !== b.id && (extras || o.id !== "nice")).map(
+                      (o) => (
+                        <button
+                          key={o.id}
+                          type="button"
+                          className="dk-btn small"
+                          onClick={() => move(b.id, i, o.id)}
+                          aria-label={`Move to ${o.label}`}
+                        >
+                          → {o.label.split(" ")[0]}
+                        </button>
+                      ),
+                    )}
                     <button
                       type="button"
                       className="dk-icon-btn"

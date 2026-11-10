@@ -16,7 +16,7 @@ import { SetupPage } from "./SetupPage";
 import { TaglinePage } from "./TaglinePage";
 import { TitlePage } from "./TitlePage";
 
-export type PageDef = { id: PageId; group: string; title: string; prompt: string };
+export type PageDef = { id: PageId; group: string; title: string; prompt: string; extra?: boolean };
 export type PageCtx = {
   book: Scrapbook;
   concept: Concept;
@@ -24,80 +24,85 @@ export type PageCtx = {
   goTo: (id: PageId) => void;
 };
 
-export const PAGES: PageDef[] = [
+/**
+ * The short early pitch, in order: what the game *is* first, its name last.
+ * `extra` pages are hidden unless "Show extra pages" is on (their data is kept either way).
+ */
+export const ALL_PAGES: PageDef[] = [
   {
     id: "setup",
     group: "Setup",
     title: "Your jam",
-    prompt: "Tell us about the jam. Skip anything you don't know yet.",
-  },
-  {
-    id: "title",
-    group: "Identity",
-    title: "Game title",
-    prompt: "Write a title, or open a word pack and see what catches your eye.",
-  },
-  {
-    id: "tagline",
-    group: "Identity",
-    title: "Tagline",
-    prompt: "How would you describe your game in one memorable sentence?",
-  },
-  {
-    id: "concept",
-    group: "Identity",
-    title: "High concept",
-    prompt: "What is your game about? One or two sentences is plenty.",
-  },
-  {
-    id: "genre",
-    group: "Playground",
-    title: "Genre",
-    prompt: "Open a pack. Pick a primary genre, and maybe a second one.",
+    prompt: "The theme, the time and the team. Skip what you don't know.",
   },
   {
     id: "mechanics",
     group: "Playground",
     title: "Core mechanics",
-    prompt: "Open packs and keep whatever sparks something. Nothing is required.",
+    prompt: "Open a pack. Keep what sparks something.",
   },
   {
     id: "loop",
     group: "Playground",
     title: "Core loop",
-    prompt: "What does your player do, over and over?",
+    prompt: "What does the player do, over and over?",
   },
   {
     id: "objective",
     group: "Playground",
     title: "Objective",
     prompt: "What is the player trying to achieve?",
+    extra: true,
   },
   {
     id: "hook",
     group: "Playground",
-    title: "Unique hook",
-    prompt: "What makes this game interesting or different?",
+    title: "The twist",
+    prompt: "What makes it different? Find a twist under the cups.",
   },
   {
     id: "mood",
     group: "Atmosphere",
     title: "Mood & world",
-    prompt: "Pin up the feeling: mood, setting, look and sound.",
+    prompt: "How it feels, where it is, how it looks.",
   },
   {
     id: "scope",
     group: "Production",
-    title: "Scope & MVP",
-    prompt: "What can we realistically build?",
+    title: "Scope",
+    prompt: "What must be in the jam build, and what goes first?",
+  },
+  {
+    id: "genre",
+    group: "Name it",
+    title: "Genre",
+    prompt: "Now you know what it is: what shelf does it sit on?",
+  },
+  {
+    id: "title",
+    group: "Name it",
+    title: "Title",
+    prompt: "Spin the gacha for a name, or write your own.",
+  },
+  { id: "tagline", group: "Name it", title: "Tagline", prompt: "One line to sell it. Optional." },
+  {
+    id: "concept",
+    group: "Name it",
+    title: "High concept",
+    prompt: "What is your game about? One or two sentences.",
+    extra: true,
   },
   {
     id: "close",
     group: "Close",
-    title: "Close the scrapbook",
-    prompt: "See everything you collected as one pitch.",
+    title: "Close the book",
+    prompt: "Forge everything into one pitch.",
   },
 ];
+
+export const pagesFor = (showExtras: boolean) => ALL_PAGES.filter((p) => showExtras || !p.extra);
+/** The default (short) flow. */
+export const PAGES = pagesFor(false);
 
 /** Pages that don't have their own screen yet show their question and nothing else. */
 function Pending({ page }: PageCtx) {

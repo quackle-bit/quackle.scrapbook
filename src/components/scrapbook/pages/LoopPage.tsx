@@ -1,5 +1,6 @@
 "use client";
 
+import { useSettings } from "@/lib/settings";
 import { useState } from "react";
 import { LOOP_VERBS } from "@/lib/inspiration";
 import { scrapbookStore, uid } from "@/lib/scrapbook/store";
@@ -10,6 +11,7 @@ import type { PageCtx } from "./registry";
 
 /** Build a loop by tapping: add steps, reorder with arrows, rename inline. No dragging needed. */
 export function LoopPage({ book, concept, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const loops = concept.coreLoops;
   const active = loops.find((l) => l.id === concept.activeLoopId) ?? loops[0];
   const [custom, setCustom] = useState("");
@@ -55,7 +57,7 @@ export function LoopPage({ book, concept, page }: PageCtx) {
 
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
-      {!!loops.length && (
+      {extras && !!loops.length && (
         <div className="dk-chips" role="tablist" aria-label="Loop variations">
           {loops.map((l) => (
             <button
@@ -78,17 +80,19 @@ export function LoopPage({ book, concept, page }: PageCtx) {
 
       {active && (
         <>
-          <div className="dk-row">
-            <label className="dk-field" style={{ flex: 1 }}>
-              <span>Variation name</span>
-              <input
-                className="dk-input"
-                value={active.name}
-                onChange={(e) => patchActive({ name: e.target.value })}
-                maxLength={30}
-              />
-            </label>
-          </div>
+          {extras && (
+            <div className="dk-row">
+              <label className="dk-field" style={{ flex: 1 }}>
+                <span>Variation name</span>
+                <input
+                  className="dk-input"
+                  value={active.name}
+                  onChange={(e) => patchActive({ name: e.target.value })}
+                  maxLength={30}
+                />
+              </label>
+            </div>
+          )}
           <div className="dk-loop-glance" aria-label="Loop at a glance">
             {glance && glance.length ? (
               <p>
@@ -143,59 +147,65 @@ export function LoopPage({ book, concept, page }: PageCtx) {
       )}
 
       <section className="dk-block">
-        <h3>Add a step</h3>
-        {!!mechanics.length && (
+        {active && !extras && active.steps.length >= 5 ? (
+          <p className="dk-hint">Five steps is plenty for a jam. Remove one to add another.</p>
+        ) : (
           <>
-            <p className="dk-hint">From your mechanics</p>
+            <h3>Add a step</h3>
+            {!!mechanics.length && (
+              <>
+                <p className="dk-hint">From your mechanics</p>
+                <div className="dk-chips">
+                  {mechanics.map((m) => (
+                    <button
+                      key={m.id}
+                      type="button"
+                      className="dk-chip"
+                      onClick={() => addStep(m.title, m.id)}
+                    >
+                      + {m.title}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+            <p className="dk-hint">Common actions</p>
             <div className="dk-chips">
-              {mechanics.map((m) => (
-                <button
-                  key={m.id}
-                  type="button"
-                  className="dk-chip"
-                  onClick={() => addStep(m.title, m.id)}
-                >
-                  + {m.title}
+              {(moreVerbs ? LOOP_VERBS : LOOP_VERBS.slice(0, extras ? 12 : 8)).map((v) => (
+                <button key={v} type="button" className="dk-chip" onClick={() => addStep(v)}>
+                  + {v}
                 </button>
               ))}
+              <button type="button" className="dk-chip" onClick={() => setMoreVerbs((m) => !m)}>
+                {moreVerbs ? "Fewer" : "More…"}
+              </button>
             </div>
+            <form
+              className="dk-row"
+              onSubmit={(e) => {
+                e.preventDefault();
+                addStep(custom);
+                setCustom("");
+              }}
+            >
+              <input
+                className="dk-input"
+                style={{ flex: 1 }}
+                value={custom}
+                onChange={(e) => setCustom(e.target.value)}
+                placeholder="Or type your own step"
+                aria-label="Custom step"
+                maxLength={30}
+              />
+              <button type="submit" className="dk-btn small primary" disabled={!custom.trim()}>
+                Add
+              </button>
+            </form>
           </>
         )}
-        <p className="dk-hint">Common actions</p>
-        <div className="dk-chips">
-          {(moreVerbs ? LOOP_VERBS : LOOP_VERBS.slice(0, 12)).map((v) => (
-            <button key={v} type="button" className="dk-chip" onClick={() => addStep(v)}>
-              + {v}
-            </button>
-          ))}
-          <button type="button" className="dk-chip" onClick={() => setMoreVerbs((m) => !m)}>
-            {moreVerbs ? "Fewer" : "More…"}
-          </button>
-        </div>
-        <form
-          className="dk-row"
-          onSubmit={(e) => {
-            e.preventDefault();
-            addStep(custom);
-            setCustom("");
-          }}
-        >
-          <input
-            className="dk-input"
-            style={{ flex: 1 }}
-            value={custom}
-            onChange={(e) => setCustom(e.target.value)}
-            placeholder="Or type your own step"
-            aria-label="Custom step"
-            maxLength={30}
-          />
-          <button type="submit" className="dk-btn small primary" disabled={!custom.trim()}>
-            Add
-          </button>
-        </form>
       </section>
 
-      {active && (
+      {extras && active && (
         <div className="dk-row">
           <button type="button" className="dk-btn small" onClick={() => newLoop(true)}>
             Duplicate as a new variation
