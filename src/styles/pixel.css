@@ -3898,3 +3898,21 @@ html[data-dark="1"] .dk.dk-desk {
     text-shadow: 0 2px 0 rgba(10, 30, 18, 0.6);
   }
 }
+@media (min-width: 900px) {
+  .dk-desk .dk-desk-actions {
+    justify-items: stretch;
+  }
+  .dk-desk .dk-desk-actions .dk-btn.primary {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+@media (min-width: 900px) {
+  /* The old cover had three buttons in a row; now there's one, centred. */
+  .dk-desk .dk-desk-actions {
+    grid-template-columns: 1fr !important;
+  }
+}
