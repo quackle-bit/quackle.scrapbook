@@ -150,7 +150,8 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         >
           <div className="dk-stack" aria-hidden />
           {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
-            const moving = active && i === (active.dir === 1 ? active.from : active.to);
+            // The page being left always moves; the page arriving always waits, still, underneath.
+            const moving = active && i === active.from;
             const under = active && !moving;
             return (
               <div

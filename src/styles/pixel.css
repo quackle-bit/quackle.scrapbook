@@ -253,7 +253,8 @@
 .dk-moving {
   z-index: 3;
   /* not !important: the slide animation must be able to move it */
-  transform: translateZ(0);
+  transform: none;
+  will-change: transform;
   /* hard pixel shadow on the page edge as it slides */
   box-shadow: 6px 0 0 rgba(36, 33, 31, 0.35) !important;
 }
@@ -1009,9 +1010,7 @@
 }
 
 /* Starting pose of a back turn, so nothing flashes before the animation picks it up. */
-.turn-back .dk-moving {
-  transform: translate3d(-108%, 0, 0);
-}
+
 .turn-fwd .dk-under-dim {
   opacity: 0.25;
 }
@@ -2008,11 +2007,6 @@
   padding-right: 6px !important;
 }
 
-/* Every page is always its own layer, so finishing a turn never re-draws its content (no blink). */
-.dk-leaf {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
 .dk-under-dim {
   position: absolute;
   inset: 0;

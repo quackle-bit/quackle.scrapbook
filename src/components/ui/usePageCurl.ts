@@ -13,10 +13,11 @@ const TURN_MS = 340;
 const EASE = "cubic-bezier(.3,0,.2,1)";
 
 /**
- * Page turns, played by the Back/Next buttons and arrow keys: the top page slides off to the left
- * (or back in from the left) over the other page, which stays perfectly still. Transform only, no
- * overlays or clipping: earlier fold and 3D versions repainted on the phone's main thread and read
- * as a blink. Web Animations, so React doesn't re-render during the turn.
+ * Page turns, played by the Back/Next buttons and arrow keys. The page you leave slides away (left
+ * on Next, right on Back) and the page you go to waits, perfectly still, underneath. The new page
+ * never animates and gets two frames to be drawn before the slide starts: phones show a freshly
+ * mounted layer half-drawn during an animation, which was the blink. Transform only, Web
+ * Animations, so React doesn't re-render during the turn.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
@@ -44,44 +45,44 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     if (!turn) return;
     const leaf = binding.current?.querySelector<HTMLElement>(".dk-moving");
     const fwd = turn.dir === 1;
-    // Only transform moves, so phones run it on the graphics chip: the top page slides off to the
-    // left (Next) or back in from the left (Back) over the other page, which never changes.
-    const opts: KeyframeAnimationOptions = {
-      duration: TURN_MS,
-      easing: EASE,
-      fill: "forwards",
-      direction: fwd ? "normal" : "reverse",
-    };
+    // The page you're leaving (already fully drawn) is the one that moves: off to the left on Next,
+    // off to the right on Back. The page you're going to sits still underneath and never animates,
+    // so the phone never shows it half-drawn (that was the blink).
     const all: Animation[] = [];
-    const main = leaf?.animate(
-      { transform: ["translate3d(0,0,0)", "translate3d(-108%,0,0)"] },
-      opts,
-    );
-    if (main) all.push(main);
-
     let done = false;
+    let raf = 0;
     const finish = (stalled = false) => {
       if (done) return;
       done = true;
-      // A stalled turn (hidden tab, frozen frames) must not leave a page clipped: clear it now.
+      cancelAnimationFrame(raf);
       if (stalled) all.forEach((a) => a.cancel());
       haptic(feel.haptic.tear);
       setIndex(turn.to);
       setTurn(null);
       busy.current = false;
-      // Drop the finished animations once React has drawn the new page.
+      // The moving page is unmounted by then; drop its animation on the next frame.
       requestAnimationFrame(() => all.forEach((a) => a.cancel()));
     };
-    if (main)
-      void main.finished.then(
-        () => finish(),
-        () => finish(),
-      );
-    else finish();
-    // Safety net only: a hidden tab can pause animations.
+    // Give the phone two frames to draw the new page behind the old one before anything moves.
+    raf = requestAnimationFrame(() => {
+      raf = requestAnimationFrame(() => {
+        if (done || !leaf) return finish();
+        const main = leaf.animate(
+          { transform: ["translate3d(0,0,0)", `translate3d(${fwd ? -108 : 108}%,0,0)`] },
+          { duration: TURN_MS, easing: EASE, fill: "forwards" },
+        );
+        all.push(main);
+        void main.finished.then(
+          () => finish(),
+          () => finish(),
+        );
+      });
+    });
+    // Safety net only: a hidden tab can pause frames and animations.
     const t = setTimeout(() => finish(true), TURN_MS * 4);
     return () => {
       clearTimeout(t);
+      cancelAnimationFrame(raf);
       if (!done) all.forEach((a) => a.cancel());
       done = true; // StrictMode re-runs this effect; only the live run may finish the turn.
     };
