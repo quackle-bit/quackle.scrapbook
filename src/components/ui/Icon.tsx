@@ -1,6 +1,8 @@
 import {
   Check,
   Copy,
+  LibraryBig,
+  Plus,
   Maximize,
   Minimize,
   Moon,
@@ -38,6 +40,8 @@ const ICONS = {
   image: Image,
   copy: Copy,
   print: Printer,
+  library: LibraryBig,
+  plus: Plus,
   fullscreen: Maximize,
   exitFullscreen: Minimize,
   moon: Moon,

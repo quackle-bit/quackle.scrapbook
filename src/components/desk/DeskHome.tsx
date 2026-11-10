@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import { FullscreenButton } from "../ui/FullscreenButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -44,6 +45,18 @@ export function DeskHome() {
     <DeskRoot className="dk-desk">
       <main className="dk-desk-main">
         <div className="dk-desk-top">
+          {/* Your scrapbooks (and New) live here, top left. */}
+          <button
+            type="button"
+            className="dk-icon-btn cv-shelf"
+            onClick={() => setList(true)}
+            disabled={!ready}
+            aria-label={`My scrapbooks (${scrapbooks.length})`}
+          >
+            <Icon name="library" />
+            {scrapbooks.length > 0 && <span className="cv-count">{scrapbooks.length}</span>}
+          </button>
+          <span className="cv-top-gap" />
           <FullscreenButton />
           <RadioButton />
           <SettingsButton />
@@ -96,16 +109,6 @@ export function DeskHome() {
               Start a scrapbook
             </button>
           )}
-          {last && (
-            <div className="dk-cover-links">
-              <button type="button" className="dk-link-btn" onClick={start}>
-                New scrapbook
-              </button>
-              <button type="button" className="dk-link-btn" onClick={() => setList(true)}>
-                My scrapbooks ({scrapbooks.length})
-              </button>
-            </div>
-          )}
         </div>
 
         {oldCount > 0 && (
@@ -149,6 +152,9 @@ export function DeskHome() {
       </main>
 
       <BottomSheet open={list} title="My Scrapbooks" onClose={() => setList(false)}>
+        <button type="button" className="dk-btn primary cv-new" onClick={start}>
+          <Icon name="plus" size={18} /> New scrapbook
+        </button>
         <ul className="dk-list">
           {scrapbooks.map((s) => (
             <li key={s.id} className="dk-list-item">
@@ -169,8 +175,9 @@ export function DeskHome() {
                 <h3>{s.name.trim() || "Untitled scrapbook"}</h3>
               )}
               <small>
-                Updated {when(s.updatedAt)} · {s.progress.visitedPages.length} / {PAGES.length}{" "}
-                pages
+                Updated {when(s.updatedAt)} ·{" "}
+                {s.progress.visitedPages.filter((id) => PAGES.some((p) => p.id === id)).length} /{" "}
+                {PAGES.length} pages
               </small>
               <div className="dk-row">
                 <Link className="dk-btn small primary" href={`/scrapbook?id=${s.id}`}>

@@ -3274,3 +3274,40 @@ html[data-dark="1"] .dk.dk-desk {
 .cv-book {
   width: min(270px, 72vw, 36dvh);
 }
+
+/* Cover top row: scrapbooks on the left, settings icons on the right. */
+.dk-desk .dk-desk-top {
+  justify-content: flex-start !important;
+  align-items: center;
+}
+.cv-top-gap {
+  flex: 1;
+}
+.cv-shelf {
+  position: relative;
+}
+.cv-count {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-pixel), monospace;
+  font-size: 8px;
+  line-height: 1;
+}
+.cv-new {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 12px;
+}
