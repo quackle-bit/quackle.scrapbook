@@ -95,7 +95,7 @@ export const PitchSpread = forwardRef<
       <header className="pp-head">
         <div className="pp-titleblock">
           <p className="pp-kicker">
-            <span lang="ja">企画書</span> · Game pitch
+            <span className="pp-doc">Pitch document</span> · Game pitch
             {m.project.name ? ` · ${m.project.name}` : ""}
           </p>
           <h1>{m.title || <span className="pp-empty">Untitled game</span>}</h1>
@@ -103,7 +103,7 @@ export const PitchSpread = forwardRef<
         </div>
         {/* The approval box: a red hanko once it's pitched, an empty box while it's a draft. */}
         <div className={`pp-approve${m.status === "pitched" ? " stamped" : ""}`}>
-          <small lang="ja">承認</small>
+          <small>Approved</small>
           {m.status === "pitched" ? (
             <span className="pp-hanko" aria-label="Pitched">
               Pitched

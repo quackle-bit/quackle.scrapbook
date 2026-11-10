@@ -3530,7 +3530,7 @@ html[data-dark="1"] .dk.dk-desk {
   letter-spacing: 0.04em;
   color: var(--ink-soft);
 }
-.pp-kicker [lang="ja"] {
+.pp-kicker .pp-doc {
   color: var(--hanko);
   font-weight: 700;
 }
@@ -3915,4 +3915,19 @@ html[data-dark="1"] .dk.dk-desk {
   .dk-desk .dk-desk-actions {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* Shadow under the 3D page turn: darkest at the spine, driven per frame by pageCurl3d. */
+.dk-curl-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(36, 33, 31, 0.55),
+    rgba(36, 33, 31, 0.15) 45%,
+    transparent 80%
+  );
 }

@@ -174,6 +174,8 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           <div key={page.id} className="dk-leaf" aria-live="polite" inert={!!turning}>
             <PageScreen book={book} concept={concept} page={page} goTo={goToId} />
           </div>
+          {/* Soft shadow the 3D page casts while it turns (opacity driven per frame). */}
+          <div className="dk-curl-shadow" aria-hidden />
           {/* The blank sheet that does the page turn; always here, hidden until a turn. */}
           <div className="dk-turn-sheet" aria-hidden>
             <span className="dk-turn-shade" />

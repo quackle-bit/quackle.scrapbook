@@ -6,9 +6,11 @@ import { feel } from "@/feel";
 import { haptic } from "@/lib/motion";
 import { settings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
+import { curlReady, playCurl } from "@/lib/pageCurl3d";
 
 const FADE_OUT = 120;
 const SWING = 440;
+const CURL = 720;
 const FADE_IN = 240;
 const EASE = "cubic-bezier(.45,.05,.55,.95)";
 
@@ -29,12 +31,12 @@ const done = (a: Animation | undefined, ms: number) =>
   ]);
 
 /**
- * Book page turns (Back/Next buttons, arrow keys), built so nothing heavy ever animates:
+ * Book page turns (Back/Next buttons, arrow keys), built so the real page content never animates:
  *   1. the current page's content fades out,
  *   2. the page switches instantly (exactly like speed mode, which never blinked), new content hidden,
- *   3. a blank paper sheet (always in the book, hidden) swings over the spine like a real leaf,
+ *   3. a 3D paper sheet curls over the spine (lib/pageCurl3d.ts: a 36×8 grid bent every frame),
+ *      or, without WebGL, a flat blank sheet swings,
  *   4. the new content fades in.
- * Only a plain sheet and opacity move, so phones never show a half-drawn page.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
@@ -67,27 +69,8 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
       await frame();
       await frame();
 
-      // 3. The blank sheet swings: away over the spine on Next, back onto the page on Back.
-      const sheet = root.querySelector<HTMLElement>(".dk-turn-sheet");
-      const shade = sheet?.querySelector<HTMLElement>(".dk-turn-shade");
-      const flat = "perspective(1100px) rotateY(0deg)";
-      const over = "perspective(1100px) rotateY(-100deg)";
-      let swing: Animation | undefined;
-      let dim: Animation | undefined;
-      if (sheet) {
-        sheet.style.visibility = "visible";
-        swing = sheet.animate(
-          { transform: fwd ? [flat, over] : [over, flat] },
-          { duration: SWING, easing: EASE, fill: "forwards" },
-        );
-        dim = shade?.animate(
-          { opacity: fwd ? [0, 0.5] : [0.5, 0] },
-          { duration: SWING, easing: EASE, fill: "forwards" },
-        );
-      }
       haptic(feel.haptic.tear);
-
-      // 4. New content in: as the sheet clears (Next) or once it has landed (Back).
+      // 4. (used by both turns) New content in.
       const reveal = async () => {
         const page = root.querySelector<HTMLElement>(".dk-leaf .dk-page");
         const fade = page?.animate({ opacity: [0, 1] }, { duration: FADE_IN, fill: "forwards" });
@@ -95,19 +78,54 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
         await done(fade, FADE_IN);
         fade?.cancel();
       };
-      if (fwd) {
-        await new Promise((r) => setTimeout(r, SWING * 0.45));
-        const r = reveal();
-        await done(swing, SWING);
-        await r;
+
+      // 3. A 3D paper sheet curls over the spine (see lib/pageCurl3d.ts); content appears as it
+      //    clears (Next) or once it has landed (Back).
+      if (await curlReady()) {
+        const shadow = root.querySelector<HTMLElement>(".dk-curl-shadow");
+        const turn3d = playCurl(root, fwd ? 1 : -1, CURL, shadow);
+        if (fwd) {
+          await new Promise((r) => setTimeout(r, CURL * 0.5));
+          const r = reveal();
+          await turn3d;
+          await r;
+        } else {
+          await turn3d;
+          await reveal();
+        }
       } else {
-        await done(swing, SWING);
+        // Fallback (no WebGL): the flat blank sheet swings in CSS 3D.
+        const sheet = root.querySelector<HTMLElement>(".dk-turn-sheet");
+        const shade = sheet?.querySelector<HTMLElement>(".dk-turn-shade");
+        const flat = "perspective(1100px) rotateY(0deg)";
+        const over = "perspective(1100px) rotateY(-100deg)";
+        let swing: Animation | undefined;
+        let dim: Animation | undefined;
+        if (sheet) {
+          sheet.style.visibility = "visible";
+          swing = sheet.animate(
+            { transform: fwd ? [flat, over] : [over, flat] },
+            { duration: SWING, easing: EASE, fill: "forwards" },
+          );
+          dim = shade?.animate(
+            { opacity: fwd ? [0, 0.5] : [0.5, 0] },
+            { duration: SWING, easing: EASE, fill: "forwards" },
+          );
+        }
+        if (fwd) {
+          await new Promise((r) => setTimeout(r, SWING * 0.45));
+          const r = reveal();
+          await done(swing, SWING);
+          await r;
+        } else {
+          await done(swing, SWING);
+          if (sheet) sheet.style.visibility = "hidden";
+          await reveal();
+        }
         if (sheet) sheet.style.visibility = "hidden";
-        await reveal();
+        swing?.cancel();
+        dim?.cancel();
       }
-      if (sheet) sheet.style.visibility = "hidden";
-      swing?.cancel();
-      dim?.cancel();
       setTurning(null);
       busy.current = false;
     },
