@@ -132,6 +132,17 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     [count, index, setIndex],
   );
 
+  // Fetch the 3D page turn quietly once the page is idle, so the first turn doesn't wait for it.
+  useEffect(() => {
+    if (settings.get().reducedMotion || settings.get().speed) return;
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    const go = () => void curlReady();
+    const id = w.requestIdleCallback ? w.requestIdleCallback(go) : window.setTimeout(go, 1500);
+    return () => {
+      if (!w.requestIdleCallback) window.clearTimeout(id);
+    };
+  }, []);
+
   // Arrow keys turn pages too.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
