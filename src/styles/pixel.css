@@ -1332,3 +1332,347 @@
   display: inline-grid;
   place-items: center;
 }
+
+/* ══════════ PACK BOX (mechanics): pick a pack, tear it ══════════ */
+.pb-stage {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 8px 0 4px;
+}
+.pb-hint {
+  min-height: 1.4em;
+  text-align: center;
+}
+.pb-box {
+  position: relative;
+  width: min(280px, 100%);
+  padding-top: 34px;
+}
+.pb-slots {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 0;
+  height: 70px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+.pb-slot {
+  flex: 1;
+  height: 66px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  background:
+    linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.45) 45%, transparent 60%),
+    var(--pc);
+  /* crimped top edge */
+  clip-path: polygon(
+    0 6px,
+    10% 0,
+    20% 6px,
+    30% 0,
+    40% 6px,
+    50% 0,
+    60% 6px,
+    70% 0,
+    80% 6px,
+    90% 0,
+    100% 6px,
+    100% 100%,
+    0 100%
+  );
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.pb-slot:hover:not(:disabled),
+.pb-slot:focus-visible {
+  transform: translateY(-8px);
+}
+.pb-slot.gone {
+  visibility: hidden;
+}
+.pb-front {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 18px 10px 14px;
+  border: 2px solid var(--ink);
+  background: #e9d3a8;
+  box-shadow: var(--px-sm);
+}
+.pb-front strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+}
+.pb-front span {
+  font-size: 14px;
+}
+
+.pb-pack {
+  --p: 0;
+  position: relative;
+  width: 170px;
+  height: 220px;
+  margin-top: 54px;
+}
+.pb-body {
+  position: absolute;
+  inset: 34px 0 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  border: 2px solid var(--ink);
+  border-top: 0;
+  color: #fff;
+  background:
+    linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.4) 40%, transparent 55%),
+    var(--pc);
+  box-shadow: var(--px);
+}
+.pb-body small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+.pb-body strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+}
+.pb-body span {
+  font-size: 14px;
+}
+/* The strip you tear: wobbles up and peels as the tear runs along it. */
+.pb-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 36px;
+  z-index: 3;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-bottom: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0 6px, transparent 6px 12px),
+    var(--pc);
+  clip-path: polygon(
+    0 6px,
+    10% 0,
+    20% 6px,
+    30% 0,
+    40% 6px,
+    50% 0,
+    60% 6px,
+    70% 0,
+    80% 6px,
+    90% 0,
+    100% 6px,
+    100% 100%,
+    0 100%
+  );
+  transform-origin: 100% 100%;
+  transform: translateY(calc(var(--p) * -6px)) rotate(calc(var(--p) * -7deg));
+  cursor: grab;
+  touch-action: none;
+}
+.pb-top::after {
+  /* dashed "tear here" line */
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 4px;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.85);
+}
+.pb-tear {
+  /* the actual rip, following your finger */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: calc(var(--p) * 100%);
+  background: var(--ink);
+  clip-path: polygon(
+    0 0,
+    4% 100%,
+    8% 0,
+    12% 100%,
+    16% 0,
+    20% 100%,
+    24% 0,
+    28% 100%,
+    32% 0,
+    36% 100%,
+    40% 0,
+    44% 100%,
+    48% 0,
+    52% 100%,
+    56% 0,
+    60% 100%,
+    64% 0,
+    68% 100%,
+    72% 0,
+    76% 100%,
+    80% 0,
+    84% 100%,
+    88% 0,
+    92% 100%,
+    96% 0,
+    100% 100%
+  );
+}
+.pb-cards {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 30px;
+  height: 120px;
+  z-index: 1;
+}
+.pb-cards i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+.pb-cards i:nth-child(2) {
+  transform: translate(-6px, 4px) rotate(-3deg);
+}
+.pb-cards i:nth-child(3) {
+  transform: translate(6px, 6px) rotate(3deg);
+}
+.pb-burst {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  height: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.pb-burst i {
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  opacity: 0;
+  background: var(--pc);
+  border: 1px solid var(--ink);
+}
+.pb-burst i:nth-child(3n) {
+  background: #fff;
+}
+
+/* ══════════ SLOT LEVER (visual) ══════════ */
+.sl-stage {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding-top: 4px;
+}
+.sl-machine {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+.sl-windows {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  border: 2px solid var(--ink);
+  background: var(--terra);
+  box-shadow: var(--px-sm);
+}
+.sl-win {
+  position: relative;
+  height: 84px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+.sl-strip {
+  display: grid;
+  grid-auto-rows: 80px;
+}
+.sl-strip.spin {
+  animation: sl-spin 0.5s linear infinite;
+}
+.sl-strip b,
+.sl-final {
+  display: grid;
+  place-items: center;
+  height: 80px;
+  padding: 0 6px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+.sl-final {
+  animation: sl-land 0.22s cubic-bezier(0.2, 1.6, 0.4, 1);
+  background: #fff8e6;
+}
+@keyframes sl-spin {
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes sl-land {
+  from {
+    transform: translateY(-14px);
+  }
+}
+.sl-lever {
+  position: relative;
+  width: 36px;
+  height: 140px;
+  flex: none;
+  cursor: grab;
+  touch-action: none;
+}
+.sl-lever:focus-visible {
+  outline: 2px solid var(--amber);
+}
+.sl-rod {
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  width: 6px;
+  height: 100px;
+  background: var(--ink);
+  transform-origin: bottom;
+}
+.sl-lever::after {
+  /* the base the rod sits in */
+  content: "";
+  position: absolute;
+  left: 6px;
+  bottom: 8px;
+  width: 24px;
+  height: 14px;
+  background: var(--ink);
+}
+.sl-ball {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--terra);
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.18);
+}
+.dk[data-rm="1"] .sl-strip.spin {
+  animation: none;
+}

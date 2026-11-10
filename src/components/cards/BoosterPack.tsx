@@ -11,7 +11,8 @@ import { settings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
 import { ACTS, say, sayRandom } from "../Duck";
 import { KEEPERS, pickLine } from "../feel/keepers";
-import { FoldedMap, GearPress, ShellGame } from "../feel/openers";
+import { FoldedMap, ShellGame } from "../feel/openers";
+import { MechanicPackBox, SlotLever } from "../feel/packOpeners";
 
 type Props = {
   type: CardType;
@@ -40,8 +41,9 @@ type Props = {
 };
 
 /** Stalls with their own reveal; the others use a pixel envelope. */
-const OPENERS: Partial<Record<CardType, typeof GearPress>> = {
-  mechanic: GearPress,
+const OPENERS: Partial<Record<CardType, typeof SlotLever>> = {
+  mechanic: MechanicPackBox,
+  visual: SlotLever,
   setting: FoldedMap,
   twist: ShellGame,
 };
@@ -104,7 +106,8 @@ export function BoosterPack({
     setPhase("opening");
   }
 
-  function deal(faceUp: boolean) {
+  /** `animate: false` keeps cards exactly where an opener (the slot machine) already showed them. */
+  function deal(faceUp: boolean, animate = true) {
     const c = peek();
     pending.current = null;
     if (!c.length) {
@@ -117,7 +120,7 @@ export function BoosterPack({
     setCards(c);
     setUp(new Set(faceUp ? c.map((x) => x.id) : []));
     setPhase("choose");
-    if (!quick())
+    if (animate && !quick())
       requestAnimationFrame(() =>
         Array.from(grid.current?.children ?? []).forEach((el, i) =>
           play(
@@ -336,7 +339,11 @@ export function BoosterPack({
           </div>
         ) : phase === "opening" ? (
           Opener ? (
-            <Opener open={() => deal(type !== "mood")} titles={() => peek().map((c) => c.title)} />
+            <Opener
+              // Torn packs come out face-down (flip each one); slot reels already show their looks.
+              open={() => (type === "visual" ? deal(true, false) : deal(type !== "mechanic"))}
+              titles={() => peek().map((c) => c.title)}
+            />
           ) : (
             <button type="button" className="px-envelope" onClick={() => deal(false)}>
               <span className="px-envelope-flap" aria-hidden />
@@ -347,7 +354,7 @@ export function BoosterPack({
         ) : (
           <div className="px-choose">
             <div ref={grid} className="px-grid">
-              {cards.map((c, i) => {
+              {cards.map((c) => {
                 const isUp = up.has(c.id);
                 const on = chosen.has(c.id);
                 return (
@@ -360,25 +367,12 @@ export function BoosterPack({
                     aria-label={
                       isUp
                         ? `${c.title}. ${c.description}. ${on ? "Chosen" : "Tap to choose"}`
-                        : type === "visual"
-                          ? "Spinning reel. Tap to stop."
-                          : "Face-down card. Tap to flip."
+                        : "Face-down card. Tap to flip."
                     }
                   >
                     <span className="px-card-inner">
                       <span className="px-card-back" aria-hidden>
-                        {type === "visual" ? (
-                          // The Tailor's slot reel: looks spin until you tap to stop it.
-                          <span className="px-reel">
-                            <span style={{ animationDelay: `${-i * 0.37}s` }}>
-                              {[...cards, ...cards].map((r, j) => (
-                                <b key={j}>{r.title}</b>
-                              ))}
-                            </span>
-                          </span>
-                        ) : (
-                          "?"
-                        )}
+                        ?
                       </span>
                       <span className="px-card-face">
                         <small>{TYPE_LABEL[type]}</small>
@@ -406,7 +400,7 @@ export function BoosterPack({
                     )
                   }
                 >
-                  {type === "visual" ? "Stop all" : "Flip all"}
+                  Flip all
                 </button>
               ) : (
                 <button type="button" className="dk-btn primary" onClick={() => void keepChosen()}>
