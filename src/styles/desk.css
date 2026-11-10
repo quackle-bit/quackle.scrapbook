@@ -1987,3 +1987,250 @@ textarea.dk-input {
   color: var(--ink-soft);
   font-weight: 700;
 }
+
+/* ══════════ FEEL: paper skin for DragCard / PackOpen (fc-*) ══════════ */
+.dk {
+  --fcw: min(140px, 24vw);
+}
+.fc-hand-card {
+  position: relative;
+  width: var(--fcw);
+  flex: none;
+  transition:
+    width 0.25s,
+    margin 0.25s;
+}
+.fc-hand-card.gone {
+  width: 0;
+  margin: 0 !important;
+}
+.fc-hand-card-body {
+  perspective: 800px;
+  touch-action: none;
+  will-change: transform;
+}
+.fc-hand-card-body.up {
+  cursor: grab;
+}
+.fc-hand-card-body.up:active {
+  cursor: grabbing;
+}
+.fc-card-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  transition:
+    transform 0.26s cubic-bezier(0.3, 1.6, 0.5, 1),
+    filter 0.26s,
+    clip-path 0.26s;
+}
+.fc-card-button .dk-card {
+  min-height: calc(var(--fcw) * 1.4);
+  font-size: 13px;
+}
+.fc-card-button .dk-card-title {
+  font-size: 17px;
+}
+.crumpled .fc-card-button {
+  transform: scale(0.6) rotate(-9deg);
+  filter: contrast(1.15) brightness(0.9);
+  clip-path: polygon(
+    8% 4%,
+    30% 0,
+    52% 7%,
+    74% 1%,
+    96% 9%,
+    100% 33%,
+    93% 55%,
+    100% 78%,
+    90% 97%,
+    63% 92%,
+    40% 100%,
+    18% 93%,
+    0 98%,
+    6% 72%,
+    0 47%,
+    5% 24%
+  );
+}
+.fc-flipper {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+}
+.fc-flipper > * {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+}
+.fc-flipper > :last-child {
+  transform: rotateY(180deg);
+}
+.fc-flipper.flipped {
+  transform: rotateY(180deg);
+}
+.selected .fc-hand-card-body {
+  filter: drop-shadow(0 0 0 var(--amber)) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3));
+}
+.fc-card-actions {
+  /* Pinned to the bottom of the screen so it never falls off the edge under an outer card. */
+  position: fixed;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 60;
+}
+.fc-act {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    700 13px var(--font-ui),
+    sans-serif;
+  white-space: nowrap;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.fc-act.keep {
+  background: var(--amber);
+}
+.fc-rip-halves {
+  position: relative;
+}
+.fc-rip-halves > :last-child {
+  position: absolute;
+  inset: 0;
+}
+
+/* The pack: a kraft envelope with a wax seal, torn along the top. */
+.fc-pack-stage {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 12px 0;
+}
+.fc-pack {
+  position: relative;
+  width: min(210px, 56vw);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  background:
+    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.25) 48%, transparent 60%),
+    var(--grain), #c9a678;
+  box-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.15),
+    0 12px 24px rgba(30, 18, 10, 0.35);
+}
+.fc-pack-flap {
+  position: relative;
+  height: 24%;
+  display: grid;
+  place-items: center;
+  border-radius: 6px 6px 0 0;
+  background: #d8bb90;
+  border-bottom: 2px dashed rgba(60, 40, 25, 0.45);
+  touch-action: none;
+  cursor: ew-resize;
+}
+.fc-tear-hint {
+  font:
+    700 12px var(--font-ui),
+    sans-serif;
+  color: #5a3f28;
+  animation: nudge 1.2s ease-in-out infinite;
+}
+.fc-tear-line {
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 8px;
+  width: calc(var(--tear, 0) * 100%);
+  background: #fff8ea;
+  clip-path: polygon(
+    0 50%,
+    5% 0,
+    10% 100%,
+    15% 0,
+    20% 100%,
+    25% 0,
+    30% 100%,
+    35% 0,
+    40% 100%,
+    45% 0,
+    50% 100%,
+    55% 0,
+    60% 100%,
+    65% 0,
+    70% 100%,
+    75% 0,
+    80% 100%,
+    85% 0,
+    90% 100%,
+    95% 0,
+    100% 50%
+  );
+}
+.fc-pack-body {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  text-align: center;
+  position: relative;
+}
+.fc-pack-body::before {
+  content: "";
+  justify-self: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #c45a4a, #8a2d25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.fc-pack-label {
+  font:
+    700 20px var(--font-display),
+    serif;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 6px 12px;
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.fc-pack-sub {
+  font:
+    600 14px var(--font-ui),
+    sans-serif;
+  color: #4a3220;
+}
+.fc-fan {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 0 64px;
+  width: 100%;
+}
+.fc-fan .fc-hand-card {
+  margin-inline: calc(var(--fcw) * -0.14);
+}
+.fc-fan-tools {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+@keyframes nudge {
+  50% {
+    transform: translateX(6px);
+  }
+}
