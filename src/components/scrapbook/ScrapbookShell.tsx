@@ -130,18 +130,21 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         </Link>
         <div className="dk-title">
           <strong>{book.name.trim() || "Untitled scrapbook"}</strong>
-          <PageStamps
-            pages={PAGES}
-            visited={book.progress.visitedPages}
-            filled={filled}
-            current={page.id}
-            fresh={fresh}
-          />
         </div>
         <FullscreenButton />
         <RadioButton />
         <SettingsButton />
       </header>
+      {/* Progress: its own full-width row, so the top bar stays clean. */}
+      <div className="dk-progress">
+        <PageStamps
+          pages={PAGES}
+          visited={book.progress.visitedPages}
+          filled={filled}
+          current={page.id}
+          fresh={fresh}
+        />
+      </div>
 
       <main className="dk-stage">
         <div

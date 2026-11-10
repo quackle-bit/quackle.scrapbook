@@ -2862,3 +2862,32 @@ html[data-dark="1"] .dk .pp-badge {
   font-size: 14px;
   color: var(--ink-soft);
 }
+
+/* Progress: a full-width segmented strip under the top bar (the top bar holds only icons + name). */
+.dk-progress {
+  padding: 6px 12px 0;
+}
+.dk-progress .dk-stamps {
+  width: auto !important;
+  height: 6px;
+  margin: 0 !important;
+}
+.dk-topbar .dk-title {
+  align-content: center;
+}
+.dk-topbar .dk-title strong {
+  font-size: 16px;
+}
+.dk-shell .dk-topbar {
+  padding-top: 6px !important;
+  padding-bottom: 4px !important;
+}
+.dk-shell .dk-stage {
+  padding-top: 6px !important;
+}
+.dk-shell .dk-page {
+  gap: 8px !important;
+}
+.dk-progress {
+  padding-top: 2px !important;
+}
