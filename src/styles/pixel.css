@@ -716,7 +716,7 @@
 /* Machine is 28×36 art pixels at 4 px each. */
 .px-gacha-machine {
   position: relative;
-  width: 112px;
+  width: 108px;
   height: 144px;
 }
 .px-gacha-machine svg {
@@ -724,15 +724,15 @@
 }
 .px-gacha-knob {
   position: absolute;
-  left: 24px; /* art x = 6 */
-  top: 92px; /* art y = 23 */
+  left: 40px; /* art x = 10 */
+  top: 80px; /* art y = 20 */
   width: 28px;
   height: 28px;
 }
 .px-gacha-capsule {
   position: absolute;
-  left: 60px; /* art x = 15, in the chute */
-  top: 96px; /* art y = 24 */
+  left: 44px; /* art x = 11, in front of the chute */
+  top: 112px; /* art y = 28 */
   opacity: 0;
 }
 .px-gacha-capsule.out {
@@ -1287,4 +1287,24 @@
   .px-gacha {
     gap: 10px;
   }
+}
+
+/* Top bar: name and progress stacked with room to breathe, centred against the 44 px buttons. */
+.dk-topbar .dk-title {
+  display: grid !important;
+  align-content: center;
+  gap: 6px !important;
+  min-width: 0;
+  padding-right: 4px;
+}
+.dk-topbar .dk-title strong {
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dk-stamps {
+  margin-top: 0 !important;
+  height: 6px;
+  width: min(160px, 100%);
 }
