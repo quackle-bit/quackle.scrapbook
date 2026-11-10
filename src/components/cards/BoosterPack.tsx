@@ -1,13 +1,16 @@
 "use client";
 
-import { useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { feel } from "@/feel";
 import { drawPack, TYPE_LABEL, type InspirationCard } from "@/lib/inspiration";
-import { haptic, OVERSHOOT, play } from "@/lib/motion";
+import { haptic, play } from "@/lib/motion";
 import { createRng, freshSeed } from "@/lib/rng";
 import type { CardType } from "@/lib/scrapbook/types";
 import { sfx } from "@/lib/sound";
-import { PaperCard } from "./PaperCard";
+import { sayRandom } from "../Duck";
+import { KEEPERS, pickLine } from "../feel/keepers";
+import { PackOpen } from "../feel/PackOpen";
+import { CardBack, PaperCard } from "./PaperCard";
 
 type Props = {
   type: CardType;
@@ -21,19 +24,16 @@ type Props = {
   onToggleKeep: (c: InspirationCard) => void;
   onToggleFavorite: (c: InspirationCard) => void;
   onAddCustom?: (c: { title: string; description: string }) => void;
-  /** Called once per envelope opened (progress: packs opened). */
   onOpened?: () => void;
-  /** Word packs have no favorites; cards can still be kept (used) or set aside. */
   canFavorite?: boolean;
   keepLabel?: string;
   keptLabel?: string;
 };
 
-type Phase = "sealed" | "open";
-
 /**
- * A booster pack: tear the envelope, flip the cards, then keep, favorite or set aside each one.
- * Keeping is a toggle (everything can be changed). Randomness only suggests; nothing is forced.
+ * A stall on the page: its keeper greets you, you tear a pack, the cards fan out face-down, you flip them,
+ * then drag the good ones onto the page (thud, tape, stamp) and crumple / rip / fling the rest into the bin.
+ * Nothing is lost: the bin keeps this visit's cards so you can fish them back out.
  */
 export function BoosterPack({
   type,
@@ -41,285 +41,218 @@ export function BoosterPack({
   count = 5,
   hideIds = [],
   isKept,
-  isFavorite,
   onToggleKeep,
-  onToggleFavorite,
   onAddCustom,
   onOpened,
-  canFavorite = true,
-  keepLabel = "Keep",
-  keptLabel = "✓ Kept (undo)",
+  keepLabel = "Stick it in",
 }: Props) {
-  const [phase, setPhase] = useState<Phase>("sealed");
-  const [cards, setCards] = useState<InspirationCard[]>([]);
-  const [faceUp, setFaceUp] = useState<Set<string>>(new Set());
-  const [aside, setAside] = useState<Set<string>>(new Set());
-  const [tear, setTear] = useState(0);
+  const keeper = KEEPERS[type];
+  const [line, setLine] = useState(keeper.greet[0]);
+  const [packNo, setPackNo] = useState(0);
+  const [phase, setPhase] = useState<"pack" | "done" | "empty">("pack");
+  const [stuck, setStuck] = useState<InspirationCard[]>([]);
+  const [bin, setBin] = useState<InspirationCard[]>([]);
+  const [binOpen, setBinOpen] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [stampKey, setStampKey] = useState(0);
   const [writing, setWriting] = useState(false);
   const [draft, setDraft] = useState({ title: "", description: "" });
-  const [empty, setEmpty] = useState(false);
   const seen = useRef(new Set<string>());
-  const envRef = useRef<HTMLDivElement>(null);
-  const flapRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ x0: number; w: number; step: number } | null>(null);
-  const opening = useRef(false);
+  const dropRef = useRef<HTMLDivElement>(null);
+  const binRef = useRef<HTMLDivElement>(null);
 
-  const draw = (n: number, extra: string[] = []) =>
-    drawPack(type, n, createRng(freshSeed()), [...hideIds, ...seen.current, ...extra]);
+  // A different greeting each visit (after hydration, so server and client agree).
+  useEffect(() => {
+    const t = setTimeout(() => setLine(pickLine(keeper.greet)), 0);
+    return () => clearTimeout(t);
+  }, [keeper]);
 
-  async function open() {
-    if (phase !== "sealed" || opening.current) return;
-    opening.current = true;
-    drag.current = null;
-    sfx.tearOff();
-    haptic(feel.haptic.tear);
-    setTear(1);
-    await play(
-      flapRef.current,
-      [{ transform: "none" }, { transform: "translate(70px,-120px) rotate(30deg)", opacity: 0 }],
-      feel.tearFlyOff,
-      { fill: "forwards" },
-    );
-    const fresh = draw(count);
-    fresh.forEach((c) => seen.current.add(c.id));
-    setCards(fresh);
-    setEmpty(fresh.length === 0);
-    setFaceUp(new Set());
-    setAside(new Set());
-    setPhase("open");
-    onOpened?.();
-    opening.current = false;
-    sfx.riffle();
-    requestAnimationFrame(() =>
-      Array.from(gridRef.current?.children ?? []).forEach((el, i) =>
-        play(
-          el,
-          [
-            { transform: "translateY(-30px) scale(.9)", opacity: 0 },
-            { transform: "none", opacity: 1 },
-          ],
-          320,
-          {
-            delay: i * 70,
-            easing: OVERSHOOT,
-            fill: "backwards",
-          },
-        ),
-      ),
+  function draw() {
+    const cards = drawPack(type, count, createRng(freshSeed()), [...hideIds, ...seen.current]);
+    cards.forEach((c) => seen.current.add(c.id));
+    if (!cards.length) setTimeout(() => setPhase("empty"), 0);
+    return cards;
+  }
+
+  function stick(c: InspirationCard) {
+    if (!isKept(c)) onToggleKeep(c);
+    setStuck((s) => [c, ...s.filter((x) => x.id !== c.id)].slice(0, 4));
+    setBin((b) => b.filter((x) => x.id !== c.id));
+    sfx.thud();
+    haptic(feel.haptic.thud);
+    setStampKey((k) => k + 1);
+    setLine(pickLine(keeper.kept));
+    sayRandom("stamp");
+    void play(
+      dropRef.current,
+      [
+        { transform: "none" },
+        { transform: "translate(-4px,2px)" },
+        { transform: "translate(4px,-2px)" },
+        { transform: "translate(-2px,1px)" },
+        { transform: "none" },
+      ],
+      feel.shake,
     );
   }
 
-  function openAnother() {
-    setPhase("sealed");
-    setTear(0);
+  function another() {
+    setPackNo((n) => n + 1);
+    setPhase("pack");
     setWriting(false);
-  }
-
-  /** Replace the cards that weren't kept with fresh, face-down ones. */
-  function reroll() {
-    const keep = cards.filter((c) => isKept(c));
-    const fresh = draw(
-      count - keep.length,
-      keep.map((c) => c.id),
-    );
-    fresh.forEach((c) => seen.current.add(c.id));
-    setCards([...keep, ...fresh]);
-    setFaceUp((f) => new Set([...f].filter((id) => keep.some((k) => k.id === id))));
-    setAside(new Set());
-    setEmpty(fresh.length === 0 && keep.length === 0);
-    sfx.riffle();
-  }
-
-  function flip(c: InspirationCard) {
-    if (faceUp.has(c.id)) return;
-    sfx.thup();
-    setFaceUp((f) => new Set(f).add(c.id));
-  }
-  function flipAll() {
-    cards.forEach((c, i) => setTimeout(() => flip(c), i * 90));
-  }
-
-  // Tear gesture (drag across), with a tap fallback.
-  function onDown(e: PointerEvent<HTMLDivElement>) {
-    if (phase !== "sealed") return;
-    e.currentTarget.setPointerCapture(e.pointerId);
-    drag.current = { x0: e.clientX, w: e.currentTarget.getBoundingClientRect().width, step: 0 };
-  }
-  function onMove(e: PointerEvent<HTMLDivElement>) {
-    const d = drag.current;
-    if (!d) return;
-    const p = Math.min(1, Math.abs(e.clientX - d.x0) / d.w);
-    setTear(p);
-    const step = Math.floor(p * 10);
-    if (step > d.step) {
-      d.step = step;
-      sfx.rip(1 + p);
-    }
-    if (p >= feel.tearThreshold) void open();
-  }
-  function onUp() {
-    if (!drag.current) return;
-    drag.current = null;
-    if (!opening.current) setTear(0);
-  }
-
-  const unflipped = cards.filter((c) => !faceUp.has(c.id)).length;
-
-  if (phase === "sealed") {
-    return (
-      <div className="dk-pack">
-        <div ref={envRef} className="dk-env" style={{ ["--tear" as string]: tear }}>
-          <div
-            ref={flapRef}
-            className="dk-env-flap"
-            onPointerDown={onDown}
-            onPointerMove={onMove}
-            onPointerUp={onUp}
-            onPointerCancel={onUp}
-          >
-            <i className="dk-env-tear" />
-            <span>drag across to tear →</span>
-          </div>
-          <div className="dk-env-body">
-            <span className="dk-env-seal" aria-hidden />
-            <strong>{label}</strong>
-            <small>{count} cards inside</small>
-          </div>
-        </div>
-        <button type="button" className="dk-btn small" onClick={() => void open()}>
-          Open the envelope
-        </button>
-      </div>
-    );
   }
 
   return (
     <div className="dk-pack">
-      <div className="dk-pack-head">
-        <strong>{label}</strong>
-        {unflipped > 0 && (
-          <button type="button" className="dk-btn small" onClick={flipAll}>
-            Flip all
-          </button>
-        )}
-      </div>
+      <header className="dk-stall">
+        <div className="dk-awning" aria-hidden />
+        <div className="dk-stall-sign">
+          <strong>{keeper.stall}</strong>
+          <p className="dk-stall-line" aria-live="polite">
+            “{line}”
+          </p>
+        </div>
+      </header>
 
-      {empty ? (
+      {phase === "pack" && (
+        <PackOpen<InspirationCard>
+          key={packNo}
+          skin="paper"
+          label={label}
+          sub={`${count} cards inside`}
+          hint="drag a card onto the page · hold to crumple · swipe down to rip · fling it away"
+          draw={draw}
+          onOpened={() => onOpened?.()}
+          onDone={() => setPhase("done")}
+          card={{
+            renderFace: (c, style) => (
+              <div style={style}>
+                <PaperCard
+                  type={type}
+                  title={c.title}
+                  description={c.description}
+                  category={c.category}
+                  kept={isKept(c)}
+                />
+              </div>
+            ),
+            renderBack: () => <CardBack label={TYPE_LABEL[type]} />,
+            label: (c, up) =>
+              up
+                ? `${c.title}. Drag onto the page to keep, or press for actions.`
+                : "Face-down card. Press to flip.",
+            accepts: () => true,
+            findTarget: () => dropRef.current,
+            stampLabel: keepLabel,
+            onStamp: (c) => {
+              stick(c);
+              return true;
+            },
+            onTrash: (c) => {
+              setBin((b) => [c, ...b]);
+              setLine(pickLine(keeper.trashed));
+              sayRandom("trash");
+              void play(
+                binRef.current,
+                [
+                  { transform: "none" },
+                  { transform: "rotate(-8deg)" },
+                  { transform: "rotate(6deg)" },
+                  { transform: "none" },
+                ],
+                320,
+              );
+            },
+            onDragging: (c) => setDragging(!!c),
+          }}
+        />
+      )}
+
+      {phase === "empty" && (
         <p className="dk-empty">
-          You&apos;ve seen every {TYPE_LABEL[type].toLowerCase()} card in the deck.{" "}
+          You&apos;ve seen every {TYPE_LABEL[type].toLowerCase()} card at this stall.{" "}
           <button
             type="button"
             className="dk-link"
             onClick={() => {
               seen.current.clear();
-              reroll();
+              another();
             }}
           >
-            Shuffle the set-aside ones back in
+            Shuffle them back in
           </button>
         </p>
-      ) : (
-        <div ref={gridRef} className="dk-pack-grid">
-          {cards.map((c) => {
-            const up = faceUp.has(c.id);
-            const kept = isKept(c);
-            const fav = isFavorite(c);
-            const away = aside.has(c.id) && !kept;
-            return (
-              <div key={c.id} className={`dk-slotcard${away ? " away" : ""}`}>
-                {up ? (
-                  <PaperCard
-                    type={type}
-                    title={c.title}
-                    description={c.description}
-                    category={c.category}
-                    kept={kept}
-                    favorite={fav}
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    className="dk-card dk-card-back"
-                    onClick={() => flip(c)}
-                    aria-label="Face-down card. Tap to flip."
-                  >
-                    <span>Q</span>
-                    <small>tap to flip</small>
-                  </button>
-                )}
-                {up && (
-                  <div className="dk-card-actions">
-                    {away ? (
-                      <button
-                        type="button"
-                        className="dk-btn small"
-                        onClick={() => setAside((s) => new Set([...s].filter((x) => x !== c.id)))}
-                      >
-                        ↶ Bring back
-                      </button>
-                    ) : (
-                      <>
-                        <button
-                          type="button"
-                          className={`dk-btn small${kept ? "" : " primary"}`}
-                          aria-pressed={kept}
-                          onClick={() => {
-                            if (!kept) {
-                              sfx.thud();
-                              haptic(feel.haptic.thud);
-                            } else sfx.peel();
-                            onToggleKeep(c);
-                          }}
-                        >
-                          {kept ? keptLabel : keepLabel}
-                        </button>
-                        <div className="dk-row2">
-                          {canFavorite && (
-                            <button
-                              type="button"
-                              className="dk-btn small"
-                              aria-pressed={fav}
-                              onClick={() => {
-                                sfx.tink();
-                                onToggleFavorite(c);
-                              }}
-                              aria-label={fav ? "Remove favorite" : "Mark as favorite"}
-                            >
-                              {fav ? "★" : "☆"}
-                            </button>
-                          )}
-                          {!kept && (
-                            <button
-                              type="button"
-                              className="dk-btn small ghost"
-                              style={{ color: "var(--ink-soft)" }}
-                              onClick={() => {
-                                sfx.crumple();
-                                setAside((s) => new Set(s).add(c.id));
-                              }}
-                            >
-                              Set aside
-                            </button>
-                          )}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+      )}
+
+      <div className="dk-drop-row">
+        <div ref={dropRef} data-drop="slot" className={`dk-drop${dragging ? " ready" : ""}`}>
+          {(dragging || stuck.length === 0) && (
+            <span className="dk-drop-hint">
+              {dragging
+                ? "Let go to stick it in"
+                : "Drop cards here to stick them in your scrapbook"}
+            </span>
+          )}
+          {stuck.length > 0 && (
+            <ul className="dk-drop-stuck">
+              {stuck.map((c, i) => (
+                <li key={c.id} style={{ rotate: `${((i * 37) % 7) - 3}deg` }}>
+                  {c.title}
+                </li>
+              ))}
+            </ul>
+          )}
+          {stampKey > 0 && (
+            <span key={stampKey} className="dk-drop-stamp" aria-hidden>
+              KEPT
+            </span>
+          )}
+        </div>
+        <div
+          ref={binRef}
+          data-drop="bin"
+          className={`dk-bin${dragging ? " ready" : ""}`}
+          role="button"
+          tabIndex={0}
+          aria-label={`Bin, ${bin.length} card${bin.length === 1 ? "" : "s"}. Open to fish cards back out.`}
+          onClick={() => setBinOpen((o) => !o)}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setBinOpen((o) => !o)}
+        >
+          <span className="dk-bin-can" aria-hidden />
+          <small>{bin.length}</small>
+        </div>
+      </div>
+
+      {binOpen && (
+        <div className="dk-bin-list">
+          {bin.length === 0 ? (
+            <p className="dk-hint">
+              The bin is empty. Crumple, rip or fling a card to throw it here.
+            </p>
+          ) : (
+            <>
+              <p className="dk-hint">Changed your mind? Fish one out.</p>
+              <ul>
+                {bin.map((c) => (
+                  <li key={c.id}>
+                    <span>{c.title}</span>
+                    <button type="button" className="dk-btn small" onClick={() => stick(c)}>
+                      Smooth it out
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
 
       <div className="dk-pack-foot">
-        <button type="button" className="dk-btn small" onClick={reroll}>
-          ↻ Reroll the rest
-        </button>
-        <button type="button" className="dk-btn small primary" onClick={openAnother}>
-          Open another pack
-        </button>
+        {phase !== "pack" && (
+          <button type="button" className="dk-btn small primary" onClick={another}>
+            Open another pack
+          </button>
+        )}
         {onAddCustom && (
           <button
             type="button"
@@ -341,6 +274,7 @@ export function BoosterPack({
             onAddCustom({ title: draft.title.trim(), description: draft.description.trim() });
             setDraft({ title: "", description: "" });
             sfx.thud();
+            setStampKey((k) => k + 1);
           }}
         >
           <label className="dk-field">

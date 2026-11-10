@@ -104,8 +104,9 @@ const ACTS: Record<keyof typeof LINES, Act> = {
 export const FORGE_ACT: Act = { tag: "fly", ms: 1600, then: { tag: "land", ms: 150 } };
 export const sayRandom = (k: keyof typeof LINES) => say(pick(LINES[k]), ACTS[k]);
 
-export function Duck() {
-  const current = useSyncExternalStore(
+/** The duck's current line (null until it speaks). */
+export function useDuckLine() {
+  return useSyncExternalStore(
     (cb) => {
       subs.add(cb);
       return () => subs.delete(cb);
@@ -113,6 +114,10 @@ export function Duck() {
     () => line,
     () => null,
   );
+}
+
+export function Duck() {
+  const current = useDuckLine();
   const [hiddenKey, setHiddenKey] = useState<number | null>(null);
   useEffect(() => {
     if (!current) return;

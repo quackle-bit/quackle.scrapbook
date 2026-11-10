@@ -1,5 +1,6 @@
 "use client";
 
+import { DuckBubble } from "../feel/DuckBubble";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { scrapbookStore, useScrapbook } from "@/lib/scrapbook/store";
@@ -173,6 +174,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           ))}
         </div>
       </BottomSheet>
+      <DuckBubble />
     </DeskRoot>
   );
 }
