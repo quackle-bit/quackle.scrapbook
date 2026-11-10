@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
@@ -60,7 +61,7 @@ export function SummaryRoute() {
       const { toPng } = await import("html-to-image");
       const url = await toPng(spread.current, {
         pixelRatio: 2,
-        backgroundColor: "#faf4e6",
+        backgroundColor: "#ffffff",
         cacheBust: true,
         filter: (n) => !(n instanceof HTMLElement && n.classList.contains("no-export")),
       });
@@ -104,10 +105,10 @@ export function SummaryRoute() {
           className="dk-icon-btn"
           aria-label="Back to the scrapbook"
         >
-          ‹
+          <Icon name="chevronLeft" />
         </Link>
         <div className="dk-title">
-          <strong>Close the scrapbook</strong>
+          <strong>Pitch</strong>
           <small>{book.name.trim() || "Untitled scrapbook"}</small>
         </div>
         <ConceptSwitcher
@@ -122,10 +123,10 @@ export function SummaryRoute() {
       <main className="dk-summary-main">
         <PitchSpread ref={spread} model={model} editHref={editHref} />
 
-        <div className="dk-sp-actions no-print">
+        <div className="pp-actions no-print">
           <button
             type="button"
-            className={`dk-btn${concept.status === "pitched" ? "" : " primary"}`}
+            className={`dk-btn${concept.status === "pitched" ? "" : " primary"} pp-main`}
             onClick={() => {
               scrapbookStore.updateConcept(concept.id, {
                 status: concept.status === "pitched" ? "draft" : "pitched",
@@ -140,41 +141,45 @@ export function SummaryRoute() {
           >
             {concept.status === "pitched" ? "Back to draft" : "Save as pitched"}
           </button>
-          <button type="button" className="dk-btn" onClick={() => void share()}>
-            Share link
-          </button>
-          <button type="button" className="dk-btn" onClick={() => void exportImage()}>
-            Save as image
-          </button>
-          <button type="button" className="dk-btn" onClick={() => window.print()}>
-            Print / PDF
-          </button>
-          <button type="button" className="dk-btn" onClick={() => void copyText()}>
-            Copy as text
-          </button>
-          <button
-            type="button"
-            className="dk-btn"
-            onClick={() => {
-              const id = scrapbookStore.duplicateConcept(concept.id);
-              if (id) open(id);
-            }}
-          >
-            Duplicate concept
-          </button>
-          <Link className="dk-btn" href={`/wall?id=${book.id}`}>
-            Pitch Wall
-          </Link>
-          <button
-            type="button"
-            className="dk-btn"
-            onClick={() => {
-              const id = scrapbookStore.addConcept(book.id);
-              router.push(`/scrapbook?id=${book.id}&page=title&concept=${id}`);
-            }}
-          >
-            New concept
-          </button>
+          <div className="pp-share">
+            <button type="button" className="dk-btn" onClick={() => void share()}>
+              <Icon name="share" size={18} /> Share
+            </button>
+            <button type="button" className="dk-btn" onClick={() => void exportImage()}>
+              <Icon name="image" size={18} /> Image
+            </button>
+            <button type="button" className="dk-btn" onClick={() => void copyText()}>
+              <Icon name="copy" size={18} /> Copy
+            </button>
+          </div>
+          <div className="pp-more">
+            <button type="button" className="dk-link-btn" onClick={() => window.print()}>
+              Print / PDF
+            </button>
+            <button
+              type="button"
+              className="dk-link-btn"
+              onClick={() => {
+                const id = scrapbookStore.duplicateConcept(concept.id);
+                if (id) open(id);
+              }}
+            >
+              Duplicate
+            </button>
+            <button
+              type="button"
+              className="dk-link-btn"
+              onClick={() => {
+                const id = scrapbookStore.addConcept(book.id);
+                router.push(`/scrapbook?id=${book.id}&page=title&concept=${id}`);
+              }}
+            >
+              New concept
+            </button>
+            <Link className="dk-link-btn" href={`/wall?id=${book.id}`}>
+              Pitch Wall
+            </Link>
+          </div>
         </div>
         {note && (
           <p className="dk-toast no-print" role="status">

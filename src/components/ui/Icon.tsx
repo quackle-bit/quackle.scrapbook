@@ -1,5 +1,9 @@
 import {
   Check,
+  Copy,
+  Image,
+  Printer,
+  Share2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -26,6 +30,10 @@ const ICONS = {
   bin: Trash2,
   refresh: RefreshCw,
   edit: Pencil,
+  share: Share2,
+  image: Image,
+  copy: Copy,
+  print: Printer,
 } satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof ICONS;
