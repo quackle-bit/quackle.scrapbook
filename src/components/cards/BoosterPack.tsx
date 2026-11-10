@@ -12,7 +12,7 @@ import { sfx } from "@/lib/sound";
 import { ACTS, say, sayRandom } from "../Duck";
 import { KEEPERS, pickLine } from "../feel/keepers";
 import { FoldedMap, ShellGame } from "../feel/openers";
-import { MechanicPackBox, SlotLever } from "../feel/packOpeners";
+import { MechanicPack, SlotLever } from "../feel/packOpeners";
 
 type Props = {
   type: CardType;
@@ -41,11 +41,8 @@ type Props = {
 };
 
 /** Stalls with their own reveal; the others use a pixel envelope. */
-/** Stalls whose opener is a box of packs you return to after choosing. */
-const BOX_STALLS = new Set<CardType>(["mechanic"]);
-
 const OPENERS: Partial<Record<CardType, typeof SlotLever>> = {
-  mechanic: MechanicPackBox,
+  mechanic: MechanicPack,
   visual: SlotLever,
   setting: FoldedMap,
   twist: ShellGame,
@@ -207,15 +204,7 @@ export function BoosterPack({
       say(pickLine(keeper.trashed), ACTS.trash);
     }
     setCards([]);
-    // Stalls with a box of packs go straight back to the box (if there's room for more).
-    const added = keep.filter((c) => !isKept(c)).length;
-    const roomLeft = max === undefined || kept.length + added < max;
-    if (BOX_STALLS.has(type) && roomLeft) {
-      pending.current = null;
-      setChosen(new Set());
-      setUp(new Set());
-      setPhase("opening");
-    } else setPhase("board");
+    setPhase("board");
   }
 
   const Opener = OPENERS[type];
@@ -364,7 +353,6 @@ export function BoosterPack({
           </div>
         ) : phase === "opening" ? (
           <div className="px-opening">
-            {BOX_STALLS.has(type) && tapedList}
             {Opener ? (
               <Opener
                 // Torn packs come out face-down (flip each one); slot reels already show their looks.
@@ -379,13 +367,7 @@ export function BoosterPack({
               </button>
             )}
             <div className="px-opening-links">
-              {BOX_STALLS.has(type) ? (
-                <button type="button" className="dk-link-btn" onClick={() => setPhase("board")}>
-                  Done
-                </button>
-              ) : (
-                backToBoard
-              )}
+              {backToBoard}
               {onAddCustom && (
                 <button
                   type="button"

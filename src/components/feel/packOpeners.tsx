@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { feel } from "@/feel";
 import { haptic, play } from "@/lib/motion";
 import { settings } from "@/lib/settings";
@@ -12,70 +12,38 @@ type Api = { open: () => void; titles: () => string[] };
 const quick = () => settings.get().reducedMotion || settings.get().speed;
 const wait = (ms: number) => new Promise((r) => setTimeout(r, quick() ? 0 : ms));
 
-// ── Pack box ────────────────────────────────────────────────────────────────
+// ── Tear pack ───────────────────────────────────────────────────────────────
 
-const BOX_SIZE = 5;
-const PACK_COLORS = ["#e05a3a", "#4f7cc0", "#5aa469", "#f5b83d", "#9a6fc0"];
-
-function readBox(key: string) {
-  try {
-    const n = Number(localStorage.getItem(`qs.box.${key}`));
-    return Number.isFinite(n) && localStorage.getItem(`qs.box.${key}`) !== null
-      ? Math.max(0, Math.min(BOX_SIZE, n))
-      : BOX_SIZE;
-  } catch {
-    return BOX_SIZE;
-  }
-}
-function writeBox(key: string, n: number) {
-  try {
-    localStorage.setItem(`qs.box.${key}`, String(n));
-  } catch {
-    /* private mode: the box just refills next visit */
-  }
-}
+const PACK_COLORS = ["#e05a3a", "#4f7cc0", "#5aa469", "#9a6fc0"];
 
 /**
- * A box of packs. Tap one to lift it out, then drag across its top to tear it: the tear follows your
- * finger with rising rip sounds and little buzzes, and past 80 % the top flies off in a burst of paper.
- * When the box is empty, a fresh box slides in.
+ * One pack, handed to you. Drag across its top to tear it: the tear follows your finger with
+ * rising rip sounds and little buzzes, and past 80 % the strip flies off in a burst of paper,
+ * the pack jolts and the cards rise out. A tap tears it too.
  */
-export function PackBox({ open, boxKey, label }: Api & { boxKey: string; label: string }) {
-  const [left, setLeft] = useState(() => readBox(boxKey));
-  const [picked, setPicked] = useState<number | null>(null);
+export function TearPack({ open, label }: Api & { label: string }) {
+  const [color] = useState(() => PACK_COLORS[Math.floor(Math.random() * PACK_COLORS.length)]);
   const [p, setP] = useState(0);
   const [torn, setTorn] = useState(false);
-  const box = useRef<HTMLDivElement>(null);
   const pack = useRef<HTMLDivElement>(null);
   const top = useRef<HTMLButtonElement>(null);
   const burst = useRef<HTMLDivElement>(null);
   const drag = useRef<{ x0: number; w: number; moved: boolean; step: number } | null>(null);
-  const busy = useRef(false);
 
-  async function pick(i: number) {
-    if (busy.current) return;
-    busy.current = true;
+  // The pack is handed over: it slides up from below the counter in pixel steps.
+  useEffect(() => {
     sfx.slide();
-    haptic(8);
-    const el = box.current?.querySelectorAll<HTMLElement>(".pb-slot")[i];
-    if (el)
-      await play(el, [{ transform: "translateY(0)" }, { transform: "translateY(-28px)" }], 160);
-    setPicked(i);
-    say("Ooh, that one. Rip it!");
-    busy.current = false;
-    requestAnimationFrame(() =>
-      play(
-        pack.current,
-        [
-          { transform: "translateY(40px) scale(.55)", opacity: 0 },
-          { transform: "translateY(-6px) scale(1.04)", opacity: 1, offset: 0.7 },
-          { transform: "none", opacity: 1 },
-        ],
-        320,
-        { easing: "cubic-bezier(.2,.9,.3,1)" },
-      ),
+    void play(
+      pack.current,
+      [
+        { transform: "translateY(60px)", opacity: 0 },
+        { transform: "translateY(-8px)", opacity: 1, offset: 0.7 },
+        { transform: "none", opacity: 1 },
+      ],
+      360,
+      { easing: "steps(6, end)" },
     );
-  }
+  }, []);
 
   async function tearOff() {
     if (torn) return;
@@ -84,15 +52,14 @@ export function PackBox({ open, boxKey, label }: Api & { boxKey: string; label: 
     drag.current = null;
     sfx.tearOff();
     haptic(feel.haptic.tear);
-    // The strip flies off, paper bits burst from the tear, the pack jolts.
     void play(
       top.current,
       [
         { transform: "none", opacity: 1 },
-        { transform: "translate(90px,-120px) rotate(38deg)", opacity: 0 },
+        { transform: "translate(90px,-120px) rotate(30deg)", opacity: 0 },
       ],
       feel.tearFlyOff,
-      { easing: "cubic-bezier(.2,.7,.4,1)", fill: "forwards" },
+      { easing: "steps(6, end)", fill: "forwards" },
     );
     Array.from(burst.current?.children ?? []).forEach((el, i) => {
       const a = (i / 14) * Math.PI - Math.PI;
@@ -100,38 +67,36 @@ export function PackBox({ open, boxKey, label }: Api & { boxKey: string; label: 
       void play(
         el,
         [
-          { transform: "translate(0,0) rotate(0)", opacity: 1 },
+          { transform: "translate(0,0)", opacity: 1 },
           {
-            transform: `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r - 20}px) rotate(${i * 47}deg)`,
+            transform: `translate(${Math.round(Math.cos(a) * r)}px, ${Math.round(Math.sin(a) * r - 20)}px)`,
             opacity: 0,
           },
         ],
         520,
-        { easing: "cubic-bezier(.1,.8,.3,1)", fill: "forwards" },
+        { easing: "steps(8, end)", fill: "forwards" },
       );
     });
     await play(
       pack.current,
       [
         { transform: "none" },
-        { transform: "translateX(-6px) rotate(-2deg)" },
-        { transform: "translateX(5px) rotate(1.5deg)" },
+        { transform: "translateX(-6px)" },
+        { transform: "translateX(6px)" },
         { transform: "translateX(-2px)" },
         { transform: "none" },
       ],
-      260,
+      240,
+      { easing: "steps(4, end)" },
     );
     sfx.riffle();
     await play(
       pack.current?.querySelector(".pb-cards"),
-      [{ transform: "translateY(0)" }, { transform: "translateY(-46px)" }],
-      260,
-      { easing: "cubic-bezier(.2,.9,.3,1)", fill: "forwards" },
+      [{ transform: "translateY(0)" }, { transform: "translateY(-54px)" }],
+      280,
+      { easing: "steps(5, end)", fill: "forwards" },
     );
     await wait(160);
-    const n = Math.max(0, left - 1);
-    writeBox(boxKey, n);
-    setLeft(n);
     open();
   }
 
@@ -178,115 +143,54 @@ export function PackBox({ open, boxKey, label }: Api & { boxKey: string; label: 
     else setP(0); // let go too early: the strip springs back
   };
 
-  async function newBox() {
-    if (busy.current) return;
-    busy.current = true;
-    await play(
-      box.current,
-      [{ transform: "none" }, { transform: "translateX(-130%) rotate(-6deg)" }],
-      260,
-      {
-        easing: "cubic-bezier(.5,0,.8,.4)",
-      },
-    );
-    writeBox(boxKey, BOX_SIZE);
-    setLeft(BOX_SIZE);
-    sfx.thud();
-    haptic(feel.haptic.thud);
-    say("Fresh box!");
-    await play(
-      box.current,
-      [
-        { transform: "translateX(130%) rotate(6deg)" },
-        { transform: "translateX(-4%) rotate(-1deg)", offset: 0.75 },
-        { transform: "none" },
-      ],
-      380,
-      { easing: "cubic-bezier(.2,.9,.3,1)" },
-    );
-    busy.current = false;
-  }
-
-  if (picked !== null) {
-    const color = PACK_COLORS[picked % PACK_COLORS.length];
-    return (
-      <div className="op pb-stage">
-        <div ref={pack} className="pb-pack" style={{ "--pc": color, "--p": p } as CSSProperties}>
-          <div className="pb-cards" aria-hidden>
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="pb-body" aria-hidden>
-            <small>quackle.scrapbook</small>
-            <strong>{label}</strong>
-            <span>4 cards</span>
-          </div>
-          <button
-            ref={top}
-            type="button"
-            className="pb-top"
-            onPointerDown={down}
-            onPointerMove={move}
-            onPointerUp={up}
-            onPointerCancel={up}
-            onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && void autoTear()}
-            aria-label="Tear the pack open"
-            data-noswipe
-          >
-            <span className="pb-tear" aria-hidden />
-          </button>
-          <div ref={burst} className="pb-burst" aria-hidden>
-            {Array.from({ length: 14 }, (_, i) => (
-              <i key={i} style={{ left: `${8 + i * 6.3}%` }} />
-            ))}
-          </div>
-        </div>
-        <p className="dk-hint pb-hint">{torn ? " " : "Drag across the top to tear it open →"}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="op pb-stage">
-      <div ref={box} className="pb-box">
-        <div className="pb-slots">
-          {Array.from({ length: BOX_SIZE }, (_, i) => {
-            const there = i < left;
-            return (
-              <button
-                key={i}
-                type="button"
-                className={`pb-slot${there ? "" : " gone"}`}
-                style={{ "--pc": PACK_COLORS[i % PACK_COLORS.length] } as CSSProperties}
-                disabled={!there}
-                onClick={() => void pick(i)}
-                aria-label={there ? `Pick pack ${i + 1}` : "Empty slot"}
-              />
-            );
-          })}
+      <div
+        ref={pack}
+        className={`pb-pack${torn ? " torn" : ""}`}
+        style={{ "--pc": color, "--p": p } as CSSProperties}
+      >
+        <div className="pb-cards" aria-hidden>
+          <i />
+          <i />
+          <i />
         </div>
-        <div className="pb-front">
-          <strong>{label}</strong>
-          <span>
-            {left} / {BOX_SIZE} packs
+        <div className="pb-body" aria-hidden>
+          <span className="pb-star" />
+          <span className="pb-plate">
+            <strong>{label}</strong>
+            <small>4 cards</small>
           </span>
+          <span className="pb-brand">quackle.scrapbook</span>
+        </div>
+        <button
+          ref={top}
+          type="button"
+          className="pb-top"
+          onPointerDown={down}
+          onPointerMove={move}
+          onPointerUp={up}
+          onPointerCancel={up}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && void autoTear()}
+          aria-label="Tear the pack open"
+          data-noswipe
+        >
+          <span className="pb-tear" aria-hidden />
+        </button>
+        <div ref={burst} className="pb-burst" aria-hidden>
+          {Array.from({ length: 14 }, (_, i) => (
+            <i key={i} style={{ left: `${8 + i * 6}%` }} />
+          ))}
         </div>
       </div>
-      {left > 0 ? (
-        <p className="dk-hint pb-hint">Pick a pack.</p>
-      ) : (
-        <button type="button" className="dk-btn primary" onClick={() => void newBox()}>
-          Get a new box
-        </button>
-      )}
+      <p className="dk-hint pb-hint">{torn ? " " : "Drag across the top to tear it open →"}</p>
     </div>
   );
 }
 
-/** The mechanics stall's opener: a box of mechanics packs. */
-export function MechanicPackBox(api: Api) {
-  return <PackBox {...api} boxKey="mechanic" label="Mechanics" />;
+/** The mechanics stall's opener: a pack, handed straight over. */
+export function MechanicPack(api: Api) {
+  return <TearPack {...api} label="Mechanics" />;
 }
 
 // ── Slot lever ──────────────────────────────────────────────────────────────

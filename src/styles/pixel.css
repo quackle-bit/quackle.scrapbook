@@ -2314,3 +2314,252 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ══════════ PIXEL PACK (mechanics): handed over, torn open ══════════ */
+.pb-pack {
+  --p: 0;
+  position: relative;
+  width: 176px;
+  height: 232px;
+  margin-top: 46px;
+}
+.pb-pack:not(.torn) .pb-body,
+.pb-pack:not(.torn) .pb-top {
+  animation: pb-bob 1.6s steps(2, end) infinite;
+}
+@keyframes pb-bob {
+  50% {
+    translate: 0 -2px;
+  }
+}
+.pb-body {
+  position: absolute;
+  inset: 34px 0 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+  border: 0;
+  /* hard pixel foil stripes over the pack colour */
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0 8px, transparent 8px 24px),
+    var(--pc);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    176px calc(100% - 0px),
+    168px calc(100% - 0px),
+    168px calc(100% - 4px),
+    160px calc(100% - 4px),
+    160px calc(100% - 0px),
+    152px calc(100% - 0px),
+    152px calc(100% - 4px),
+    144px calc(100% - 4px),
+    144px calc(100% - 0px),
+    136px calc(100% - 0px),
+    136px calc(100% - 4px),
+    128px calc(100% - 4px),
+    128px calc(100% - 0px),
+    120px calc(100% - 0px),
+    120px calc(100% - 4px),
+    112px calc(100% - 4px),
+    112px calc(100% - 0px),
+    104px calc(100% - 0px),
+    104px calc(100% - 4px),
+    96px calc(100% - 4px),
+    96px calc(100% - 0px),
+    88px calc(100% - 0px),
+    88px calc(100% - 4px),
+    80px calc(100% - 4px),
+    80px calc(100% - 0px),
+    72px calc(100% - 0px),
+    72px calc(100% - 4px),
+    64px calc(100% - 4px),
+    64px calc(100% - 0px),
+    56px calc(100% - 0px),
+    56px calc(100% - 4px),
+    48px calc(100% - 4px),
+    48px calc(100% - 0px),
+    40px calc(100% - 0px),
+    40px calc(100% - 4px),
+    32px calc(100% - 4px),
+    32px calc(100% - 0px),
+    24px calc(100% - 0px),
+    24px calc(100% - 4px),
+    16px calc(100% - 4px),
+    16px calc(100% - 0px),
+    8px calc(100% - 0px),
+    8px calc(100% - 4px),
+    0px calc(100% - 4px)
+  );
+  box-shadow: none;
+  color: var(--ink);
+  filter: drop-shadow(4px 4px 0 var(--ink));
+}
+.pb-body::before {
+  /* ink outline drawn inside the crimp */
+  content: "";
+  position: absolute;
+  inset: 0 0 4px;
+  border: 2px solid var(--ink);
+  border-top: 0;
+  pointer-events: none;
+}
+.pb-plate {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 120px;
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+.pb-plate strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+}
+.pb-plate small {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.pb-brand {
+  font-size: 12px;
+  color: #fff;
+}
+.pb-star {
+  /* a little pixel star sticker */
+  width: 20px;
+  height: 20px;
+  background: var(--amber);
+  clip-path: polygon(
+    40% 0,
+    60% 0,
+    60% 40%,
+    100% 40%,
+    100% 60%,
+    60% 60%,
+    60% 100%,
+    40% 100%,
+    40% 60%,
+    0 60%,
+    0 40%,
+    40% 40%
+  );
+}
+.pb-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 36px;
+  z-index: 3;
+  padding: 0;
+  border: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0 4px, transparent 4px 8px) 0 6px /
+      100% 4px no-repeat,
+    var(--pc);
+  clip-path: polygon(
+    0px 0px,
+    8px 0px,
+    8px 4px,
+    16px 4px,
+    16px 0px,
+    24px 0px,
+    24px 4px,
+    32px 4px,
+    32px 0px,
+    40px 0px,
+    40px 4px,
+    48px 4px,
+    48px 0px,
+    56px 0px,
+    56px 4px,
+    64px 4px,
+    64px 0px,
+    72px 0px,
+    72px 4px,
+    80px 4px,
+    80px 0px,
+    88px 0px,
+    88px 4px,
+    96px 4px,
+    96px 0px,
+    104px 0px,
+    104px 4px,
+    112px 4px,
+    112px 0px,
+    120px 0px,
+    120px 4px,
+    128px 4px,
+    128px 0px,
+    136px 0px,
+    136px 4px,
+    144px 4px,
+    144px 0px,
+    152px 0px,
+    152px 4px,
+    160px 4px,
+    160px 0px,
+    168px 0px,
+    168px 4px,
+    176px 4px,
+    100% 100%,
+    0 100%
+  );
+  transform-origin: 100% 100%;
+  transform: translateY(calc(var(--p) * -6px)) rotate(calc(var(--p) * -6deg));
+  filter: drop-shadow(4px 0 0 var(--ink));
+  cursor: grab;
+  touch-action: none;
+}
+.pb-top::before {
+  content: "";
+  position: absolute;
+  inset: 4px 0 0;
+  border: 2px solid var(--ink);
+  border-bottom: 0;
+  pointer-events: none;
+}
+.pb-top::after {
+  /* dashed "tear here" line */
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 2px;
+  height: 2px;
+  border: 0;
+  background: repeating-linear-gradient(90deg, #fff 0 6px, transparent 6px 10px);
+}
+.pb-tear {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: calc(var(--p) * 100%);
+  background: var(--ink);
+  clip-path: none;
+}
+.pb-cards {
+  top: 34px;
+}
+.pb-cards i {
+  transform: none !important;
+}
+.pb-cards i:nth-child(2) {
+  translate: -6px 4px;
+}
+.pb-cards i:nth-child(3) {
+  translate: 6px 8px;
+}
+.pb-burst i {
+  border: 0;
+  width: 6px;
+  height: 6px;
+}
+.dk[data-rm="1"] .pb-pack * {
+  animation: none !important;
+}
