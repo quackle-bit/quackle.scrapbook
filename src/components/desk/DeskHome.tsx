@@ -38,7 +38,7 @@ export function DeskHome() {
 
   function start() {
     const id = scrapbookStore.createScrapbook();
-    router.push(`/scrapbook?id=${id}&page=setup`);
+    router.push(`/book?id=${id}&page=setup`);
   }
 
   return (
@@ -76,7 +76,7 @@ export function DeskHome() {
             ref={bookRef}
             type="button"
             className="cv-book"
-            onClick={() => (last ? router.push(`/scrapbook?id=${last.id}`) : start())}
+            onClick={() => (last ? router.push(`/book?id=${last.id}`) : start())}
             disabled={!ready}
             aria-label={last ? `Open ${last.name.trim() || "your scrapbook"}` : "Start a scrapbook"}
           >
@@ -101,7 +101,7 @@ export function DeskHome() {
 
         <div className="dk-desk-actions">
           {ready && last ? (
-            <Link className="dk-btn primary" href={`/scrapbook?id=${last.id}`}>
+            <Link className="dk-btn primary" href={`/book?id=${last.id}`}>
               Continue
             </Link>
           ) : (
@@ -124,7 +124,7 @@ export function DeskHome() {
                 onClick={() => {
                   const id = importOldSpreads(old.book.spreads);
                   markImportDone();
-                  if (id) router.push(`/scrapbook?id=${id}&page=close`);
+                  if (id) router.push(`/book?id=${id}&page=close`);
                 }}
               >
                 Import {oldCount === 1 ? "it" : "them"}
@@ -180,7 +180,7 @@ export function DeskHome() {
                 {PAGES.length} pages
               </small>
               <div className="dk-row">
-                <Link className="dk-btn small primary" href={`/scrapbook?id=${s.id}`}>
+                <Link className="dk-btn small primary" href={`/book?id=${s.id}`}>
                   Open
                 </Link>
                 <button type="button" className="dk-btn small" onClick={() => setRenaming(s.id)}>

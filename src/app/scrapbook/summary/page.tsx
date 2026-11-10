@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { SummaryRoute } from "@/components/summary/SummaryRoute";
+import { Forward } from "@/components/ui/Forward";
 
-export const metadata: Metadata = { title: "Pitch · Quackle Scrapbook" };
-
-export default function SummaryPage() {
-  return (
-    <Suspense fallback={null}>
-      <SummaryRoute />
-    </Suspense>
-  );
+/** Old address (…/scrapbook/scrapbook/summary?id=…): the pitch now lives at /pitch. */
+export default function OldSummaryPage() {
+  return <Forward to="/pitch" />;
 }

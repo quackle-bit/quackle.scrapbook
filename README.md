@@ -5,15 +5,14 @@ A cozy desk for game ideas, by [Quackle.bit](https://quacklebit.com). Lives at
 something, stamp it into your scrapbook, and end up with a game pitch your team can read, compare and
 vote on. **Less thinking. More tinkering.**
 
-| Route                             | What                                                                                 |
-| --------------------------------- | ------------------------------------------------------------------------------------ |
-| `/`                               | **The Desk**: Continue / New scrapbook / My scrapbooks, radio, settings              |
-| `/scrapbook?id=&page=`            | The scrapbook: 12 pages (setup, identity, playground, atmosphere, production, close) |
-| `/scrapbook/summary?id=&concept=` | The pitch spread: edit links, save as pitched, export image / PDF / text, share link |
-| `/wall?id=`                       | **Pitch Wall**: browse pitches, compare, local voting rounds, comments               |
-| `/s#…`                            | A shared, read-only pitch (the pitch lives in the link itself)                       |
-| `/about`                          | What it is and how it works                                                          |
-| `/studio`, `/jam`, `/play?mode=`  | Studio library, Jam rooms and their streets (from the first version, unchanged)      |
+| Route (under `/scrapbook` when published) | What                                                                         |
+| ----------------------------------------- | ---------------------------------------------------------------------------- |
+| `/`                                       | The cover: Continue, your scrapbooks, radio, settings                        |
+| `/book?id=&page=`                         | The scrapbook: 10 pages from your jam to closing the book                    |
+| `/pitch?id=`                              | The pitch document: share image, link, text, print; asset list & notes       |
+| `/s#…`                                    | A shared, read-only pitch (the pitch lives in the link itself)               |
+| `/about`, `/jam-kit`                      | About quackle.bit, and a printable poster for jam organisers                 |
+| `/studio`, `/jam`, `/wall`                | Studio, Jam rooms, Pitch Wall (need a server; not in the GitHub Pages build) |
 
 ## Run it
 

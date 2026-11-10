@@ -103,7 +103,7 @@ export function ClosePage({ book, concept, page, goTo }: PageCtx) {
             setForging(false);
             // Forging stamps it: the pitch (and its image) shows PITCHED.
             scrapbookStore.updateConcept(concept.id, { status: "pitched" });
-            router.push(`/scrapbook/summary?id=${book.id}&concept=${concept.id}`);
+            router.push(`/pitch?id=${book.id}`);
           }}
           onClose={() => setForging(false)}
         />

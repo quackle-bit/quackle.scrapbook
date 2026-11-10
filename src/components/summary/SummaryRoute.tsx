@@ -49,7 +49,7 @@ export function SummaryRoute() {
     setNote(t);
     setTimeout(() => setNote(null), 2600);
   };
-  const editHref = (page: PageId) => `/scrapbook?id=${book.id}&page=${page}`;
+  const editHref = (page: PageId) => `/book?id=${book.id}&page=${page}`;
   const fname = slug(model.title || "game-pitch");
 
   /** The pitch card as a PNG file (1080×1350). */
@@ -122,7 +122,7 @@ export function SummaryRoute() {
     <DeskRoot className="dk-summary">
       <header className="dk-topbar no-print">
         <Link
-          href={`/scrapbook?id=${book.id}&page=close`}
+          href={`/book?id=${book.id}&page=close`}
           className="dk-icon-btn"
           aria-label="Back to the scrapbook"
         >

@@ -221,10 +221,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </nav>
 
       <BottomSheet open={sheet} title="Pages" onClose={() => setSheet(false)}>
-        <Link
-          className="dk-btn primary dk-sheet-pitch"
-          href={`/scrapbook/summary?id=${book.id}&concept=${concept.id}`}
-        >
+        <Link className="dk-btn primary dk-sheet-pitch" href={`/pitch?id=${book.id}`}>
           View pitch
         </Link>
 

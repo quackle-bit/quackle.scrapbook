@@ -21,10 +21,9 @@ const nextConfig: NextConfig = {
     : {
         // Dev only: let phones on the local network load the dev server (e.g. http://192.168.x.x:3000).
         allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "*.local"],
-        // The old street and book are retired. /play stays only for the Studio and Jam streets (?mode=).
+        // The old street is retired. /play stays only for the Studio and Jam streets (?mode=).
         async redirects() {
           return [
-            { source: "/book", destination: "/", permanent: false },
             { source: "/prototype", destination: "/", permanent: false },
             {
               source: "/play",

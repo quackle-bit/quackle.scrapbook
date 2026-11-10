@@ -94,7 +94,7 @@ export function PitchWallRoute() {
     <DeskRoot className="dk-summary">
       <header className="dk-topbar">
         <Link
-          href={`/scrapbook?id=${book.id}&page=close`}
+          href={`/book?id=${book.id}&page=close`}
           className="dk-icon-btn"
           aria-label="Back to the scrapbook"
         >
@@ -294,10 +294,7 @@ export function PitchWallRoute() {
               {drafts.map((c) => (
                 <li key={c.id} style={{ gridTemplateColumns: "1fr auto" }}>
                   <strong>{models[c.id]?.title || "Untitled concept"}</strong>
-                  <Link
-                    className="dk-btn small"
-                    href={`/scrapbook/summary?id=${book.id}&concept=${c.id}`}
-                  >
+                  <Link className="dk-btn small" href={`/pitch?id=${book.id}`}>
                     Open pitch
                   </Link>
                 </li>

@@ -1,14 +1,6 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { ScrapbookRoute } from "@/components/scrapbook/ScrapbookRoute";
+import { Forward } from "@/components/ui/Forward";
 
-export const metadata: Metadata = { title: "Scrapbook · Quackle Scrapbook" };
-
-export default function ScrapbookPage() {
-  // ?id=…&page=… are read on the client (inside Suspense) so the page stays static.
-  return (
-    <Suspense fallback={null}>
-      <ScrapbookRoute />
-    </Suspense>
-  );
+/** Old address (…/scrapbook/scrapbook?id=…): the scrapbook now lives at /book. */
+export default function OldScrapbookPage() {
+  return <Forward to="/book" />;
 }
