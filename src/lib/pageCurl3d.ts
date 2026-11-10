@@ -50,14 +50,17 @@ function build(T: Three, w: number, h: number): Scene {
   sun.position.set(-0.5, 0.4, 1.4);
   scene.add(sun);
   const geo = new T.PlaneGeometry(1, 1, COLS, ROWS);
-  const mat = new T.MeshLambertMaterial({ color: PAPER, side: T.DoubleSide });
+  const mat = new T.MeshLambertMaterial({ color: PAPER, side: T.DoubleSide, transparent: true });
   const mesh = new T.Mesh(geo, mat);
   scene.add(mesh);
   // Ink outline around the sheet (the book's pixel look), following the curl.
   const ring = (COLS + 1) * 2 + (ROWS - 1) * 2;
   const edgeGeo = new T.BufferGeometry();
   edgeGeo.setAttribute("position", new T.BufferAttribute(new Float32Array(ring * 3), 3));
-  const edge = new T.LineLoop(edgeGeo, new T.LineBasicMaterial({ color: 0x24211f }));
+  const edge = new T.LineLoop(
+    edgeGeo,
+    new T.LineBasicMaterial({ color: 0x24211f, transparent: true }),
+  );
   scene.add(edge);
   const camera = new T.PerspectiveCamera(30, 1, 1, 10000);
   return { T, renderer, scene, camera, mesh, geo, edge, w, h };
@@ -100,6 +103,11 @@ function shape(s: Scene, p: number) {
   }
   pos.needsUpdate = true;
   geo.computeVertexNormals();
+  // Past upright the sheet fades out, so it never lies over the left page (the page index on PC).
+  const fade = Math.max(0, Math.min(1, 1 - (p - 0.5) / 0.22));
+  (s.mesh.material as import("three").Material).opacity = fade;
+  (s.edge.material as import("three").Material).opacity = fade;
+  s.mesh.visible = s.edge.visible = fade > 0.01;
   // Outline: top row left→right, right column down, bottom row right→left, left column up.
   const ring = s.edge.geometry.attributes.position;
   let k = 0;
