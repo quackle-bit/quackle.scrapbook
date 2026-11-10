@@ -52,7 +52,9 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
       const anims: Animation[] = [];
       const extra: Animation[] = [];
       if (leaf) {
-        anims.push(leaf.animate({ transform: fwd ? [flat, lifted, over] : [over, lifted, flat] }, opts));
+        anims.push(
+          leaf.animate({ transform: fwd ? [flat, lifted, over] : [over, lifted, flat] }, opts),
+        );
         // Past upright you see the back of the page, not its front.
         const back = leaf.querySelector<HTMLElement>(".dk-leaf-back");
         const b = back?.animate(
@@ -66,7 +68,9 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
         );
         if (b) extra.push(b);
         // Light rolls across the leaf as it bends.
-        const sh = leaf.querySelector<HTMLElement>(".dk-leaf-shade")?.animate({ opacity: [0, 0.9, 0] }, opts);
+        const sh = leaf
+          .querySelector<HTMLElement>(".dk-leaf-shade")
+          ?.animate({ opacity: [0, 0.5, 0] }, opts);
         if (sh) extra.push(sh);
       }
       // The page underneath sits in the leaf's shadow until it's uncovered.

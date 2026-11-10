@@ -10,7 +10,7 @@ import { settings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
 import { say, sayRandom } from "../Duck";
 import { KEEPERS, pickLine } from "../feel/keepers";
-import { FoldedMap, GearPress, ShellGame, TailorReels, TarotSpread } from "../feel/openers";
+import { FoldedMap, GearPress, ShellGame, TailorReels } from "../feel/openers";
 
 type Props = {
   type: CardType;
@@ -42,7 +42,6 @@ type Props = {
 const OPENERS: Partial<Record<CardType, typeof GearPress>> = {
   mechanic: GearPress,
   setting: FoldedMap,
-  mood: TarotSpread,
   visual: TailorReels,
   twist: ShellGame,
 };

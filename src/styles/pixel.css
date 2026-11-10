@@ -1066,3 +1066,14 @@
 .dk-stage {
   overflow: clip;
 }
+
+/* Starting pose of a turn, so nothing flashes before the animation picks it up. */
+.turn-fwd .dk-under .dk-leaf-dim {
+  opacity: 0.55;
+}
+.turn-back .dk-moving {
+  transform: perspective(1800px) rotateY(-180deg);
+}
+.turn-back .dk-moving .dk-leaf-back {
+  opacity: 1;
+}

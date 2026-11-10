@@ -139,7 +139,10 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </header>
 
       <main className="dk-stage">
-        <div ref={binding} className={`dk-binding${active ? " turning" : ""}`}>
+        <div
+          ref={binding}
+          className={`dk-binding${active ? (active.dir === 1 ? " turning turn-fwd" : " turning turn-back") : ""}`}
+        >
           <div className="dk-stack" aria-hidden />
           {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
             const moving = active && i === (active.dir === 1 ? active.from : active.to);
