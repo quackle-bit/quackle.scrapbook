@@ -9,8 +9,8 @@ For the session that copies this project into the website repo and pushes it.
 ## What to copy
 
 - **Source:** `/Users/rendyrayana/Documents/GitHub/quackle.scrapbook`, branch **`phase-10-pixel`** (the latest work; `main` is
-  56 commits behind and was never merged into). Nothing has been pushed from here.
-- **Copy only tracked files** (198 files). The simplest way is to export the branch, which skips everything git-ignored:
+  78 commits behind and was never merged into). Nothing has been pushed from here.
+- **Copy only tracked files** (204 files). The simplest way is to export the branch, which skips everything git-ignored:
 
 ```bash
 mkdir -p /path/to/web-repo/scrapbook
@@ -55,7 +55,10 @@ npm ci
 npm run typecheck && npm run lint && npm run content:lint && npm run build
 ```
 
-All four pass on `phase-10-pixel` (lint has 15 warnings, 0 errors).
+All four pass on `phase-10-pixel` (lint has 15 warnings, 0 errors). `npm ci` installs everything from
+`package-lock.json`, including the packages added recently (all pinned to exact versions): `lucide-react` (icons),
+`qrcode-generator` (QR code on the share image and jam kit) and `three` (the 3D page turn, loaded only on the first
+page turn).
 
 ## Hosting on GitHub Pages (not done yet)
 
@@ -67,6 +70,10 @@ links) runs fully in the browser and stores data in localStorage, so it can be s
 - `src/app/auth`, `src/app/studio` (login and the Studio library, via Supabase)
 - `src/app/jam` (Jam rooms, via Supabase)
 - `src/app/wall` (the Pitch Wall; already unlinked, local-only)
+
+These are static and fine on GitHub Pages: the cover, the 10 scrapbook pages, the pitch page and share image, `/s`
+(share links), `/about`, `/jam-kit` (printable poster) and the link-preview images (`opengraph-image.tsx`,
+`twitter-image.tsx`, drawn at build time).
 
 To deploy there, the app needs a static export (`output: "export"` in `next.config.ts`, a `basePath` matching the repo
 path, and the server-only routes above removed or moved out). That work has not been started.
@@ -89,6 +96,15 @@ This build passes. Local dev needs nothing: without the variable the app runs at
 
 ## Where things stand
 
-See `PROGRESS.md` (Phase 10 and 10.7+) for what was built and the known gaps. The latest commit on the branch is the
-blank-sheet page turn (content fades out, a blank sheet swings, new content fades in), which still needs checking on a
-real phone for the old blink.
+See `PROGRESS.md` for what was built and the known gaps. Highlights since the last handoff:
+
+- **Page turn:** content fades out, the page switches, a 3D paper sheet (three.js, `src/lib/pageCurl3d.ts`) curls over
+  the spine and fades past it, then the new content fades in. Needs a check on a real phone for the old blink.
+  `window.__curlSlow = 10` in the console plays turns in slow motion (dev builds only).
+- **Studio:** studio name, links and games live in `src/lib/studio.ts` (About page, duck lines, after-forge link, share
+  image footer, jam kit). Socials are one link to quacklebit.com/social.
+- **Pitch:** a formal pitch document with a red PITCHED seal; Share pitch image exports that same document with a QR code
+  and `#quackleScrapbook`.
+- **PC layout (900 px+ only, phones unchanged):** the scrapbook opens as a two-page spread on the green cutting mat, with
+  a page index on the left, card-sized packs centred in the page and toys drawn at 1.5×.
+- **Bigger decks:** about 1,170 cards across 9 decks; `npm run content:lint` enforces the minimums.
