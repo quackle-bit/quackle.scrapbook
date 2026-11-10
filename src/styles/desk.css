@@ -2606,3 +2606,279 @@ textarea.dk-input {
 .turning .dk-corner {
   visibility: hidden;
 }
+
+/* ══════════ REWARDS: page stamps, stickers, receipt, forge ══════════ */
+.dk-stamps {
+  display: flex;
+  gap: 3px;
+  margin-top: 3px;
+}
+.dk-stamps i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(244, 207, 138, 0.45);
+}
+.dk-stamps i.on {
+  border: 2px solid var(--amber-soft);
+  background: radial-gradient(circle, transparent 35%, rgba(244, 207, 138, 0.35) 36%);
+}
+.dk-stamps i.full {
+  border-color: var(--amber);
+  background: var(--amber);
+  box-shadow: inset 0 0 0 2px rgba(42, 29, 22, 0.35);
+}
+.dk-stamps i.here {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 1px;
+}
+.dk-stamps i.fresh {
+  animation: dk-stamp-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+@keyframes dk-stamp-in {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+}
+.dk-sticker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.dk-sticker {
+  --sc: var(--amber);
+  display: inline-grid;
+  place-items: center;
+  min-height: 34px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--sc);
+  color: #2a1d16;
+  font:
+    800 13px var(--font-ui),
+    sans-serif;
+  box-shadow:
+    0 0 0 3px #fffdf6,
+    0 3px 8px rgba(0, 0, 0, 0.25);
+  rotate: -3deg;
+}
+.dk-sticker:nth-child(even) {
+  rotate: 2deg;
+}
+.dk-sticker.s-identity {
+  --sc: #e8a849;
+}
+.dk-sticker.s-playground {
+  --sc: #8fb07a;
+}
+.dk-sticker.s-atmosphere {
+  --sc: #9fb4d4;
+}
+.dk-sticker.s-production {
+  --sc: #e09a7f;
+}
+.dk-sticker.missing {
+  background: transparent;
+  color: var(--ink-soft);
+  box-shadow: inset 0 0 0 2px dashed;
+  border: 2px dashed var(--line);
+  rotate: 0deg;
+}
+.dk-sticker-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 12, 8, 0.35);
+}
+.dk-sticker.big {
+  gap: 2px;
+  padding: 26px 34px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  text-align: center;
+  box-shadow:
+    0 0 0 6px #fffdf6,
+    0 14px 30px rgba(0, 0, 0, 0.4);
+  animation: dk-slap 0.55s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+.dk-sticker.big strong {
+  font:
+    700 24px var(--font-display),
+    serif;
+}
+.dk-sticker.big small {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@keyframes dk-slap {
+  0% {
+    transform: scale(2.4) rotate(-25deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.92) rotate(-6deg);
+    opacity: 1;
+  }
+}
+.dk-forge-btn {
+  min-height: 56px;
+  font-size: 17px;
+}
+.dk-receipt {
+  justify-self: center;
+  width: min(300px, 100%);
+  padding: 18px 18px 26px;
+  background: #fffefa;
+  color: #3a3330;
+  font:
+    600 14px ui-monospace,
+    "SF Mono",
+    Menlo,
+    monospace;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 8px),
+    95% 100%,
+    90% calc(100% - 8px),
+    85% 100%,
+    80% calc(100% - 8px),
+    75% 100%,
+    70% calc(100% - 8px),
+    65% 100%,
+    60% calc(100% - 8px),
+    55% 100%,
+    50% calc(100% - 8px),
+    45% 100%,
+    40% calc(100% - 8px),
+    35% 100%,
+    30% calc(100% - 8px),
+    25% 100%,
+    20% calc(100% - 8px),
+    15% 100%,
+    10% calc(100% - 8px),
+    5% 100%,
+    0 calc(100% - 8px)
+  );
+  rotate: 1deg;
+}
+.dk-receipt-head,
+.dk-receipt-foot {
+  text-align: center;
+  line-height: 1.5;
+}
+.dk-receipt dl {
+  margin: 12px 0;
+  padding: 10px 0;
+  border-block: 2px dashed #c9c0b4;
+  display: grid;
+  gap: 4px;
+}
+.dk-receipt dl div {
+  display: flex;
+  justify-content: space-between;
+}
+.dk-receipt dd {
+  margin: 0;
+}
+.dk-forge {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, rgba(70, 40, 20, 0.85), rgba(15, 9, 5, 0.95));
+}
+.dk-forge-ring {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+.dk-forge-ring span {
+  position: absolute;
+  left: -60px;
+  top: -20px;
+  width: 120px;
+  padding: 8px;
+  background: #fffdf6;
+  color: var(--ink);
+  font:
+    700 13px var(--font-ui),
+    sans-serif;
+  text-align: center;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+.dk-forge-flash {
+  position: fixed;
+  inset: 0;
+  background: #fff6dd;
+  opacity: 0;
+  pointer-events: none;
+}
+.dk-forge-done {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+.dk-polaroid {
+  margin: 0;
+  width: min(280px, 80vw);
+  padding: 14px 14px 0;
+  background: #fffdf8;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  rotate: -3deg;
+  animation: dk-land 0.6s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+.dk-polaroid-pic {
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 18px;
+  text-align: center;
+  color: #fff8e8;
+  background:
+    linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.25) 45%, transparent 60%),
+    linear-gradient(160deg, var(--terra), var(--burg) 60%, #3a2a40);
+}
+.dk-polaroid-pic strong {
+  font:
+    700 28px var(--font-display),
+    serif;
+  line-height: 1.1;
+}
+.dk-polaroid-pic span {
+  font-style: italic;
+  opacity: 0.9;
+}
+.dk-polaroid figcaption {
+  padding: 14px 4px 18px;
+  text-align: center;
+  font:
+    600 22px var(--font-hand, cursive),
+    cursive;
+  color: var(--ink);
+}
+@keyframes dk-land {
+  0% {
+    transform: scale(1.6) rotate(12deg);
+    opacity: 0;
+  }
+}
+.dk[data-rm="1"] .dk-stamps i.fresh,
+.dk[data-rm="1"] .dk-sticker.big,
+.dk[data-rm="1"] .dk-polaroid {
+  animation: none;
+}

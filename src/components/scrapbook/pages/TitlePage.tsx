@@ -102,6 +102,7 @@ export function TitlePage({ book, concept, page }: PageCtx) {
           keepLabel="Add to title"
           keptLabel="✓ In your title"
           onOpened={() => scrapbookStore.countPack(book.id)}
+          onTrashed={() => scrapbookStore.countTrash(book.id)}
         />
       </section>
 

@@ -25,6 +25,8 @@ type Props = {
   onToggleFavorite: (c: InspirationCard) => void;
   onAddCustom?: (c: { title: string; description: string }) => void;
   onOpened?: () => void;
+  /** A card went in the bin (progress: cards trashed). */
+  onTrashed?: () => void;
   canFavorite?: boolean;
   keepLabel?: string;
   keptLabel?: string;
@@ -44,6 +46,7 @@ export function BoosterPack({
   onToggleKeep,
   onAddCustom,
   onOpened,
+  onTrashed,
   keepLabel = "Stick it in",
 }: Props) {
   const keeper = KEEPERS[type];
@@ -150,6 +153,7 @@ export function BoosterPack({
             },
             onTrash: (c) => {
               setBin((b) => [c, ...b]);
+              onTrashed?.();
               setLine(pickLine(keeper.trashed));
               sayRandom("trash");
               void play(

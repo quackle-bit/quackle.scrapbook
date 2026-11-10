@@ -106,7 +106,12 @@ export type Scrapbook = {
   /** Cards kept so far; shared by every concept so they can be reused. */
   collected: CollectedCard[];
   /** Progress never decreases. */
-  progress: { visitedPages: PageId[]; packsOpened: number; lastPage?: PageId };
+  progress: {
+    visitedPages: PageId[];
+    packsOpened: number;
+    cardsTrashed?: number;
+    lastPage?: PageId;
+  };
   createdAt: string;
   updatedAt: string;
 };

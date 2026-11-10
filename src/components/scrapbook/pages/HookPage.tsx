@@ -59,6 +59,7 @@ export function HookPage({ book, concept, page }: PageCtx) {
         onToggleFavorite={(c) => toggleFavorite(book.id, "twist", c)}
         onAddCustom={(c) => addCustom(book.id, concept.id, "twist", c)}
         onOpened={() => scrapbookStore.countPack(book.id)}
+        onTrashed={() => scrapbookStore.countTrash(book.id)}
       />
 
       <section className="dk-block">

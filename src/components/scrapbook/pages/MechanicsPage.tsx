@@ -38,6 +38,7 @@ export function MechanicsPage({ book, concept, page }: PageCtx) {
         onToggleFavorite={(c) => toggleFavorite(book.id, "mechanic", c)}
         onAddCustom={(c) => addCustom(book.id, concept.id, "mechanic", c)}
         onOpened={() => scrapbookStore.countPack(book.id)}
+        onTrashed={() => scrapbookStore.countTrash(book.id)}
       />
       <section className="dk-block">
         <h3>On this page{mine.length ? ` (${mine.length})` : ""}</h3>

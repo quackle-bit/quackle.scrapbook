@@ -1,8 +1,11 @@
 "use client";
 
 import { DuckBubble } from "../feel/DuckBubble";
+import { PageStamps, StickerPop, StickerRow } from "../feel/Rewards";
+import { earnedStickers, filledPages, type StickerId } from "@/lib/scrapbook/rewards";
+import { sfx } from "@/lib/sound";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { scrapbookStore, useScrapbook } from "@/lib/scrapbook/store";
 import type { PageId } from "@/lib/scrapbook/types";
 import { RadioButton } from "../radio/Radio";
@@ -21,6 +24,9 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
     return i >= 0 ? i : -1;
   });
   const [sheet, setSheet] = useState(false);
+  const [fresh, setFresh] = useState<PageId | null>(null);
+  const [pop, setPop] = useState<StickerId | null>(null);
+  const lastEarned = useRef<{ concept: string; ids: StickerId[] } | null>(null);
 
   // First render: pick the start page (URL, else where the user left off, else the first page).
   useEffect(() => {
@@ -33,12 +39,39 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
   useEffect(() => {
     if (!book || index < 0) return;
     scrapbookStore.open(book.id);
+    if (!book.progress.visitedPages.includes(page.id)) {
+      // First time on this page: it gets stamped in the top bar.
+      setFresh(page.id);
+      sfx.tick();
+    }
     scrapbookStore.visitPage(book.id, page.id);
     const url = new URL(window.location.href);
     url.searchParams.set("id", book.id);
     url.searchParams.set("page", page.id);
     window.history.replaceState(null, "", url);
   }, [book, index, page.id]);
+
+  // A sticker pops when a whole part of the scrapbook gets filled in (not on load, not on switching concept).
+  const earned = useMemo(
+    () => (book && concept ? earnedStickers(book, concept) : []),
+    [book, concept],
+  );
+  const filled = useMemo(
+    () => (book && concept ? filledPages(book, concept) : new Set<PageId>()),
+    [book, concept],
+  );
+  useEffect(() => {
+    if (!concept) return;
+    const prev = lastEarned.current;
+    lastEarned.current = { concept: concept.id, ids: earned };
+    if (!prev || prev.concept !== concept.id) return;
+    const gained = earned.find((id) => !prev.ids.includes(id));
+    if (gained) {
+      const t = setTimeout(() => setPop(gained), 0);
+      return () => clearTimeout(t);
+    }
+  }, [earned, concept]);
+  const closePop = useCallback(() => setPop(null), []);
 
   const set = useCallback((i: number) => setIndex(i), []);
   const {
@@ -81,8 +114,6 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </DeskRoot>
     );
 
-  const explored = book.progress.visitedPages.length;
-
   return (
     <DeskRoot className="dk-shell">
       <header className="dk-topbar">
@@ -91,9 +122,13 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         </Link>
         <div className="dk-title">
           <strong>{book.name.trim() || "Untitled scrapbook"}</strong>
-          <small>
-            {explored} / {PAGES.length} pages explored
-          </small>
+          <PageStamps
+            pages={PAGES}
+            visited={book.progress.visitedPages}
+            filled={filled}
+            current={page.id}
+            fresh={fresh}
+          />
         </div>
         <RadioButton />
         <SettingsButton />
@@ -183,6 +218,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </nav>
 
       <BottomSheet open={sheet} title="Pages" onClose={() => setSheet(false)}>
+        <StickerRow earned={earned} />
         <div className="dk-index">
           {groups.map((g) => (
             <div key={g.name}>
@@ -212,6 +248,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           ))}
         </div>
       </BottomSheet>
+      {pop && <StickerPop id={pop} onDone={closePop} />}
       <DuckBubble />
     </DeskRoot>
   );

@@ -116,6 +116,7 @@ export function GenrePage({ book, concept, page }: PageCtx) {
           )
         }
         onOpened={() => scrapbookStore.countPack(book.id)}
+        onTrashed={() => scrapbookStore.countTrash(book.id)}
       />
       <CollectionShelf
         cards={others}

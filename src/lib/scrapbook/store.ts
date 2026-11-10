@@ -178,6 +178,18 @@ export const scrapbookStore = {
     });
   },
 
+  countTrash(id: string) {
+    load();
+    commit({
+      ...state,
+      scrapbooks: state.scrapbooks.map((s) =>
+        s.id === id
+          ? { ...s, progress: { ...s.progress, cardsTrashed: (s.progress.cardsTrashed ?? 0) + 1 } }
+          : s,
+      ),
+    });
+  },
+
   // ── Concepts ────────────────────────────────────────────────
   updateConcept(id: string, patch: Partial<Omit<Concept, "id" | "scrapbookId">>) {
     load();

@@ -110,6 +110,7 @@ export function MoodPage({ book, concept, page }: PageCtx) {
         onToggleFavorite={(c) => toggleFavorite(book.id, type, c)}
         onAddCustom={(c) => addCustom(book.id, concept.id, tab.id, c)}
         onOpened={() => scrapbookStore.countPack(book.id)}
+        onTrashed={() => scrapbookStore.countTrash(book.id)}
         keepLabel="Pin it"
         keptLabel="✓ Pinned (undo)"
       />
