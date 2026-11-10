@@ -84,8 +84,10 @@ Starter banks (~200 entries) in `data/vocab`, `npm run vocab:lint`, `npm run voc
 - Page turns and the forge still use the earlier animation code.
 
 ## Phase 7 — The pitch (branch `phase-7-pitch`)
+
 Every walk now produces a **pitch** in one readable shape (see `docs/pitch-structure.md`):
 title · tagline · genre · platform · details (short keyword lines: mechanic, world, mood, look, twist, rule, seed) · notes.
+
 - Free order: open **Pitch** from the bottom bar anytime; tap a detail's 🎴 to walk straight to its stall; skip anything; type over any line. Filling one line never changes another.
 - Title: type or 🎰 spin (names from your own keywords). Tagline: type or ✎ draft from the details. Genre/Platform: pick chips (itch.io genres) or 🎰 spin — you choose in the end. Notes: spark answers drop in automatically.
 - New last stop on every street: **the Pitch Desk** (full editor + live card + copy as Markdown / itch.io text / save image).

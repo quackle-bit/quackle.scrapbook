@@ -1,0 +1,836 @@
+/* Quackle Scrapbook: the cozy desk. Mobile-first. Every rule is scoped under .dk so the
+   older pages (Studio, Jam) keep their own look until they're retired. */
+
+.dk {
+  --walnut: #3b2a20;
+  --walnut-2: #2a1d16;
+  --walnut-3: #4a362a;
+  --amber: #e8a849;
+  --amber-soft: #f4cf8a;
+  --cream: #f3ead8;
+  --paper: #faf4e6;
+  --paper-2: #f1e8d4;
+  --olive: #7b7f4a;
+  --dusty: #6f8aa3;
+  --terra: #c4623f;
+  --burg: #7d2e3b;
+  --ink: #2e2621;
+  --ink-soft: #6a5d52;
+  --line: #d8cdb6;
+  --shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 8px 18px rgba(20, 12, 8, 0.35);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --wood: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.55' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.07 0 0 0 0 0.04 0 0 0 0.55 -0.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+
+  min-height: 100dvh;
+  color: var(--ink);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+  background: var(--walnut-2);
+  -webkit-tap-highlight-color: transparent;
+}
+.dk *,
+.dk *::before,
+.dk *::after {
+  box-sizing: border-box;
+}
+.dk h1,
+.dk h2,
+.dk h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+.dk p {
+  margin: 0;
+}
+.dk button,
+.dk input,
+.dk textarea,
+.dk select {
+  font: inherit;
+  color: inherit;
+}
+.dk button {
+  cursor: pointer;
+}
+.dk :focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+.dk[data-rm="1"] *,
+.dk[data-rm="1"] *::before,
+.dk[data-rm="1"] *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ── Buttons & controls ─────────────────────────────────── */
+.dk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 17px;
+  background: var(--paper);
+  color: var(--ink) !important;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  transition: transform 0.08s;
+}
+.dk-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+.dk-btn.primary {
+  background: var(--amber);
+}
+.dk-btn.terra {
+  background: var(--terra);
+  color: #fff !important;
+}
+.dk-btn.ghost {
+  background: transparent;
+  box-shadow: none;
+  border: 2px solid currentColor;
+  color: inherit !important;
+}
+.dk-btn.small {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 15px;
+}
+.dk-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.dk-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--cream);
+  font-size: 20px;
+}
+.paper .dk-icon-btn,
+.dk-sheet .dk-icon-btn {
+  background: rgba(0, 0, 0, 0.07);
+  color: var(--ink);
+}
+.dk-icon-btn.playing {
+  background: var(--amber);
+  color: var(--ink);
+}
+.dk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dk-chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink) !important;
+}
+.dk-chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper) !important;
+}
+.dk-field {
+  display: grid;
+  gap: 6px;
+}
+.dk-field > span,
+.dk-label {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+}
+.dk-field small {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+.dk-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf7;
+  font-size: 17px;
+  color: var(--ink);
+}
+textarea.dk-input {
+  min-height: 96px;
+  resize: vertical;
+}
+.dk-input:focus {
+  border-color: var(--amber);
+}
+.dk-hint {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.dk-eyebrow {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+.dk-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  font-weight: 600;
+}
+.dk-switch input {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--terra);
+}
+.dk-slider {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+}
+.dk-slider input {
+  width: 100%;
+  height: 32px;
+  accent-color: var(--terra);
+}
+
+/* ── Paper ──────────────────────────────────────────────── */
+.dk-paper,
+.paper {
+  background: var(--grain), var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+/* ── Bottom sheet ───────────────────────────────────────── */
+.dk-sheet-back {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(20, 12, 8, 0.6);
+  animation: dk-fade 0.18s ease-out;
+}
+.dk-sheet {
+  width: min(560px, 100%);
+  max-height: 86dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--grain), var(--paper);
+  color: var(--ink);
+  border-radius: 20px 20px 0 0;
+  padding: 8px 18px calc(18px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
+  animation: dk-rise 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+  outline: none;
+}
+.dk-sheet-grab {
+  width: 44px;
+  height: 5px;
+  margin: 4px auto 8px;
+  border-radius: 3px;
+  background: var(--line);
+}
+.dk-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+.dk-sheet-head h2 {
+  font-size: 22px;
+}
+.dk-sheet-body {
+  overflow-y: auto;
+  display: grid;
+  gap: 14px;
+  padding-bottom: 6px;
+}
+@keyframes dk-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dk-rise {
+  from {
+    transform: translateY(40px);
+    opacity: 0.4;
+  }
+}
+
+/* ── Radio panel ────────────────────────────────────────── */
+.dk-radio-panel {
+  display: grid;
+  gap: 14px;
+}
+.dk-stations {
+  display: grid;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.dk-stations legend {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.dk-station {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "r t" "r s";
+  column-gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  min-height: 56px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf7;
+  cursor: pointer;
+}
+.dk-station input {
+  grid-area: r;
+  width: 22px;
+  height: 22px;
+  accent-color: var(--terra);
+}
+.dk-station strong {
+  grid-area: t;
+}
+.dk-station small {
+  grid-area: s;
+  color: var(--ink-soft);
+}
+.dk-station.on {
+  border-color: var(--terra);
+  background: #fff3e4;
+}
+.dk-settings {
+  display: grid;
+  gap: 10px;
+}
+
+/* ══════════ THE DESK (home) ══════════ */
+.dk-desk {
+  position: relative;
+  overflow: hidden;
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse 70% 38% at 22% 6%, rgba(232, 168, 73, 0.5), transparent 72%),
+    radial-gradient(ellipse 120% 70% at 50% 110%, rgba(0, 0, 0, 0.55), transparent 70%),
+    var(--wood), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 46px),
+    linear-gradient(180deg, #4d382b, #2b1e16);
+}
+.dk-desk-main {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 18px 20px calc(24px + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 18px;
+}
+.dk-desk-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dk-lamp {
+  position: relative;
+  width: 120px;
+  height: 130px;
+}
+.dk-lamp-glow {
+  position: absolute;
+  left: -50px;
+  top: -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 200, 110, 0.55),
+    rgba(255, 170, 70, 0.14) 55%,
+    transparent 72%
+  );
+  animation: dk-flicker 7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes dk-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0.94;
+  }
+  50% {
+    opacity: 0.82;
+  }
+  54% {
+    opacity: 0.96;
+  }
+}
+.dk-lamp svg {
+  position: relative;
+  display: block;
+}
+.dk-radio-obj {
+  position: relative;
+  width: 168px;
+  height: 104px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: var(--grain), linear-gradient(180deg, #8a5a3a, #6c4328);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.25),
+    var(--shadow);
+  color: var(--cream);
+  text-align: left;
+}
+.dk-radio-obj::before {
+  /* speaker grille */
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  width: 78px;
+  height: 80px;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0 3px, transparent 3px 8px), #3a2618;
+}
+.dk-radio-dial {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3d9a5, #b68a45 70%);
+  box-shadow:
+    inset 0 -3px 0 rgba(0, 0, 0, 0.3),
+    0 2px 0 rgba(0, 0, 0, 0.3);
+}
+.dk-radio-dial::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 4px;
+  height: 20px;
+  background: var(--walnut-2);
+  border-radius: 2px;
+  transform-origin: 50% 21px;
+  transform: translateX(-50%) rotate(-40deg);
+}
+.dk-radio-led {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4a3426;
+}
+.dk-radio-obj.playing .dk-radio-led {
+  background: var(--amber);
+  box-shadow: 0 0 10px 3px rgba(232, 168, 73, 0.8);
+}
+.dk-radio-obj.playing .dk-radio-dial::after {
+  animation: dk-dial 5s ease-in-out infinite alternate;
+}
+@keyframes dk-dial {
+  from {
+    transform: translateX(-50%) rotate(-40deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(35deg);
+  }
+}
+.dk-radio-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -26px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--amber-soft);
+}
+.dk-desk-title {
+  text-align: center;
+  display: grid;
+  gap: 4px;
+  padding-top: 6px;
+}
+.dk-desk-title h1 {
+  font-size: clamp(32px, 9vw, 46px);
+  color: var(--cream);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+.dk-desk-title p {
+  color: var(--amber-soft);
+  font-weight: 600;
+}
+.dk-desk-middle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 250px;
+}
+.dk-book {
+  position: relative;
+  width: 190px;
+  height: 232px;
+  border-radius: 6px 12px 12px 6px;
+  background: var(--grain), linear-gradient(135deg, #9a3d3a, #6d2428);
+  box-shadow:
+    inset 12px 0 0 rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+    6px 10px 0 rgba(0, 0, 0, 0.25),
+    var(--shadow);
+  transform: rotate(-3deg);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px 20px 24px 30px;
+  color: var(--cream);
+}
+.dk-book::before {
+  /* ribbon */
+  content: "";
+  position: absolute;
+  right: 26px;
+  bottom: -16px;
+  width: 16px;
+  height: 46px;
+  background: var(--amber);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+}
+.dk-book-label {
+  padding: 14px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  display: grid;
+  gap: 4px;
+}
+.dk-book-label strong {
+  font-family: var(--font-display), serif;
+  font-size: 20px;
+  line-height: 1.1;
+}
+.dk-book-label small {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.dk-envelope {
+  position: absolute;
+  width: 78px;
+  height: 52px;
+  border-radius: 3px;
+  background: var(--grain), #efe2c4;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+.dk-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 60%;
+  background: #e3d3ae;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.dk-envelope::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 7px);
+  top: 36%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--burg);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+.dk-envelope.a {
+  left: 0;
+  top: 18px;
+  transform: rotate(-12deg);
+}
+.dk-envelope.b {
+  right: 2px;
+  top: 6px;
+  transform: rotate(9deg);
+  background: var(--grain), #cfdce6;
+}
+.dk-envelope.c {
+  right: 14px;
+  bottom: 6px;
+  transform: rotate(-5deg);
+  background: var(--grain), #dfe3c2;
+}
+.dk-desk-duck {
+  position: absolute;
+  left: -2px;
+  bottom: -4px;
+  pointer-events: none;
+}
+.dk-desk-actions {
+  display: grid;
+  gap: 12px;
+}
+.dk-desk-actions .dk-btn {
+  width: 100%;
+  min-height: 58px;
+}
+.dk-desk-actions .dk-btn small {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  opacity: 0.75;
+}
+.dk-desk-foot {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--amber-soft);
+}
+.dk-desk-foot a {
+  color: inherit;
+}
+
+/* My scrapbooks list */
+.dk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.dk-list-item {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf7;
+}
+.dk-list-item h3 {
+  font-size: 18px;
+}
+.dk-list-item small {
+  color: var(--ink-soft);
+}
+.dk-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ══════════ THE SCRAPBOOK (shell) ══════════ */
+.dk-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background:
+    var(--wood), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 46px),
+    linear-gradient(180deg, #4d382b, #2b1e16);
+  color: var(--cream);
+}
+.dk-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  background: rgba(20, 12, 8, 0.35);
+}
+.dk-topbar .dk-title {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  line-height: 1.2;
+}
+.dk-topbar .dk-title strong {
+  font-family: var(--font-display), serif;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dk-topbar .dk-title small {
+  color: var(--amber-soft);
+  font-size: 13px;
+  font-weight: 600;
+}
+.dk-stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  padding: 10px 10px 4px;
+  touch-action: pan-y;
+}
+.dk-binding {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  border-left: 8px solid var(--burg);
+  border-radius: 6px 0 0 6px;
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+.dk-leaf {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform-origin: left center;
+  background: var(--grain), var(--paper);
+  color: var(--ink);
+  border-radius: 0 8px 8px 0;
+  box-shadow: var(--shadow);
+  background-image: var(--grain), linear-gradient(transparent 31px, rgba(150, 125, 90, 0.12) 32px);
+  background-size:
+    auto,
+    100% 32px;
+}
+.dk-bottomnav {
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(20, 12, 8, 0.35);
+}
+.dk-bottomnav .dk-btn {
+  min-height: 52px;
+  padding: 0 10px;
+}
+.dk-nav-page {
+  display: grid;
+  line-height: 1.15;
+}
+.dk-nav-page small {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* A scrapbook page */
+.dk-page {
+  display: grid;
+  gap: 16px;
+  padding: 22px 18px 28px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.dk-page h2 {
+  font-size: 28px;
+}
+.dk-prompt {
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+.dk-page-body {
+  display: grid;
+  gap: 18px;
+}
+.dk-note {
+  font-family: var(--font-hand), cursive;
+  font-size: 22px;
+  color: var(--ink-soft);
+  line-height: 1.15;
+}
+.dk-empty {
+  padding: 18px;
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* page index sheet */
+.dk-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.dk-index h3 {
+  font-size: 13px;
+  font-family: var(--font-ui), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin: 10px 0 2px;
+}
+.dk-index button {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf7;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink) !important;
+}
+.dk-index button[aria-current="page"] {
+  border-color: var(--terra);
+  background: #fff3e4;
+}
+.dk-index .tick {
+  margin-left: auto;
+  color: var(--olive);
+  font-weight: 800;
+}
+
+@media (min-width: 820px) {
+  .dk-desk-main {
+    width: min(880px, 100%);
+  }
+  .dk-desk-actions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .dk-page {
+    padding: 30px 32px 36px;
+  }
+}
