@@ -164,6 +164,8 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
                 inert={!!active}
               >
                 <PageScreen book={book} concept={concept} page={PAGES[i]} goTo={goToId} />
+                {/* always there (opacity 0), so nothing mounts during a turn */}
+                <span className="dk-turn-shade" aria-hidden />
               </div>
             );
           })}

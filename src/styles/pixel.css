@@ -2891,3 +2891,16 @@ html[data-dark="1"] .dk .pp-badge {
 .dk-progress {
   padding-top: 2px !important;
 }
+
+/* Shade on the turning page (animated by usePageCurl; always present at opacity 0). */
+.dk-turn-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(36, 33, 31, 0.9), rgba(36, 33, 31, 0.5));
+}
+.dk-moving {
+  backface-visibility: hidden;
+}

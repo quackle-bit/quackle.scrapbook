@@ -9,15 +9,15 @@ import { sfx } from "@/lib/sound";
 /** A turn in progress: which page is the leaf that moves, and which way. */
 export type Turn = { from: number; to: number; dir: 1 | -1 };
 
-const TURN_MS = 340;
-const EASE = "cubic-bezier(.3,0,.2,1)";
+const TURN_MS = 460;
+const EASE = "cubic-bezier(.45,.05,.55,.95)";
 
 /**
- * Page turns, played by the Back/Next buttons and arrow keys. The page you leave slides away (left
- * on Next, right on Back) and the page you go to waits, perfectly still, underneath. The new page
- * never animates and gets two frames to be drawn before the slide starts: phones show a freshly
- * mounted layer half-drawn during an animation, which was the blink. Transform only, Web
- * Animations, so React doesn't re-render during the turn.
+ * Book page turns, played by the Back/Next buttons and arrow keys. The page you leave swings like a
+ * real leaf (over the spine on Next, away to the right on Back) and darkens as it turns; the page
+ * you go to waits, perfectly still, underneath. The new page never animates and gets two frames to
+ * be drawn before the turn starts: phones show a freshly mounted layer half-drawn during an
+ * animation, which was the blink. Transform + opacity only, Web Animations, no React re-renders.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
@@ -67,10 +67,23 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     raf = requestAnimationFrame(() => {
       raf = requestAnimationFrame(() => {
         if (done || !leaf) return finish();
+        // A real page swing: Next lifts the page off the right edge and turns it over the spine;
+        // Back swings it away to the right. Perspective + rotateY only (transform), plus its own
+        // shade darkening as it turns from the light. The page underneath never moves.
+        leaf.style.transformOrigin = fwd ? "left center" : "right center";
         const main = leaf.animate(
-          { transform: ["translate3d(0,0,0)", `translate3d(${fwd ? -108 : 108}%,0,0)`] },
+          {
+            transform: [
+              "perspective(1100px) rotateY(0deg)",
+              `perspective(1100px) rotateY(${fwd ? -100 : 100}deg)`,
+            ],
+          },
           { duration: TURN_MS, easing: EASE, fill: "forwards" },
         );
+        const shade = leaf
+          .querySelector<HTMLElement>(".dk-turn-shade")
+          ?.animate({ opacity: [0, 0.55] }, { duration: TURN_MS, easing: EASE, fill: "forwards" });
+        if (shade) all.push(shade);
         all.push(main);
         void main.finished.then(
           () => finish(),
