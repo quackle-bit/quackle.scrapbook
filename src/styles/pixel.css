@@ -3268,3 +3268,9 @@ html[data-dark="1"] .dk.dk-desk {
   text-underline-offset: 3px;
   text-shadow: 0 2px 0 rgba(10, 30, 18, 0.6);
 }
+.dk-desk .dk-desk-foot {
+  margin-bottom: 16px;
+}
+.cv-book {
+  width: min(270px, 72vw, 36dvh);
+}
