@@ -3232,3 +3232,27 @@ html[data-dark="1"] .dk.dk-desk {
 .dk-desk .cv-bubble {
   color: var(--ink);
 }
+/* Footer links on the mat: small dark tags so they read over the grid and ruler. */
+.dk-desk .dk-desk-foot {
+  margin-bottom: 12px;
+}
+.dk-desk .dk-desk-foot a {
+  opacity: 1;
+  padding: 4px 10px;
+  background: #1f3b2c;
+  border: 2px solid #12261b;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+.dk-desk .dk-desk-foot {
+  margin-bottom: 0;
+}
+.dk-desk .dk-desk-foot a,
+.dk-desk .dk-desk-foot a:visited {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+.cv-book {
+  width: min(270px, 72vw, 38dvh);
+}
