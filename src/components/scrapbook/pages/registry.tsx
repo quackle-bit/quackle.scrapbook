@@ -96,7 +96,7 @@ export const ALL_PAGES: PageDef[] = [
     id: "close",
     group: "Close",
     title: "Close the book",
-    prompt: "Forge everything into one pitch.",
+    prompt: "Check what your pitch has, then stamp it.",
   },
 ];
 
