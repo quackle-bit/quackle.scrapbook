@@ -4,38 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PAGES } from "../scrapbook/pages/registry";
-import { RadioPanel } from "../radio/Radio";
+import { RadioButton } from "../radio/Radio";
 import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
 import { DuckSprite } from "../Duck";
 import { scrapbookStore, useScrapbooks } from "@/lib/scrapbook/store";
-import { useSettings } from "@/lib/settings";
 import { importDone, importOldSpreads, markImportDone } from "@/lib/scrapbook/import";
 import { useStore } from "@/lib/store";
-
-function Lamp() {
-  return (
-    <div className="dk-lamp" aria-hidden>
-      <div className="dk-lamp-glow" />
-      <svg width="96" height="104" viewBox="0 0 24 26" shapeRendering="crispEdges">
-        {/* pixel desk lamp: base, arm, joint, shade, bulb */}
-        <rect x="3" y="23" width="12" height="2" fill="#24211f" />
-        <rect x="4" y="22" width="10" height="1" fill="#6b645c" />
-        <rect x="8" y="14" width="2" height="8" fill="#24211f" />
-        <rect x="9" y="12" width="2" height="2" fill="#24211f" />
-        <rect x="10" y="10" width="2" height="2" fill="#24211f" />
-        <rect x="11" y="9" width="2" height="2" fill="#f5b83d" />
-        <rect x="13" y="7" width="2" height="2" fill="#24211f" />
-        <rect x="15" y="5" width="2" height="2" fill="#24211f" />
-        <rect x="14" y="2" width="8" height="2" fill="#24211f" />
-        <rect x="13" y="4" width="10" height="3" fill="#e05a3a" />
-        <rect x="12" y="7" width="12" height="1" fill="#24211f" />
-        <rect x="16" y="8" width="4" height="1" fill="#f5b83d" />
-      </svg>
-    </div>
-  );
-}
 
 const when = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
@@ -43,9 +19,7 @@ const when = (iso: string) =>
 export function DeskHome() {
   const router = useRouter();
   const { ready, scrapbooks, lastId } = useScrapbooks();
-  const { musicOn } = useSettings();
   const [list, setList] = useState(false);
-  const [radioOpen, setRadioOpen] = useState(false);
   const [renaming, setRenaming] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<string | null>(null);
   const last = scrapbooks.find((s) => s.id === lastId) ?? scrapbooks[0];
@@ -63,39 +37,16 @@ export function DeskHome() {
     <DeskRoot className="dk-desk">
       <main className="dk-desk-main">
         <div className="dk-desk-top">
-          <Lamp />
-          <div style={{ display: "grid", justifyItems: "end", gap: 8 }}>
-            <SettingsButton />
-            <button
-              type="button"
-              className={`dk-radio-obj${musicOn ? " playing" : ""}`}
-              onClick={() => setRadioOpen(true)}
-              aria-label={musicOn ? "Radio, playing. Open controls." : "Radio. Open controls."}
-            >
-              <span className="dk-radio-dial" aria-hidden />
-              <span className="dk-radio-led" aria-hidden />
-              <span className="dk-radio-label">{musicOn ? "now playing" : "radio"}</span>
-            </button>
-          </div>
+          <RadioButton />
+          <SettingsButton />
         </div>
 
-        <div className="dk-desk-title">
-          <h1>Quackle Scrapbook</h1>
-          <p>Less thinking. More tinkering.</p>
-        </div>
+        <h1 className="dk-cover-title">Quackle Scrapbook</h1>
 
         <div className="dk-desk-middle">
-          <span className="dk-envelope a" aria-hidden />
-          <span className="dk-envelope b" aria-hidden />
-          <span className="dk-envelope c" aria-hidden />
           <div className="dk-book" aria-hidden>
             <div className="dk-book-label">
               <strong>{last?.name.trim() || "Game ideas"}</strong>
-              <small>
-                {last
-                  ? `${last.progress.visitedPages.filter((id) => PAGES.some((p) => p.id === id)).length} / ${PAGES.length} pages`
-                  : "an empty scrapbook"}
-              </small>
             </div>
           </div>
           <div className="dk-desk-duck">
@@ -106,29 +57,23 @@ export function DeskHome() {
         <div className="dk-desk-actions">
           {ready && last ? (
             <Link className="dk-btn primary" href={`/scrapbook?id=${last.id}`}>
-              <span>
-                Continue Scrapbook
-                <small>{last.name.trim() || "Untitled scrapbook"}</small>
-              </span>
+              Continue
             </Link>
           ) : (
             <button type="button" className="dk-btn primary" onClick={start} disabled={!ready}>
-              Start your first scrapbook
+              Start a scrapbook
             </button>
           )}
           {last && (
-            <button type="button" className="dk-btn" onClick={start}>
-              New Scrapbook
-            </button>
+            <div className="dk-cover-links">
+              <button type="button" className="dk-link-btn" onClick={start}>
+                New scrapbook
+              </button>
+              <button type="button" className="dk-link-btn" onClick={() => setList(true)}>
+                My scrapbooks ({scrapbooks.length})
+              </button>
+            </div>
           )}
-          <button
-            type="button"
-            className="dk-btn ghost"
-            onClick={() => setList(true)}
-            disabled={!scrapbooks.length}
-          >
-            My Scrapbooks{scrapbooks.length ? ` (${scrapbooks.length})` : ""}
-          </button>
         </div>
 
         {oldCount > 0 && (
@@ -164,18 +109,12 @@ export function DeskHome() {
         )}
 
         <footer className="dk-desk-foot">
+          <Link href="/about">About</Link>
           <a href="https://quacklebit.com" rel="noopener">
             Quackle.bit
           </a>
-          <Link href="/about">About</Link>
-          <Link href="/studio">Studio</Link>
-          <Link href="/jam">Jam rooms</Link>
         </footer>
       </main>
-
-      <BottomSheet open={radioOpen} title="Radio" onClose={() => setRadioOpen(false)}>
-        <RadioPanel />
-      </BottomSheet>
 
       <BottomSheet open={list} title="My Scrapbooks" onClose={() => setList(false)}>
         <ul className="dk-list">

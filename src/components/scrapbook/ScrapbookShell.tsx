@@ -178,7 +178,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           <span className="dk-nav-page">
             {page.title}
             <small>
-              Page {index + 1} of {PAGES.length}
+              {index + 1} / {PAGES.length}
             </small>
           </span>
         </button>

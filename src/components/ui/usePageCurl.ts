@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { feel } from "@/feel";
 import { haptic } from "@/lib/motion";
 import { settings } from "@/lib/settings";
@@ -25,7 +25,7 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
   const busy = useRef(false);
 
   const goTo = useCallback(
-    async (to: number) => {
+    (to: number) => {
       if (busy.current || to < 0 || to >= count || to === index) return;
       const s = settings.get();
       sfx.peel();
@@ -34,64 +34,72 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
         return;
       }
       busy.current = true;
-      const t: Turn = { from: index, to, dir: to > index ? 1 : -1 };
-      setTurn(t);
-      // Wait for both leaves to be on screen.
-      await new Promise((r) => {
-        requestAnimationFrame(() => requestAnimationFrame(r));
-        setTimeout(r, 60);
-      });
-      const root = binding.current;
-      const leaf = root?.querySelector<HTMLElement>(".dk-moving");
-      const under = root?.querySelector<HTMLElement>(".dk-under");
-      const fwd = t.dir === 1;
-      const flat = "perspective(1800px) rotateY(0deg)";
-      const over = "perspective(1800px) rotateY(-180deg)";
-      const lifted = "perspective(1800px) rotateY(-90deg) scale(1.02)";
-      const opts = { duration: TURN_MS, easing: EASE, fill: "forwards" as const };
-      const anims: Animation[] = [];
-      const extra: Animation[] = [];
-      if (leaf) {
-        anims.push(
-          leaf.animate({ transform: fwd ? [flat, lifted, over] : [over, lifted, flat] }, opts),
-        );
-        // Past upright you see the back of the page, not its front.
-        const back = leaf.querySelector<HTMLElement>(".dk-leaf-back");
-        const b = back?.animate(
-          [
-            { opacity: fwd ? 0 : 1, offset: 0 },
-            { opacity: fwd ? 0 : 1, offset: 0.5 },
-            { opacity: fwd ? 1 : 0, offset: 0.5 },
-            { opacity: fwd ? 1 : 0, offset: 1 },
-          ],
-          opts,
-        );
-        if (b) extra.push(b);
-        // Light rolls across the leaf as it bends.
-        const sh = leaf
-          .querySelector<HTMLElement>(".dk-leaf-shade")
-          ?.animate({ opacity: [0, 0.5, 0] }, opts);
-        if (sh) extra.push(sh);
-      }
-      // The page underneath sits in the leaf's shadow until it's uncovered.
-      const dim = under
-        ?.querySelector<HTMLElement>(".dk-leaf-dim")
-        ?.animate({ opacity: fwd ? [0.55, 0] : [0, 0.55] }, opts);
-      if (dim) extra.push(dim);
-      // A hidden tab can pause animations; never leave the book stuck mid-turn.
-      await Promise.race([
-        Promise.all(anims.map((a) => a.finished.catch(() => undefined))),
-        new Promise((r) => setTimeout(r, TURN_MS + 250)),
-      ]);
-      haptic(feel.haptic.tear);
-      setIndex(t.to);
-      setTurn(null);
-      busy.current = false;
-      // Drop the finished animations once React has drawn the new page.
-      requestAnimationFrame(() => [...anims, ...extra].forEach((a) => a.cancel()));
+      setTurn({ from: index, to, dir: to > index ? 1 : -1 });
     },
     [count, index, setIndex],
   );
+
+  // Runs right after React has put both leaves in the DOM (before the browser paints them),
+  // so the turn always starts from its first frame, however slow the phone is.
+  useLayoutEffect(() => {
+    if (!turn) return;
+    const root = binding.current;
+    const leaf = root?.querySelector<HTMLElement>(".dk-moving");
+    const under = root?.querySelector<HTMLElement>(".dk-under");
+    const fwd = turn.dir === 1;
+    const flat = "perspective(1800px) rotateY(0deg)";
+    const over = "perspective(1800px) rotateY(-180deg)";
+    const lifted = "perspective(1800px) rotateY(-90deg) scale(1.02)";
+    const opts = { duration: TURN_MS, easing: EASE, fill: "forwards" as const };
+    const all: Animation[] = [];
+    const main = leaf?.animate(
+      { transform: fwd ? [flat, lifted, over] : [over, lifted, flat] },
+      opts,
+    );
+    if (main) all.push(main);
+    // Past upright you see the back of the page, not its front.
+    const back = leaf?.querySelector<HTMLElement>(".dk-leaf-back")?.animate(
+      [
+        { opacity: fwd ? 0 : 1, offset: 0 },
+        { opacity: fwd ? 0 : 1, offset: 0.5 },
+        { opacity: fwd ? 1 : 0, offset: 0.5 },
+        { opacity: fwd ? 1 : 0, offset: 1 },
+      ],
+      opts,
+    );
+    if (back) all.push(back);
+    // Light rolls across the leaf as it bends.
+    const shade = leaf
+      ?.querySelector<HTMLElement>(".dk-leaf-shade")
+      ?.animate({ opacity: [0, 0.5, 0] }, opts);
+    if (shade) all.push(shade);
+    // The page underneath sits in the leaf's shadow until it's uncovered.
+    const dim = under
+      ?.querySelector<HTMLElement>(".dk-leaf-dim")
+      ?.animate({ opacity: fwd ? [0.55, 0] : [0, 0.55] }, opts);
+    if (dim) all.push(dim);
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      haptic(feel.haptic.tear);
+      setIndex(turn.to);
+      setTurn(null);
+      busy.current = false;
+      // Drop the finished animations once React has drawn the new page.
+      requestAnimationFrame(() => all.forEach((a) => a.cancel()));
+    };
+    if (main) void main.finished.then(finish, finish);
+    else finish();
+    // Safety net only: a hidden tab can pause animations.
+    const t = setTimeout(finish, TURN_MS * 4);
+    return () => {
+      clearTimeout(t);
+      if (!done) all.forEach((a) => a.cancel());
+      done = true; // StrictMode re-runs this effect; only the live run may finish the turn.
+    };
+  }, [turn, setIndex]);
 
   // Arrow keys turn pages too.
   useEffect(() => {

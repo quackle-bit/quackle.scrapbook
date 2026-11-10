@@ -26,9 +26,7 @@
 
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 16px;
-  background:
-    radial-gradient(#d9d3c7 1px, transparent 1.5px) 0 0 / 12px 12px,
-    var(--walnut-2);
+  background: var(--walnut-2);
   color: var(--ink);
 }
 .dk h1,
@@ -873,9 +871,7 @@
 /* ══════════ DESK HOME in pixels ══════════ */
 .dk-desk {
   color: var(--ink) !important;
-  background:
-    radial-gradient(#d9d3c7 1px, transparent 1.5px) 0 0 / 12px 12px,
-    var(--walnut-2) !important;
+  background: var(--walnut-2) !important;
 }
 .dk-desk-main {
   gap: 12px !important;
@@ -1076,4 +1072,119 @@
 }
 .turn-back .dk-moving .dk-leaf-back {
   opacity: 1;
+}
+
+/* ══════════ CLEANER (Phase 10.7) ══════════ */
+/* Plain white pages: no ruled lines, a thin solid spine, one soft hard-edged shadow. */
+.dk-leaf {
+  background-image: none !important;
+}
+.dk-binding::before {
+  width: 6px;
+  left: -6px;
+  background: var(--ink);
+  border: 0;
+}
+.dk-stack {
+  display: none;
+}
+/* Chips, inputs and secondary buttons: outline only. Only primary buttons keep the pixel shadow. */
+.dk-chip,
+.dk-btn:not(.primary),
+.dk-input,
+.dk-card {
+  box-shadow: none !important;
+}
+.dk-chip {
+  border-width: 1.5px !important;
+}
+.dk-leaf-back {
+  background: #f4efe6;
+}
+
+/* ══════════ COVER: title, book, one button ══════════ */
+.dk-desk-main {
+  justify-content: space-between;
+  gap: 18px !important;
+}
+.dk-desk-top {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 8px;
+}
+.dk-cover-title {
+  margin: 8px 0 0;
+  text-align: center;
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(26px, 8vw, 40px);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-shadow: none;
+}
+.dk-desk-middle {
+  flex: 1;
+  display: grid !important;
+  place-items: center;
+  min-height: 0;
+}
+.dk-book {
+  transform: none !important;
+  width: min(200px, 55vw) !important;
+  height: auto !important;
+  aspect-ratio: 3 / 4;
+}
+.dk-book-label strong {
+  font-size: 13px;
+}
+.dk-desk-duck {
+  position: absolute;
+  right: 12%;
+  bottom: 0;
+}
+.dk-desk-middle {
+  position: relative;
+}
+.dk-desk-actions {
+  display: grid;
+  gap: 12px;
+}
+.dk-desk-actions .dk-btn.primary {
+  min-height: 58px;
+  font-size: 16px;
+}
+.dk-cover-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.dk-link-btn {
+  background: none;
+  border: 0;
+  padding: 8px 2px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.dk-desk-foot {
+  justify-content: center;
+}
+.dk-desk-middle .dk-desk-duck {
+  position: absolute !important;
+  left: auto !important;
+  right: calc(50% - min(100px, 27.5vw) - 34px) !important;
+  bottom: 4% !important;
+  margin: 0 !important;
+}
+.dk-desk-top {
+  width: 100%;
+}
+.dk-icon-btn {
+  box-shadow: none !important;
+}
+.dk-desk-top > :first-child {
+  margin-left: auto;
 }
