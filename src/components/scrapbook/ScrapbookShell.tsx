@@ -74,14 +74,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
   const closePop = useCallback(() => setPop(null), []);
 
   const set = useCallback((i: number) => setIndex(i), []);
-  const {
-    binding,
-    turn: active,
-    goTo,
-    onPointerDown,
-    onPointerUp,
-    corner,
-  } = usePageCurl(Math.max(0, index), PAGES.length, set);
+  const { binding, turn: active, goTo } = usePageCurl(Math.max(0, index), PAGES.length, set);
   const goToId = useCallback(
     (id: PageId) => {
       const i = PAGES.findIndex((p) => p.id === id);
@@ -149,7 +142,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         </Link>
       </div>
 
-      <main className="dk-stage" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+      <main className="dk-stage">
         <div ref={binding} className={`dk-binding${active ? " turning" : ""}`}>
           <div className="dk-stack" aria-hidden />
           {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
@@ -167,24 +160,6 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
               </div>
             );
           })}
-          <button
-            type="button"
-            className="dk-corner next"
-            aria-label="Turn to the next page (or drag this corner)"
-            disabled={index === PAGES.length - 1}
-            data-noswipe
-            {...corner(1)}
-            onClick={(e) => e.detail === 0 && void goTo(index + 1)}
-          />
-          <button
-            type="button"
-            className="dk-corner prev"
-            aria-label="Turn back a page (or drag this corner)"
-            disabled={index === 0}
-            data-noswipe
-            {...corner(-1)}
-            onClick={(e) => e.detail === 0 && void goTo(index - 1)}
-          />
         </div>
       </main>
 
@@ -196,7 +171,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           disabled={index === 0}
           aria-label="Previous page"
         >
-          ‹
+          ‹ Back
         </button>
         <button type="button" className="dk-btn" onClick={() => setSheet(true)}>
           <span className="dk-nav-page">
@@ -213,7 +188,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           disabled={index === PAGES.length - 1}
           aria-label="Next page"
         >
-          ›
+          Next ›
         </button>
       </nav>
 

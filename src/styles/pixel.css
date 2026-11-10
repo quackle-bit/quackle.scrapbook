@@ -1,0 +1,263 @@
+/* ══════════════════════════════════════════════════════════════════
+   PIXEL THEME (Phase 10): clean white paper, ink outlines, hard pixel
+   shadows, pixel fonts. Loaded after desk.css and overrides its look.
+   ══════════════════════════════════════════════════════════════════ */
+.dk {
+  --walnut: #ece8df;
+  --walnut-2: #f3f0e9;
+  --walnut-3: #e2ddd2;
+  --paper: #fffefb;
+  --paper-2: #f4f1ea;
+  --cream: #24211f;
+  --amber: #f5b83d;
+  --amber-soft: #6b645c;
+  --olive: #5bab5b;
+  --dusty: #4a7bd0;
+  --terra: #e05a3a;
+  --burg: #a8436b;
+  --ink: #24211f;
+  --ink-soft: #6b645c;
+  --line: #24211f;
+  --px: 3px 3px 0 #24211f;
+  --px-sm: 2px 2px 0 #24211f;
+  --shadow: var(--px);
+  --grain: none;
+  --wood: none;
+
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 16px;
+  background:
+    radial-gradient(#d9d3c7 1px, transparent 1.5px) 0 0 / 12px 12px,
+    var(--walnut-2);
+  color: var(--ink);
+}
+.dk h1,
+.dk h2,
+.dk h3 {
+  font-family: var(--font-pixel), monospace;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+.dk h1 {
+  font-size: 28px;
+}
+.dk h2 {
+  font-size: 22px;
+}
+.dk h3 {
+  font-size: 16px;
+}
+
+/* No soft corners, no blur, no gradients on controls: everything is a pixel box. */
+.dk
+  :is(
+    .dk-btn,
+    .dk-icon-btn,
+    .dk-chip,
+    .dk-input,
+    .dk-sheet,
+    .dk-card,
+    .dk-leaf,
+    .dk-drop,
+    .dk-bin,
+    .dk-pack,
+    .dk-spread,
+    .dk-wall-card,
+    .dk-toast,
+    .dk-list-item,
+    .dk-concept-bar > *,
+    .fc-pack,
+    .fc-pack-flap,
+    .fc-act,
+    .dk-duck-line,
+    .dk-sticker,
+    .dk-receipt,
+    .dk-polaroid,
+    .dk-stack,
+    .dk-binding,
+    .dk-bin-list li,
+    .dk-comments li,
+    .dk-wall-note,
+    .op-press-frame,
+    .op-press-head,
+    .op-lever-track,
+    .op-lever,
+    .op-velvet,
+    .op-reel-row,
+    .op-reel,
+    .op-tarot-card,
+    .dk-import,
+    .dk-env
+  ) {
+  border-radius: 0 !important;
+}
+.dk-btn,
+.dk-chip,
+.dk-icon-btn,
+.fc-act {
+  border: 2px solid var(--ink) !important;
+  box-shadow: var(--px-sm) !important;
+  font-family: var(--font-pixel), monospace;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.dk-btn:active:not(:disabled),
+.dk-chip:active,
+.dk-icon-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
+.dk-btn.ghost {
+  border-style: dashed !important;
+  box-shadow: none !important;
+}
+.dk-icon-btn {
+  background: var(--paper);
+  color: var(--ink);
+}
+.dk-icon-btn.playing {
+  background: var(--amber);
+}
+.dk-chip[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper) !important;
+}
+.dk-input {
+  border: 2px solid var(--ink);
+  background: #fff;
+  font-family: var(--font-body), sans-serif;
+  box-shadow: inset 2px 2px 0 #e9e4da;
+}
+.dk-hint {
+  color: var(--ink-soft);
+}
+
+/* Top bar and bottom bar: flat white strips with an ink rule. */
+.dk-topbar,
+.dk-bottomnav,
+.dk-concept-bar {
+  background: var(--paper) !important;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.dk-bottomnav {
+  border-bottom: 0;
+  border-top: 2px solid var(--ink);
+}
+.dk-topbar .dk-title small,
+.dk-link-light {
+  color: var(--ink-soft) !important;
+}
+.dk-stamps i {
+  border-radius: 0 !important;
+  border: 2px solid var(--ink-soft);
+}
+.dk-stamps i.on {
+  border-color: var(--ink);
+  background: none;
+}
+.dk-stamps i.full {
+  background: var(--terra);
+  border-color: var(--ink);
+  box-shadow: none;
+}
+.dk-stamps i.here {
+  outline: 2px solid var(--amber);
+}
+
+/* The book: a white page with a pixel outline and a stepped shadow, a striped pixel spine. */
+.dk-binding {
+  border-left: 0 !important;
+}
+.dk-binding::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  z-index: 4;
+  background: repeating-linear-gradient(var(--ink) 0 6px, var(--terra) 6px 18px);
+  border: 2px solid var(--ink);
+}
+.dk-leaf {
+  background: var(--paper) !important;
+  background-image: linear-gradient(#efeae0 1px, transparent 1px) !important;
+  background-size: 100% 24px !important;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+.dk-stack {
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, #fff 2px 4px) !important;
+  box-shadow: none !important;
+  inset: 4px -6px -6px 4px !important;
+}
+
+/* Cards: white with a colored pixel band and an ink outline. */
+.dk-card {
+  background: #fff !important;
+  border: 2px solid var(--ink);
+  box-shadow: var(--px-sm) !important;
+}
+.dk-card-band {
+  font-family: var(--font-pixel), monospace;
+}
+.dk-card-title {
+  font-family: var(--font-pixel), monospace !important;
+  font-size: 15px !important;
+  line-height: 1.2;
+}
+.dk-card-back {
+  background:
+    repeating-linear-gradient(45deg, transparent 0 4px, rgba(255, 255, 255, 0.25) 4px 8px),
+    var(--dusty) !important;
+  color: #fff;
+}
+
+/* Sheets, toasts, speech: pixel boxes. */
+.dk-sheet {
+  border: 2px solid var(--ink);
+  box-shadow: 0 -4px 0 var(--ink) !important;
+  background: var(--paper) !important;
+}
+.dk-duck-line {
+  border: 2px solid var(--ink);
+  box-shadow: var(--px-sm) !important;
+  font-family: var(--font-pixel), monospace;
+  font-weight: 400;
+  font-size: 12px;
+}
+.dk-toast {
+  border: 2px solid var(--ink);
+  box-shadow: var(--px-sm);
+  font-family: var(--font-pixel), monospace;
+}
+.duck-sprite {
+  image-rendering: pixelated;
+  filter: none !important;
+}
+
+/* Bottom bar: two big, always-there buttons, page name in the middle. */
+.dk-bottomnav {
+  grid-template-columns: 1fr 1.2fr 1fr !important;
+}
+.dk-bottomnav .dk-btn {
+  min-height: 56px;
+  font-size: 15px;
+}
+.dk-nav-page {
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+}
+.dk-moving {
+  transform: perspective(1600px) rotateY(calc(var(--q) * -180deg)) !important;
+}
+.dk-moving::after {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 8px,
+    rgba(36, 33, 31, 0.08) 8px 10px
+  ) !important;
+}

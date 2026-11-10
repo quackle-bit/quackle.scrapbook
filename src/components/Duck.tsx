@@ -40,7 +40,8 @@ function frameAt(tag: DuckTag, t: number) {
 /** Plays `tag` (looping) for `ms`, then a follow-up tag, then back to idle. */
 type Act = { tag: DuckTag; ms: number; then?: Act };
 
-export function DuckSprite({ act, scale = 3 }: { act: Act | null; scale?: number }) {
+export function DuckSprite({ act, scale: rawScale = 3 }: { act: Act | null; scale?: number }) {
+  const scale = Math.max(1, Math.round(rawScale));
   const { reducedMotion } = useSettings();
   const [frame, setFrame] = useState(0);
   useEffect(() => {
@@ -70,6 +71,8 @@ export function DuckSprite({ act, scale = 3 }: { act: Act | null; scale?: number
         backgroundImage: "url(/duck/duck.png)",
         backgroundSize: `${SHEET_FRAMES * size}px ${size}px`,
         backgroundPosition: `${-frame * size}px 0`,
+        // Crisp pixels: whole-number scale, no smoothing.
+        imageRendering: "pixelated",
       }}
     />
   );

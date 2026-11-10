@@ -4,6 +4,7 @@ import { Caveat, Fraunces, Nunito, Pixelify_Sans, Silkscreen } from "next/font/g
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "@/styles/desk.css";
+import "@/styles/pixel.css";
 
 /** Display: Silkscreen (card words, titles). UI: Pixelify Sans (readable pixel). Notes: Caveat. */
 const pixel = Silkscreen({ variable: "--font-pixel", weight: ["400", "700"], subsets: ["latin"] });

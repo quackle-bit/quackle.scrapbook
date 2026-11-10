@@ -26,8 +26,10 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
   const swipe = useRef<{ x: number; y: number } | null>(null);
 
   /** q = how far the moving leaf has turned (0 = flat on the right, 1 = flat on the left). */
-  const setQ = useCallback((v: number) => {
-    q.current = v;
+  const setQ = useCallback((raw: number) => {
+    // Pixel feel: the page turns in 6 stepped frames instead of a smooth sweep.
+    const v = Math.round(raw * 6) / 6;
+    q.current = raw;
     const el = binding.current;
     if (!el) return;
     el.style.setProperty("--q", v.toFixed(4));
@@ -93,7 +95,7 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
       const t = start(to);
       if (!t) return;
       await new Promise((r) => requestAnimationFrame(r));
-      await animateTo(t, t.dir === 1 ? 1 : 0, 520);
+      await animateTo(t, t.dir === 1 ? 1 : 0, 330);
     },
     [count, index, turn, start, animateTo, setIndex],
   );
