@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_PATH } from "@/lib/site";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { feel } from "@/feel";
 import { useSettings } from "@/lib/settings";
@@ -69,7 +70,7 @@ export function DuckSprite({ act, scale: rawScale = 3 }: { act: Act | null; scal
       style={{
         width: size,
         height: size,
-        backgroundImage: "url(/duck/duck.png)",
+        backgroundImage: `url(${BASE_PATH}/duck/duck.png)`,
         backgroundSize: `${SHEET_FRAMES * size}px ${size}px`,
         backgroundPosition: `${-frame * size}px 0`,
         // Crisp pixels: whole-number scale, no smoothing.

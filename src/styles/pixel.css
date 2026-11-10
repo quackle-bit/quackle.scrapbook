@@ -3311,3 +3311,169 @@ html[data-dark="1"] .dk.dk-desk {
   min-height: 48px;
   margin-bottom: 12px;
 }
+
+/* Pitch image footer: studio mark + address + hashtag on the left, QR on the right. */
+.pcard {
+  padding-bottom: 110px;
+}
+.pcard-foot {
+  position: absolute;
+  left: 16px;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px 10px 26px;
+  border-top: 4px solid #24211f;
+  background: #fff8e6;
+  color: #24211f;
+  font-size: 12px;
+}
+.pcard-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pcard-brand > span {
+  display: grid;
+  gap: 2px;
+}
+.pcard-brand strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+}
+.pcard-brand small {
+  font-size: 12px;
+  color: #6b645c;
+}
+.pcard-stamp {
+  top: 22px;
+  bottom: auto !important;
+  right: 20px;
+}
+.cv-bubble.link {
+  display: block;
+  pointer-events: auto;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--ink) !important;
+}
+.fg-studio {
+  margin: 4px 0 0;
+  max-width: 300px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #e9e3d6;
+}
+.fg-studio a {
+  color: #fff;
+  text-underline-offset: 3px;
+}
+
+/* About: the studio's games */
+.ab-games {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ab-games li {
+  display: grid;
+  gap: 2px;
+}
+.ab-games a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+.ab-games small {
+  color: var(--ink-soft);
+}
+.ab-games span {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* ══════════ JAM KIT: printable poster ══════════ */
+.jk {
+  min-height: 100dvh;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 16px;
+  padding: 24px 16px;
+  background: #eceae4;
+  color: #24211f;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+.jk-sheet {
+  box-sizing: border-box;
+  width: min(640px, 100%);
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 32px 28px;
+  background: #fff;
+  border: 4px solid #24211f;
+  box-shadow: 8px 8px 0 #24211f;
+  text-align: center;
+}
+.jk-kicker {
+  margin: 0;
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  color: #e05a3a;
+}
+.jk h1 {
+  margin: 0;
+  font-family: var(--font-pixel), monospace;
+  font-size: 32px;
+  font-weight: 400;
+}
+.jk-lead {
+  margin: 0;
+  font-size: 20px;
+}
+.jk-steps {
+  margin: 4px 0;
+  padding-left: 22px;
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.jk-qr {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.jk-qr strong {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  font-weight: 400;
+}
+.jk-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  font-size: 15px;
+}
+@media print {
+  .jk {
+    background: #fff;
+    padding: 0;
+  }
+  .jk-sheet {
+    box-shadow: none;
+    border-width: 2px;
+  }
+  .jk-print {
+    display: none !important;
+  }
+}

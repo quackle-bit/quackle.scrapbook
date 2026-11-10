@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PUBLIC_URL, PUBLIC_URL_LABEL } from "@/lib/site";
 import Link from "next/link";
+import { GAMES, STUDIO } from "@/lib/studio";
 import { DeskRoot } from "@/components/ui/DeskRoot";
 
 export const metadata: Metadata = {
@@ -67,20 +68,41 @@ export default function About() {
               </p>
             </section>
             <section>
-              <h2>Made by</h2>
+              <h2>Made by {STUDIO.name}</h2>
               <p>
-                <a href="https://quacklebit.com" rel="noopener">
-                  Quackle.bit
-                </a>
-                , a small studio telling stories in pixels. The music on the radio is generated live
-                in your browser.
-              </p>
-              <p>
-                Quackle Scrapbook lives at{" "}
+                <a href={STUDIO.url} rel="noopener">
+                  {STUDIO.name}
+                </a>{" "}
+                is {STUDIO.line.charAt(0).toLowerCase() + STUDIO.line.slice(1)} Quackle Scrapbook is
+                the tool we use to find our own ideas, and it lives at{" "}
                 <a href={PUBLIC_URL} rel="noopener">
                   {PUBLIC_URL_LABEL}
                 </a>
-                .
+                . The music on the radio is generated live in your browser.
+              </p>
+            </section>
+            <section>
+              <h2>Our games</h2>
+              <ul className="ab-games">
+                {GAMES.map((g) => (
+                  <li key={g.title}>
+                    <a href={g.href} target="_blank" rel="noopener">
+                      <strong>{g.title}</strong> <small>{g.year}</small>
+                    </a>
+                    <span>{g.line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+            <section>
+              <h2>Say hi</h2>
+              <p>
+                Follow us for new card packs, jam invites and what we&apos;re making:{" "}
+                <a href={STUDIO.connect} target="_blank" rel="noopener">
+                  quacklebit.com/social
+                </a>
+                . Made a game from a pitch? Tag it <strong>{STUDIO.hashtag}</strong> so we can find
+                it and cheer you on. Running a jam? <Link href="/jam-kit">Print the jam kit</Link>.
               </p>
             </section>
           </div>

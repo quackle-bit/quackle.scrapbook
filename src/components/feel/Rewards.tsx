@@ -1,5 +1,6 @@
 "use client";
 
+import { STUDIO } from "@/lib/studio";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { feel } from "@/feel";
@@ -240,6 +241,12 @@ export function ForgeOverlay({
           <button type="button" className="dk-link-btn fg-back" onClick={onClose}>
             Back to the book
           </button>
+          <p className="fg-studio">
+            Made something you like? {STUDIO.name} makes games like this.{" "}
+            <a href={STUDIO.portfolio} target="_blank" rel="noopener">
+              See our games →
+            </a>
+          </p>
         </div>
       ) : (
         <p className="fg-skip">Tap to skip</p>

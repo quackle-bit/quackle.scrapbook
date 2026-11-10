@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_PATH } from "./site";
 import { feel } from "@/feel";
 import { settings } from "./settings";
 
@@ -42,7 +43,7 @@ let quackLoading = false;
 function loadQuack(c: AudioContext) {
   if (quackLoading) return;
   quackLoading = true;
-  fetch("/duck/quack.mp3")
+  fetch(`${BASE_PATH}/duck/quack.mp3`)
     .then((r) => r.arrayBuffer())
     .then((b) => c.decodeAudioData(b))
     .then((buf) => {

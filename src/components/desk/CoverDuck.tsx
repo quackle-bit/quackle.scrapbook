@@ -1,5 +1,6 @@
 "use client";
 
+import { STUDIO } from "@/lib/studio";
 import { useCallback, useEffect, useRef, useState, type PointerEvent, type RefObject } from "react";
 import { feel } from "@/feel";
 import { haptic } from "@/lib/motion";
@@ -21,6 +22,12 @@ const TAP_LINES = ["Quack!", "Hello!", "Open the book!", "Quack quack.", "Hey, t
 const FLY_LINES = ["Wheee!", "Look, no hands!", "Flap flap flap!"];
 const DROP_LINES = ["Oof!", "My feathers…", "I meant to do that."];
 const IDLE_LINES = ["Got a game idea?", "This book wants pages.", "*preens*", "Quack."];
+/** Now and then he mentions where he lives; these bubbles are links (tap them). */
+const STUDIO_LINES: { text: string; href: string }[] = [
+  { text: "I live at quackle.bit. Come say hi →", href: STUDIO.url },
+  { text: "My team makes pixel games. Peek? →", href: STUDIO.portfolio },
+  { text: "Follow quackle.bit for new card packs →", href: STUDIO.connect },
+];
 const pick = (xs: string[]) => xs[Math.floor(Math.random() * xs.length)];
 
 type Mode = "perch" | "walk" | "fly" | "held" | "fall" | "stunned" | "sleep";
@@ -61,16 +68,17 @@ export function CoverDuck({
   );
   const [act, setAct] = useState<DuckAct | null>(null);
   const [facing, setFacing] = useState<1 | -1>(-1);
-  const [line, setLine] = useState<{ text: string; key: number } | null>(null);
+  const [line, setLine] = useState<{ text: string; key: number; href?: string } | null>(null);
 
   const still = () => settings.get().reducedMotion;
 
   const geo = useCallback(() => geoOf(stage, book), [stage, book]);
 
-  const say = useCallback((text: string) => {
+  const say = useCallback((text: string, href?: string) => {
     const key = Date.now();
-    setLine({ text, key });
-    setTimeout(() => setLine((l) => (l?.key === key ? null : l)), 2200);
+    setLine({ text, key, href });
+    // Link lines stay up longer so there's time to tap them.
+    setTimeout(() => setLine((l) => (l?.key === key ? null : l)), href ? 5000 : 2200);
   }, []);
 
   const place = useCallback(() => {
@@ -189,8 +197,11 @@ export function CoverDuck({
         } else if (r < 0.75 && now - idleSince > 15000) {
           mode.current = "sleep";
           setAct({ tag: "sleepy", ms: 1e9 });
-        } else if (r < 0.85) {
+        } else if (r < 0.8) {
           say(pick(IDLE_LINES));
+        } else if (r < 0.87) {
+          const l = STUDIO_LINES[Math.floor(Math.random() * STUDIO_LINES.length)];
+          say(l.text, l.href);
         } else {
           setFacing((f) => (f === 1 ? -1 : 1));
         }
@@ -279,11 +290,23 @@ export function CoverDuck({
 
   return (
     <div ref={el} className="cv-duck">
-      {line && (
-        <p key={line.key} className="cv-bubble" aria-live="polite">
-          {line.text}
-        </p>
-      )}
+      {line &&
+        (line.href ? (
+          <a
+            key={line.key}
+            className="cv-bubble link"
+            href={line.href}
+            target="_blank"
+            rel="noopener"
+            aria-live="polite"
+          >
+            {line.text}
+          </a>
+        ) : (
+          <p key={line.key} className="cv-bubble" aria-live="polite">
+            {line.text}
+          </p>
+        ))}
       <div
         className="cv-duck-body"
         style={{ transform: facing === -1 ? "scaleX(-1)" : undefined }}

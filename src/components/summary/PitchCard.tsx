@@ -1,5 +1,8 @@
 import { forwardRef } from "react";
-import { PUBLIC_URL_LABEL } from "@/lib/site";
+import { PUBLIC_URL, PUBLIC_URL_LABEL } from "@/lib/site";
+import { STUDIO } from "@/lib/studio";
+import { DuckSprite } from "../Duck";
+import { QrCode } from "../ui/QrCode";
 import type { PitchCardLine, PitchModel } from "@/lib/scrapbook/pitch";
 
 const names = (xs: PitchCardLine[], n: number) => xs.slice(0, n).map((x) => x.title);
@@ -78,7 +81,20 @@ export const PitchCard = forwardRef<HTMLDivElement, { model: PitchModel }>(funct
         )}
       </div>
       {m.status === "pitched" && <span className="pcard-stamp">Pitched</span>}
-      <p className="pcard-foot">made with Quackle Scrapbook · {PUBLIC_URL_LABEL}</p>
+      {/* Studio mark: every shared pitch says where it came from and how to get there. */}
+      <footer className="pcard-foot">
+        <span className="pcard-brand">
+          <DuckSprite act={null} scale={2} />
+          <span>
+            <strong>{STUDIO.name}</strong>
+            <small>made with Quackle Scrapbook</small>
+            <small>
+              {PUBLIC_URL_LABEL} · {STUDIO.hashtag}
+            </small>
+          </span>
+        </span>
+        <QrCode text={PUBLIC_URL} size={76} />
+      </footer>
     </div>
   );
 });
