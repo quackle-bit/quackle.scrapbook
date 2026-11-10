@@ -13,7 +13,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "vocab:lint": "node scripts/vocab.mts lint",
     "vocab:sample": "node scripts/vocab.mts sample",
-    "db:test": "node supabase/tests/rls.test.mjs"
+    "db:test": "node supabase/tests/rls.test.mjs",
+    "content:lint": "node scripts/content.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",

@@ -1,0 +1,491 @@
+{
+  "type": "mechanic",
+  "cards": [
+    {
+      "id": "mech-time-rewind",
+      "title": "Time Rewind",
+      "description": "Reverse the last action or rewind a short period.",
+      "category": "time"
+    },
+    {
+      "id": "mech-magnetism",
+      "title": "Magnetism",
+      "description": "Attract or repel objects.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-duplication",
+      "title": "Duplication",
+      "description": "Create copies of objects.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-body-swap",
+      "title": "Body Swap",
+      "description": "Exchange identities or abilities.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-visibility",
+      "title": "Visibility",
+      "description": "Objects exist only when observed.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-gravity-manipulation",
+      "title": "Gravity Manipulation",
+      "description": "Change the direction of gravity.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-crafting",
+      "title": "Crafting",
+      "description": "Combine objects to create new items.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-trading",
+      "title": "Trading",
+      "description": "Exchange resources or abilities.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-grappling",
+      "title": "Grappling",
+      "description": "Swing, pull and latch onto the world.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-dash",
+      "title": "Dash",
+      "description": "A short burst of speed with a cooldown.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-wall-running",
+      "title": "Wall Running",
+      "description": "Run along vertical surfaces.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-stealth",
+      "title": "Stealth",
+      "description": "Stay unseen and slip past watchers.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-parry",
+      "title": "Parry",
+      "description": "Time a block to turn an attack around.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-combo-chains",
+      "title": "Combo Chains",
+      "description": "Chain actions for bigger effects.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-deckbuilding",
+      "title": "Deckbuilding",
+      "description": "Grow a deck of actions as you play.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-tile-placement",
+      "title": "Tile Placement",
+      "description": "Place tiles that shape the board.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-matching",
+      "title": "Matching",
+      "description": "Line up similar things to clear them.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-pushing-blocks",
+      "title": "Pushing Blocks",
+      "description": "Shove objects to open paths.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-light-and-shadow",
+      "title": "Light and Shadow",
+      "description": "Light reveals, hides or harms.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-echolocation",
+      "title": "Echolocation",
+      "description": "See the world through sound.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-memory",
+      "title": "Memory",
+      "description": "Recall what you saw to make progress.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-resource-juggling",
+      "title": "Resource Juggling",
+      "description": "Keep several meters from running out.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-farming",
+      "title": "Farming",
+      "description": "Plant, tend and harvest over time.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-cooking",
+      "title": "Cooking",
+      "description": "Combine ingredients into dishes with effects.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-base-building",
+      "title": "Base Building",
+      "description": "Place structures that last.",
+      "category": "building"
+    },
+    {
+      "id": "mech-terraforming",
+      "title": "Terraforming",
+      "description": "Reshape the terrain itself.",
+      "category": "building"
+    },
+    {
+      "id": "mech-tower-placement",
+      "title": "Tower Placement",
+      "description": "Position defenses along a path.",
+      "category": "building"
+    },
+    {
+      "id": "mech-programming",
+      "title": "Programming",
+      "description": "Give instructions that run on their own.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-hacking",
+      "title": "Hacking",
+      "description": "Take over the systems around you.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-possession",
+      "title": "Possession",
+      "description": "Control other creatures or objects.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-shapeshifting",
+      "title": "Shapeshifting",
+      "description": "Change form to gain new abilities.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-size-change",
+      "title": "Size Change",
+      "description": "Grow or shrink at will.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-time-loop",
+      "title": "Time Loop",
+      "description": "Repeat the same stretch of time, learning each pass.",
+      "category": "time"
+    },
+    {
+      "id": "mech-slow-motion",
+      "title": "Slow Motion",
+      "description": "Bend the speed of time around you.",
+      "category": "time"
+    },
+    {
+      "id": "mech-day-and-night",
+      "title": "Day and Night",
+      "description": "The world changes with the clock.",
+      "category": "time"
+    },
+    {
+      "id": "mech-weather-control",
+      "title": "Weather Control",
+      "description": "Summon rain, wind or storms.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-fluid-physics",
+      "title": "Fluid Physics",
+      "description": "Water, lava or gas flows and spreads.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-ragdoll",
+      "title": "Ragdoll",
+      "description": "Characters flop and tumble with the physics.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-momentum",
+      "title": "Momentum",
+      "description": "Speed carries from one action to the next.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-rhythm-input",
+      "title": "Rhythm Input",
+      "description": "Act on the beat.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-drawing",
+      "title": "Drawing",
+      "description": "Draw lines or shapes that become real.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-stacking",
+      "title": "Stacking",
+      "description": "Pile things up without toppling them.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-throwing",
+      "title": "Throwing",
+      "description": "Toss objects to solve problems or hit targets.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-companions",
+      "title": "Companions",
+      "description": "Followers who act on their own.",
+      "category": "social"
+    },
+    {
+      "id": "mech-taming",
+      "title": "Taming",
+      "description": "Befriend creatures to fight or work for you.",
+      "category": "social"
+    },
+    {
+      "id": "mech-dialogue-choices",
+      "title": "Dialogue Choices",
+      "description": "Conversations that change what happens.",
+      "category": "social"
+    },
+    {
+      "id": "mech-persuasion",
+      "title": "Persuasion",
+      "description": "Win people over without fighting.",
+      "category": "social"
+    },
+    {
+      "id": "mech-reputation",
+      "title": "Reputation",
+      "description": "The world remembers how you acted.",
+      "category": "social"
+    },
+    {
+      "id": "mech-bartering",
+      "title": "Bartering",
+      "description": "Haggle for a better deal.",
+      "category": "social"
+    },
+    {
+      "id": "mech-asymmetric-roles",
+      "title": "Asymmetric Roles",
+      "description": "Players see and do different things.",
+      "category": "social"
+    },
+    {
+      "id": "mech-shared-control",
+      "title": "Shared Control",
+      "description": "Two players steer one character.",
+      "category": "social"
+    },
+    {
+      "id": "mech-procedural-levels",
+      "title": "Procedural Levels",
+      "description": "Layouts that change every run.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-permadeath",
+      "title": "Permadeath",
+      "description": "A loss means starting over.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-upgrades",
+      "title": "Upgrades",
+      "description": "Spend what you earn to grow stronger.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-skill-trees",
+      "title": "Skill Trees",
+      "description": "Pick a path of unlockable abilities.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-inventory-tetris",
+      "title": "Inventory Tetris",
+      "description": "Fit odd-shaped items into limited space.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-risk-and-reward",
+      "title": "Risk and Reward",
+      "description": "Greed is tempting and dangerous.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-countdown-timers",
+      "title": "Countdown Timers",
+      "description": "Everything ticks down toward something.",
+      "category": "time"
+    },
+    {
+      "id": "mech-escort",
+      "title": "Escort",
+      "description": "Keep someone fragile safe on the way.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-survival-meters",
+      "title": "Survival Meters",
+      "description": "Hunger, cold and fear need tending.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-scavenging",
+      "title": "Scavenging",
+      "description": "Search the world for useful scraps.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-camera-tricks",
+      "title": "Camera Tricks",
+      "description": "The camera itself is part of the puzzle.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-perspective-shift",
+      "title": "Perspective Shift",
+      "description": "Change viewpoint to change reality.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-mirror-world",
+      "title": "Mirror World",
+      "description": "A reflected world with different rules.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-portals",
+      "title": "Portals",
+      "description": "Connect two places together.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-teleport-swap",
+      "title": "Teleport Swap",
+      "description": "Trade places with something else.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-elemental-reactions",
+      "title": "Elemental Reactions",
+      "description": "Fire, water, ice and electricity interact.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-chain-reactions",
+      "title": "Chain Reactions",
+      "description": "One small push sets off many.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-destruction",
+      "title": "Destruction",
+      "description": "Break the world apart.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-repair",
+      "title": "Repair",
+      "description": "Fix, restore and patch things up.",
+      "category": "building"
+    },
+    {
+      "id": "mech-collecting",
+      "title": "Collecting",
+      "description": "Gather sets of things to complete.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-photography",
+      "title": "Photography",
+      "description": "Capture the world to solve puzzles or score.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-music-making",
+      "title": "Music Making",
+      "description": "Compose sounds that change the game.",
+      "category": "social"
+    },
+    {
+      "id": "mech-bluffing",
+      "title": "Bluffing",
+      "description": "Hide your hand and read the others.",
+      "category": "social"
+    },
+    {
+      "id": "mech-tug-of-war",
+      "title": "Tug of War",
+      "description": "Push back and forth over shared ground.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-territory-control",
+      "title": "Territory Control",
+      "description": "Claim and hold areas.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-auto-battle",
+      "title": "Auto-Battle",
+      "description": "Set things up, then watch them fight.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-sandbox-tools",
+      "title": "Sandbox Tools",
+      "description": "Free-form tools with no set goal.",
+      "category": "building"
+    },
+    {
+      "id": "mech-running-a-shop",
+      "title": "Running a Shop",
+      "description": "Stock shelves, set prices, grow a reputation.",
+      "category": "social"
+    },
+    {
+      "id": "mech-maze-navigation",
+      "title": "Maze Navigation",
+      "description": "Find a way through a tangle of paths.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-sorting",
+      "title": "Sorting",
+      "description": "Put things where they belong, fast or carefully.",
+      "category": "puzzle"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "templates": [
+    "{objective}",
+    "Can you {objective}?",
+    "Where {twist}",
+    "A {mood} {genre} where {twist}",
+    "A {genre} where {twist}",
+    "{title}: {objective}",
+    "In {setting}, {mechanic} is everything.",
+    "A {mood} {genre} set in {setting}.",
+    "{genre} meets {genre2}, in {setting}.",
+    "Everything depends on {mechanic}.",
+    "Get lost in {setting}.",
+    "Welcome to {setting}.",
+    "{mechanic}, {mechanic2} and a lot of {mood} vibes.",
+    "A {mood} {genre} about {mechanic}."
+  ]
+}

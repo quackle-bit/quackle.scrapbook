@@ -1,0 +1,205 @@
+{
+  "type": "setting",
+  "cards": [
+    {
+      "id": "set-floating-islands",
+      "title": "Floating Islands",
+      "description": "Chunks of land adrift in an endless sky."
+    },
+    {
+      "id": "set-abandoned-city",
+      "title": "Abandoned City",
+      "description": "Empty streets and plants reclaiming everything."
+    },
+    {
+      "id": "set-underwater-world",
+      "title": "Underwater World",
+      "description": "Currents, coral and lights in the deep."
+    },
+    {
+      "id": "set-outer-space",
+      "title": "Outer Space",
+      "description": "Stations, stars and long silences."
+    },
+    {
+      "id": "set-haunted-village",
+      "title": "Haunted Village",
+      "description": "A small place with too many whispers."
+    },
+    {
+      "id": "set-tiny-garden",
+      "title": "Tiny Garden",
+      "description": "A whole world under the leaves."
+    },
+    {
+      "id": "set-underground-facility",
+      "title": "Underground Facility",
+      "description": "Corridors, lifts and humming machines."
+    },
+    {
+      "id": "set-fantasy-kingdom",
+      "title": "Fantasy Kingdom",
+      "description": "Castles, forests and old promises."
+    },
+    {
+      "id": "set-night-market",
+      "title": "Night Market",
+      "description": "Lanterns, stalls and strangers after dark."
+    },
+    {
+      "id": "set-lighthouse-island",
+      "title": "Lighthouse Island",
+      "description": "One light, one keeper, and the sea."
+    },
+    {
+      "id": "set-sunken-library",
+      "title": "Sunken Library",
+      "description": "Books drifting in dark water."
+    },
+    {
+      "id": "set-rooftop-garden",
+      "title": "Rooftop Garden",
+      "description": "Green above the city traffic."
+    },
+    {
+      "id": "set-train-that-never-stops",
+      "title": "Train That Never Stops",
+      "description": "Every carriage has a different world."
+    },
+    {
+      "id": "set-desert-caravan",
+      "title": "Desert Caravan",
+      "description": "Dunes, wind and slow travelers."
+    },
+    {
+      "id": "set-snowed-in-village",
+      "title": "Snowed-In Village",
+      "description": "Warm windows against endless white."
+    },
+    {
+      "id": "set-mountain-monastery",
+      "title": "Mountain Monastery",
+      "description": "Bells, stairs and thin air."
+    },
+    {
+      "id": "set-toy-shop",
+      "title": "Toy Shop",
+      "description": "After closing, the toys wake."
+    },
+    {
+      "id": "set-inside-a-clock",
+      "title": "Inside a Clock",
+      "description": "Gears, pendulums and ticking dust."
+    },
+    {
+      "id": "set-floating-market",
+      "title": "Floating Market",
+      "description": "Boats trading on a wide river."
+    },
+    {
+      "id": "set-laundromat-at-3-am",
+      "title": "Laundromat at 3 AM",
+      "description": "Spin cycles and sleepy neon."
+    },
+    {
+      "id": "set-giant-s-kitchen",
+      "title": "Giant's Kitchen",
+      "description": "Everything is huge and a little dangerous."
+    },
+    {
+      "id": "set-cloud-harbor",
+      "title": "Cloud Harbor",
+      "description": "Ships docking on fog."
+    },
+    {
+      "id": "set-moss-covered-ruins",
+      "title": "Moss-Covered Ruins",
+      "description": "Old stones and new life."
+    },
+    {
+      "id": "set-neon-alleyways",
+      "title": "Neon Alleyways",
+      "description": "Rain, signs and quick shadows."
+    },
+    {
+      "id": "set-orbiting-greenhouse",
+      "title": "Orbiting Greenhouse",
+      "description": "A garden in a station window."
+    },
+    {
+      "id": "set-cozy-cafe",
+      "title": "Cozy Cafe",
+      "description": "Steam, warm light and regulars."
+    },
+    {
+      "id": "set-dinosaur-park",
+      "title": "Dinosaur Park",
+      "description": "Gentle giants and one escaped thing."
+    },
+    {
+      "id": "set-circus-after-dark",
+      "title": "Circus After Dark",
+      "description": "Tents, trapezes and stranger acts."
+    },
+    {
+      "id": "set-volcano-village",
+      "title": "Volcano Village",
+      "description": "Life at the edge of the fire."
+    },
+    {
+      "id": "set-frozen-lake",
+      "title": "Frozen Lake",
+      "description": "A hush above something moving below."
+    },
+    {
+      "id": "set-paper-world",
+      "title": "Paper World",
+      "description": "Folded cities and cut-out skies."
+    },
+    {
+      "id": "set-dream-hospital",
+      "title": "Dream Hospital",
+      "description": "Corridors that lead elsewhere."
+    },
+    {
+      "id": "set-swamp-town",
+      "title": "Swamp Town",
+      "description": "Stilt houses and low mist."
+    },
+    {
+      "id": "set-space-bazaar",
+      "title": "Space Bazaar",
+      "description": "Aliens, wares and haggling."
+    },
+    {
+      "id": "set-clockwork-city",
+      "title": "Clockwork City",
+      "description": "Streets that turn like gears."
+    },
+    {
+      "id": "set-sleeping-giant",
+      "title": "Sleeping Giant",
+      "description": "A civilisation on a slumbering back."
+    },
+    {
+      "id": "set-school-after-hours",
+      "title": "School After Hours",
+      "description": "Empty halls and secret clubs."
+    },
+    {
+      "id": "set-old-cinema",
+      "title": "Old Cinema",
+      "description": "Reels, dust and flickering ghosts."
+    },
+    {
+      "id": "set-candy-land",
+      "title": "Candy Land",
+      "description": "Everything edible and slightly suspicious."
+    },
+    {
+      "id": "set-pocket-dimension",
+      "title": "Pocket Dimension",
+      "description": "A whole world in a small space."
+    }
+  ]
+}

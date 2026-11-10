@@ -1,0 +1,197 @@
+{
+  "type": "genre",
+  "cards": [
+    {
+      "id": "genre-roguelike",
+      "title": "Roguelike",
+      "description": "Procedurally generated runs where every loss teaches you something.",
+      "category": "action"
+    },
+    {
+      "id": "genre-tower-defense",
+      "title": "Tower Defense",
+      "description": "Place defenses and hold the line against waves.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-puzzle",
+      "title": "Puzzle",
+      "description": "Work out how the pieces fit together.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-platformer",
+      "title": "Platformer",
+      "description": "Run, jump and master movement through levels.",
+      "category": "action"
+    },
+    {
+      "id": "genre-simulation",
+      "title": "Simulation",
+      "description": "A small world that runs by its own rules.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-adventure",
+      "title": "Adventure",
+      "description": "Explore, find things and uncover what's going on.",
+      "category": "story"
+    },
+    {
+      "id": "genre-strategy",
+      "title": "Strategy",
+      "description": "Plan ahead and outthink the opposition.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-survival",
+      "title": "Survival",
+      "description": "Gather, build and endure against the odds.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-rhythm",
+      "title": "Rhythm",
+      "description": "Everything happens on the beat.",
+      "category": "action"
+    },
+    {
+      "id": "genre-management",
+      "title": "Management",
+      "description": "Keep a business, town or team running.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-metroidvania",
+      "title": "Metroidvania",
+      "description": "A connected world that opens up as you gain abilities.",
+      "category": "story"
+    },
+    {
+      "id": "genre-racing",
+      "title": "Racing",
+      "description": "Go fast, take the corner, beat the clock.",
+      "category": "action"
+    },
+    {
+      "id": "genre-action",
+      "title": "Action",
+      "description": "Quick reactions and satisfying moment-to-moment play.",
+      "category": "action"
+    },
+    {
+      "id": "genre-card-game",
+      "title": "Card Game",
+      "description": "Play cards for effects and tactics.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-deckbuilder",
+      "title": "Deckbuilder",
+      "description": "Grow and refine your own deck as you go.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-visual-novel",
+      "title": "Visual Novel",
+      "description": "A story told through scenes and choices.",
+      "category": "story"
+    },
+    {
+      "id": "genre-point-click",
+      "title": "Point & Click",
+      "description": "Examine, combine and talk your way forward.",
+      "category": "story"
+    },
+    {
+      "id": "genre-roguelite",
+      "title": "Roguelite",
+      "description": "Short runs with progress that carries between them.",
+      "category": "action"
+    },
+    {
+      "id": "genre-shooter",
+      "title": "Shooter",
+      "description": "Aim, dodge and keep the pressure on.",
+      "category": "action"
+    },
+    {
+      "id": "genre-stealth",
+      "title": "Stealth",
+      "description": "Stay hidden and get past without a fight.",
+      "category": "action"
+    },
+    {
+      "id": "genre-farming-sim",
+      "title": "Farming Sim",
+      "description": "Plant, tend and grow a little patch of the world.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-city-builder",
+      "title": "City Builder",
+      "description": "Lay out streets and watch a place come to life.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-idle-incremental",
+      "title": "Idle / Incremental",
+      "description": "Numbers that grow while you plan the next upgrade.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-fighting",
+      "title": "Fighting",
+      "description": "One-on-one duels built on timing and reads.",
+      "category": "action"
+    },
+    {
+      "id": "genre-sandbox",
+      "title": "Sandbox",
+      "description": "Free-form tools and no required goal.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-horror",
+      "title": "Horror",
+      "description": "Dread, tension and the feeling of being watched.",
+      "category": "story"
+    },
+    {
+      "id": "genre-narrative",
+      "title": "Narrative",
+      "description": "A story first, with play in service of it.",
+      "category": "story"
+    },
+    {
+      "id": "genre-exploration",
+      "title": "Exploration",
+      "description": "The joy of seeing what's over the next hill.",
+      "category": "story"
+    },
+    {
+      "id": "genre-party-game",
+      "title": "Party Game",
+      "description": "Short, loud rounds meant for groups.",
+      "category": "social"
+    },
+    {
+      "id": "genre-sports",
+      "title": "Sports",
+      "description": "A familiar game, bent into something new.",
+      "category": "action"
+    },
+    {
+      "id": "genre-cozy",
+      "title": "Cozy",
+      "description": "Gentle, low-pressure play with warm rewards.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-text-adventure",
+      "title": "Text Adventure",
+      "description": "Words, imagination and a parser or choices.",
+      "category": "story"
+    }
+  ]
+}

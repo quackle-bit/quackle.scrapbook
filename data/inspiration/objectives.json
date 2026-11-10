@@ -1,0 +1,205 @@
+{
+  "type": "objective",
+  "cards": [
+    {
+      "id": "obj-survive-until-sunrise",
+      "title": "Survive until sunrise.",
+      "description": "Make it through the night, whatever comes."
+    },
+    {
+      "id": "obj-protect-a-mysterious-object",
+      "title": "Protect a mysterious object.",
+      "description": "Keep something strange safe from everyone."
+    },
+    {
+      "id": "obj-escape-an-abandoned-facility",
+      "title": "Escape an abandoned facility.",
+      "description": "Find the way out before it's too late."
+    },
+    {
+      "id": "obj-build-the-largest-settlement",
+      "title": "Build the largest settlement.",
+      "description": "Grow a tiny camp into a thriving place."
+    },
+    {
+      "id": "obj-deliver-all-packages",
+      "title": "Deliver all packages.",
+      "description": "Every parcel reaches the right door."
+    },
+    {
+      "id": "obj-discover-the-truth",
+      "title": "Discover the truth.",
+      "description": "Piece together what really happened."
+    },
+    {
+      "id": "obj-reach-the-top",
+      "title": "Reach the top.",
+      "description": "Climb higher than anyone has."
+    },
+    {
+      "id": "obj-bring-everyone-home",
+      "title": "Bring everyone home.",
+      "description": "Lead your group safely back."
+    },
+    {
+      "id": "obj-restore-the-lights",
+      "title": "Restore the lights.",
+      "description": "Bring power back to a dark place."
+    },
+    {
+      "id": "obj-collect-every-memory",
+      "title": "Collect every memory.",
+      "description": "Find the scattered pieces of the past."
+    },
+    {
+      "id": "obj-win-the-festival",
+      "title": "Win the festival.",
+      "description": "Come out on top of the big event."
+    },
+    {
+      "id": "obj-keep-the-garden-alive",
+      "title": "Keep the garden alive.",
+      "description": "Tend something fragile through the seasons."
+    },
+    {
+      "id": "obj-cross-the-border",
+      "title": "Cross the border.",
+      "description": "Get across a line nobody wants you to cross."
+    },
+    {
+      "id": "obj-find-your-way-back",
+      "title": "Find your way back.",
+      "description": "You're lost. Get home."
+    },
+    {
+      "id": "obj-pay-off-the-debt",
+      "title": "Pay off the debt.",
+      "description": "Earn enough to clear what you owe."
+    },
+    {
+      "id": "obj-outlast-the-storm",
+      "title": "Outlast the storm.",
+      "description": "Hold on until the weather breaks."
+    },
+    {
+      "id": "obj-rescue-the-crew",
+      "title": "Rescue the crew.",
+      "description": "Find and free everyone who's missing."
+    },
+    {
+      "id": "obj-solve-the-case",
+      "title": "Solve the case.",
+      "description": "Gather clues and name the culprit."
+    },
+    {
+      "id": "obj-escape-the-loop",
+      "title": "Escape the loop.",
+      "description": "Break out of the repeating time."
+    },
+    {
+      "id": "obj-feed-the-village",
+      "title": "Feed the village.",
+      "description": "Make sure nobody goes hungry this winter."
+    },
+    {
+      "id": "obj-map-the-unknown",
+      "title": "Map the unknown.",
+      "description": "Chart a place no one has drawn."
+    },
+    {
+      "id": "obj-win-without-being-seen",
+      "title": "Win without being seen.",
+      "description": "Reach the goal and leave no trace."
+    },
+    {
+      "id": "obj-become-the-best-in-town",
+      "title": "Become the best in town.",
+      "description": "Rise from nobody to the name everyone knows."
+    },
+    {
+      "id": "obj-wake-the-sleeping-giant",
+      "title": "Wake the sleeping giant.",
+      "description": "Find a way to rouse something huge."
+    },
+    {
+      "id": "obj-keep-the-secret",
+      "title": "Keep the secret.",
+      "description": "Don't let anyone find out."
+    },
+    {
+      "id": "obj-make-peace",
+      "title": "Make peace.",
+      "description": "Bring two sides together."
+    },
+    {
+      "id": "obj-defend-the-last-tower",
+      "title": "Defend the last tower.",
+      "description": "Hold the final position."
+    },
+    {
+      "id": "obj-finish-the-song",
+      "title": "Finish the song.",
+      "description": "Complete a piece of music, one part at a time."
+    },
+    {
+      "id": "obj-return-the-stolen-things",
+      "title": "Return the stolen things.",
+      "description": "Track down what was taken and bring it back."
+    },
+    {
+      "id": "obj-out-trade-the-rival",
+      "title": "Out-trade the rival.",
+      "description": "Beat a competitor at their own market."
+    },
+    {
+      "id": "obj-stay-warm-until-spring",
+      "title": "Stay warm until spring.",
+      "description": "Keep the fire lit through the cold."
+    },
+    {
+      "id": "obj-find-the-missing-friend",
+      "title": "Find the missing friend.",
+      "description": "Follow the trail to someone who vanished."
+    },
+    {
+      "id": "obj-reach-the-end-of-the-line",
+      "title": "Reach the end of the line.",
+      "description": "See where the last train goes."
+    },
+    {
+      "id": "obj-grow-something-impossible",
+      "title": "Grow something impossible.",
+      "description": "Coax life from the least likely place."
+    },
+    {
+      "id": "obj-get-the-whole-team-across",
+      "title": "Get the whole team across.",
+      "description": "Everyone has to make it, not just you."
+    },
+    {
+      "id": "obj-break-the-curse",
+      "title": "Break the curse.",
+      "description": "Find what's behind it and undo it."
+    },
+    {
+      "id": "obj-make-it-to-the-party",
+      "title": "Make it to the party.",
+      "description": "Obstacles everywhere, but you're not missing this."
+    },
+    {
+      "id": "obj-clean-up-the-mess",
+      "title": "Clean up the mess.",
+      "description": "Put a chaotic place right again."
+    },
+    {
+      "id": "obj-win-the-heart-of-the-town",
+      "title": "Win the heart of the town.",
+      "description": "Get to know everyone, one by one."
+    },
+    {
+      "id": "obj-prove-them-wrong",
+      "title": "Prove them wrong.",
+      "description": "Do what everyone said couldn't be done."
+    }
+  ]
+}

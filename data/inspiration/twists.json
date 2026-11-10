@@ -1,0 +1,260 @@
+{
+  "type": "twist",
+  "cards": [
+    {
+      "id": "twist-the-player-cannot-move-directly",
+      "title": "The player cannot move directly.",
+      "description": "Movement happens some other way: pushing, pulling, asking."
+    },
+    {
+      "id": "twist-the-world-changes-every-minute",
+      "title": "The world changes every minute.",
+      "description": "Layouts, rules or weather reshuffle on a timer."
+    },
+    {
+      "id": "twist-enemies-help-the-player",
+      "title": "Enemies help the player.",
+      "description": "The ones who attack are secretly on your side."
+    },
+    {
+      "id": "twist-every-action-has-a-consequence",
+      "title": "Every action has a consequence.",
+      "description": "Even small choices ripple outward."
+    },
+    {
+      "id": "twist-the-player-controls-the-environment-instead-of-a-character",
+      "title": "The player controls the environment instead of a character.",
+      "description": "You move the world, not the hero."
+    },
+    {
+      "id": "twist-the-game-reverses-its-rules-halfway-through",
+      "title": "The game reverses its rules halfway through.",
+      "description": "What helped you now works against you."
+    },
+    {
+      "id": "twist-you-play-as-the-monster",
+      "title": "You play as the monster.",
+      "description": "The usual villain is the one you steer."
+    },
+    {
+      "id": "twist-the-map-is-a-person-s-memory",
+      "title": "The map is a person's memory.",
+      "description": "Places fade or change as memories do."
+    },
+    {
+      "id": "twist-you-can-only-move-when-others-aren-t-looking",
+      "title": "You can only move when others aren't looking.",
+      "description": "Eyes are the real enemy."
+    },
+    {
+      "id": "twist-your-tools-have-limited-uses",
+      "title": "Your tools have limited uses.",
+      "description": "Every item you use is gone for good."
+    },
+    {
+      "id": "twist-death-is-a-resource",
+      "title": "Death is a resource.",
+      "description": "Dying is something you spend to get ahead."
+    },
+    {
+      "id": "twist-the-player-is-the-final-boss",
+      "title": "The player is the final boss.",
+      "description": "Everyone else works together against you."
+    },
+    {
+      "id": "twist-the-level-is-alive",
+      "title": "The level is alive.",
+      "description": "The map itself reacts and moves."
+    },
+    {
+      "id": "twist-time-only-moves-when-you-move",
+      "title": "Time only moves when you move.",
+      "description": "Stand still and the world freezes."
+    },
+    {
+      "id": "twist-you-share-your-body-with-a-stranger",
+      "title": "You share your body with a stranger.",
+      "description": "Two minds, one set of controls."
+    },
+    {
+      "id": "twist-the-ui-is-part-of-the-world",
+      "title": "The UI is part of the world.",
+      "description": "Menus and meters can be touched, broken or used."
+    },
+    {
+      "id": "twist-gravity-belongs-to-objects-not-the-world",
+      "title": "Gravity belongs to objects, not the world.",
+      "description": "Each thing pulls in its own direction."
+    },
+    {
+      "id": "twist-everything-you-collect-also-follows-you",
+      "title": "Everything you collect also follows you.",
+      "description": "Pick things up and they trail behind you."
+    },
+    {
+      "id": "twist-there-s-no-text-only-symbols",
+      "title": "There's no text, only symbols.",
+      "description": "Understanding is the puzzle."
+    },
+    {
+      "id": "twist-the-game-remembers-across-runs",
+      "title": "The game remembers across runs.",
+      "description": "Earlier attempts leave marks on later ones."
+    },
+    {
+      "id": "twist-the-player-can-t-see-their-own-character",
+      "title": "The player can't see their own character.",
+      "description": "You steer by sound or by others' reactions."
+    },
+    {
+      "id": "twist-walls-are-only-suggestions",
+      "title": "Walls are only suggestions.",
+      "description": "You can pass through, if you pay the price."
+    },
+    {
+      "id": "twist-your-companion-makes-the-decisions",
+      "title": "Your companion makes the decisions.",
+      "description": "You guide, but they choose."
+    },
+    {
+      "id": "twist-light-is-both-weapon-and-weakness",
+      "title": "Light is both weapon and weakness.",
+      "description": "What saves you also exposes you."
+    },
+    {
+      "id": "twist-you-can-only-carry-one-thing",
+      "title": "You can only carry one thing.",
+      "description": "Every choice is a trade."
+    },
+    {
+      "id": "twist-each-level-is-a-different-genre",
+      "title": "Each level is a different genre.",
+      "description": "The rules keep changing shape."
+    },
+    {
+      "id": "twist-cause-and-effect-arrive-out-of-order",
+      "title": "Cause and effect arrive out of order.",
+      "description": "Results appear before their causes."
+    },
+    {
+      "id": "twist-the-world-is-tiny-and-you-re-huge",
+      "title": "The world is tiny and you're huge.",
+      "description": "Move carefully: everything is fragile."
+    },
+    {
+      "id": "twist-you-are-always-being-followed",
+      "title": "You are always being followed.",
+      "description": "Something dogs your steps, closer each time."
+    },
+    {
+      "id": "twist-silence-is-the-strongest-move",
+      "title": "Silence is the strongest move.",
+      "description": "Making noise is the cost of acting."
+    },
+    {
+      "id": "twist-the-enemy-copies-what-you-do",
+      "title": "The enemy copies what you do.",
+      "description": "Everything you try comes right back at you."
+    },
+    {
+      "id": "twist-anything-can-be-a-weapon",
+      "title": "Anything can be a weapon.",
+      "description": "Objects have uses you wouldn't expect."
+    },
+    {
+      "id": "twist-your-inventory-is-a-creature",
+      "title": "Your inventory is a creature.",
+      "description": "It has moods, hungers and opinions."
+    },
+    {
+      "id": "twist-you-can-undo-anything-but-only-once",
+      "title": "You can undo anything, but only once.",
+      "description": "One rewind per level, so choose well."
+    },
+    {
+      "id": "twist-the-goal-moves-as-you-approach",
+      "title": "The goal moves as you approach.",
+      "description": "The finish line keeps shifting."
+    },
+    {
+      "id": "twist-friendship-is-the-only-currency",
+      "title": "Friendship is the only currency.",
+      "description": "Everything is bought with trust."
+    },
+    {
+      "id": "twist-day-is-a-platformer-night-is-a-puzzle",
+      "title": "Day is a platformer, night is a puzzle.",
+      "description": "Two halves of one world, played differently."
+    },
+    {
+      "id": "twist-rules-are-written-on-the-walls",
+      "title": "Rules are written on the walls.",
+      "description": "Read the room to learn what's allowed."
+    },
+    {
+      "id": "twist-you-win-by-losing-on-purpose",
+      "title": "You win by losing on purpose.",
+      "description": "Failure is a strategy."
+    },
+    {
+      "id": "twist-the-player-writes-the-level-as-they-play",
+      "title": "The player writes the level as they play.",
+      "description": "The path appears behind your pen."
+    },
+    {
+      "id": "twist-each-npc-remembers-a-different-story",
+      "title": "Each NPC remembers a different story.",
+      "description": "The truth is spread across everyone."
+    },
+    {
+      "id": "twist-you-shrink-every-time-you-succeed",
+      "title": "You shrink every time you succeed.",
+      "description": "Winning makes your problems bigger."
+    },
+    {
+      "id": "twist-the-weather-is-the-enemy",
+      "title": "The weather is the enemy.",
+      "description": "Wind, rain and lightning hunt you."
+    },
+    {
+      "id": "twist-controls-flip-each-time-you-die",
+      "title": "Controls flip each time you die.",
+      "description": "Left becomes right, and so on."
+    },
+    {
+      "id": "twist-your-shadow-plays-a-different-game",
+      "title": "Your shadow plays a different game.",
+      "description": "It has its own goals."
+    },
+    {
+      "id": "twist-players-take-turns-being-the-world",
+      "title": "Players take turns being the world.",
+      "description": "Half play, half make trouble."
+    },
+    {
+      "id": "twist-the-map-is-a-deck-of-cards",
+      "title": "The map is a deck of cards.",
+      "description": "Draw and place to make the next room."
+    },
+    {
+      "id": "twist-you-are-invisible-to-everyone-but-one",
+      "title": "You are invisible to everyone but one.",
+      "description": "Only a single character can see you."
+    },
+    {
+      "id": "twist-the-final-level-is-the-first-again",
+      "title": "The final level is the first, again.",
+      "description": "You return, changed, to where you began."
+    },
+    {
+      "id": "twist-every-enemy-is-someone-you-ve-helped",
+      "title": "Every enemy is someone you've helped.",
+      "description": "The ones who come for you owe you."
+    },
+    {
+      "id": "twist-making-something-takes-away-something-else",
+      "title": "Making something takes away something else.",
+      "description": "Creation always has a cost."
+    }
+  ]
+}

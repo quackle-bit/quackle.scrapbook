@@ -1,0 +1,105 @@
+{
+  "type": "visual",
+  "cards": [
+    {
+      "id": "vis-pixel-art",
+      "title": "Pixel Art",
+      "description": "Hand-placed pixels with a retro heart."
+    },
+    {
+      "id": "vis-low-poly",
+      "title": "Low Poly",
+      "description": "Simple faceted 3D shapes."
+    },
+    {
+      "id": "vis-hand-drawn",
+      "title": "Hand Drawn",
+      "description": "Visible brushwork and sketchy lines."
+    },
+    {
+      "id": "vis-3d-stylized",
+      "title": "3D Stylized",
+      "description": "Chunky, colourful 3D with a clear look."
+    },
+    {
+      "id": "vis-minimalist",
+      "title": "Minimalist",
+      "description": "A few shapes, strong colour, lots of room."
+    },
+    {
+      "id": "vis-retro-3d",
+      "title": "Retro 3D",
+      "description": "Old-console polygons and fuzzy textures."
+    },
+    {
+      "id": "vis-paper-cutout",
+      "title": "Paper Cutout",
+      "description": "Layered flat shapes with soft shadows."
+    },
+    {
+      "id": "vis-isometric",
+      "title": "Isometric",
+      "description": "A tilted, diorama-like view."
+    },
+    {
+      "id": "vis-watercolour",
+      "title": "Watercolour",
+      "description": "Soft washes and bleeding colour."
+    },
+    {
+      "id": "vis-black-and-white",
+      "title": "Black and White",
+      "description": "High contrast, no colour at all."
+    },
+    {
+      "id": "vis-neon-vector",
+      "title": "Neon Vector",
+      "description": "Glowing lines on dark backgrounds."
+    },
+    {
+      "id": "vis-claymation",
+      "title": "Claymation",
+      "description": "Soft, handmade, slightly lumpy."
+    },
+    {
+      "id": "vis-comic-book",
+      "title": "Comic Book",
+      "description": "Bold outlines, halftone dots, panels."
+    },
+    {
+      "id": "vis-voxel",
+      "title": "Voxel",
+      "description": "A world built from tiny cubes."
+    },
+    {
+      "id": "vis-silhouette",
+      "title": "Silhouette",
+      "description": "Dark shapes against bright light."
+    },
+    {
+      "id": "vis-cel-shaded",
+      "title": "Cel Shaded",
+      "description": "3D with a cartoon outline."
+    },
+    {
+      "id": "vis-collage",
+      "title": "Collage",
+      "description": "Torn paper, photos and mixed textures."
+    },
+    {
+      "id": "vis-stained-glass",
+      "title": "Stained Glass",
+      "description": "Bold lead lines and glowing colours."
+    },
+    {
+      "id": "vis-chalkboard",
+      "title": "Chalkboard",
+      "description": "White lines and smudges on a dark ground."
+    },
+    {
+      "id": "vis-limited-palette",
+      "title": "Limited Palette",
+      "description": "Just a few colours, used carefully."
+    }
+  ]
+}

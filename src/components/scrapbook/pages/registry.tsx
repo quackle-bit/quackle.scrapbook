@@ -3,7 +3,17 @@
 import type { ComponentType } from "react";
 import type { Concept, PageId, Scrapbook } from "@/lib/scrapbook/types";
 import { PageFrame } from "./PageFrame";
+import { GenrePage } from "./GenrePage";
+import { HighConceptPage } from "./HighConceptPage";
+import { HookPage } from "./HookPage";
+import { LoopPage } from "./LoopPage";
+import { MechanicsPage } from "./MechanicsPage";
+import { MoodPage } from "./MoodPage";
+import { ObjectivePage } from "./ObjectivePage";
+import { ScopePage } from "./ScopePage";
 import { SetupPage } from "./SetupPage";
+import { TaglinePage } from "./TaglinePage";
+import { TitlePage } from "./TitlePage";
 
 export type PageDef = { id: PageId; group: string; title: string; prompt: string };
 export type PageCtx = {
@@ -99,6 +109,16 @@ function Pending({ page }: PageCtx) {
 
 const SCREENS: Partial<Record<PageId, ComponentType<PageCtx>>> = {
   setup: SetupPage,
+  title: TitlePage,
+  tagline: TaglinePage,
+  concept: HighConceptPage,
+  genre: GenrePage,
+  mechanics: MechanicsPage,
+  loop: LoopPage,
+  objective: ObjectivePage,
+  hook: HookPage,
+  mood: MoodPage,
+  scope: ScopePage,
 };
 
 export function PageScreen(props: PageCtx) {

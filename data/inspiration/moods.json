@@ -1,0 +1,130 @@
+{
+  "type": "mood",
+  "cards": [
+    {
+      "id": "mood-cozy",
+      "title": "Cozy",
+      "description": "Warm, safe and unhurried."
+    },
+    {
+      "id": "mood-eerie",
+      "title": "Eerie",
+      "description": "Quiet and slightly wrong."
+    },
+    {
+      "id": "mood-melancholic",
+      "title": "Melancholic",
+      "description": "Beautiful and a little sad."
+    },
+    {
+      "id": "mood-chaotic",
+      "title": "Chaotic",
+      "description": "Loud, fast and gleefully messy."
+    },
+    {
+      "id": "mood-whimsical",
+      "title": "Whimsical",
+      "description": "Playful, odd and light on its feet."
+    },
+    {
+      "id": "mood-mysterious",
+      "title": "Mysterious",
+      "description": "Full of questions and half-seen things."
+    },
+    {
+      "id": "mood-dreamlike",
+      "title": "Dreamlike",
+      "description": "Soft logic, drifting scenes."
+    },
+    {
+      "id": "mood-tense",
+      "title": "Tense",
+      "description": "Held breath, ticking clock."
+    },
+    {
+      "id": "mood-peaceful",
+      "title": "Peaceful",
+      "description": "Calm, spacious and unforced."
+    },
+    {
+      "id": "mood-surreal",
+      "title": "Surreal",
+      "description": "Familiar things in impossible arrangements."
+    },
+    {
+      "id": "mood-nostalgic",
+      "title": "Nostalgic",
+      "description": "A warm ache for a time gone by."
+    },
+    {
+      "id": "mood-hopeful",
+      "title": "Hopeful",
+      "description": "Small lights in a dark place."
+    },
+    {
+      "id": "mood-lonely",
+      "title": "Lonely",
+      "description": "Vast spaces and few voices."
+    },
+    {
+      "id": "mood-triumphant",
+      "title": "Triumphant",
+      "description": "Big feelings, bright colours."
+    },
+    {
+      "id": "mood-playful",
+      "title": "Playful",
+      "description": "Silly, bouncy and never too serious."
+    },
+    {
+      "id": "mood-brooding",
+      "title": "Brooding",
+      "description": "Heavy skies and slow thoughts."
+    },
+    {
+      "id": "mood-cheerful",
+      "title": "Cheerful",
+      "description": "Sunny and easy."
+    },
+    {
+      "id": "mood-haunting",
+      "title": "Haunting",
+      "description": "Something lingers after you've gone."
+    },
+    {
+      "id": "mood-adventurous",
+      "title": "Adventurous",
+      "description": "Always another horizon."
+    },
+    {
+      "id": "mood-wistful",
+      "title": "Wistful",
+      "description": "Longing for something just out of reach."
+    },
+    {
+      "id": "mood-absurd",
+      "title": "Absurd",
+      "description": "Gloriously, deliberately ridiculous."
+    },
+    {
+      "id": "mood-gritty",
+      "title": "Gritty",
+      "description": "Rough edges and real consequences."
+    },
+    {
+      "id": "mood-serene",
+      "title": "Serene",
+      "description": "Still water and slow breath."
+    },
+    {
+      "id": "mood-spooky",
+      "title": "Spooky",
+      "description": "Fun scares and creaky floors."
+    },
+    {
+      "id": "mood-bittersweet",
+      "title": "Bittersweet",
+      "description": "Joy and loss in the same moment."
+    }
+  ]
+}

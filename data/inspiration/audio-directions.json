@@ -1,0 +1,80 @@
+{
+  "type": "audio",
+  "cards": [
+    {
+      "id": "aud-lo-fi",
+      "title": "Lo-fi",
+      "description": "Warm, dusty beats and mellow chords."
+    },
+    {
+      "id": "aud-ambient",
+      "title": "Ambient",
+      "description": "Slow textures and gentle drones."
+    },
+    {
+      "id": "aud-chiptune",
+      "title": "Chiptune",
+      "description": "Square waves and lively little melodies."
+    },
+    {
+      "id": "aud-orchestral",
+      "title": "Orchestral",
+      "description": "Big strings, brass and drama."
+    },
+    {
+      "id": "aud-experimental",
+      "title": "Experimental",
+      "description": "Strange sounds and bold choices."
+    },
+    {
+      "id": "aud-minimalist-soundscape",
+      "title": "Minimalist Soundscape",
+      "description": "Quiet, sparse, every sound matters."
+    },
+    {
+      "id": "aud-acoustic",
+      "title": "Acoustic",
+      "description": "Guitars, pianos and natural rooms."
+    },
+    {
+      "id": "aud-synthwave",
+      "title": "Synthwave",
+      "description": "Pulsing synths and neon nostalgia."
+    },
+    {
+      "id": "aud-folk",
+      "title": "Folk",
+      "description": "Simple tunes with homespun instruments."
+    },
+    {
+      "id": "aud-jazz",
+      "title": "Jazz",
+      "description": "Swing, improvisation and smoky rooms."
+    },
+    {
+      "id": "aud-field-recordings",
+      "title": "Field Recordings",
+      "description": "Real places, recorded and woven in."
+    },
+    {
+      "id": "aud-music-box",
+      "title": "Music Box",
+      "description": "Tiny tinkling melodies."
+    },
+    {
+      "id": "aud-heavy-percussion",
+      "title": "Heavy Percussion",
+      "description": "Drums that drive everything."
+    },
+    {
+      "id": "aud-silence-and-foley",
+      "title": "Silence and Foley",
+      "description": "Almost no music, just close, detailed sound."
+    },
+    {
+      "id": "aud-retro-arcade",
+      "title": "Retro Arcade",
+      "description": "Bright blips and punchy effects."
+    }
+  ]
+}
