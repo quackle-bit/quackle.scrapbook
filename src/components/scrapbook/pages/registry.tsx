@@ -3,6 +3,7 @@
 import type { ComponentType } from "react";
 import type { Concept, PageId, Scrapbook } from "@/lib/scrapbook/types";
 import { PageFrame } from "./PageFrame";
+import { ClosePage } from "./ClosePage";
 import { GenrePage } from "./GenrePage";
 import { HighConceptPage } from "./HighConceptPage";
 import { HookPage } from "./HookPage";
@@ -119,6 +120,7 @@ const SCREENS: Partial<Record<PageId, ComponentType<PageCtx>>> = {
   hook: HookPage,
   mood: MoodPage,
   scope: ScopePage,
+  close: ClosePage,
 };
 
 export function PageScreen(props: PageCtx) {

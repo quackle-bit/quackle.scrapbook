@@ -11,6 +11,8 @@ import { SettingsButton } from "../ui/SettingsSheet";
 import { DuckSprite } from "../Duck";
 import { scrapbookStore, useScrapbooks } from "@/lib/scrapbook/store";
 import { useSettings } from "@/lib/settings";
+import { importDone, importOldSpreads, markImportDone } from "@/lib/scrapbook/import";
+import { useStore } from "@/lib/store";
 
 function Lamp() {
   return (
@@ -50,6 +52,10 @@ export function DeskHome() {
   const [renaming, setRenaming] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<string | null>(null);
   const last = scrapbooks.find((s) => s.id === lastId) ?? scrapbooks[0];
+  // Pitches from the first version of the app can be brought across once.
+  const old = useStore();
+  const [skipImport, setSkipImport] = useState(false);
+  const oldCount = old.ready && !skipImport && !importDone() ? old.book.spreads.length : 0;
 
   function start() {
     const id = scrapbookStore.createScrapbook();
@@ -128,11 +134,45 @@ export function DeskHome() {
           </button>
         </div>
 
+        {oldCount > 0 && (
+          <div className="dk-import" role="note">
+            <p>
+              You have {oldCount} pitch{oldCount === 1 ? "" : "es"} from the first version of
+              Quackle Scrapbook. Bring {oldCount === 1 ? "it" : "them"} into a new scrapbook?
+            </p>
+            <div className="dk-row">
+              <button
+                type="button"
+                className="dk-btn small primary"
+                onClick={() => {
+                  const id = importOldSpreads(old.book.spreads);
+                  markImportDone();
+                  if (id) router.push(`/scrapbook?id=${id}&page=close`);
+                }}
+              >
+                Import {oldCount === 1 ? "it" : "them"}
+              </button>
+              <button
+                type="button"
+                className="dk-btn small ghost"
+                onClick={() => {
+                  markImportDone();
+                  setSkipImport(true);
+                }}
+              >
+                No thanks
+              </button>
+            </div>
+          </div>
+        )}
+
         <footer className="dk-desk-foot">
           <a href="https://quacklebit.com" rel="noopener">
             Quackle.bit
           </a>
           <Link href="/about">About</Link>
+          <Link href="/studio">Studio</Link>
+          <Link href="/jam">Jam rooms</Link>
         </footer>
       </main>
 

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { scrapbookStore, useScrapbook } from "@/lib/scrapbook/store";
 import type { PageId } from "@/lib/scrapbook/types";
 import { RadioButton } from "../radio/Radio";
+import { ConceptSwitcher } from "./ConceptSwitcher";
 import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
@@ -13,7 +14,7 @@ import { PAGES, PageScreen } from "./pages/registry";
 
 /** The open scrapbook: one page at a time, any order, with swipe, buttons and a page index. */
 export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPage?: PageId }) {
-  const { ready, book, concept } = useScrapbook(bookId);
+  const { ready, book, concept, concepts } = useScrapbook(bookId);
   const [index, setIndex] = useState(() => {
     const i = PAGES.findIndex((p) => p.id === startPage);
     return i >= 0 ? i : -1;
@@ -89,6 +90,21 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <RadioButton />
         <SettingsButton />
       </header>
+
+      <div className="dk-concept-bar">
+        <ConceptSwitcher
+          book={book}
+          concepts={concepts}
+          activeId={concept.id}
+          onSelect={(id) => scrapbookStore.setActiveConcept(book.id, id)}
+        />
+        <Link
+          className="dk-link-light"
+          href={`/scrapbook/summary?id=${book.id}&concept=${concept.id}`}
+        >
+          View pitch →
+        </Link>
+      </div>
 
       <main className="dk-stage" onPointerDown={turn.onPointerDown} onPointerUp={turn.onPointerUp}>
         <div className="dk-binding">

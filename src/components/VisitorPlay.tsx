@@ -113,8 +113,8 @@ export function VisitorPlay({ mode }: { mode: Mode }) {
         onFinish={onFinish}
         finishActions={(_run, restart) => (
           <>
-            <Link className="big-btn" href={mode === "studio" ? "/studio" : "/book"}>
-              {mode === "studio" ? "Open the library →" : "Open my book →"}
+            <Link className="big-btn" href={mode === "studio" ? "/studio" : "/"}>
+              {mode === "studio" ? "Open the library →" : "Back to the desk →"}
             </Link>
             {!full && (
               <button

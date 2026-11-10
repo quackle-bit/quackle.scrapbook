@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { SharedView } from "@/components/book/SharedView";
+import { SharedEntry } from "@/components/summary/SharedEntry";
 import "@/styles/scrapbook.css";
 import "@/styles/route.css";
 import "@/styles/book.css";
 import "@/styles/pitch.css";
 
 export const metadata: Metadata = {
-  title: "A game idea · quackle.scrapbook",
-  description: "A spread from someone's quackle.scrapbook idea book.",
-  // Shared spreads are personal; keep them out of search results.
+  title: "A game pitch · Quackle Scrapbook",
+  description: "A game pitch made with Quackle Scrapbook.",
+  // Shared pitches are personal; keep them out of search results.
   robots: { index: false, follow: true },
 };
 
 export default function SharedPage() {
-  return <SharedView />;
+  return <SharedEntry />;
 }
