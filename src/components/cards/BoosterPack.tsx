@@ -233,7 +233,6 @@ export function BoosterPack({
   return (
     <div className="px-stall">
       <header className="px-stall-head">
-        <strong>{keeper.stall}</strong>
         <button
           type="button"
           className="px-bin"

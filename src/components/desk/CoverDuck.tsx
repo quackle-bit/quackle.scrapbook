@@ -31,7 +31,8 @@ function geoOf(stage: RefObject<HTMLDivElement | null>, book: RefObject<HTMLButt
   const s = stage.current?.getBoundingClientRect();
   const b = book.current?.getBoundingClientRect();
   if (!s || !b) return null;
-  const top = b.top - s.top - SIZE + 6;
+  // The book lies flat on the desk: he stands on the cover, near its top edge.
+  const top = b.top - s.top - SIZE + 52;
   return {
     home: { x: b.right - s.left - SIZE - 18, y: top },
     minX: b.left - s.left + 4,

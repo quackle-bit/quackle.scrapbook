@@ -3123,84 +3123,6 @@ html[data-dark="1"] .dk.dk-desk {
 .cv-duck {
   z-index: 2;
 }
-/* A pool of warm light around the book, in hard steps (no smooth glow). */
-.cv-pool {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  width: 170%;
-  aspect-ratio: 1;
-  translate: -50% -50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 196, 110, 0.3) 0 22%,
-    rgba(255, 196, 110, 0.2) 22% 32%,
-    rgba(255, 196, 110, 0.12) 32% 42%,
-    rgba(255, 196, 110, 0.06) 42% 52%,
-    transparent 52%
-  );
-}
-/* The desk: pixel planks, a lit top edge and a dark front edge. */
-.cv-table {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -20px;
-  height: 36%;
-  border-top: 4px solid #2a1a10;
-  background:
-    linear-gradient(#c0864e 0 4px, transparent 4px),
-    repeating-linear-gradient(#7a4e2c 0 22px, #6a4224 22px 26px), #6a4224;
-  box-shadow: inset 0 -18px 0 #3d2616;
-}
-.cv-table::after {
-  /* the lamp's light falling on the desk, stepped */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 60% 70% at 46% 0,
-    rgba(255, 210, 140, 0.35) 0 30%,
-    rgba(255, 210, 140, 0.18) 30% 55%,
-    transparent 55%
-  );
-}
-/* The lamp, hanging in from the top left, and its cone of light toward the book. */
-.cv-lamp {
-  position: absolute;
-  left: 8px;
-  top: 0;
-  rotate: -18deg;
-  transform-origin: 50% 0;
-}
-.cv-lamp::before {
-  content: "";
-  position: absolute;
-  left: 26px;
-  bottom: 100%;
-  width: 4px;
-  height: 200px;
-  background: #2a2530;
-}
-.cv-lamp svg {
-  display: block;
-  filter: drop-shadow(0 0 0 #000);
-}
-.cv-cone {
-  position: absolute;
-  left: 20px;
-  top: 24px;
-  width: 80%;
-  height: 70%;
-  clip-path: polygon(6% 0, 16% 0, 100% 78%, 34% 100%);
-  background: linear-gradient(
-    160deg,
-    rgba(255, 214, 150, 0.32) 0 25%,
-    rgba(255, 214, 150, 0.2) 25% 50%,
-    rgba(255, 214, 150, 0.1) 50% 75%,
-    transparent 75%
-  );
-}
 /* Dust in the light, drifting up in pixel steps. */
 .cv-motes {
   position: absolute;
@@ -3258,4 +3180,55 @@ html[data-dark="1"] .dk.dk-desk {
 }
 .dk-desk .dk-desk-foot a {
   opacity: 0.8;
+}
+
+/* ══════════ COVER, TOP-DOWN: the whole screen is the desk, the book lies flat ══════════ */
+.dk.dk-desk {
+  /* wooden desktop seen from above: planks + fine grain */
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 2px, transparent 2px 14px),
+    repeating-linear-gradient(
+      90deg,
+      #7a4e2c 0 58px,
+      #5e3a1f 58px 62px,
+      #6f4626 62px 120px,
+      #5e3a1f 120px 124px
+    ) !important;
+  position: relative;
+}
+/* Lamp light from the upper left, in hard steps, fading the desk into the dark at the edges. */
+.dk.dk-desk::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 42% 40%,
+      rgba(255, 196, 120, 0.22) 0 20%,
+      rgba(255, 196, 120, 0.12) 20% 30%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 42% 40%,
+      transparent 0 30%,
+      rgba(12, 8, 6, 0.28) 30% 42%,
+      rgba(12, 8, 6, 0.5) 42% 54%,
+      rgba(12, 8, 6, 0.7) 54% 68%,
+      rgba(12, 8, 6, 0.85) 68%
+    );
+}
+.dk-desk .dk-desk-main {
+  position: relative;
+  z-index: 1;
+}
+.cv-scene {
+  inset: 0;
+}
+/* Lying flat: a short shadow down and to the right, away from the lamp. */
+.cv-book {
+  box-shadow:
+    4px 4px 0 var(--ink),
+    12px 14px 0 rgba(0, 0, 0, 0.5) !important;
 }

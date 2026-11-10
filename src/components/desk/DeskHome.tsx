@@ -10,21 +10,9 @@ import { BottomSheet } from "../ui/BottomSheet";
 import { DeskRoot } from "../ui/DeskRoot";
 import { SettingsButton } from "../ui/SettingsSheet";
 import { CoverDuck } from "./CoverDuck";
-import { PixelArt } from "../scrapbook/pages/gachaArt";
 import { scrapbookStore, useScrapbooks } from "@/lib/scrapbook/store";
 import { importDone, importOldSpreads, markImportDone } from "@/lib/scrapbook/import";
 import { useStore } from "@/lib/store";
-
-/** Pixel desk lamp (shade tilted toward the book), 4 px per pixel. k ink, y bulb, r shade, R shade dark. */
-const LAMP = [
-  "..kkkkkkkkk...",
-  ".kRRRRRRRRRk..",
-  "kRrrrrrrrrrRk.",
-  "kRrrrrrrrrrRRk",
-  ".kkkkkkkkkkkk.",
-  "...kyyyyyyk...",
-  "....kyyyyk....",
-];
 
 const when = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
@@ -63,14 +51,8 @@ export function DeskHome() {
 
         {/* The cover: the scrapbook itself, with the duck living on it. */}
         <div ref={stage} className="cv-stage">
-          {/* The scene: a dark room, a desk lamp pooling warm light, a wooden desk, dust in the air. */}
+          {/* Dust drifting in the lamp light over the desk. */}
           <div className="cv-scene" aria-hidden>
-            <span className="cv-pool" />
-            <span className="cv-table" />
-            <span className="cv-lamp">
-              <PixelArt rows={LAMP} size={4} />
-            </span>
-            <span className="cv-cone" />
             <span className="cv-motes">
               {Array.from({ length: 7 }, (_, i) => (
                 <i key={i} style={{ left: `${18 + i * 11}%`, animationDelay: `${-i * 1.7}s` }} />
