@@ -3106,7 +3106,6 @@ html[data-dark="1"] .dk.dk-desk {
 
 /* ══════════ COVER SCENE: lamp-lit desk, dark room, pixel light ══════════ */
 .dk.dk-desk {
-  background: #15121a !important;
   color: #f3e9d8 !important;
   overflow: hidden;
 }
@@ -3182,41 +3181,39 @@ html[data-dark="1"] .dk.dk-desk {
   opacity: 0.8;
 }
 
-/* ══════════ COVER, TOP-DOWN: the whole screen is the desk, the book lies flat ══════════ */
+/* ══════════ COVER: the book lies flat on a green craft cutting mat ══════════ */
 .dk.dk-desk {
-  /* wooden desktop seen from above: planks + fine grain */
+  /* self-healing cutting mat: fine grid every 16 px, brighter lines every 80 px */
   background:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 2px, transparent 2px 14px),
-    repeating-linear-gradient(
-      90deg,
-      #7a4e2c 0 58px,
-      #5e3a1f 58px 62px,
-      #6f4626 62px 120px,
-      #5e3a1f 120px 124px
-    ) !important;
+    linear-gradient(rgba(255, 255, 255, 0.22) 2px, transparent 2px) 0 0 / 80px 80px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 2px, transparent 2px) 0 0 / 80px 80px,
+    linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+    #3d7356 !important;
   position: relative;
 }
-/* Lamp light from the upper left, in hard steps, fading the desk into the dark at the edges. */
+/* The mat's border with ruler ticks, and soft light (two gentle steps darker at the corners). */
 .dk.dk-desk::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  border: 10px solid #2f5d45;
   background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0 2px, transparent 2px 16px) left 0
+      bottom 0 / 100% 8px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0 2px, transparent 2px 80px) left 0
+      bottom 0 / 100% 14px no-repeat,
+    repeating-linear-gradient(rgba(255, 255, 255, 0.5) 0 2px, transparent 2px 16px) left 0 top 0 /
+      8px 100% no-repeat,
+    repeating-linear-gradient(rgba(255, 255, 255, 0.7) 0 2px, transparent 2px 80px) left 0 top 0 /
+      14px 100% no-repeat,
     radial-gradient(
-      circle at 42% 40%,
-      rgba(255, 196, 120, 0.22) 0 20%,
-      rgba(255, 196, 120, 0.12) 20% 30%,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 42% 40%,
-      transparent 0 30%,
-      rgba(12, 8, 6, 0.28) 30% 42%,
-      rgba(12, 8, 6, 0.5) 42% 54%,
-      rgba(12, 8, 6, 0.7) 54% 68%,
-      rgba(12, 8, 6, 0.85) 68%
+      ellipse at 50% 42%,
+      transparent 0 62%,
+      rgba(10, 20, 14, 0.08) 62% 82%,
+      rgba(10, 20, 14, 0.16) 82%
     );
 }
 .dk-desk .dk-desk-main {
