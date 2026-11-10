@@ -64,8 +64,8 @@ export const PitchSpread = forwardRef<
     ) : null;
   // Only ask for sections whose page is in the current flow (extras hidden by default).
   const visible = new Set(pagesFor(showExtras).map((p) => p.id));
-  // Audio, high concept and objective are extras: don't nag about them unless extras are on.
-  const extraOnly = new Set<SectionId>(["audio", "highConcept", "objective"]);
+  // High concept and objective are extras: don't nag about them unless extras are on.
+  const extraOnly = new Set<SectionId>(["highConcept", "objective"]);
   const missing = SECTIONS.filter(
     (s) => !has(s.id) && visible.has(s.page) && (showExtras || !extraOnly.has(s.id)),
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { FullscreenButton } from "../ui/FullscreenButton";
 import { AssetPanel } from "./AssetPanel";
 import { Icon } from "../ui/Icon";
 import Link from "next/link";
@@ -106,6 +107,7 @@ export function SummaryRoute() {
           <strong>Pitch</strong>
           <small>{book.name.trim() || "Untitled scrapbook"}</small>
         </div>
+        <FullscreenButton />
       </header>
 
       <main className="dk-summary-main">

@@ -16,7 +16,7 @@ export type Settings = {
   motionOverride: boolean | null;
   /** Show the pages hidden from the short pitch (high concept, objective, audio, extra options). */
   showExtras: boolean;
-  /** Dark mode: the paper is inverted (art keeps its colours). */
+  /** Dark mode: the paper is inverted (art keeps its colours). Not saved: every visit starts light. */
   dark: boolean;
 };
 
@@ -52,7 +52,6 @@ function start() {
         : "lofi",
       motionOverride: typeof saved.motionOverride === "boolean" ? saved.motionOverride : null,
       showExtras: !!saved.showExtras,
-      dark: !!saved.dark,
     };
   } catch {
     /* storage unavailable: keep defaults */
@@ -66,8 +65,19 @@ function start() {
   });
 }
 
+/**
+ * Dark mode lives on <html> only, set right here. (Putting it on each screen's root broke switching
+ * back: Next keeps the previous screen mounted but frozen, still marked dark.)
+ */
+function applyDark() {
+  if (typeof document === "undefined") return;
+  if (state.dark) document.documentElement.dataset.dark = "1";
+  else delete document.documentElement.dataset.dark;
+}
+
 function setState(patch: Partial<Settings>) {
   state = { ...state, ...patch };
+  if ("dark" in patch) applyDark();
   if ("motionOverride" in patch) state.reducedMotion = state.motionOverride ?? osReduced;
   try {
     localStorage.setItem(
@@ -79,7 +89,6 @@ function setState(patch: Partial<Settings>) {
         station: state.station,
         motionOverride: state.motionOverride,
         showExtras: state.showExtras,
-        dark: state.dark,
       }),
     );
   } catch {

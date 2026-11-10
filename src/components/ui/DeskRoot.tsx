@@ -13,14 +13,9 @@ export function DeskRoot({
   className?: string;
   style?: CSSProperties;
 }) {
-  const { reducedMotion, speed, dark } = useSettings();
+  const { reducedMotion, speed } = useSettings();
   return (
-    <div
-      className={`dk ${className}`}
-      data-rm={reducedMotion || speed ? "1" : "0"}
-      data-dark={dark ? "1" : undefined}
-      style={style}
-    >
+    <div className={`dk ${className}`} data-rm={reducedMotion || speed ? "1" : "0"} style={style}>
       {children}
     </div>
   );

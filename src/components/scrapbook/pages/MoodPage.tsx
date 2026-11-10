@@ -67,9 +67,7 @@ const TABS: {
 export function MoodPage({ book, concept, page }: PageCtx) {
   const { showExtras: extras } = useSettings();
   // Coming back from the next page opens on the last tab, as if turning back through it.
-  const [tabId, setTabId] = useState<ListType>(() =>
-    pageNav.dir() === -1 ? (extras ? "audio" : "perspective") : "mood",
-  );
+  const [tabId, setTabId] = useState<ListType>(() => (pageNav.dir() === -1 ? "audio" : "mood"));
   const tab = TABS.find((t) => t.id === tabId)!;
   const type = tab.id as CardType;
   const cards = cardsOf(book, concept[LIST_KEY[tab.id]]);
@@ -78,7 +76,7 @@ export function MoodPage({ book, concept, page }: PageCtx) {
   );
   const primaryId = concept.primary[tab.prim];
   const counts = Object.fromEntries(TABS.map((t) => [t.id, concept[LIST_KEY[t.id]].length]));
-  const steps = useMemo(() => TABS.filter((t) => extras || t.id !== "audio"), [extras]);
+  const steps = TABS;
   const at = steps.findIndex((t) => t.id === tabId);
   // Next/Back in the bottom bar walk through the tabs first, so none gets skipped by accident.
   const nav = useMemo<PageNavHook>(

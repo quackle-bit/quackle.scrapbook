@@ -1,5 +1,6 @@
 "use client";
 
+import { FullscreenButton } from "../ui/FullscreenButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -37,6 +38,7 @@ export function DeskHome() {
     <DeskRoot className="dk-desk">
       <main className="dk-desk-main">
         <div className="dk-desk-top">
+          <FullscreenButton />
           <RadioButton />
           <SettingsButton />
         </div>

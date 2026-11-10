@@ -5,12 +5,10 @@ import { useState } from "react";
 import { radio } from "@/lib/radio";
 import { settings, useSettings } from "@/lib/settings";
 import { BottomSheet } from "./BottomSheet";
-import { useFullscreen } from "./useFullscreen";
 
 export function SettingsButton() {
   const [open, setOpen] = useState(false);
   const s = useSettings();
-  const fs = useFullscreen();
   return (
     <>
       <button
@@ -32,12 +30,6 @@ export function SettingsButton() {
             >
               <Icon name={s.dark ? "sun" : "moon"} /> {s.dark ? "Light mode" : "Dark mode"}
             </button>
-            {fs.supported && (
-              <button type="button" className="dk-btn" aria-pressed={fs.on} onClick={fs.toggle}>
-                <Icon name={fs.on ? "exitFullscreen" : "fullscreen"} />{" "}
-                {fs.on ? "Exit full screen" : "Full screen"}
-              </button>
-            )}
           </div>
           <label className="dk-switch">
             <input
@@ -81,7 +73,7 @@ export function SettingsButton() {
               checked={s.showExtras}
               onChange={(e) => settings.set({ showExtras: e.target.checked })}
             />
-            <span>Show extra pages (high concept, objective, sound, more options)</span>
+            <span>Show extra pages (high concept, objective, more options)</span>
           </label>
           {s.motionOverride !== null && (
             <button

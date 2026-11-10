@@ -1,5 +1,6 @@
 "use client";
 
+import { FullscreenButton } from "../ui/FullscreenButton";
 import { pageNav, usePageNavLabel } from "./pages/pageNav";
 import { Icon } from "../ui/Icon";
 import { DuckBubble } from "../feel/DuckBubble";
@@ -137,6 +138,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
             fresh={fresh}
           />
         </div>
+        <FullscreenButton />
         <RadioButton />
         <SettingsButton />
       </header>
