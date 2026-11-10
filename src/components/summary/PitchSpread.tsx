@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { PUBLIC_URL } from "@/lib/site";
+import { STUDIO } from "@/lib/studio";
 import { Icon } from "../ui/Icon";
 import { useSettings } from "@/lib/settings";
 import { pagesFor } from "../scrapbook/pages/registry";
@@ -28,7 +30,7 @@ function Section({
         <h2>{label}</h2>
         {edit}
       </header>
-      {children}
+      <div className="pp-cell">{children}</div>
     </section>
   );
 }
@@ -77,28 +79,52 @@ export const PitchSpread = forwardRef<
 
   return (
     <article ref={ref} className="pp" aria-label={`Pitch: ${m.title || "untitled"}`}>
+      {/* Top strip: where it was made, and the date, like a form's letterhead. */}
+      <div className="pp-letterhead">
+        <a href={PUBLIC_URL} target="_blank" rel="noopener">
+          quackle.scrapbook
+        </a>
+        {m.date && <span>{m.date.replaceAll("-", ".")}</span>}
+      </div>
       <header className="pp-head">
-        <div className="pp-head-row">
-          {m.project.name && <p className="pp-kicker">{m.project.name}</p>}
-          {m.status === "pitched" && <span className="pp-badge">Pitched</span>}
+        <div className="pp-titleblock">
+          <p className="pp-kicker">
+            <span lang="ja">企画書</span> · Game pitch
+            {m.project.name ? ` · ${m.project.name}` : ""}
+          </p>
+          <h1>{m.title || <span className="pp-empty">Untitled game</span>}</h1>
+          {m.tagline && <p className="pp-tagline">{m.tagline}</p>}
         </div>
-        <h1>{m.title || <span className="pp-empty">Untitled game</span>}</h1>
-        {m.tagline && <p className="pp-tagline">{m.tagline}</p>}
-        {(m.genres.length > 0 || m.platforms.length > 0) && (
-          <ul className="pp-meta">
-            {m.genres.map((g) => (
-              <li key={g}>{g}</li>
-            ))}
-            {m.platforms.map((pl) => (
-              <li key={pl} className="plat">
-                {pl}
-              </li>
-            ))}
-          </ul>
-        )}
-        {!!proj.length && <p className="pp-proj">{proj.join(" · ")}</p>}
-        {!m.title && <span className="no-export">{edit("title")}</span>}
+        {/* The approval box: a red hanko once it's pitched, an empty box while it's a draft. */}
+        <div className={`pp-approve${m.status === "pitched" ? " stamped" : ""}`}>
+          <small lang="ja">承認</small>
+          {m.status === "pitched" ? (
+            <span className="pp-hanko" aria-label="Pitched">
+              Pitched
+            </span>
+          ) : (
+            <span className="pp-hanko-empty">Draft</span>
+          )}
+        </div>
       </header>
+      {(m.genres.length > 0 || m.platforms.length > 0 || proj.length > 0) && (
+        <ul className="pp-meta">
+          {m.genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+          {m.platforms.map((pl) => (
+            <li key={pl} className="plat">
+              {pl}
+            </li>
+          ))}
+          {proj.map((x) => (
+            <li key={x} className="plat">
+              {x}
+            </li>
+          ))}
+        </ul>
+      )}
+      {!m.title && <span className="no-export">{edit("title")}</span>}
 
       {filledCount(m) === 0 && !m.assets?.length && !m.assetNotes && (
         <p className="pp-nothing">
@@ -298,6 +324,16 @@ export const PitchSpread = forwardRef<
           .
         </p>
       )}
+      <footer className="pp-footer">
+        made with{" "}
+        <a href={PUBLIC_URL} target="_blank" rel="noopener">
+          quackle.scrapbook
+        </a>{" "}
+        · by{" "}
+        <a href={STUDIO.url} target="_blank" rel="noopener">
+          {STUDIO.name}
+        </a>
+      </footer>
     </article>
   );
 });

@@ -3477,3 +3477,172 @@ html[data-dark="1"] .dk.dk-desk {
     display: none !important;
   }
 }
+
+/* ══════════ PITCH AS A JAPANESE FORMAL DOCUMENT (企画書) ══════════ */
+.pp {
+  --hanko: #c8322b;
+  --rule: #24211f;
+  --cell: #f4f1ea;
+  padding: 0 !important;
+  gap: 0 !important;
+  border: 2px solid var(--rule) !important;
+  outline: 2px solid var(--rule);
+  outline-offset: 4px;
+  box-shadow: none !important;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.pp-letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  border-bottom: 2px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.pp-letterhead a {
+  font-family: var(--font-pixel), monospace;
+  font-size: 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.pp-letterhead a:hover,
+.pp-letterhead a:focus-visible {
+  text-decoration: underline;
+}
+.pp-head {
+  display: grid !important;
+  grid-template-columns: 1fr auto;
+  gap: 12px !important;
+  align-items: start;
+  padding: 16px 14px !important;
+  border-bottom: 2px solid var(--rule) !important;
+}
+.pp-titleblock {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.pp .pp-kicker {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+.pp-kicker [lang="ja"] {
+  color: var(--hanko);
+  font-weight: 700;
+}
+.pp h1 {
+  font-size: 24px !important;
+}
+.pp-tagline {
+  font-size: 16px !important;
+}
+/* The approval box (承認) with its seal. */
+.pp-approve {
+  display: grid;
+  justify-items: center;
+  width: 84px;
+  border: 2px solid var(--rule);
+}
+.pp-approve small {
+  width: 100%;
+  padding: 2px 0;
+  border-bottom: 2px solid var(--rule);
+  background: var(--cell);
+  text-align: center;
+  font-size: 12px;
+}
+.pp-approve > span {
+  margin: 8px 0;
+}
+.pp-hanko {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--hanko);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 2px #fff,
+    inset 0 0 0 4px var(--hanko);
+  color: var(--hanko);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  rotate: -8deg;
+  opacity: 0.92;
+}
+.pp-hanko-empty {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 2px dashed #c9c3b8;
+  border-radius: 50%;
+  color: #b0a99d;
+  font-size: 12px;
+}
+.pp > .pp-meta {
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--rule);
+}
+/* Sections as ruled table rows: label cell on the left, content on the right. */
+.pp-section {
+  display: grid !important;
+  grid-template-columns: 92px minmax(0, 1fr);
+  column-gap: 0;
+  row-gap: 8px !important;
+  padding: 0 !important;
+  border-bottom: 2px solid var(--rule) !important;
+}
+.pp-section:last-of-type {
+  border-bottom: 2px solid var(--rule) !important;
+}
+.pp-section > header {
+  grid-column: 1;
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 6px;
+  padding: 12px 10px;
+  border-right: 2px solid var(--rule);
+  background: var(--cell);
+}
+.pp-section > header h2 {
+  font-size: 12px !important;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  color: var(--ink) !important;
+}
+.pp-cell {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+  padding: 12px;
+}
+.pp-section .pp-edit {
+  margin: 0 !important;
+  width: 28px;
+  height: 28px;
+}
+.pp-nothing,
+.pp-missing {
+  margin: 12px 14px !important;
+}
+.pp-footer {
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.pp-footer a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
