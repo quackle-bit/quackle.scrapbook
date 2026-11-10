@@ -103,7 +103,7 @@ export const PitchSpread = forwardRef<
         </div>
         {/* The approval box: a red hanko once it's pitched, an empty box while it's a draft. */}
         <div className={`pp-approve${m.status === "pitched" ? " stamped" : ""}`}>
-          <small>Approved</small>
+          <small>Seal</small>
           {m.status === "pitched" ? (
             <span className="pp-hanko" aria-label="Pitched">
               Pitched
