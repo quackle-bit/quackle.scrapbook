@@ -2019,3 +2019,51 @@
   opacity: 0;
   background: var(--ink);
 }
+
+/* ══════════ THE DUCK: wanders along the bottom bar ══════════ */
+.dk-duck,
+.dk-duck-lane {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  height: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+.dk-duck-walker {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 52px;
+  will-change: transform;
+}
+.dk-duck-body {
+  width: 52px;
+  height: 52px;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.dk-duck-body:focus-visible {
+  outline: 2px solid var(--amber);
+}
+.dk-duck-lane .dk-duck-line {
+  position: absolute;
+  bottom: 58px;
+  width: max-content;
+  max-width: min(220px, 70vw);
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 0;
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.3;
+  pointer-events: none;
+}
+.dk-duck-lane .dk-duck-line.right {
+  right: 0;
+}
+.dk-duck-lane .dk-duck-line.left {
+  left: 0;
+}
