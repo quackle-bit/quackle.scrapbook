@@ -96,7 +96,7 @@ export const LINES = {
   broke: ["Out of coins. Here, have more. (prototype)"],
 };
 /** Each kind of line comes with a little sprite reaction. */
-const ACTS: Record<keyof typeof LINES, Act> = {
+export const ACTS: Record<keyof typeof LINES, Act> = {
   trash: { tag: "eat", ms: 400, then: { tag: "gulp", ms: 200, then: { tag: "burp", ms: 300 } } },
   stamp: { tag: "jump", ms: 250, then: { tag: "land", ms: 120 } },
   rare: { tag: "stunned", ms: 1000 },

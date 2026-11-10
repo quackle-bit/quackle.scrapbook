@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { feel } from "@/feel";
 import { drawPack, TYPE_LABEL, type InspirationCard } from "@/lib/inspiration";
 import { haptic, OVERSHOOT, play } from "@/lib/motion";
@@ -8,9 +8,9 @@ import { createRng, freshSeed } from "@/lib/rng";
 import type { CardType, CollectedCard } from "@/lib/scrapbook/types";
 import { settings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
-import { say, sayRandom } from "../Duck";
+import { ACTS, say, sayRandom } from "../Duck";
 import { KEEPERS, pickLine } from "../feel/keepers";
-import { FoldedMap, GearPress, ShellGame, TailorReels } from "../feel/openers";
+import { FoldedMap, GearPress, ShellGame } from "../feel/openers";
 
 type Props = {
   type: CardType;
@@ -42,7 +42,6 @@ type Props = {
 const OPENERS: Partial<Record<CardType, typeof GearPress>> = {
   mechanic: GearPress,
   setting: FoldedMap,
-  visual: TailorReels,
   twist: ShellGame,
 };
 
@@ -69,7 +68,6 @@ export function BoosterPack({
   boardExtra,
 }: Props) {
   const keeper = KEEPERS[type];
-  const [line, setLine] = useState(keeper.greet[0]);
   const [phase, setPhase] = useState<Phase>("board");
   const [cards, setCards] = useState<InspirationCard[]>([]);
   const [up, setUp] = useState<Set<string>>(new Set());
@@ -83,11 +81,6 @@ export function BoosterPack({
   const pending = useRef<InspirationCard[] | null>(null);
   const grid = useRef<HTMLDivElement>(null);
   const quick = () => settings.get().reducedMotion || settings.get().speed;
-
-  useEffect(() => {
-    const t = setTimeout(() => setLine(pickLine(keeper.greet)), 0);
-    return () => clearTimeout(t);
-  }, [keeper]);
 
   const room = max ? Math.max(0, max - kept.length) : Infinity;
 
@@ -201,12 +194,10 @@ export function BoosterPack({
     if (keep.length) {
       sfx.thud();
       haptic(feel.haptic.thud);
-      setLine(pickLine(keeper.kept));
-      sayRandom("stamp");
+      say(pickLine(keeper.kept), ACTS.stamp);
     } else {
       sfx.crumple();
-      setLine(pickLine(keeper.trashed));
-      sayRandom("trash");
+      say(pickLine(keeper.trashed), ACTS.trash);
     }
     setCards([]);
     setPhase("board");
@@ -218,7 +209,6 @@ export function BoosterPack({
     <div className="px-stall">
       <header className="px-stall-head">
         <strong>{keeper.stall}</strong>
-        <span aria-live="polite">“{line}”</span>
         <button
           type="button"
           className="px-bin"
@@ -226,8 +216,7 @@ export function BoosterPack({
           aria-label={`Bin: ${bin.length} card${bin.length === 1 ? "" : "s"}. Open it to take cards back.`}
           aria-expanded={binOpen}
         >
-          <i aria-hidden />
-          {bin.length}
+          Bin · {bin.length}
         </button>
       </header>
 
@@ -279,9 +268,7 @@ export function BoosterPack({
                   </li>
                 ))}
               </ul>
-            ) : (
-              <p className="px-board-empty">Nothing kept yet. Open a pack!</p>
-            )}
+            ) : null}
             {boardExtra}
             {empty && (
               <p className="dk-hint">
@@ -338,11 +325,7 @@ export function BoosterPack({
                       : `Open a ${label.toLowerCase()}`}
                 </button>
                 {onAddCustom && (
-                  <button
-                    type="button"
-                    className="dk-btn small ghost"
-                    onClick={() => setWriting(true)}
-                  >
+                  <button type="button" className="dk-link-btn" onClick={() => setWriting(true)}>
                     Write my own
                   </button>
                 )}
@@ -362,7 +345,7 @@ export function BoosterPack({
         ) : (
           <div className="px-choose">
             <div ref={grid} className="px-grid">
-              {cards.map((c) => {
+              {cards.map((c, i) => {
                 const isUp = up.has(c.id);
                 const on = chosen.has(c.id);
                 return (
@@ -375,12 +358,25 @@ export function BoosterPack({
                     aria-label={
                       isUp
                         ? `${c.title}. ${c.description}. ${on ? "Chosen" : "Tap to choose"}`
-                        : "Face-down card. Tap to flip."
+                        : type === "visual"
+                          ? "Spinning reel. Tap to stop."
+                          : "Face-down card. Tap to flip."
                     }
                   >
                     <span className="px-card-inner">
                       <span className="px-card-back" aria-hidden>
-                        ?
+                        {type === "visual" ? (
+                          // The Tailor's slot reel: looks spin until you tap to stop it.
+                          <span className="px-reel">
+                            <span style={{ animationDelay: `${-i * 0.37}s` }}>
+                              {[...cards, ...cards].map((r, j) => (
+                                <b key={j}>{r.title}</b>
+                              ))}
+                            </span>
+                          </span>
+                        ) : (
+                          "?"
+                        )}
                       </span>
                       <span className="px-card-face">
                         <small>{TYPE_LABEL[type]}</small>
@@ -408,7 +404,7 @@ export function BoosterPack({
                     )
                   }
                 >
-                  Flip all
+                  {type === "visual" ? "Stop all" : "Flip all"}
                 </button>
               ) : (
                 <button type="button" className="dk-btn primary" onClick={() => void keepChosen()}>

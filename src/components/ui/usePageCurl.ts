@@ -14,10 +14,11 @@ const EASE = "cubic-bezier(.45,.05,.3,1)";
 
 /**
  * Book page turns, played by the Back/Next buttons and arrow keys.
- * The top page swings over the spine like a real leaf (rotateY around the left edge), shows its blank
- * back once it passes upright, and the page underneath comes out of its shadow. Everything runs as
- * Web Animations on transform and opacity only, so the phone's compositor does the work and React
- * doesn't re-render during the turn.
+ * Portrait page turn: a vertical fold sweeps from the right edge to the spine. Left of the fold is
+ * the page's front, the folded part lies on top as its blank back, and the next page shows to the
+ * right in the fold's shadow. Everything stays inside the page frame (on a phone a 3D swing around
+ * the spine just vanishes off-screen, which reads as a blink). Web Animations only, so React doesn't
+ * re-render during the turn.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
@@ -46,38 +47,46 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     const root = binding.current;
     const leaf = root?.querySelector<HTMLElement>(".dk-moving");
     const under = root?.querySelector<HTMLElement>(".dk-under");
+    const flap = root?.querySelector<HTMLElement>(".dk-flap");
+    const fold = root?.querySelector<HTMLElement>(".dk-fold-shadow");
     const fwd = turn.dir === 1;
-    const flat = "perspective(1800px) rotateY(0deg)";
-    const over = "perspective(1800px) rotateY(-180deg)";
-    const lifted = "perspective(1800px) rotateY(-90deg) scale(1.02)";
-    const opts = { duration: TURN_MS, easing: EASE, fill: "forwards" as const };
+    // Turning back plays the same turn in reverse.
+    const opts: KeyframeAnimationOptions = {
+      duration: TURN_MS,
+      easing: EASE,
+      fill: "forwards",
+      direction: fwd ? "normal" : "reverse",
+    };
     const all: Animation[] = [];
-    const main = leaf?.animate(
-      { transform: fwd ? [flat, lifted, over] : [over, lifted, flat] },
-      opts,
+    const add = (a?: Animation) => a && all.push(a);
+    // A vertical fold sweeps from the right edge (p = 0) to the spine (p = 1).
+    // The front of the turning page is what's left of the fold…
+    const main = leaf?.animate({ clipPath: ["inset(0 0% 0 0)", "inset(0 100% 0 0)"] }, opts);
+    add(main);
+    // …the part past the fold flips over and lies on top as the blank back of the page…
+    add(
+      flap?.animate(
+        [
+          { transform: "translateX(0%)", clipPath: "inset(0 0 0 100%)" },
+          { transform: "translateX(-50%)", clipPath: "inset(0 0 0 50%)" },
+          { transform: "translateX(-100%)", clipPath: "inset(0 0 0 100%)" },
+        ],
+        opts,
+      ),
     );
-    if (main) all.push(main);
-    // Past upright you see the back of the page, not its front.
-    const back = leaf?.querySelector<HTMLElement>(".dk-leaf-back")?.animate(
-      [
-        { opacity: fwd ? 0 : 1, offset: 0 },
-        { opacity: fwd ? 0 : 1, offset: 0.5 },
-        { opacity: fwd ? 1 : 0, offset: 0.5 },
-        { opacity: fwd ? 1 : 0, offset: 1 },
-      ],
-      opts,
+    // …and the next page shows to the right of the fold, in its shadow.
+    add(
+      fold?.animate(
+        [
+          { transform: "translateX(100%)", opacity: 0 },
+          { transform: "translateX(85%)", opacity: 1, offset: 0.15 },
+          { transform: "translateX(15%)", opacity: 1, offset: 0.85 },
+          { transform: "translateX(0%)", opacity: 0 },
+        ],
+        opts,
+      ),
     );
-    if (back) all.push(back);
-    // Light rolls across the leaf as it bends.
-    const shade = leaf
-      ?.querySelector<HTMLElement>(".dk-leaf-shade")
-      ?.animate({ opacity: [0, 0.5, 0] }, opts);
-    if (shade) all.push(shade);
-    // The page underneath sits in the leaf's shadow until it's uncovered.
-    const dim = under
-      ?.querySelector<HTMLElement>(".dk-leaf-dim")
-      ?.animate({ opacity: fwd ? [0.55, 0] : [0, 0.55] }, opts);
-    if (dim) all.push(dim);
+    add(under?.querySelector<HTMLElement>(".dk-leaf-dim")?.animate({ opacity: [0.35, 0] }, opts));
 
     let done = false;
     const finish = () => {

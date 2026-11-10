@@ -249,19 +249,14 @@
   font-family: var(--font-pixel), monospace;
   font-size: 12px;
 }
-/* ── Book page turn (driven by Web Animations in usePageCurl: transform + opacity only) ── */
-.dk-binding {
-  perspective: none;
-}
+/* ── Book page turn: a fold sweeping right → left (Web Animations in usePageCurl) ── */
 .dk-leaf {
-  transform-origin: left center;
-  backface-visibility: visible;
+  transform: none;
 }
 .dk-moving {
   z-index: 3;
-  transform: none;
-  box-shadow: 4px 4px 0 var(--ink) !important;
-  will-change: transform;
+  transform: none !important;
+  box-shadow: none !important;
 }
 .dk-moving::after {
   content: none !important;
@@ -270,39 +265,35 @@
   z-index: 1;
   box-shadow: 4px 4px 0 var(--ink) !important;
 }
-.dk-leaf-dim,
-.dk-leaf-shade,
-.dk-leaf-back {
-  display: block !important;
+.dk-leaf-dim {
+  display: block;
   position: absolute;
   inset: 0;
   z-index: 20;
   pointer-events: none;
   opacity: 0;
+  background: rgba(36, 33, 31, 1);
 }
-/* the shadow the turning leaf throws on the page below */
-.dk-leaf-dim {
-  background: linear-gradient(90deg, rgba(36, 33, 31, 0.55), rgba(36, 33, 31, 0.15) 60%, transparent);
-}
-/* light and shade rolling over the bending paper */
-.dk-leaf-shade {
-  background: linear-gradient(
-    90deg,
-    rgba(36, 33, 31, 0.25),
-    rgba(255, 255, 255, 0.5) 45%,
-    rgba(36, 33, 31, 0.2) 80%,
-    rgba(36, 33, 31, 0.45)
-  );
-}
-/* the blank back of the page, seen once it passes upright */
-.dk-leaf-back {
+/* the folded-over back of the turning page */
+.dk-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  clip-path: inset(0 0 0 100%);
+  border: 2px solid var(--ink);
   background:
-    linear-gradient(90deg, transparent 70%, rgba(36, 33, 31, 0.18)),
-    linear-gradient(#e6dfd2 1px, transparent 1px) 0 0 / 100% 24px,
-    #f4efe6;
+    linear-gradient(to left, rgba(36, 33, 31, 0.28), rgba(36, 33, 31, 0.06) 18%, transparent 40%),
+    linear-gradient(to right, rgba(36, 33, 31, 0.1), transparent 12%), #f2ede4;
 }
-.past-half .dk-moving > * {
-  visibility: visible !important;
+/* the shadow the fold throws on the next page */
+.dk-fold-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(to right, rgba(36, 33, 31, 0.32), transparent 28px);
 }
 
 /* ── Compact page: fits a phone screen ───────────────────────── */
@@ -1063,15 +1054,12 @@
   overflow: clip;
 }
 
-/* Starting pose of a turn, so nothing flashes before the animation picks it up. */
-.turn-fwd .dk-under .dk-leaf-dim {
-  opacity: 0.55;
-}
+/* Starting pose of a back turn, so nothing flashes before the animation picks it up. */
 .turn-back .dk-moving {
-  transform: perspective(1800px) rotateY(-180deg);
+  clip-path: inset(0 100% 0 0);
 }
-.turn-back .dk-moving .dk-leaf-back {
-  opacity: 1;
+.turn-fwd .dk-under .dk-leaf-dim {
+  opacity: 0.35;
 }
 
 /* ══════════ CLEANER (Phase 10.7) ══════════ */
@@ -1097,9 +1085,6 @@
 }
 .dk-chip {
   border-width: 1.5px !important;
-}
-.dk-leaf-back {
-  background: #f4efe6;
 }
 
 /* ══════════ COVER: title, book, one button ══════════ */
@@ -1187,4 +1172,81 @@
 }
 .dk-desk-top > :first-child {
   margin-left: auto;
+}
+
+/* The Tailor's reels: a face-down visual card spins through looks until you tap it. */
+.px-reel {
+  position: absolute;
+  inset: 8px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+.px-reel > span {
+  display: grid;
+  grid-auto-rows: var(--reel-h, 26px);
+  animation: px-reel 1.2s steps(4) infinite;
+  will-change: transform;
+}
+.px-card .px-reel {
+  --reel-h: 80px;
+}
+.px-reel b {
+  display: grid;
+  place-items: center;
+  padding: 0 6px;
+  height: var(--reel-h);
+  font-family: var(--font-pixel), monospace;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+@keyframes px-reel {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.dk[data-rm="1"] .px-reel > span {
+  animation: none;
+}
+
+/* ══════════ CLEANER CONTENT (Phase 10.8) ══════════ */
+.dk-eyebrow {
+  display: none !important;
+}
+.dk-prompt {
+  color: var(--ink-soft);
+}
+/* Stall header: one quiet row, stall name left, bin right. */
+.px-stall-head {
+  display: flex !important;
+  justify-content: space-between;
+  padding: 0 0 6px !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--ink) !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.px-stall-head strong {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.px-bin {
+  display: inline-block !important;
+  width: auto !important;
+  padding: 6px 8px !important;
+  border: 1.5px solid var(--ink) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  font-size: 11px;
+}
+.px-bin i {
+  display: none;
+}
+.px-actions {
+  justify-items: center;
 }
