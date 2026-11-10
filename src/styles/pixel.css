@@ -251,15 +251,60 @@
   font-family: var(--font-pixel), monospace;
   font-size: 12px;
 }
+/* ── Book page turn (driven by Web Animations in usePageCurl: transform + opacity only) ── */
+.dk-binding {
+  perspective: none;
+}
+.dk-leaf {
+  transform-origin: left center;
+  backface-visibility: visible;
+}
 .dk-moving {
-  transform: perspective(1600px) rotateY(calc(var(--q) * -180deg)) !important;
+  z-index: 3;
+  transform: none;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  will-change: transform;
 }
 .dk-moving::after {
-  background: repeating-linear-gradient(
+  content: none !important;
+}
+.dk-under {
+  z-index: 1;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+.dk-leaf-dim,
+.dk-leaf-shade,
+.dk-leaf-back {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+}
+/* the shadow the turning leaf throws on the page below */
+.dk-leaf-dim {
+  background: linear-gradient(90deg, rgba(36, 33, 31, 0.55), rgba(36, 33, 31, 0.15) 60%, transparent);
+}
+/* light and shade rolling over the bending paper */
+.dk-leaf-shade {
+  background: linear-gradient(
     90deg,
-    transparent 0 8px,
-    rgba(36, 33, 31, 0.08) 8px 10px
-  ) !important;
+    rgba(36, 33, 31, 0.25),
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(36, 33, 31, 0.2) 80%,
+    rgba(36, 33, 31, 0.45)
+  );
+}
+/* the blank back of the page, seen once it passes upright */
+.dk-leaf-back {
+  background:
+    linear-gradient(90deg, transparent 70%, rgba(36, 33, 31, 0.18)),
+    linear-gradient(#e6dfd2 1px, transparent 1px) 0 0 / 100% 24px,
+    #f4efe6;
+}
+.past-half .dk-moving > * {
+  visibility: visible !important;
 }
 
 /* ── Compact page: fits a phone screen ───────────────────────── */
@@ -1016,4 +1061,8 @@
 .dk-page .dk-chips[aria-label="Moodboard section"] .dk-chip,
 .dk-page [role="group"][aria-label="Moodboard section"] .dk-chip {
   min-height: 32px;
+}
+
+.dk-stage {
+  overflow: clip;
 }

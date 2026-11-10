@@ -46,13 +46,28 @@ function load() {
   state = { ...EMPTY, ready: true };
 }
 
-function commit(next: Omit<ScrapbookState, "ready">) {
-  state = { ...next, ready: true };
+let saveTimer: ReturnType<typeof setTimeout> | null = null;
+/** Write to localStorage at most a few times a second (typing would otherwise save on every key). */
+function flush() {
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = null;
   try {
-    localStorage.setItem(KEY, JSON.stringify({ ...next }));
+    const { scrapbooks, concepts, lastId } = state;
+    localStorage.setItem(KEY, JSON.stringify({ scrapbooks, concepts, lastId }));
   } catch {
     /* storage full or blocked: the session still works */
   }
+}
+if (typeof window !== "undefined") {
+  window.addEventListener("pagehide", flush);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden" && saveTimer) flush();
+  });
+}
+
+function commit(next: Omit<ScrapbookState, "ready">) {
+  state = { ...next, ready: true };
+  if (!saveTimer) saveTimer = setTimeout(flush, 400);
   subs.forEach((s) => s());
 }
 

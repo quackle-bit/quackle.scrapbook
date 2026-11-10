@@ -152,6 +152,8 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
                 inert={!!active}
               >
                 <PageScreen book={book} concept={concept} page={PAGES[i]} goTo={goToId} />
+                <span className="dk-leaf-dim" aria-hidden />
+                <span className="dk-leaf-shade" aria-hidden />
                 <span className="dk-leaf-back" aria-hidden />
               </div>
             );
