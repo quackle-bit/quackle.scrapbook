@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useScrapbook } from "@/lib/scrapbook/store";
+import { useSettings } from "@/lib/settings";
 import { ForgeOverlay, Receipt } from "../../feel/Rewards";
 import { PAGES } from "./registry";
 import { buildPitchModel, filledCount, SECTIONS } from "@/lib/scrapbook/pitch";
@@ -14,6 +15,7 @@ import type { PageCtx } from "./registry";
 export function ClosePage({ book, concept, page }: PageCtx) {
   const { concepts } = useScrapbook(book.id);
   const router = useRouter();
+  const { showExtras: extras } = useSettings();
   const [forging, setForging] = useState(false);
   const cur = buildPitchModel(book, concept);
   const pieces = [
@@ -48,41 +50,43 @@ export function ClosePage({ book, concept, page }: PageCtx) {
         <ForgeOverlay
           pieces={pieces}
           title={cur.title}
-          tagline={cur.tagline}
           onOpen={() => router.push(`/scrapbook/summary?id=${book.id}&concept=${concept.id}`)}
           onClose={() => setForging(false)}
         />
       )}
-      <ul className="dk-list">
-        {concepts.map((c, i) => {
-          const m = buildPitchModel(book, c);
-          return (
-            <li key={c.id} className="dk-list-item">
-              <h3>
-                {c.id === concept.id && "● "}
-                {m.title || `Concept ${i + 1}`}
-              </h3>
-              <small>
-                {filledCount(m)} / {SECTIONS.length} sections filled
-                {c.status === "pitched" ? " · pitched" : ""}
-              </small>
-              {m.tagline && <p className="dk-quote">“{m.tagline}”</p>}
-              <div className="dk-row">
-                <Link
-                  className="dk-btn small primary"
-                  href={`/scrapbook/summary?id=${book.id}&concept=${c.id}`}
-                >
-                  See pitch
-                </Link>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-      <p className="dk-hint">
-        Only what you filled in shows up. Nothing is invented for the rest, and you can come back
-        and change anything.
-      </p>
+      {extras && (
+        <ul className="dk-list">
+          {concepts.map((c, i) => {
+            const m = buildPitchModel(book, c);
+            return (
+              <li key={c.id} className="dk-list-item">
+                <h3>
+                  {c.id === concept.id && "● "}
+                  {m.title || `Concept ${i + 1}`}
+                </h3>
+                <small>
+                  {filledCount(m)} / {SECTIONS.length} sections filled
+                  {c.status === "pitched" ? " · pitched" : ""}
+                </small>
+                <div className="dk-row">
+                  <Link
+                    className="dk-btn small primary"
+                    href={`/scrapbook/summary?id=${book.id}&concept=${c.id}`}
+                  >
+                    See pitch
+                  </Link>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {extras && (
+        <p className="dk-hint">
+          Only what you filled in shows up. Nothing is invented for the rest, and you can come back
+          and change anything.
+        </p>
+      )}
     </PageFrame>
   );
 }

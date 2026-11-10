@@ -399,7 +399,11 @@
   width: 30px;
   height: 10px;
   transform: translateX(-50%);
-  background: repeating-linear-gradient(90deg, rgba(245, 184, 61, 0.85) 0 4px, rgba(245, 184, 61, 0.6) 4px 8px);
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(245, 184, 61, 0.85) 0 4px,
+    rgba(245, 184, 61, 0.6) 4px 8px
+  );
 }
 .px-taped button {
   width: 28px;
@@ -667,4 +671,156 @@
 }
 .px-card {
   height: 112px;
+}
+
+/* ── Title gacha ─────────────────────────────────────────────── */
+.px-gacha {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.px-gacha-machine {
+  display: grid;
+  justify-items: center;
+}
+.px-gacha-dome {
+  display: grid;
+  grid-template-columns: repeat(3, 18px);
+  gap: 6px;
+  padding: 12px;
+  width: 104px;
+  border: 2px solid var(--ink);
+  border-bottom: 0;
+  background: #e8f2f7;
+}
+.px-gacha-dome i {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ink);
+  background: var(--terra);
+}
+.px-gacha-dome i.c1 {
+  background: var(--amber);
+}
+.px-gacha-dome i.c2 {
+  background: var(--dusty);
+}
+.px-gacha-dome i.c3 {
+  background: var(--olive);
+}
+.px-gacha-body {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  width: 116px;
+  padding: 10px 0;
+  border: 2px solid var(--ink);
+  background: var(--terra);
+  box-shadow: var(--px);
+}
+.px-gacha-knob {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 4px 100% no-repeat,
+    #fff;
+}
+.px-gacha-slot {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  overflow: hidden;
+}
+.px-gacha-capsule {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ink);
+  background: linear-gradient(var(--amber) 50%, #fff 50%);
+  opacity: 0;
+}
+.px-gacha-capsule.open {
+  opacity: 1;
+  background: linear-gradient(var(--amber) 35%, transparent 35% 65%, #fff 65%);
+}
+.px-gacha-side {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.px-tickets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.px-tickets button {
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 2px dashed var(--ink);
+  background: #fff8e6;
+  text-align: left;
+  font-family: var(--font-pixel), monospace;
+  font-size: 12px;
+  line-height: 1.25;
+}
+.px-tickets button[aria-pressed="true"] {
+  border-style: solid;
+  background: var(--amber);
+  box-shadow: var(--px-sm);
+}
+.px-tickets.wide button {
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+}
+
+/* Tighter forms so Setup and Loop fit one screen. */
+.dk-page .dk-field {
+  gap: 4px;
+}
+.dk-page .dk-field small {
+  display: none;
+}
+.dk-page .dk-chips {
+  gap: 6px;
+}
+.dk-steps li {
+  gap: 4px !important;
+}
+.dk-steps .dk-input {
+  min-height: 38px;
+}
+.dk-steps .dk-icon-btn {
+  width: 34px;
+  height: 38px;
+  font-size: 14px;
+}
+.dk-loop-glance {
+  padding: 6px 8px !important;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+}
+.dk-receipt {
+  font-size: 12px !important;
+  padding: 12px 14px 20px !important;
+}
+.dk-receipt dl {
+  margin: 8px 0 !important;
+  padding: 6px 0 !important;
+}
+.dk-receipt {
+  border: 2px solid var(--ink);
+  clip-path: none !important;
+  rotate: 0deg !important;
+  box-shadow: var(--px-sm) !important;
+}
+.dk-page .dk-chip {
+  min-height: 34px;
 }

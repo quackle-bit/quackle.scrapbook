@@ -129,3 +129,61 @@ export function suggestTaglines(
   }
   return out.slice(0, max);
 }
+
+/**
+ * Title gacha: three name ideas from the word bank, flavoured by what the concept already has
+ * (setting, mood, mechanic). Suggestions only; the player picks one or spins again.
+ */
+export function suggestTitles(
+  concept: Concept,
+  collected: CollectedCard[],
+  rng: Rng,
+  max = 3,
+): string[] {
+  const byId = new Map(collected.map((c) => [c.id, c]));
+  const t = (id?: string) => (id ? byId.get(id)?.title : undefined);
+  const nouns = INSPIRATION.word.filter((w) => w.category === "noun").map((w) => w.title);
+  const adjs = INSPIRATION.word.filter((w) => w.category === "adjective").map((w) => w.title);
+  const pick = (xs: string[]) => xs[Math.floor(rng.next() * xs.length)];
+  const setting = t(concept.primary.setting) ?? t(concept.setting[0]);
+  const mood = t(concept.primary.mood) ?? t(concept.mood[0]);
+  const mech = t(concept.mechanics[0]);
+  const short = (s?: string) => (s && s.split(" ").length <= 2 ? s : undefined);
+  const SUFFIX = [
+    "fall",
+    "light",
+    "bound",
+    "keeper",
+    "song",
+    "craft",
+    "born",
+    "run",
+    "ward",
+    "hollow",
+  ];
+  const makers: (() => string | undefined)[] = [
+    () => `${pick(adjs)} ${pick(nouns)}`,
+    () => `The ${pick(nouns)} of ${short(setting) ?? pick(nouns) + "s"}`,
+    () => `${pick(nouns)} & ${pick(nouns)}`,
+    () => (short(mood) ? `${mood} ${pick(nouns)}` : undefined),
+    () => `${pick(nouns)}${pick(SUFFIX)}`,
+    () => `Last ${pick(nouns)}`,
+    () => (short(mech) ? `${pick(adjs)} ${mech}` : undefined),
+    () => `${pick(nouns)} Keeper`,
+    () => (short(setting) ? `${short(setting)} ${pick(nouns)}s` : undefined),
+  ];
+  const out: string[] = [];
+  for (let tries = 0; out.length < max && tries < 40; tries++) {
+    const s = makers[Math.floor(rng.next() * makers.length)]();
+    if (!s) continue;
+    const title = s
+      .replace(/\b\w/g, (c) => c.toUpperCase())
+      .replace(
+        /(\w)(Fall|Light|Bound|Keeper|Song|Craft|Born|Run|Ward|Hollow)\b/,
+        (_, a, b) => a + b.toLowerCase(),
+      )
+      .replace(/ Of /g, " of ");
+    if (!out.includes(title)) out.push(title);
+  }
+  return out;
+}

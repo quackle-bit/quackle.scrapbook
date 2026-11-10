@@ -57,7 +57,6 @@ export function WallCard({
       <MoodStrip m={model} />
       <div className="dk-wall-body">
         <h3>{model.title || "Untitled game"}</h3>
-        {model.tagline && <p className="dk-wall-tag">“{model.tagline}”</p>}
         {meta && <p className="dk-wall-meta">{meta}</p>}
         {model.highConcept && <p className="dk-wall-desc">{model.highConcept}</p>}
         {showVotes && (

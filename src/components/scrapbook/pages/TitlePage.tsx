@@ -1,31 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { feel } from "@/feel";
+import { suggestTitles } from "@/lib/inspiration";
+import { haptic, play } from "@/lib/motion";
+import { createRng, freshSeed } from "@/lib/rng";
 import { scrapbookStore } from "@/lib/scrapbook/store";
-import { BoosterPack } from "../../cards/BoosterPack";
+import { settings, useSettings } from "@/lib/settings";
+import { sfx } from "@/lib/sound";
+import { say } from "../../Duck";
 import { TextField } from "../../ui/TextField";
 import { PageFrame } from "./PageFrame";
 import type { PageCtx } from "./registry";
 
-/** Typing first; the word pack is there for sparks. Several candidates can be saved. */
+/**
+ * The title gacha: turn the knob, a capsule drops and opens into three name ideas built from
+ * the word bank and what you've already kept. Tap one to use it, or spin again. Typing always works.
+ */
 export function TitlePage({ book, concept, page }: PageCtx) {
-  const [tray, setTray] = useState<string[]>([]);
+  const { showExtras: extras } = useSettings();
+  const [ideas, setIdeas] = useState<string[]>([]);
+  const [spinning, setSpinning] = useState(false);
+  const [spins, setSpins] = useState(0);
+  const knob = useRef<HTMLSpanElement>(null);
+  const capsule = useRef<HTMLSpanElement>(null);
   const update = (patch: Parameters<typeof scrapbookStore.updateConcept>[1]) =>
     scrapbookStore.updateConcept(concept.id, patch);
-  const preview = tray.join(" ");
-  const addCandidate = (t: string) => {
-    const v = t.trim();
-    if (v && !concept.titleCandidates.includes(v))
-      update({ titleCandidates: [...concept.titleCandidates, v] });
-  };
-  const move = (i: number, d: number) =>
-    setTray((t) => {
-      const j = i + d;
-      if (j < 0 || j >= t.length) return t;
-      const n = [...t];
-      [n[i], n[j]] = [n[j], n[i]];
-      return n;
-    });
+
+  async function spin() {
+    if (spinning) return;
+    setSpinning(true);
+    setIdeas([]);
+    const quick = settings.get().reducedMotion || settings.get().speed;
+    sfx.clink();
+    if (!quick) {
+      await play(knob.current, [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }], 480, {
+        easing: "steps(8)",
+      });
+      sfx.slide();
+      await play(
+        capsule.current,
+        [
+          { transform: "translateY(-60px)", opacity: 0 },
+          { transform: "translateY(0)", opacity: 1, offset: 0.7 },
+          { transform: "translateY(-6px)" },
+          { transform: "translateY(0)" },
+        ],
+        420,
+        {
+          easing: "steps(6)",
+          fill: "forwards",
+        },
+      );
+    }
+    sfx.tearOff();
+    haptic(feel.haptic.tear);
+    setIdeas(suggestTitles(concept, book.collected, createRng(freshSeed()), 3));
+    setSpins((n) => n + 1);
+    say(spins === 0 ? "Ooh, names!" : "Another capsule!");
+    setSpinning(false);
+  }
 
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
@@ -33,132 +67,71 @@ export function TitlePage({ book, concept, page }: PageCtx) {
         label="Your title"
         value={concept.title}
         onChange={(title) => update({ title })}
-        placeholder="Type anything. Change it any time."
+        placeholder="Type one, or spin the gacha"
         maxLength={60}
       />
-      <div className="dk-row">
-        <button
-          type="button"
-          className="dk-btn small"
-          onClick={() => addCandidate(concept.title)}
-          disabled={!concept.title.trim() || concept.titleCandidates.includes(concept.title.trim())}
-        >
-          Save as a candidate
-        </button>
-      </div>
 
-      {!!concept.titleCandidates.length && (
-        <section className="dk-block">
-          <h3>Candidates</h3>
-          <ul className="dk-list">
-            {concept.titleCandidates.map((t) => {
-              const fav = concept.title === t;
-              return (
-                <li key={t} className="dk-list-item">
-                  <strong>
-                    {fav && "★ "}
-                    {t}
-                  </strong>
-                  <div className="dk-row">
-                    <button
-                      type="button"
-                      className={`dk-btn small${fav ? "" : " primary"}`}
-                      onClick={() => update({ title: t })}
-                      disabled={fav}
-                    >
-                      {fav ? "Current favorite" : "Make it my title"}
-                    </button>
-                    <button
-                      type="button"
-                      className="dk-btn small ghost"
-                      onClick={() =>
-                        update({ titleCandidates: concept.titleCandidates.filter((x) => x !== t) })
-                      }
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )}
-
-      <section className="dk-block">
-        <h3>Word pack</h3>
-        <p className="dk-hint">Add words to the tray and combine them into a title.</p>
-        <BoosterPack
-          type="word"
-          label="Word pack"
-          count={6}
-          isKept={(c) => tray.includes(c.title)}
-          onToggleKeep={(c) =>
-            setTray((t) => (t.includes(c.title) ? t.filter((x) => x !== c.title) : [...t, c.title]))
-          }
-          isFavorite={() => false}
-          onToggleFavorite={() => {}}
-          canFavorite={false}
-          keepLabel="Add to title"
-          keptLabel="✓ In your title"
-          onOpened={() => scrapbookStore.countPack(book.id)}
-          onTrashed={() => scrapbookStore.countTrash(book.id)}
-        />
-      </section>
-
-      {!!tray.length && (
-        <section className="dk-block dk-tray">
-          <h3>Title tray</h3>
-          <ul className="dk-tray-list">
-            {tray.map((w, i) => (
-              <li key={w}>
-                <span>{w}</span>
-                <button
-                  type="button"
-                  className="dk-icon-btn"
-                  onClick={() => move(i, -1)}
-                  disabled={i === 0}
-                  aria-label={`Move ${w} earlier`}
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  className="dk-icon-btn"
-                  onClick={() => move(i, 1)}
-                  disabled={i === tray.length - 1}
-                  aria-label={`Move ${w} later`}
-                >
-                  ›
-                </button>
-                <button
-                  type="button"
-                  className="dk-icon-btn"
-                  onClick={() => setTray((t) => t.filter((x) => x !== w))}
-                  aria-label={`Remove ${w}`}
-                >
-                  ✕
-                </button>
-              </li>
+      <div className="px-gacha">
+        <div className="px-gacha-machine" aria-hidden>
+          <span className="px-gacha-dome">
+            {Array.from({ length: 9 }, (_, i) => (
+              <i key={i} className={`c${i % 4}`} />
             ))}
-          </ul>
-          <p className="dk-tray-preview">{preview}</p>
-          <div className="dk-row">
+          </span>
+          <span className="px-gacha-body">
+            <span ref={knob} className="px-gacha-knob" />
+            <span className="px-gacha-slot">
+              <span ref={capsule} className={`px-gacha-capsule${ideas.length ? " open" : ""}`} />
+            </span>
+          </span>
+        </div>
+        <div className="px-gacha-side">
+          {ideas.length ? (
+            <ul className="px-tickets">
+              {ideas.map((t) => (
+                <li key={t}>
+                  <button
+                    type="button"
+                    aria-pressed={concept.title === t}
+                    onClick={() => {
+                      update({ title: t });
+                      sfx.thud();
+                    }}
+                  >
+                    {t}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="dk-hint">{spinning ? "…" : "Turn the knob for three name ideas."}</p>
+          )}
+          <button
+            type="button"
+            className="dk-btn primary"
+            onClick={() => void spin()}
+            disabled={spinning}
+          >
+            {spins ? "Spin again" : "Turn the knob"}
+          </button>
+        </div>
+      </div>
+      <p className="dk-hint">Tap a name to use it. You can still edit it above.</p>
+
+      {extras && !!concept.titleCandidates.length && (
+        <div className="dk-chips" aria-label="Saved candidates">
+          {concept.titleCandidates.map((t) => (
             <button
+              key={t}
               type="button"
-              className="dk-btn small primary"
-              onClick={() => update({ title: preview })}
+              className="dk-chip"
+              aria-pressed={concept.title === t}
+              onClick={() => update({ title: t })}
             >
-              Use as my title
+              {t}
             </button>
-            <button type="button" className="dk-btn small" onClick={() => addCandidate(preview)}>
-              Save as candidate
-            </button>
-            <button type="button" className="dk-btn small ghost" onClick={() => setTray([])}>
-              Clear
-            </button>
-          </div>
-        </section>
+          ))}
+        </div>
       )}
     </PageFrame>
   );

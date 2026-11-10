@@ -4,12 +4,14 @@ import { useMemo, useState } from "react";
 import { SENTENCE_STARTERS, suggestTaglines } from "@/lib/inspiration";
 import { createRng } from "@/lib/rng";
 import { scrapbookStore } from "@/lib/scrapbook/store";
+import { useSettings } from "@/lib/settings";
 import { TextField } from "../../ui/TextField";
 import { PageFrame } from "./PageFrame";
 import type { PageCtx } from "./registry";
 
 /** Typing, with optional starters and suggestions made only from what you've already collected. */
 export function TaglinePage({ book, concept, page }: PageCtx) {
+  const { showExtras: extras } = useSettings();
   const [seed, setSeed] = useState(1);
   const suggestions = useMemo(
     () => suggestTaglines(concept, book.collected, createRng(`tag-${seed}`), 3),
@@ -26,31 +28,29 @@ export function TaglinePage({ book, concept, page }: PageCtx) {
         maxLength={110}
       />
 
+      {extras && (
+        <section className="dk-block">
+          <h3>Sentence starters</h3>
+          <div className="dk-chips">
+            {SENTENCE_STARTERS.slice(0, 8).map((s) => (
+              <button key={s} type="button" className="dk-chip" onClick={() => set(s)}>
+                {s}
+              </button>
+            ))}
+          </div>
+          <p className="dk-hint">Tap one, then finish it your way.</p>
+        </section>
+      )}
       <section className="dk-block">
-        <h3>Sentence starters</h3>
-        <div className="dk-chips">
-          {SENTENCE_STARTERS.slice(0, 8).map((s) => (
-            <button key={s} type="button" className="dk-chip" onClick={() => set(s)}>
-              {s}
-            </button>
-          ))}
-        </div>
-        <p className="dk-hint">Tap one, then finish it your way.</p>
-      </section>
-
-      <section className="dk-block">
-        <h3>Suggestions</h3>
+        <h3>Ideas from your picks</h3>
         {suggestions.length ? (
           <>
-            <ul className="dk-list">
+            <ul className="px-tickets wide">
               {suggestions.map((s) => (
-                <li key={s} className="dk-list-item">
-                  <p className="dk-quote">{s}</p>
-                  <div className="dk-row">
-                    <button type="button" className="dk-btn small primary" onClick={() => set(s)}>
-                      Use this
-                    </button>
-                  </div>
+                <li key={s}>
+                  <button type="button" aria-pressed={concept.tagline === s} onClick={() => set(s)}>
+                    {s}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -59,9 +59,8 @@ export function TaglinePage({ book, concept, page }: PageCtx) {
             </button>
           </>
         ) : (
-          <p className="dk-empty">
-            Suggestions appear here once you have a genre, a mechanic, a setting or an objective.
-            They only use your own picks.
+          <p className="dk-hint">
+            Ideas show up once you&apos;ve kept a mechanic, a setting or a genre.
           </p>
         )}
       </section>

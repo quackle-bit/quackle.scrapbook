@@ -124,11 +124,19 @@ export function BoosterPack({
     if (!quick())
       requestAnimationFrame(() =>
         Array.from(grid.current?.children ?? []).forEach((el, i) =>
-          play(el, [{ transform: "translateY(-24px) scale(.85)", opacity: 0 }, { transform: "none", opacity: 1 }], 260, {
-            delay: i * 70,
-            easing: OVERSHOOT,
-            fill: "backwards",
-          }),
+          play(
+            el,
+            [
+              { transform: "translateY(-24px) scale(.85)", opacity: 0 },
+              { transform: "none", opacity: 1 },
+            ],
+            260,
+            {
+              delay: i * 70,
+              easing: OVERSHOOT,
+              fill: "backwards",
+            },
+          ),
         ),
       );
     sfx.riffle();
@@ -165,10 +173,24 @@ export function BoosterPack({
       await Promise.all(
         cards.map((c, i) =>
           chosen.has(c.id)
-            ? play(els[i], [{ transform: "none" }, { transform: "translateY(-30px) scale(1.05)" }, { transform: "translateY(-90px) scale(.6)", opacity: 0 }], 380, {
-                fill: "forwards",
-              })
-            : play(els[i], [{ transform: "none" }, { transform: "scale(.3) rotate(160deg)", opacity: 0 }], 320, { fill: "forwards", delay: 80 }),
+            ? play(
+                els[i],
+                [
+                  { transform: "none" },
+                  { transform: "translateY(-30px) scale(1.05)" },
+                  { transform: "translateY(-90px) scale(.6)", opacity: 0 },
+                ],
+                380,
+                {
+                  fill: "forwards",
+                },
+              )
+            : play(
+                els[i],
+                [{ transform: "none" }, { transform: "scale(.3) rotate(160deg)", opacity: 0 }],
+                320,
+                { fill: "forwards", delay: 80 },
+              ),
         ),
       );
     keep.forEach((c) => !isKept(c) && onToggleKeep(c));
@@ -244,7 +266,11 @@ export function BoosterPack({
                   <li key={c.id} style={{ rotate: `${((i * 37) % 7) - 3}deg` }}>
                     <span>{c.title}</span>
                     {onRemove && (
-                      <button type="button" aria-label={`Remove ${c.title}`} onClick={() => onRemove(c.id)}>
+                      <button
+                        type="button"
+                        aria-label={`Remove ${c.title}`}
+                        onClick={() => onRemove(c.id)}
+                      >
                         ✕
                       </button>
                     )}
@@ -296,11 +322,24 @@ export function BoosterPack({
               </form>
             ) : (
               <div className="px-actions">
-                <button type="button" className="dk-btn primary" onClick={startOpening} disabled={room === 0}>
-                  {room === 0 ? "Page full" : kept.length ? "Open another pack" : `Open a ${label.toLowerCase()}`}
+                <button
+                  type="button"
+                  className="dk-btn primary"
+                  onClick={startOpening}
+                  disabled={room === 0}
+                >
+                  {room === 0
+                    ? "Page full"
+                    : kept.length
+                      ? "Open another pack"
+                      : `Open a ${label.toLowerCase()}`}
                 </button>
                 {onAddCustom && (
-                  <button type="button" className="dk-btn small ghost" onClick={() => setWriting(true)}>
+                  <button
+                    type="button"
+                    className="dk-btn small ghost"
+                    onClick={() => setWriting(true)}
+                  >
                     Write my own
                   </button>
                 )}
@@ -330,7 +369,11 @@ export function BoosterPack({
                     className={`px-card t-${type}${isUp ? " up" : ""}${on ? " chosen" : ""}`}
                     onClick={() => tap(c)}
                     aria-pressed={isUp ? on : undefined}
-                    aria-label={isUp ? `${c.title}. ${c.description}. ${on ? "Chosen" : "Tap to choose"}` : "Face-down card. Tap to flip."}
+                    aria-label={
+                      isUp
+                        ? `${c.title}. ${c.description}. ${on ? "Chosen" : "Tap to choose"}`
+                        : "Face-down card. Tap to flip."
+                    }
                   >
                     <span className="px-card-inner">
                       <span className="px-card-back" aria-hidden>
@@ -353,7 +396,15 @@ export function BoosterPack({
             </div>
             <div className="px-actions">
               {up.size < cards.length ? (
-                <button type="button" className="dk-btn" onClick={() => cards.forEach((c, i) => setTimeout(() => setUp((u) => new Set(u).add(c.id)), i * 90))}>
+                <button
+                  type="button"
+                  className="dk-btn"
+                  onClick={() =>
+                    cards.forEach((c, i) =>
+                      setTimeout(() => setUp((u) => new Set(u).add(c.id)), i * 90),
+                    )
+                  }
+                >
                   Flip all
                 </button>
               ) : (

@@ -30,13 +30,15 @@ export function SetupPage({ book, page }: PageCtx) {
     scrapbookStore.updateScrapbook(book.id, patch);
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
-      <TextField
-        label="Project name"
-        value={book.name}
-        onChange={(name) => set({ name })}
-        placeholder="e.g. Rainy Day Jam entry"
-        maxLength={60}
-      />
+      {extras && (
+        <TextField
+          label="Project name"
+          value={book.name}
+          onChange={(name) => set({ name })}
+          placeholder="e.g. Rainy Day Jam entry"
+          maxLength={60}
+        />
+      )}
       <TextField
         label="Game jam theme"
         value={book.jamTheme}
