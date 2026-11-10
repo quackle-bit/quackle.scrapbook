@@ -9,16 +9,14 @@ import { sfx } from "@/lib/sound";
 /** A turn in progress: which page is the leaf that moves, and which way. */
 export type Turn = { from: number; to: number; dir: 1 | -1 };
 
-const TURN_MS = 620;
-const EASE = "cubic-bezier(.45,.05,.3,1)";
+const TURN_MS = 340;
+const EASE = "cubic-bezier(.3,0,.2,1)";
 
 /**
- * Book page turns, played by the Back/Next buttons and arrow keys.
- * Portrait page turn: a vertical fold sweeps from the right edge to the spine. Left of the fold is
- * the page's front, the folded part lies on top as its blank back, and the next page shows to the
- * right in the fold's shadow. Everything stays inside the page frame (on a phone a 3D swing around
- * the spine just vanishes off-screen, which reads as a blink). Web Animations only, so React doesn't
- * re-render during the turn.
+ * Page turns, played by the Back/Next buttons and arrow keys: the top page slides off to the left
+ * (or back in from the left) over the other page, which stays perfectly still. Transform only, no
+ * overlays or clipping: earlier fold and 3D versions repainted on the phone's main thread and read
+ * as a blink. Web Animations, so React doesn't re-render during the turn.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
@@ -44,12 +42,10 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
   // so the turn always starts from its first frame, however slow the phone is.
   useLayoutEffect(() => {
     if (!turn) return;
-    const root = binding.current;
-    const leaf = root?.querySelector<HTMLElement>(".dk-moving");
-    const flap = root?.querySelector<HTMLElement>(".dk-flap");
-    const fold = root?.querySelector<HTMLElement>(".dk-fold-shadow");
+    const leaf = binding.current?.querySelector<HTMLElement>(".dk-moving");
     const fwd = turn.dir === 1;
-    // Turning back plays the same turn in reverse.
+    // Only transform moves, so phones run it on the graphics chip: the top page slides off to the
+    // left (Next) or back in from the left (Back) over the other page, which never changes.
     const opts: KeyframeAnimationOptions = {
       duration: TURN_MS,
       easing: EASE,
@@ -57,38 +53,11 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
       direction: fwd ? "normal" : "reverse",
     };
     const all: Animation[] = [];
-    const add = (a?: Animation) => a && all.push(a);
-    // A vertical fold sweeps from the right edge (p = 0) to the spine (p = 1).
-    // The front of the turning page is what's left of the fold…
-    const main = leaf?.animate({ clipPath: ["inset(0 0% 0 0)", "inset(0 100% 0 0)"] }, opts);
-    add(main);
-    // …the part past the fold flips over and lies on top as the blank back of the page…
-    add(
-      flap?.animate(
-        [
-          { transform: "translateX(0%)", clipPath: "inset(0 0 0 100%)" },
-          { transform: "translateX(-50%)", clipPath: "inset(0 0 0 50%)" },
-          { transform: "translateX(-100%)", clipPath: "inset(0 0 0 100%)" },
-        ],
-        opts,
-      ),
+    const main = leaf?.animate(
+      { transform: ["translate3d(0,0,0)", "translate3d(-108%,0,0)"] },
+      opts,
     );
-    // …and the next page shows to the right of the fold, in its shadow.
-    add(
-      fold?.animate(
-        [
-          { transform: "translateX(100%)", opacity: 0 },
-          { transform: "translateX(85%)", opacity: 1, offset: 0.15 },
-          { transform: "translateX(15%)", opacity: 1, offset: 0.85 },
-          { transform: "translateX(0%)", opacity: 0 },
-        ],
-        opts,
-      ),
-    );
-    // The next page sits in the turning leaf's shadow until it's uncovered. This overlay lives in the
-    // book, not inside the page, so nothing on the page itself changes when the turn ends (phones
-    // re-draw a page whose layers change, which shows as a blink).
-    add(root?.querySelector<HTMLElement>(".dk-under-dim")?.animate({ opacity: [0.25, 0] }, opts));
+    if (main) all.push(main);
 
     let done = false;
     const finish = (stalled = false) => {

@@ -252,8 +252,10 @@
 /* ── Book page turn: a fold sweeping right → left (Web Animations in usePageCurl) ── */
 .dk-moving {
   z-index: 3;
-  transform: translateZ(0) !important;
-  box-shadow: none !important;
+  /* not !important: the slide animation must be able to move it */
+  transform: translateZ(0);
+  /* hard pixel shadow on the page edge as it slides */
+  box-shadow: 6px 0 0 rgba(36, 33, 31, 0.35) !important;
 }
 .dk-moving::after {
   content: none !important;
@@ -1008,7 +1010,7 @@
 
 /* Starting pose of a back turn, so nothing flashes before the animation picks it up. */
 .turn-back .dk-moving {
-  clip-path: inset(0 100% 0 0);
+  transform: translate3d(-108%, 0, 0);
 }
 .turn-fwd .dk-under-dim {
   opacity: 0.25;

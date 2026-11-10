@@ -148,9 +148,6 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           ref={binding}
           className={`dk-binding${active ? (active.dir === 1 ? " turning turn-fwd" : " turning turn-back") : ""}`}
         >
-          {active && <span className="dk-flap" aria-hidden />}
-          {active && <span className="dk-fold-shadow" aria-hidden />}
-          {active && <span className="dk-under-dim" aria-hidden />}
           <div className="dk-stack" aria-hidden />
           {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
             const moving = active && i === (active.dir === 1 ? active.from : active.to);
