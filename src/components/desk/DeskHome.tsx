@@ -138,8 +138,7 @@ export function DeskHome() {
               )}
               <small>
                 Updated {when(s.updatedAt)} · {s.progress.visitedPages.length} / {PAGES.length}{" "}
-                pages · {s.conceptIds.length} concept
-                {s.conceptIds.length === 1 ? "" : "s"}
+                pages
               </small>
               <div className="dk-row">
                 <Link className="dk-btn small primary" href={`/scrapbook?id=${s.id}`}>

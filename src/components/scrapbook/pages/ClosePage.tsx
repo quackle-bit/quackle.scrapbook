@@ -1,19 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useScrapbook } from "@/lib/scrapbook/store";
 import { useSettings } from "@/lib/settings";
 import { ForgeOverlay, Receipt } from "../../feel/Rewards";
 import { PAGES } from "./registry";
-import { buildPitchModel, filledCount, SECTIONS } from "@/lib/scrapbook/pitch";
+import { buildPitchModel, filledCount } from "@/lib/scrapbook/pitch";
 import { PageFrame } from "./PageFrame";
 import type { PageCtx } from "./registry";
 
-/** Stage 07: close the scrapbook and see each concept as a pitch spread. */
+/** Last page: close the scrapbook and forge it into a pitch. */
 export function ClosePage({ book, concept, page }: PageCtx) {
-  const { concepts } = useScrapbook(book.id);
   const router = useRouter();
   const { showExtras: extras } = useSettings();
   const [forging, setForging] = useState(false);
@@ -38,14 +35,14 @@ export function ClosePage({ book, concept, page }: PageCtx) {
         onClick={() => setForging(true)}
         disabled={filledCount(cur) === 0}
       >
-        Forge “{cur.title || "this concept"}” into a pitch
+        Forge “{cur.title || "your game"}” into a pitch
       </button>
       {filledCount(cur) === 0 && (
         <p className="dk-hint">
           Fill in at least one page first: there&apos;s nothing to forge yet.
         </p>
       )}
-      <Receipt book={book} concepts={concepts.length} pagesTotal={PAGES.length} />
+      <Receipt book={book} pagesTotal={PAGES.length} />
       {forging && (
         <ForgeOverlay
           pieces={pieces}
@@ -56,33 +53,6 @@ export function ClosePage({ book, concept, page }: PageCtx) {
           }}
           onClose={() => setForging(false)}
         />
-      )}
-      {extras && (
-        <ul className="dk-list">
-          {concepts.map((c, i) => {
-            const m = buildPitchModel(book, c);
-            return (
-              <li key={c.id} className="dk-list-item">
-                <h3>
-                  {c.id === concept.id && "● "}
-                  {m.title || `Concept ${i + 1}`}
-                </h3>
-                <small>
-                  {filledCount(m)} / {SECTIONS.length} sections filled
-                  {c.status === "pitched" ? " · pitched" : ""}
-                </small>
-                <div className="dk-row">
-                  <Link
-                    className="dk-btn small primary"
-                    href={`/scrapbook/summary?id=${book.id}&concept=${c.id}`}
-                  >
-                    See pitch
-                  </Link>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
       )}
       {extras && (
         <p className="dk-hint">

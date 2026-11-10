@@ -77,21 +77,12 @@ export function StickerRow({ earned }: { earned: StickerId[] }) {
 }
 
 /** A printed receipt of the session: what you opened, kept and threw away. */
-export function Receipt({
-  book,
-  concepts,
-  pagesTotal,
-}: {
-  book: Scrapbook;
-  concepts: number;
-  pagesTotal: number;
-}) {
+export function Receipt({ book, pagesTotal }: { book: Scrapbook; pagesTotal: number }) {
   const rows: [string, string | number][] = [
     ["Packs opened", book.progress.packsOpened],
     ["Cards kept", book.collected.length],
     ["Cards QUACKED", book.progress.cardsTrashed ?? 0],
     ["Pages explored", `${book.progress.visitedPages.length} / ${pagesTotal}`],
-    ["Concepts", concepts],
   ];
   return (
     <div className="dk-receipt" aria-label="Receipt">
