@@ -34,7 +34,11 @@ function load() {
     if (raw && Array.isArray(raw.scrapbooks)) {
       state = {
         scrapbooks: raw.scrapbooks,
-        concepts: Array.isArray(raw.concepts) ? raw.concepts : [],
+        // Older saves predate some lists; fill them in so every concept has the same shape.
+        concepts: (Array.isArray(raw.concepts) ? raw.concepts : []).map((c: Concept) => ({
+          ...c,
+          perspective: c.perspective ?? [],
+        })),
         lastId: raw.lastId ?? null,
         ready: true,
       };
@@ -87,6 +91,7 @@ export const newConcept = (scrapbookId: string, title = ""): Concept => ({
   mood: [],
   setting: [],
   visualDirection: [],
+  perspective: [],
   audioDirection: [],
   primary: {},
   scope: {},
@@ -340,6 +345,7 @@ export const scrapbookStore = {
               mood: strip(c.mood),
               setting: strip(c.setting),
               visualDirection: strip(c.visualDirection),
+              perspective: strip(c.perspective),
               audioDirection: strip(c.audioDirection),
               genres: {
                 primary: c.genres.primary === cardId ? undefined : c.genres.primary,

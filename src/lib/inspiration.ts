@@ -10,6 +10,7 @@ import starters from "../../data/inspiration/sentence-starters.json";
 import taglines from "../../data/inspiration/taglines.json";
 import twists from "../../data/inspiration/twists.json";
 import visual from "../../data/inspiration/visual-directions.json";
+import perspectives from "../../data/inspiration/perspectives.json";
 import words from "../../data/inspiration/word-packs.json";
 import type { Rng } from "./rng";
 import type { CardSource, CardType, CollectedCard, Concept } from "./scrapbook/types";
@@ -26,6 +27,7 @@ export const INSPIRATION: Record<CardType, InspirationCard[]> = {
   mood: moods.cards,
   setting: settingsData.cards,
   visual: visual.cards,
+  perspective: perspectives.cards,
   audio: audio.cards,
   word: words.cards,
 };
@@ -43,6 +45,7 @@ export const TYPE_LABEL: Record<CardType, string> = {
   mood: "Mood",
   setting: "Setting",
   visual: "Visual",
+  perspective: "Perspective",
   audio: "Audio",
   word: "Word",
 };

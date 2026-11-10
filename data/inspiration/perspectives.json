@@ -1,0 +1,105 @@
+{
+  "type": "perspective",
+  "cards": [
+    {
+      "id": "per-top-down",
+      "title": "Top-Down",
+      "description": "Looking straight down at the world."
+    },
+    {
+      "id": "per-three-quarter",
+      "title": "Three-Quarter",
+      "description": "Top-down, tilted so you see fronts and roofs."
+    },
+    {
+      "id": "per-isometric",
+      "title": "Isometric",
+      "description": "Angled grid view, like a little diorama."
+    },
+    {
+      "id": "per-side-view",
+      "title": "Side View",
+      "description": "Flat profile, left to right."
+    },
+    {
+      "id": "per-side-lanes",
+      "title": "Side View with Lanes",
+      "description": "Side-on, but you can step between depth lanes."
+    },
+    {
+      "id": "per-first-person",
+      "title": "First Person",
+      "description": "Through the character's own eyes."
+    },
+    {
+      "id": "per-over-shoulder",
+      "title": "Over the Shoulder",
+      "description": "Close third person, camera behind them."
+    },
+    {
+      "id": "per-third-person-far",
+      "title": "Wide Third Person",
+      "description": "Camera pulled back to show the space around."
+    },
+    {
+      "id": "per-fixed-diorama",
+      "title": "Fixed Diorama",
+      "description": "One still camera per room, like a stage set."
+    },
+    {
+      "id": "per-free-orbit",
+      "title": "Free Orbit",
+      "description": "Spin the camera around the scene."
+    },
+    {
+      "id": "per-flip-screen",
+      "title": "Flip Screen",
+      "description": "Each screen is a room; walk off the edge to the next."
+    },
+    {
+      "id": "per-birds-eye-map",
+      "title": "Bird's-Eye Map",
+      "description": "Zoomed far out over a whole map."
+    },
+    {
+      "id": "per-cockpit",
+      "title": "Cockpit",
+      "description": "Seated inside a vehicle, looking out."
+    },
+    {
+      "id": "per-auto-scroll",
+      "title": "Auto-Scroll",
+      "description": "The camera keeps moving and you keep up."
+    },
+    {
+      "id": "per-split-screen",
+      "title": "Split Screen",
+      "description": "Two views at once, side by side."
+    },
+    {
+      "id": "per-diegetic-screen",
+      "title": "Through a Screen",
+      "description": "You see it all through a device in the world."
+    },
+    {
+      "id": "per-tabletop",
+      "title": "Tabletop",
+      "description": "Looking down at pieces on a table."
+    },
+    {
+      "id": "per-tight-zoom",
+      "title": "Tight Zoom",
+      "description": "Close in and claustrophobic; you see very little."
+    },
+    {
+      "id": "per-single-screen",
+      "title": "Single Screen",
+      "description": "The whole game fits on one fixed screen."
+    },
+    {
+      "id": "per-vertical-scroll",
+      "title": "Vertical Scroll",
+      "description": "Top to bottom, climbing or falling."
+    }
+  ]
+}

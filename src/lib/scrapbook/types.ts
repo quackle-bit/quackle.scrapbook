@@ -7,7 +7,16 @@
  */
 
 export type CardType =
-  "word" | "genre" | "mechanic" | "objective" | "twist" | "mood" | "setting" | "visual" | "audio";
+  | "word"
+  | "genre"
+  | "mechanic"
+  | "objective"
+  | "twist"
+  | "mood"
+  | "setting"
+  | "visual"
+  | "perspective"
+  | "audio";
 
 export type CardSource = "pack" | "custom" | "recommendation";
 
@@ -50,7 +59,13 @@ export type TeamSize = "solo" | "2-3" | "4-5" | "6+" | "";
 
 export type Mvp = { must: string[]; nice: string[]; cut: string[] };
 
-export type PrimaryPicks = { mood?: CardRef; setting?: CardRef; visual?: CardRef; audio?: CardRef };
+export type PrimaryPicks = {
+  mood?: CardRef;
+  setting?: CardRef;
+  visual?: CardRef;
+  perspective?: CardRef;
+  audio?: CardRef;
+};
 
 export type Concept = {
   id: string;
@@ -69,6 +84,8 @@ export type Concept = {
   mood: CardRef[];
   setting: CardRef[];
   visualDirection: CardRef[];
+  /** Camera / point of view (added later; older saves get [] on load). */
+  perspective: CardRef[];
   audioDirection: CardRef[];
   primary: PrimaryPicks;
   scope: Partial<Record<ScopeArea, number>>;

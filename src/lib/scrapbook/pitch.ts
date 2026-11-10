@@ -36,6 +36,7 @@ export type PitchModel = {
   mood: PitchCardLine[];
   setting: PitchCardLine[];
   visual: PitchCardLine[];
+  perspective: PitchCardLine[];
   audio: PitchCardLine[];
   scope: { label: string; points: number }[];
   mvp: Mvp;
@@ -108,6 +109,7 @@ export function buildPitchModel(book: Scrapbook, concept: Concept): PitchModel {
     mood: lines(book, concept.mood, concept.primary.mood),
     setting: lines(book, concept.setting, concept.primary.setting),
     visual: lines(book, concept.visualDirection, concept.primary.visual),
+    perspective: lines(book, concept.perspective ?? [], concept.primary.perspective),
     audio: lines(book, concept.audioDirection, concept.primary.audio),
     scope: SCOPE_AREAS.map((a) => ({ label: a.label, points: concept.scope[a.id] ?? 0 })).filter(
       (s) => s.points > 0,
@@ -139,6 +141,7 @@ export type SectionId =
   | "hook"
   | "mood"
   | "visual"
+  | "perspective"
   | "audio"
   | "scope"
   | "mvp";
@@ -153,7 +156,8 @@ export const SECTIONS: { id: SectionId; label: string; page: PageId }[] = [
   { id: "objective", label: "Player objective", page: "objective" },
   { id: "hook", label: "Unique hook", page: "hook" },
   { id: "mood", label: "Mood & setting", page: "mood" },
-  { id: "visual", label: "Visual direction", page: "mood" },
+  { id: "visual", label: "Look", page: "mood" },
+  { id: "perspective", label: "Perspective", page: "mood" },
   { id: "audio", label: "Audio direction", page: "mood" },
   { id: "scope", label: "Scope", page: "scope" },
   { id: "mvp", label: "MVP", page: "scope" },
@@ -183,6 +187,8 @@ export function sectionHasContent(m: PitchModel, id: SectionId): boolean {
       return m.mood.length + m.setting.length > 0;
     case "visual":
       return m.visual.length > 0;
+    case "perspective":
+      return m.perspective.length > 0;
     case "audio":
       return m.audio.length > 0;
     case "scope":
@@ -247,6 +253,10 @@ export function pitchMarkdown(m: PitchModel): string {
   if (m.visual.length) {
     h("Visual direction");
     m.visual.forEach((c) => L.push(`- ${c.title}${c.primary ? " (primary)" : ""}`));
+  }
+  if (m.perspective.length) {
+    h("Perspective");
+    m.perspective.forEach((c) => L.push(`- ${c.title}${c.primary ? " (primary)" : ""}`));
   }
   if (m.audio.length) {
     h("Audio direction");
@@ -343,6 +353,7 @@ export function decodePitch(hash: string): PitchModel | null {
       mood: cardLines(m.mood),
       setting: cardLines(m.setting),
       visual: cardLines(m.visual),
+      perspective: cardLines(m.perspective ?? []),
       audio: cardLines(m.audio),
       scope: (Array.isArray(m.scope) ? m.scope.slice(0, 8) : [])
         .map((s: Record<string, unknown>) => ({

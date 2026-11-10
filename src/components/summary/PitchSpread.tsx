@@ -161,7 +161,7 @@ export const PitchSpread = forwardRef<
         </Section>
       )}
 
-      {(has("mood") || has("visual") || has("audio")) && (
+      {(has("mood") || has("visual") || has("perspective") || has("audio")) && (
         <Section label="Mood & world" edit={edit("mood")}>
           <dl className="pp-dl">
             {!!m.mood.length && (
@@ -185,6 +185,14 @@ export const PitchSpread = forwardRef<
                 <dt>Look</dt>
                 <dd>
                   <Tags items={m.visual} />
+                </dd>
+              </>
+            )}
+            {!!m.perspective.length && (
+              <>
+                <dt>View</dt>
+                <dd>
+                  <Tags items={m.perspective} />
                 </dd>
               </>
             )}

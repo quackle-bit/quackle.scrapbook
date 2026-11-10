@@ -264,7 +264,7 @@ export function BoosterPack({
               <p className="dk-hint">The bin is empty.</p>
             ) : (
               <ul>
-                {bin.slice(0, 6).map((c) => (
+                {bin.map((c) => (
                   <li key={c.id}>
                     <span>{c.title}</span>
                     <button

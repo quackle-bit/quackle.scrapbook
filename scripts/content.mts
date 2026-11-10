@@ -14,6 +14,7 @@ const CARD_FILES: Record<string, { type: string; prefix: string; min: number }> 
   "moods.json": { type: "mood", prefix: "mood", min: 20 },
   "settings.json": { type: "setting", prefix: "set", min: 30 },
   "visual-directions.json": { type: "visual", prefix: "vis", min: 15 },
+  "perspectives.json": { type: "perspective", prefix: "per", min: 15 },
   "audio-directions.json": { type: "audio", prefix: "aud", min: 12 },
   "word-packs.json": { type: "word", prefix: "word", min: 150 },
 };

@@ -15,6 +15,7 @@ export const LIST_KEY = {
   mood: "mood",
   setting: "setting",
   visual: "visualDirection",
+  perspective: "perspective",
   audio: "audioDirection",
 } as const;
 export type ListType = keyof typeof LIST_KEY;
@@ -64,7 +65,7 @@ export function removeFromConcept(
   const key = LIST_KEY[type];
   const patch: Partial<Concept> = { [key]: concept[key].filter((x) => x !== cardId) };
   const prim = { ...concept.primary };
-  (["mood", "setting", "visual", "audio"] as const).forEach((k) => {
+  (["mood", "setting", "visual", "perspective", "audio"] as const).forEach((k) => {
     if (prim[k] === cardId) delete prim[k];
   });
   scrapbookStore.updateConcept(conceptId, { ...patch, primary: prim });

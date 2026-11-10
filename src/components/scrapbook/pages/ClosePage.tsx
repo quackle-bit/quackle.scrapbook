@@ -23,6 +23,7 @@ export function ClosePage({ book, concept, page }: PageCtx) {
     ...cur.mood.map((c) => c.title),
     ...cur.setting.map((c) => c.title),
     ...cur.visual.map((c) => c.title),
+    ...cur.perspective.map((c) => c.title),
   ]
     .filter((x): x is string => !!x)
     .map((x) => (x.length > 28 ? `${x.slice(0, 26)}…` : x))

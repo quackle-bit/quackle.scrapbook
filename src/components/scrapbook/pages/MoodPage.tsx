@@ -41,10 +41,17 @@ const TABS: {
   },
   {
     id: "visual",
-    label: "Visual",
-    pack: "Visual pack",
+    label: "Look",
+    pack: "Look pack",
     prim: "visual",
     hint: "What does it look like?",
+  },
+  {
+    id: "perspective",
+    label: "Perspective",
+    pack: "Perspective pack",
+    prim: "perspective",
+    hint: "Where is the camera?",
   },
   {
     id: "audio",

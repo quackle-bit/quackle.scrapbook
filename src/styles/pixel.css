@@ -2086,3 +2086,18 @@
 .px-write {
   gap: 10px;
 }
+
+.px-card.t-perspective {
+  --tc: #7a5a9a;
+}
+/* The bin: the whole list, scrolling inside the page (the page itself never scrolls). */
+.px-binlist ul {
+  max-height: min(46vh, 340px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
+}
+.px-binlist li {
+  flex: none;
+}
