@@ -1,7 +1,8 @@
 "use client";
 
+import { pageNav, usePageNav, type PageNavHook } from "./pageNav";
 import { useSettings } from "@/lib/settings";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { INSPIRATION } from "@/lib/inspiration";
 import { scrapbookStore } from "@/lib/scrapbook/store";
 import type { CardType, PrimaryPicks } from "@/lib/scrapbook/types";
@@ -65,7 +66,10 @@ const TABS: {
 /** A physical moodboard in four collections. None of it is required. */
 export function MoodPage({ book, concept, page }: PageCtx) {
   const { showExtras: extras } = useSettings();
-  const [tabId, setTabId] = useState<ListType>("mood");
+  // Coming back from the next page opens on the last tab, as if turning back through it.
+  const [tabId, setTabId] = useState<ListType>(() =>
+    pageNav.dir() === -1 ? (extras ? "audio" : "perspective") : "mood",
+  );
   const tab = TABS.find((t) => t.id === tabId)!;
   const type = tab.id as CardType;
   const cards = cardsOf(book, concept[LIST_KEY[tab.id]]);
@@ -74,12 +78,32 @@ export function MoodPage({ book, concept, page }: PageCtx) {
   );
   const primaryId = concept.primary[tab.prim];
   const counts = Object.fromEntries(TABS.map((t) => [t.id, concept[LIST_KEY[t.id]].length]));
+  const steps = useMemo(() => TABS.filter((t) => extras || t.id !== "audio"), [extras]);
+  const at = steps.findIndex((t) => t.id === tabId);
+  // Next/Back in the bottom bar walk through the tabs first, so none gets skipped by accident.
+  const nav = useMemo<PageNavHook>(
+    () => ({
+      next: () => {
+        if (at >= steps.length - 1) return false;
+        setTabId(steps[at + 1].id);
+        return true;
+      },
+      back: () => {
+        if (at <= 0) return false;
+        setTabId(steps[at - 1].id);
+        return true;
+      },
+      nextLabel: at < steps.length - 1 ? steps[at + 1].label : undefined,
+    }),
+    [at, steps],
+  );
+  usePageNav(nav);
 
   return (
     <PageFrame group={page.group} title={page.title} prompt={page.prompt}>
       <Chips
         label="Moodboard section"
-        options={TABS.filter((t) => extras || t.id !== "audio").map((t) => ({
+        options={steps.map((t) => ({
           value: t.id,
           label: `${t.label}${counts[t.id] ? ` · ${counts[t.id]}` : ""}`,
         }))}

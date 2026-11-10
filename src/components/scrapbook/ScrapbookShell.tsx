@@ -1,5 +1,6 @@
 "use client";
 
+import { pageNav, usePageNavLabel } from "./pages/pageNav";
 import { Icon } from "../ui/Icon";
 import { DuckBubble } from "../feel/DuckBubble";
 import { PageStamps, StickerPop, StickerRow } from "../feel/Rewards";
@@ -21,6 +22,7 @@ import { useSettings } from "@/lib/settings";
 export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPage?: PageId }) {
   const { ready, book, concept } = useScrapbook(bookId);
   const { showExtras } = useSettings();
+  const nextLabel = usePageNavLabel();
   const PAGES = useMemo(() => pagesFor(showExtras), [showExtras]);
   const [index, setIndex] = useState(() => {
     const i = PAGES.findIndex((p) => p.id === startPage);
@@ -89,6 +91,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
   const goToId = useCallback(
     (id: PageId) => {
       const i = PAGES.findIndex((p) => p.id === id);
+      pageNav.setDir(1); // jumping to a page always opens it at its start
       if (i >= 0) void goTo(i);
     },
     [goTo, PAGES],
@@ -168,7 +171,11 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <button
           type="button"
           className="dk-btn"
-          onClick={() => void goTo(index - 1)}
+          onClick={() => {
+            if (pageNav.back()) return;
+            pageNav.setDir(-1);
+            void goTo(index - 1);
+          }}
           disabled={index === 0}
           aria-label="Previous page"
         >
@@ -185,11 +192,15 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
         <button
           type="button"
           className="dk-btn primary"
-          onClick={() => void goTo(index + 1)}
-          disabled={index === PAGES.length - 1}
+          onClick={() => {
+            if (pageNav.next()) return;
+            pageNav.setDir(1);
+            void goTo(index + 1);
+          }}
+          disabled={index === PAGES.length - 1 && !nextLabel}
           aria-label="Next page"
         >
-          Next <Icon name="chevronRight" size={18} />
+          {nextLabel ?? "Next"} <Icon name="chevronRight" size={18} />
         </button>
       </nav>
 
