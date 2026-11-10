@@ -3229,3 +3229,6 @@ html[data-dark="1"] .dk.dk-desk {
     4px 4px 0 var(--ink),
     12px 14px 0 rgba(0, 0, 0, 0.5) !important;
 }
+.dk-desk .cv-bubble {
+  color: var(--ink);
+}
