@@ -12,7 +12,6 @@ import { useScrapbooks } from "@/lib/scrapbook/store";
 import type { PageId } from "@/lib/scrapbook/types";
 import { sfx } from "@/lib/sound";
 import { DeskRoot } from "../ui/DeskRoot";
-import { PitchCard } from "./PitchCard";
 import { PitchSpread } from "./PitchSpread";
 
 /** Stage 07: the pitch spread, with actions to save, duplicate, export and share. */
@@ -166,9 +165,9 @@ export function SummaryRoute() {
             </button>
           </div>
         </div>
-        {/* Off-screen: the image that gets shared. */}
-        <div className="pcard-holder" aria-hidden>
-          <PitchCard ref={card} model={model} />
+        {/* Off-screen: the image that gets shared, the same document at a fixed width. */}
+        <div ref={card} className="pcard-holder" aria-hidden>
+          <PitchSpread model={model} forExport />
         </div>
         {note && (
           <p className="dk-toast no-print" role="status">

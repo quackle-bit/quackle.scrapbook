@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PUBLIC_URL } from "@/lib/site";
+import { PUBLIC_URL, PUBLIC_URL_LABEL } from "@/lib/site";
+import { QrCode } from "../ui/QrCode";
 import { STUDIO } from "@/lib/studio";
 import { Icon } from "../ui/Icon";
 import { useSettings } from "@/lib/settings";
@@ -54,8 +55,13 @@ function Tags({ items }: { items: PitchCardLine[] }) {
  */
 export const PitchSpread = forwardRef<
   HTMLDivElement,
-  { model: PitchModel; editHref?: (page: PageId) => string }
->(function PitchSpread({ model: m, editHref }, ref) {
+  {
+    model: PitchModel;
+    editHref?: (page: PageId) => string;
+    /** The shared image: adds a QR code and the hashtag to the footer. */
+    forExport?: boolean;
+  }
+>(function PitchSpread({ model: m, editHref, forExport }, ref) {
   const { showExtras } = useSettings();
   const has = (id: SectionId) => sectionHasContent(m, id);
   const edit = (page: PageId) =>
@@ -324,15 +330,24 @@ export const PitchSpread = forwardRef<
           .
         </p>
       )}
-      <footer className="pp-footer">
-        made with{" "}
-        <a href={PUBLIC_URL} target="_blank" rel="noopener">
-          quackle.scrapbook
-        </a>{" "}
-        · by{" "}
-        <a href={STUDIO.url} target="_blank" rel="noopener">
-          {STUDIO.name}
-        </a>
+      <footer className={`pp-footer${forExport ? " export" : ""}`}>
+        {forExport && <QrCode text={PUBLIC_URL} size={64} />}
+        <span>
+          made with{" "}
+          <a href={PUBLIC_URL} target="_blank" rel="noopener">
+            quackle.scrapbook
+          </a>{" "}
+          · by{" "}
+          <a href={STUDIO.url} target="_blank" rel="noopener">
+            {STUDIO.name}
+          </a>
+          {forExport && (
+            <>
+              <br />
+              {PUBLIC_URL_LABEL} · {STUDIO.hashtag}
+            </>
+          )}
+        </span>
       </footer>
     </article>
   );

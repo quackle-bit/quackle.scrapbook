@@ -3795,3 +3795,45 @@ html[data-dark="1"] .dk.dk-desk {
     margin-top: 16px;
   }
 }
+@media (min-width: 900px) {
+  /* Use the whole right page, and on short windows scroll inside it rather than cut content off. */
+  .dk-shell .dk-page {
+    max-width: none !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18px 26px 20px !important;
+  }
+  .dk-shell .dk-leaf {
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+}
+@media (min-width: 900px) {
+  .dk-shell .dk-page {
+    padding-top: 12px !important;
+    gap: 6px !important;
+  }
+  .pc-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* The shared image is the pitch document at a fixed width (exported at 2x = 1200 px wide). */
+.pcard-holder {
+  width: 600px;
+  padding: 10px;
+  background: #fff;
+}
+.pcard-holder .pp {
+  width: 100% !important;
+  max-width: none;
+  margin: 0;
+}
+.pp-footer.export {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: left;
+  line-height: 1.5;
+}
