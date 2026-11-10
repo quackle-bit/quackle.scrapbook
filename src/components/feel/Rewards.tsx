@@ -111,13 +111,13 @@ export function Receipt({ book, pagesTotal }: { book: Scrapbook; pagesTotal: num
 }
 
 /**
- * The finale: the cards you kept lift off, gather, flash and land as one polaroid of the pitch.
- * Tap to skip; reduced motion goes straight to the polaroid.
+ * Forging the pitch, as a scrapbook moment in pixels: a page drops in, every piece you kept gets
+ * taped onto it one by one, the title types itself out, and a PITCHED rubber stamp slams down.
+ * Tap anywhere to skip to the end.
  */
 export function ForgeOverlay({
   pieces,
   title,
-  tagline,
   onOpen,
   onClose,
 }: {
@@ -127,87 +127,122 @@ export function ForgeOverlay({
   onOpen: () => void;
   onClose: () => void;
 }) {
-  const [stage, setStage] = useState<"gather" | "done">("gather");
-  const ring = useRef<HTMLDivElement>(null);
-  const flash = useRef<HTMLDivElement>(null);
-  const skipped = useRef(false);
+  const shown = pieces.slice(0, 8);
+  const name = title || "Untitled game";
+  const [taped, setTaped] = useState(0);
+  const [typed, setTyped] = useState(0);
+  const [stamped, setStamped] = useState(false);
+  const page = useRef<HTMLDivElement>(null);
+  const skip = useRef(false);
+
+  const finish = () => {
+    skip.current = true;
+    setTaped(shown.length);
+    setTyped(name.length);
+    setStamped(true);
+  };
 
   useEffect(() => {
     const s = settings.get();
-    if (s.reducedMotion || s.speed || pieces.length === 0) {
-      const t = setTimeout(() => setStage("done"), 0);
+    if (s.reducedMotion || s.speed) {
+      const t = setTimeout(finish, 0);
       return () => clearTimeout(t);
     }
-    skipped.current = false;
-    sfx.forge();
-    haptic(feel.haptic.forge);
-    const els = Array.from(ring.current?.children ?? []) as HTMLElement[];
-    const anims = els.map((el, i) => {
-      const a = (i / els.length) * Math.PI * 2;
-      const r = 130;
-      return play(
-        el,
+    skip.current = false;
+    let alive = true;
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    (async () => {
+      sfx.slide();
+      await play(
+        page.current,
         [
-          {
-            transform: `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r}px) rotate(${i * 23 - 30}deg) scale(1)`,
-            opacity: 1,
-          },
-          {
-            transform: `translate(${Math.cos(a + 1.2) * r * 0.6}px, ${Math.sin(a + 1.2) * r * 0.6}px) rotate(${i * 60}deg) scale(.8)`,
-            opacity: 1,
-            offset: 0.6,
-          },
-          { transform: "translate(0,0) rotate(360deg) scale(.2)", opacity: 0 },
+          { transform: "translateY(-40px)", opacity: 0 },
+          { transform: "translateY(4px)", opacity: 1, offset: 0.7 },
+          { transform: "none", opacity: 1 },
         ],
-        1500,
-        { delay: i * 60, easing: "cubic-bezier(.5,0,.6,1)", fill: "forwards" },
+        320,
+        { easing: "steps(5, end)" },
       );
-    });
-    void Promise.all(anims).then(async () => {
-      if (skipped.current) return;
-      await play(flash.current, [{ opacity: 0 }, { opacity: 1, offset: 0.3 }, { opacity: 0 }], 450);
-      setStage("done");
-    });
+      for (let i = 1; i <= shown.length; i++) {
+        if (!alive || skip.current) return;
+        setTaped(i);
+        sfx.thud();
+        haptic(6);
+        await wait(230);
+      }
+      for (let i = 1; i <= name.length; i++) {
+        if (!alive || skip.current) return;
+        setTyped(i);
+        if (i % 2) sfx.tick();
+        await wait(45);
+      }
+      await wait(250);
+      if (!alive || skip.current) return;
+      setStamped(true);
+      sfx.forge();
+      haptic(feel.haptic.forge);
+      say("Pitched! Look at that.");
+      void play(
+        page.current,
+        [
+          { transform: "none" },
+          { transform: "translate(-4px, 2px)" },
+          { transform: "translate(4px, -2px)" },
+          { transform: "translate(-2px, 0)" },
+          { transform: "none" },
+        ],
+        240,
+        { easing: "steps(4, end)" },
+      );
+    })();
     return () => {
-      skipped.current = true;
+      alive = false;
     };
-  }, [pieces.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const done = stamped;
   // Rendered at the app root so it covers everything (the page leaf has its own stacking context).
   const root = typeof document !== "undefined" ? document.querySelector(".dk") : null;
   const ui = (
     <div
-      className="dk-forge"
+      className="fg"
       role="dialog"
       aria-label="Forging your pitch"
-      onClick={() => stage === "gather" && setStage("done")}
+      onClick={() => !done && finish()}
     >
-      {stage === "gather" && (
-        <div ref={ring} className="dk-forge-ring" aria-hidden>
-          {pieces.map((p, i) => (
-            <span key={i}>{p}</span>
+      <div ref={page} className="fg-page">
+        <span className="fg-spine" aria-hidden />
+        <p className="fg-kicker">Pitch</p>
+        <h2 className="fg-title" aria-label={name}>
+          {name.slice(0, typed)}
+          {typed < name.length && <span className="fg-caret" aria-hidden />}
+        </h2>
+        <ul className="fg-pieces">
+          {shown.slice(0, taped).map((p, i) => (
+            <li key={i}>
+              <span className="fg-tape" aria-hidden />
+              {p}
+            </li>
           ))}
+        </ul>
+        {stamped && (
+          <span className="fg-stamp" aria-hidden>
+            Pitched
+          </span>
+        )}
+      </div>
+      {done ? (
+        <div className="fg-actions" onClick={(e) => e.stopPropagation()}>
+          <button type="button" className="dk-btn primary" onClick={onOpen}>
+            Open the pitch
+          </button>
+          <button type="button" className="dk-link-btn fg-back" onClick={onClose}>
+            Back to the book
+          </button>
         </div>
-      )}
-      <div ref={flash} className="dk-forge-flash" aria-hidden />
-      {stage === "done" && (
-        <div className="dk-forge-done" onClick={(e) => e.stopPropagation()}>
-          <figure className="dk-polaroid">
-            <div className="dk-polaroid-pic">
-              <strong>{title || "Untitled game"}</strong>
-              {tagline && <span>“{tagline}”</span>}
-            </div>
-            <figcaption>{title || "Untitled game"}</figcaption>
-          </figure>
-          <div className="dk-row" style={{ justifyContent: "center" }}>
-            <button type="button" className="dk-btn primary" onClick={onOpen}>
-              Open the pitch
-            </button>
-            <button type="button" className="dk-btn ghost" onClick={onClose}>
-              Back to the book
-            </button>
-          </div>
-        </div>
+      ) : (
+        <p className="fg-skip">Tap to skip</p>
       )}
     </div>
   );
