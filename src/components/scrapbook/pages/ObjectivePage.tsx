@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../../ui/Icon";
 import { useMemo, useState } from "react";
 import { drawPack } from "@/lib/inspiration";
 import { createRng } from "@/lib/rng";
@@ -27,7 +28,7 @@ export function ObjectivePage({ concept, page }: PageCtx) {
       <div className="dk-pack-head">
         <h3 style={{ fontSize: 20 }}>Ideas</h3>
         <button type="button" className="dk-btn small" onClick={() => setSeed((n) => n + 1)}>
-          ↻ Shuffle
+          <Icon name="refresh" size={16} /> Shuffle
         </button>
       </div>
       <div className="dk-pack-grid">

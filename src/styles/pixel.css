@@ -1308,3 +1308,27 @@
   height: 6px;
   width: min(160px, 100%);
 }
+
+/* Line icons: centred in their buttons, no glyph baseline quirks. */
+.ui-icon {
+  display: block;
+  flex: none;
+}
+.dk-icon-btn {
+  display: inline-grid !important;
+  place-items: center;
+  padding: 0 !important;
+}
+.dk-bottomnav .dk-btn,
+.dk-sp-edit,
+.px-bin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.px-taped li button,
+.px-check {
+  display: inline-grid;
+  place-items: center;
+}

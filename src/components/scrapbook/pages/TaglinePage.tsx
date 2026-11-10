@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../../ui/Icon";
 import { useMemo, useState } from "react";
 import { SENTENCE_STARTERS, suggestTaglines } from "@/lib/inspiration";
 import { createRng } from "@/lib/rng";
@@ -55,7 +56,7 @@ export function TaglinePage({ book, concept, page }: PageCtx) {
               ))}
             </ul>
             <button type="button" className="dk-btn small" onClick={() => setSeed((n) => n + 1)}>
-              ↻ Different ones
+              <Icon name="refresh" size={16} /> Different ones
             </button>
           </>
         ) : (

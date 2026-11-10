@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import { useRef, useState, type ReactNode } from "react";
 import { feel } from "@/feel";
 import { drawPack, TYPE_LABEL, type InspirationCard } from "@/lib/inspiration";
@@ -216,7 +217,7 @@ export function BoosterPack({
           aria-label={`Bin: ${bin.length} card${bin.length === 1 ? "" : "s"}. Open it to take cards back.`}
           aria-expanded={binOpen}
         >
-          <PixelBin full={bin.length > 0} />
+          <Icon name="bin" />
           <span>{bin.length}</span>
         </button>
       </header>
@@ -263,7 +264,7 @@ export function BoosterPack({
                         aria-label={`Remove ${c.title}`}
                         onClick={() => onRemove(c.id)}
                       >
-                        ✕
+                        <Icon name="close" size={14} />
                       </button>
                     )}
                   </li>
@@ -387,7 +388,7 @@ export function BoosterPack({
                     </span>
                     {on && (
                       <span className="px-check" aria-hidden>
-                        ✓
+                        <Icon name="check" size={16} />
                       </span>
                     )}
                   </button>
@@ -417,30 +418,5 @@ export function BoosterPack({
         )}
       </div>
     </div>
-  );
-}
-
-/** A pixel trash can (2 px per pixel); paper pokes out of the top once something's in it. */
-function PixelBin({ full }: { full: boolean }) {
-  return (
-    <svg width="22" height="26" viewBox="0 0 11 13" shapeRendering="crispEdges" aria-hidden>
-      {full && (
-        <>
-          <rect x="3" y="0" width="2" height="2" fill="#fff" stroke="none" />
-          <rect x="3" y="0" width="2" height="1" fill="#24211f" />
-          <rect x="6" y="0" width="2" height="2" fill="#e05a3a" />
-        </>
-      )}
-      {/* lid + handle */}
-      <rect x="4" y={full ? 1 : 0} width="3" height="1" fill="#24211f" />
-      <rect x="0" y="2" width="11" height="2" fill="#24211f" />
-      {/* can */}
-      <rect x="1" y="4" width="9" height="9" fill="#24211f" />
-      <rect x="2" y="4" width="7" height="8" fill="#fff" />
-      {/* slats */}
-      <rect x="3" y="5" width="1" height="6" fill="#24211f" />
-      <rect x="5" y="5" width="1" height="6" fill="#24211f" />
-      <rect x="7" y="5" width="1" height="6" fill="#24211f" />
-    </svg>
   );
 }

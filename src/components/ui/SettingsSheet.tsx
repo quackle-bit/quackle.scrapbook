@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "./Icon";
 import { useState } from "react";
 import { radio } from "@/lib/radio";
 import { settings, useSettings } from "@/lib/settings";
@@ -16,7 +17,7 @@ export function SettingsButton() {
         onClick={() => setOpen(true)}
         aria-label="Settings"
       >
-        ⚙
+        <Icon name="settings" />
       </button>
       <BottomSheet open={open} title="Settings" onClose={() => setOpen(false)}>
         <div className="dk-settings">

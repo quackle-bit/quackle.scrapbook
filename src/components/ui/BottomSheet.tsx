@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "./Icon";
 import { useEffect, useRef, type ReactNode } from "react";
 
 /** One reusable bottom sheet for secondary actions (page index, settings, radio, card actions). */
@@ -41,7 +42,7 @@ export function BottomSheet({
         <header className="dk-sheet-head">
           <h2>{title}</h2>
           <button type="button" className="dk-icon-btn" onClick={onClose} aria-label="Close">
-            ✕
+            <Icon name="close" />
           </button>
         </header>
         <div className="dk-sheet-body">{children}</div>

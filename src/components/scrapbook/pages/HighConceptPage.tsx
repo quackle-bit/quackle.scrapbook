@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../../ui/Icon";
 import { useMemo, useState } from "react";
 import { drawPack, PLAYER_ROLES } from "@/lib/inspiration";
 import { createRng } from "@/lib/rng";
@@ -86,7 +87,7 @@ export function HighConceptPage({ concept, page }: PageCtx) {
           ))}
           <div className="dk-row">
             <button type="button" className="dk-btn small" onClick={() => setSeed((n) => n + 1)}>
-              ↻ New ideas
+              <Icon name="refresh" size={16} /> New ideas
             </button>
             <button
               type="button"

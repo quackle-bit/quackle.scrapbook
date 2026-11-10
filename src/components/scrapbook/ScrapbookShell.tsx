@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import { DuckBubble } from "../feel/DuckBubble";
 import { PageStamps, StickerPop, StickerRow } from "../feel/Rewards";
 import { earnedStickers, filledPages, type StickerId } from "@/lib/scrapbook/rewards";
@@ -122,7 +123,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
     <DeskRoot className="dk-shell">
       <header className="dk-topbar">
         <Link href="/" className="dk-icon-btn" aria-label="Back to the desk">
-          ⌂
+          <Icon name="home" />
         </Link>
         <div className="dk-title">
           <strong>{book.name.trim() || "Untitled scrapbook"}</strong>
@@ -172,7 +173,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           disabled={index === 0}
           aria-label="Previous page"
         >
-          ‹ Back
+          <Icon name="chevronLeft" size={18} /> Back
         </button>
         <button type="button" className="dk-btn" onClick={() => setSheet(true)}>
           <span className="dk-nav-page">
@@ -189,7 +190,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
           disabled={index === PAGES.length - 1}
           aria-label="Next page"
         >
-          Next ›
+          Next <Icon name="chevronRight" size={18} />
         </button>
       </nav>
 
@@ -228,7 +229,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
                       {p.title}
                       {book.progress.visitedPages.includes(p.id) && (
                         <span className="tick" aria-label="explored">
-                          ✓
+                          <Icon name="check" size={16} />
                         </span>
                       )}
                     </button>

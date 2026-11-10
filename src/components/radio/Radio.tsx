@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import { useState } from "react";
 import { radio, STATIONS } from "@/lib/radio";
 import { settings, useSettings } from "@/lib/settings";
@@ -70,7 +71,7 @@ export function RadioButton() {
         onClick={() => setOpen(true)}
         aria-label={musicOn ? "Radio (playing)" : "Radio"}
       >
-        ♪
+        <Icon name="music" />
       </button>
       <BottomSheet open={open} title="Radio" onClose={() => setOpen(false)}>
         <RadioPanel />

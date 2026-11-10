@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import { useState } from "react";
 import { buildPitchModel, filledCount, SECTIONS } from "@/lib/scrapbook/pitch";
 import { scrapbookStore } from "@/lib/scrapbook/store";
@@ -34,7 +35,7 @@ export function ConceptSwitcher({
       >
         {label && <small>Concept</small>}
         <strong>{active ? name(active, concepts.indexOf(active)) : "Concept"}</strong>
-        <span aria-hidden>▾</span>
+        <Icon name="chevronDown" size={16} />
         {concepts.length > 1 && <em>{concepts.length}</em>}
       </button>
       <BottomSheet open={open} title="Concepts" onClose={() => setOpen(false)}>

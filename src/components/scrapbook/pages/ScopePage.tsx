@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../../ui/Icon";
 import { useSettings } from "@/lib/settings";
 import { useState } from "react";
 import { scrapbookStore } from "@/lib/scrapbook/store";
@@ -134,7 +135,7 @@ export function ScopePage({ book, concept, page }: PageCtx) {
                       onClick={() => remove(b.id, i)}
                       aria-label={`Remove ${t}`}
                     >
-                      ✕
+                      <Icon name="close" size={16} />
                     </button>
                   </span>
                 </li>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../ui/Icon";
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { decodePitch, type PitchModel } from "@/lib/scrapbook/pitch";
@@ -28,7 +29,7 @@ export function SharedEntry() {
     <DeskRoot className="dk-summary">
       <header className="dk-topbar no-print">
         <Link href="/" className="dk-icon-btn" aria-label="Quackle Scrapbook home">
-          ⌂
+          <Icon name="home" />
         </Link>
         <div className="dk-title">
           <strong>A game pitch</strong>

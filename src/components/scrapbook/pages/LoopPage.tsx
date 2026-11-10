@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "../../ui/Icon";
 import { useSettings } from "@/lib/settings";
 import { useState } from "react";
 import { LOOP_VERBS } from "@/lib/inspiration";
@@ -138,7 +139,7 @@ export function LoopPage({ book, concept, page }: PageCtx) {
                   onClick={() => removeStep(i)}
                   aria-label="Remove step"
                 >
-                  ✕
+                  <Icon name="close" size={16} />
                 </button>
               </li>
             ))}

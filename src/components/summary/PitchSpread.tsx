@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icon } from "../ui/Icon";
 import { useSettings } from "@/lib/settings";
 import { pagesFor } from "../scrapbook/pages/registry";
 import { forwardRef, type ReactNode } from "react";
@@ -59,7 +60,7 @@ export const PitchSpread = forwardRef<
   const edit = (page: PageId) =>
     editHref ? (
       <Link href={editHref(page)} className="dk-sp-edit no-export" aria-label="Edit this section">
-        ✎ Edit
+        <Icon name="edit" size={14} /> Edit
       </Link>
     ) : null;
   // Only ask for sections whose page is in the current flow (extras hidden by default).
