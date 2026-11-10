@@ -7,15 +7,15 @@ import { join } from "node:path";
 
 const DIR = join(import.meta.dirname, "..", "data", "inspiration");
 const CARD_FILES: Record<string, { type: string; prefix: string; min: number }> = {
-  "genres.json": { type: "genre", prefix: "genre", min: 20 },
-  "mechanics.json": { type: "mechanic", prefix: "mech", min: 60 },
-  "objectives.json": { type: "objective", prefix: "obj", min: 30 },
-  "twists.json": { type: "twist", prefix: "twist", min: 30 },
-  "moods.json": { type: "mood", prefix: "mood", min: 20 },
-  "settings.json": { type: "setting", prefix: "set", min: 30 },
-  "visual-directions.json": { type: "visual", prefix: "vis", min: 15 },
-  "perspectives.json": { type: "perspective", prefix: "per", min: 15 },
-  "audio-directions.json": { type: "audio", prefix: "aud", min: 12 },
+  "genres.json": { type: "genre", prefix: "genre", min: 60 },
+  "mechanics.json": { type: "mechanic", prefix: "mech", min: 200 },
+  "objectives.json": { type: "objective", prefix: "obj", min: 80 },
+  "twists.json": { type: "twist", prefix: "twist", min: 180 },
+  "moods.json": { type: "mood", prefix: "mood", min: 100 },
+  "settings.json": { type: "setting", prefix: "set", min: 150 },
+  "visual-directions.json": { type: "visual", prefix: "vis", min: 80 },
+  "perspectives.json": { type: "perspective", prefix: "per", min: 30 },
+  "audio-directions.json": { type: "audio", prefix: "aud", min: 80 },
   "word-packs.json": { type: "word", prefix: "word", min: 150 },
 };
 const LIST_FILES: Record<string, string> = {

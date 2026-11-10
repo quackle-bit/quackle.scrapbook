@@ -332,8 +332,8 @@
       "category": "resources"
     },
     {
-      "id": "mech-inventory-tetris",
-      "title": "Inventory Tetris",
+      "id": "mech-inventory-packing",
+      "title": "Inventory Packing",
       "description": "Fit odd-shaped items into limited space.",
       "category": "resources"
     },
@@ -486,6 +486,1056 @@
       "title": "Sorting",
       "description": "Put things where they belong, fast or carefully.",
       "category": "puzzle"
+    },
+    {
+      "id": "mech-modular-rooms",
+      "title": "Modular Rooms",
+      "description": "Snap prefab rooms together to grow a home, ship or dungeon.",
+      "category": "building"
+    },
+    {
+      "id": "mech-bridge-spanning",
+      "title": "Bridge Spanning",
+      "description": "Lay planks across gaps before the structure gives way.",
+      "category": "building"
+    },
+    {
+      "id": "mech-conveyor-belts",
+      "title": "Conveyor Belts",
+      "description": "Route items along belts to feed machines automatically.",
+      "category": "building"
+    },
+    {
+      "id": "mech-pipe-routing",
+      "title": "Pipe Routing",
+      "description": "Connect pipes so water or power reaches every outlet.",
+      "category": "building"
+    },
+    {
+      "id": "mech-scaffolding",
+      "title": "Scaffolding",
+      "description": "Raise temporary platforms to reach high places, then tear them down.",
+      "category": "building"
+    },
+    {
+      "id": "mech-wall-raising",
+      "title": "Wall Raising",
+      "description": "Put up walls on the fly to block enemies or shape paths.",
+      "category": "building"
+    },
+    {
+      "id": "mech-blueprint-copying",
+      "title": "Blueprint Copying",
+      "description": "Record a structure once and stamp copies of it anywhere.",
+      "category": "building"
+    },
+    {
+      "id": "mech-load-bearing",
+      "title": "Load Bearing",
+      "description": "Place supports so heavy floors do not collapse.",
+      "category": "building"
+    },
+    {
+      "id": "mech-track-laying",
+      "title": "Track Laying",
+      "description": "Build rails ahead of a moving cart before it reaches the end.",
+      "category": "building"
+    },
+    {
+      "id": "mech-fortify-at-dusk",
+      "title": "Fortify at Dusk",
+      "description": "Reinforce your camp by day before attackers arrive at night.",
+      "category": "building"
+    },
+    {
+      "id": "mech-furniture-arranging",
+      "title": "Furniture Arranging",
+      "description": "Place furniture to meet the needs of picky residents.",
+      "category": "building"
+    },
+    {
+      "id": "mech-road-networks",
+      "title": "Road Networks",
+      "description": "Link towns with roads so traffic and trade can flow.",
+      "category": "building"
+    },
+    {
+      "id": "mech-nest-weaving",
+      "title": "Nest Weaving",
+      "description": "Gather twigs and scraps to weave a shelter piece by piece.",
+      "category": "building"
+    },
+    {
+      "id": "mech-wiring-circuits",
+      "title": "Wiring Circuits",
+      "description": "Connect switches, gates and lamps to make logic work.",
+      "category": "building"
+    },
+    {
+      "id": "mech-mech-assembly",
+      "title": "Mech Assembly",
+      "description": "Bolt parts onto a frame to change how your machine moves and fights.",
+      "category": "building"
+    },
+    {
+      "id": "mech-sandcastle-tide",
+      "title": "Sandcastle Tide",
+      "description": "Build fast and smart before the tide washes it away.",
+      "category": "building"
+    },
+    {
+      "id": "mech-garden-layout",
+      "title": "Garden Layout",
+      "description": "Arrange plants so neighbors help each other grow.",
+      "category": "building"
+    },
+    {
+      "id": "mech-counter-stance",
+      "title": "Counter Stance",
+      "description": "Hold a stance that punishes the next attack that hits you.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-weapon-juggling",
+      "title": "Weapon Juggling",
+      "description": "Toss and catch weapons midfight to switch styles.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-lock-on-dodging",
+      "title": "Lock-On Dodging",
+      "description": "Lock onto one foe and circle it while dodging others.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-bullet-grazing",
+      "title": "Bullet Grazing",
+      "description": "Skim close to bullets without getting hit to charge power.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-stagger-meter",
+      "title": "Stagger Meter",
+      "description": "Break an enemy's guard with pressure before landing big hits.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-weak-point-aiming",
+      "title": "Weak Point Aiming",
+      "description": "Find and hit glowing weak spots on large foes.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-turn-order-swapping",
+      "title": "Turn Order Swapping",
+      "description": "Rearrange who acts next in a turn-based fight.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-disarming",
+      "title": "Disarming",
+      "description": "Knock weapons away from foes and pick them up yourself.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-charge-attacks",
+      "title": "Charge Attacks",
+      "description": "Hold the button to power up a slow, heavy strike.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-formation-tactics",
+      "title": "Formation Tactics",
+      "description": "Arrange your squad in shapes that grant bonuses.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-last-stand",
+      "title": "Last Stand",
+      "description": "Fight harder and stronger when nearly defeated.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-ammo-recovery",
+      "title": "Ammo Recovery",
+      "description": "Pick your thrown spears or arrows back up to keep fighting.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-taunting",
+      "title": "Taunting",
+      "description": "Draw enemy attention onto one sturdy character.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-duel-timing",
+      "title": "Duel Timing",
+      "description": "Wait for the signal and strike first in a one-hit duel.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-status-effects",
+      "title": "Status Effects",
+      "description": "Inflict poison, sleep or burn and exploit them.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-environmental-kills",
+      "title": "Environmental Kills",
+      "description": "Lure enemies into traps, pits and falling objects.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-mounted-combat",
+      "title": "Mounted Combat",
+      "description": "Fight from the back of a creature that moves on its own.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-shield-bashing",
+      "title": "Shield Bashing",
+      "description": "Block with a shield, then shove foes off ledges.",
+      "category": "combat"
+    },
+    {
+      "id": "mech-sticky-surfaces",
+      "title": "Sticky Surfaces",
+      "description": "Walk on walls and ceilings coated in sticky goo.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-rope-swinging",
+      "title": "Rope Swinging",
+      "description": "Swing from anchor points to cross wide gaps.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-gliding",
+      "title": "Gliding",
+      "description": "Spread wings or a cloth to drift slowly through the air.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-ice-sliding",
+      "title": "Ice Sliding",
+      "description": "Slide across ice until you hit something that stops you.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-double-jump",
+      "title": "Double Jump",
+      "description": "Jump again in midair to reach higher places.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-bouncing",
+      "title": "Bouncing",
+      "description": "Bounce on springy surfaces to gain height and speed.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-burrowing",
+      "title": "Burrowing",
+      "description": "Dig through soil to travel underground.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-swimming-currents",
+      "title": "Swimming Currents",
+      "description": "Ride water currents to move fast or fight them slowly.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-rail-grinding",
+      "title": "Rail Grinding",
+      "description": "Grind along rails and edges to keep up speed.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-rolling",
+      "title": "Rolling",
+      "description": "Curl into a ball and roll down slopes and through tubes.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-climbing-stamina",
+      "title": "Climbing Stamina",
+      "description": "Climb any surface until your grip runs out.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-ledge-hanging",
+      "title": "Ledge Hanging",
+      "description": "Hang from edges and shimmy along to sneak past.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-jetpack-fuel",
+      "title": "Jetpack Fuel",
+      "description": "Hover and boost with a jetpack that needs refueling.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-sliding-under",
+      "title": "Sliding Under",
+      "description": "Slide under low gaps while keeping momentum.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-wind-riding",
+      "title": "Wind Riding",
+      "description": "Catch gusts of wind to travel far.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-tightrope-balance",
+      "title": "Tightrope Balance",
+      "description": "Keep your balance while crossing thin lines.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-hop-between-hosts",
+      "title": "Hop Between Hosts",
+      "description": "Jump from creature to creature to move around.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-skating-lines",
+      "title": "Skating Lines",
+      "description": "Draw your own path on the ground and skate along it.",
+      "category": "movement"
+    },
+    {
+      "id": "mech-fog-of-war",
+      "title": "Fog of War",
+      "description": "Explore to reveal a map hidden in darkness.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-sound-trails",
+      "title": "Sound Trails",
+      "description": "Follow footsteps and noises to track hidden things.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-scent-tracking",
+      "title": "Scent Tracking",
+      "description": "Sniff out trails that fade over time.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-x-ray-vision",
+      "title": "X-Ray Vision",
+      "description": "See through walls for a short time to spot secrets.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-color-filters",
+      "title": "Color Filters",
+      "description": "Switch lens colors to reveal different hidden objects.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-unreliable-map",
+      "title": "Unreliable Map",
+      "description": "Navigate with a map that may be lying to you.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-spot-the-difference",
+      "title": "Spot the Difference",
+      "description": "Notice what changed in a scene since you last looked.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-peripheral-glimpses",
+      "title": "Peripheral Glimpses",
+      "description": "Things only appear when you are not looking at them.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-flashlight-cone",
+      "title": "Flashlight Cone",
+      "description": "See only what your narrow beam of light touches.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-heartbeat-sense",
+      "title": "Heartbeat Sense",
+      "description": "Sense nearby creatures by their heartbeats.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-disguised-objects",
+      "title": "Disguised Objects",
+      "description": "Find enemies hiding as everyday objects.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-eavesdropping",
+      "title": "Eavesdropping",
+      "description": "Listen in on conversations to learn secrets.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-lip-reading",
+      "title": "Lip Reading",
+      "description": "Read silent lips from afar to piece together plans.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-thermal-sight",
+      "title": "Thermal Sight",
+      "description": "See the world by heat to find warm hidden things.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-clue-board",
+      "title": "Clue Board",
+      "description": "Pin clues together to reach a conclusion.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-blindfold-mode",
+      "title": "Blindfold Mode",
+      "description": "Play with the screen dark, guided only by sound.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-hallucinations",
+      "title": "Hallucinations",
+      "description": "Doubt what you see as fake objects mix with real ones.",
+      "category": "perception"
+    },
+    {
+      "id": "mech-gravity-flip-zones",
+      "title": "Gravity Flip Zones",
+      "description": "Enter zones that turn gravity upside down.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-buoyancy",
+      "title": "Buoyancy",
+      "description": "Float objects on water to build rafts or lift weights.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-wind-push",
+      "title": "Wind Push",
+      "description": "Use fans and gusts to blow objects around.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-pendulums",
+      "title": "Pendulums",
+      "description": "Swing weights to smash through or carry things across.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-elastic-bands",
+      "title": "Elastic Bands",
+      "description": "Stretch and release bands to fling yourself or objects.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-heat-expansion",
+      "title": "Heat Expansion",
+      "description": "Heat objects to make them swell and cool them to shrink.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-friction-control",
+      "title": "Friction Control",
+      "description": "Make surfaces slippery or grippy to change movement.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-rope-physics",
+      "title": "Rope Physics",
+      "description": "Tie, pull and tangle ropes to move objects.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-balance-scales",
+      "title": "Balance Scales",
+      "description": "Place weights to tip platforms the way you need.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-pressure-plates",
+      "title": "Pressure Plates",
+      "description": "Weigh down plates with bodies or boxes to open paths.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-ricochet",
+      "title": "Ricochet",
+      "description": "Bounce shots or balls off walls to hit targets.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-soft-bodies",
+      "title": "Soft Bodies",
+      "description": "Squish and stretch jelly-like objects through gaps.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-air-pressure",
+      "title": "Air Pressure",
+      "description": "Pop seals and vents to suck or blow things away.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-domino-toppling",
+      "title": "Domino Toppling",
+      "description": "Set up falling objects that knock each other over.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-sand-flow",
+      "title": "Sand Flow",
+      "description": "Pour and shift sand to bury, fill or uncover things.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-orbit-slingshot",
+      "title": "Orbit Slingshot",
+      "description": "Loop around planets to fling yourself into new paths.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-melting-and-freezing",
+      "title": "Melting and Freezing",
+      "description": "Turn water into ice platforms and back again.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-weight-shifting",
+      "title": "Weight Shifting",
+      "description": "Lean your weight to steer, tilt or tip things.",
+      "category": "physics"
+    },
+    {
+      "id": "mech-sliding-tiles",
+      "title": "Sliding Tiles",
+      "description": "Slide tiles around a grid to form a picture or path.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-lock-picking",
+      "title": "Lock Picking",
+      "description": "Feel for the right pins to open a lock.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-code-breaking",
+      "title": "Code Breaking",
+      "description": "Guess a hidden code using feedback from each attempt.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-pipe-rotation",
+      "title": "Pipe Rotation",
+      "description": "Rotate pieces until the flow connects end to end.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-laser-routing",
+      "title": "Laser Routing",
+      "description": "Angle mirrors to guide a beam to its target.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-lights-out",
+      "title": "Lights Out",
+      "description": "Toggle switches that also flip their neighbors.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-rule-discovery",
+      "title": "Rule Discovery",
+      "description": "Work out the hidden rules of a strange place by testing.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-word-building",
+      "title": "Word Building",
+      "description": "Form words from letters to unlock effects.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-path-drawing",
+      "title": "Path Drawing",
+      "description": "Draw one line that visits every point without crossing.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-weighing-puzzles",
+      "title": "Weighing Puzzles",
+      "description": "Find the odd item using a scale and few tries.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-key-and-door",
+      "title": "Key and Door",
+      "description": "Carry the right key through a maze of locked doors.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-jigsaw-assembly",
+      "title": "Jigsaw Assembly",
+      "description": "Fit torn pieces back together to read a message.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-logic-grids",
+      "title": "Logic Grids",
+      "description": "Deduce who did what from a list of clues.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-symbol-translation",
+      "title": "Symbol Translation",
+      "description": "Decode an unknown language from context.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-sokoban-spaces",
+      "title": "Sokoban Spaces",
+      "description": "Plan moves in tight spaces where one push can trap you.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-clockwork-gears",
+      "title": "Clockwork Gears",
+      "description": "Place gears so turning one moves the right part.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-riddle-doors",
+      "title": "Riddle Doors",
+      "description": "Answer riddles to pass guarded doors.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-color-mixing",
+      "title": "Color Mixing",
+      "description": "Blend colors to match locks, potions or paints.",
+      "category": "puzzle"
+    },
+    {
+      "id": "mech-oxygen-supply",
+      "title": "Oxygen Supply",
+      "description": "Manage limited air while exploring underwater or in space.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-fuel-rationing",
+      "title": "Fuel Rationing",
+      "description": "Spend fuel carefully to reach the next refill.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-water-rights",
+      "title": "Water Rights",
+      "description": "Share and fight over a scarce water source.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-light-budget",
+      "title": "Light Budget",
+      "description": "Spend your few candles to see in the dark.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-fishing",
+      "title": "Fishing",
+      "description": "Cast lines and reel in fish to eat or sell.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-mining",
+      "title": "Mining",
+      "description": "Dig out ore and gems from the ground.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-debt-payments",
+      "title": "Debt Payments",
+      "description": "Earn enough to pay a debt that grows every week.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-supply-lines",
+      "title": "Supply Lines",
+      "description": "Keep supplies flowing to distant outposts.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-seed-saving",
+      "title": "Seed Saving",
+      "description": "Save seeds from harvests to plant next season.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-recycling",
+      "title": "Recycling",
+      "description": "Break down junk into useful parts.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-ammo-scarcity",
+      "title": "Ammo Scarcity",
+      "description": "Count every bullet and choose when to fight.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-foraging",
+      "title": "Foraging",
+      "description": "Gather wild plants, mushrooms and berries.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-energy-grid",
+      "title": "Energy Grid",
+      "description": "Balance power use across a network of machines.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-spoiling-food",
+      "title": "Spoiling Food",
+      "description": "Use food before it rots away.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-salvage-rights",
+      "title": "Salvage Rights",
+      "description": "Claim wrecks and haul back what you can carry.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-stockpiling",
+      "title": "Stockpiling",
+      "description": "Store up goods for a coming disaster.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-workers-allocation",
+      "title": "Workers Allocation",
+      "description": "Assign workers to jobs and keep them fed.",
+      "category": "resources"
+    },
+    {
+      "id": "mech-gossip-spread",
+      "title": "Gossip Spread",
+      "description": "Start rumors that spread from person to person.",
+      "category": "social"
+    },
+    {
+      "id": "mech-friendship-gifts",
+      "title": "Friendship Gifts",
+      "description": "Give gifts people like to grow closer to them.",
+      "category": "social"
+    },
+    {
+      "id": "mech-hidden-traitor",
+      "title": "Hidden Traitor",
+      "description": "Find the player secretly working against the group.",
+      "category": "social"
+    },
+    {
+      "id": "mech-voting",
+      "title": "Voting",
+      "description": "Let the group vote on decisions that change the game.",
+      "category": "social"
+    },
+    {
+      "id": "mech-matchmaking",
+      "title": "Matchmaking",
+      "description": "Pair up characters who will get along.",
+      "category": "social"
+    },
+    {
+      "id": "mech-hosting-parties",
+      "title": "Hosting Parties",
+      "description": "Plan events so guests have a good time.",
+      "category": "social"
+    },
+    {
+      "id": "mech-mentoring",
+      "title": "Mentoring",
+      "description": "Teach a weaker character skills over time.",
+      "category": "social"
+    },
+    {
+      "id": "mech-debate",
+      "title": "Debate",
+      "description": "Win arguments by picking the right points at the right time.",
+      "category": "social"
+    },
+    {
+      "id": "mech-alliances",
+      "title": "Alliances",
+      "description": "Form and break pacts with other factions.",
+      "category": "social"
+    },
+    {
+      "id": "mech-favors-owed",
+      "title": "Favors Owed",
+      "description": "Do favors now and call them in later.",
+      "category": "social"
+    },
+    {
+      "id": "mech-crowd-rally",
+      "title": "Crowd Rally",
+      "description": "Inspire a crowd to follow and act with you.",
+      "category": "social"
+    },
+    {
+      "id": "mech-interrogation",
+      "title": "Interrogation",
+      "description": "Question suspects and catch them in lies.",
+      "category": "social"
+    },
+    {
+      "id": "mech-disguise",
+      "title": "Disguise",
+      "description": "Wear outfits to blend into groups that would stop you.",
+      "category": "social"
+    },
+    {
+      "id": "mech-customer-service",
+      "title": "Customer Service",
+      "description": "Keep impatient customers happy as orders pile up.",
+      "category": "social"
+    },
+    {
+      "id": "mech-group-chants",
+      "title": "Group Chants",
+      "description": "Coordinate with others to chant or act in sync.",
+      "category": "social"
+    },
+    {
+      "id": "mech-letters-and-replies",
+      "title": "Letters and Replies",
+      "description": "Write letters and wait for replies that change the story.",
+      "category": "social"
+    },
+    {
+      "id": "mech-family-tree",
+      "title": "Family Tree",
+      "description": "Raise heirs who inherit traits from their parents.",
+      "category": "social"
+    },
+    {
+      "id": "mech-turn-freeze",
+      "title": "Turn Freeze",
+      "description": "Time only moves when you move.",
+      "category": "time"
+    },
+    {
+      "id": "mech-future-glimpse",
+      "title": "Future Glimpse",
+      "description": "Peek a few seconds ahead before choosing what to do.",
+      "category": "time"
+    },
+    {
+      "id": "mech-aging-objects",
+      "title": "Aging Objects",
+      "description": "Age or un-age objects to change them.",
+      "category": "time"
+    },
+    {
+      "id": "mech-seasons-cycle",
+      "title": "Seasons Cycle",
+      "description": "Plan around seasons that change what is possible.",
+      "category": "time"
+    },
+    {
+      "id": "mech-recorded-ghosts",
+      "title": "Recorded Ghosts",
+      "description": "Record a run and play alongside your past self.",
+      "category": "time"
+    },
+    {
+      "id": "mech-time-zones",
+      "title": "Time Zones",
+      "description": "Areas of the map run at different speeds.",
+      "category": "time"
+    },
+    {
+      "id": "mech-timed-bombs",
+      "title": "Timed Bombs",
+      "description": "Defuse or place bombs before their timer runs out.",
+      "category": "time"
+    },
+    {
+      "id": "mech-calendar-events",
+      "title": "Calendar Events",
+      "description": "Plan your days around scheduled events.",
+      "category": "time"
+    },
+    {
+      "id": "mech-speed-up-time",
+      "title": "Speed Up Time",
+      "description": "Fast forward to make things grow or happen sooner.",
+      "category": "time"
+    },
+    {
+      "id": "mech-past-and-present",
+      "title": "Past and Present",
+      "description": "Swap between two eras of the same place.",
+      "category": "time"
+    },
+    {
+      "id": "mech-stopwatch-freeze",
+      "title": "Stopwatch Freeze",
+      "description": "Freeze everything for a moment and act freely.",
+      "category": "time"
+    },
+    {
+      "id": "mech-delayed-actions",
+      "title": "Delayed Actions",
+      "description": "Actions take effect a few turns after you choose them.",
+      "category": "time"
+    },
+    {
+      "id": "mech-daily-routines",
+      "title": "Daily Routines",
+      "description": "Learn when characters go where and use it.",
+      "category": "time"
+    },
+    {
+      "id": "mech-last-day",
+      "title": "Last Day",
+      "description": "Make the most of a final day before the end.",
+      "category": "time"
+    },
+    {
+      "id": "mech-tempo-shifts",
+      "title": "Tempo Shifts",
+      "description": "The world speeds up or slows down with the music.",
+      "category": "time"
+    },
+    {
+      "id": "mech-time-debt",
+      "title": "Time Debt",
+      "description": "Borrow time now and pay it back later.",
+      "category": "time"
+    },
+    {
+      "id": "mech-hourglass-sand",
+      "title": "Hourglass Sand",
+      "description": "Collect sand to buy more time.",
+      "category": "time"
+    },
+    {
+      "id": "mech-shadow-swap",
+      "title": "Shadow Swap",
+      "description": "Swap places with your shadow to reach new spots.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-mask-powers",
+      "title": "Mask Powers",
+      "description": "Wear masks that grant different abilities.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-liquid-form",
+      "title": "Liquid Form",
+      "description": "Turn into liquid to flow through cracks and pipes.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-mutation",
+      "title": "Mutation",
+      "description": "Gain odd new traits from what you eat.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-werecycle",
+      "title": "Werecycle",
+      "description": "Change into a beast at certain times.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-transmutation",
+      "title": "Transmutation",
+      "description": "Turn one material into another.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-petrify",
+      "title": "Petrify",
+      "description": "Turn things to stone and back again.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-growth-stages",
+      "title": "Growth Stages",
+      "description": "Grow from a tiny creature into a large one.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-costume-change",
+      "title": "Costume Change",
+      "description": "Switch outfits that change how you play.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-object-disguise",
+      "title": "Object Disguise",
+      "description": "Turn into a household object to hide.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-elemental-form",
+      "title": "Elemental Form",
+      "description": "Become fire, water, air or earth.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-split-self",
+      "title": "Split Self",
+      "description": "Split into smaller copies and merge again.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-inflate",
+      "title": "Inflate",
+      "description": "Puff up to float, bounce or block.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-ghost-mode",
+      "title": "Ghost Mode",
+      "description": "Leave your body to pass through walls.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-corruption-spread",
+      "title": "Corruption Spread",
+      "description": "Slowly transform as a curse takes hold.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-paper-fold",
+      "title": "Paper Fold",
+      "description": "Fold yourself into new shapes.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-metamorphosis",
+      "title": "Metamorphosis",
+      "description": "Spin a cocoon and emerge with new abilities.",
+      "category": "transformation"
+    },
+    {
+      "id": "mech-shrink-ray",
+      "title": "Shrink Ray",
+      "description": "Zap objects and creatures to shrink them down to pocket size.",
+      "category": "transformation"
     }
   ]
 }

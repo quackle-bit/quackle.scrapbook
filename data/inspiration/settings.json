@@ -200,6 +200,656 @@
       "id": "set-pocket-dimension",
       "title": "Pocket Dimension",
       "description": "A whole world in a small space."
+    },
+    {
+      "id": "set-inside-a-snow-globe",
+      "title": "Inside a Snow Globe",
+      "description": "A tiny town where the sky is glass and snow never settles."
+    },
+    {
+      "id": "set-whale-back-lighthouse",
+      "title": "Whale-Back Lighthouse",
+      "description": "A lighthouse riding on the back of a slow, singing whale."
+    },
+    {
+      "id": "set-coat-pocket",
+      "title": "Coat Pocket",
+      "description": "Lint hills, lost coins and a crumpled map in the dark."
+    },
+    {
+      "id": "set-abandoned-mall",
+      "title": "Abandoned Mall",
+      "description": "Dead escalators, dry fountains and one store still lit."
+    },
+    {
+      "id": "set-ant-colony",
+      "title": "Ant Colony",
+      "description": "Tunnels, chambers and a queen who never sleeps."
+    },
+    {
+      "id": "set-lunar-mining-base",
+      "title": "Lunar Mining Base",
+      "description": "Dusty domes, drills and Earth hanging in a black sky."
+    },
+    {
+      "id": "set-haunted-opera-house",
+      "title": "Haunted Opera House",
+      "description": "Velvet seats, a broken chandelier and a song from nowhere."
+    },
+    {
+      "id": "set-sunken-galleon",
+      "title": "Sunken Galleon",
+      "description": "A wrecked ship on the seabed, its cargo still glittering."
+    },
+    {
+      "id": "set-robot-junkyard",
+      "title": "Robot Junkyard",
+      "description": "Towers of scrap where old machines still twitch awake."
+    },
+    {
+      "id": "set-tree-canopy-village",
+      "title": "Tree Canopy Village",
+      "description": "Rope bridges and huts high in the leaves of giant trees."
+    },
+    {
+      "id": "set-ice-hotel",
+      "title": "Ice Hotel",
+      "description": "Rooms carved from ice that melt a little every day."
+    },
+    {
+      "id": "set-ghost-ship",
+      "title": "Ghost Ship",
+      "description": "A drifting ship crewed by sailors who forgot they died."
+    },
+    {
+      "id": "set-inside-a-computer",
+      "title": "Inside a Computer",
+      "description": "Circuit streets, data rivers and a cursor in the sky."
+    },
+    {
+      "id": "set-bathtub-ocean",
+      "title": "Bathtub Ocean",
+      "description": "A full bathtub seen from a rubber duck's point of view."
+    },
+    {
+      "id": "set-highway-diner",
+      "title": "Highway Diner",
+      "description": "Neon sign, endless coffee and strangers passing through."
+    },
+    {
+      "id": "set-witch-s-cottage",
+      "title": "Witch's Cottage",
+      "description": "Bubbling pots, talking cats and herbs hung from beams."
+    },
+    {
+      "id": "set-overgrown-subway",
+      "title": "Overgrown Subway",
+      "description": "Trains stopped forever under roots and green light."
+    },
+    {
+      "id": "set-bee-hive",
+      "title": "Bee Hive",
+      "description": "Golden halls of wax humming with busy workers."
+    },
+    {
+      "id": "set-storm-chaser-plains",
+      "title": "Storm Chaser Plains",
+      "description": "Flat fields under towering, spinning thunderclouds."
+    },
+    {
+      "id": "set-museum-at-night",
+      "title": "Museum at Night",
+      "description": "Exhibits stretch and whisper once the guards go home."
+    },
+    {
+      "id": "set-post-flood-city",
+      "title": "Post-Flood City",
+      "description": "Rooftops become islands and boats replace cars."
+    },
+    {
+      "id": "set-mushroom-forest",
+      "title": "Mushroom Forest",
+      "description": "Glowing caps taller than houses and drifting spores."
+    },
+    {
+      "id": "set-retro-arcade",
+      "title": "Retro Arcade",
+      "description": "Blinking cabinets, sticky carpet and a high score to beat."
+    },
+    {
+      "id": "set-drive-in-theater",
+      "title": "Drive-In Theater",
+      "description": "Old cars facing a giant screen under the stars."
+    },
+    {
+      "id": "set-pirate-cove",
+      "title": "Pirate Cove",
+      "description": "A hidden bay with treasure, rope swings and rum barrels."
+    },
+    {
+      "id": "set-moon-village",
+      "title": "Moon Village",
+      "description": "A sleepy town of round houses in low gravity."
+    },
+    {
+      "id": "set-inside-a-whale",
+      "title": "Inside a Whale",
+      "description": "A cozy home in the ribs of a gentle giant."
+    },
+    {
+      "id": "set-bamboo-forest",
+      "title": "Bamboo Forest",
+      "description": "Tall green stalks that creak and sway in the wind."
+    },
+    {
+      "id": "set-fog-bound-harbor",
+      "title": "Fog-Bound Harbor",
+      "description": "Foghorns, wet docks and ships that appear from grey."
+    },
+    {
+      "id": "set-monster-hotel",
+      "title": "Monster Hotel",
+      "description": "Rooms for creatures of every size, shape and appetite."
+    },
+    {
+      "id": "set-crystal-caverns",
+      "title": "Crystal Caverns",
+      "description": "Caves of glowing crystal that ring when touched."
+    },
+    {
+      "id": "set-antique-shop",
+      "title": "Antique Shop",
+      "description": "Dusty shelves where every object has a secret."
+    },
+    {
+      "id": "set-hamster-cage",
+      "title": "Hamster Cage",
+      "description": "Wheels, tubes and sawdust seen from inside."
+    },
+    {
+      "id": "set-rainy-bus-stop",
+      "title": "Rainy Bus Stop",
+      "description": "A small shelter, a long wait and puddles full of neon."
+    },
+    {
+      "id": "set-junk-food-planet",
+      "title": "Junk Food Planet",
+      "description": "A world made of chips, soda seas and candy mountains."
+    },
+    {
+      "id": "set-polar-research-station",
+      "title": "Polar Research Station",
+      "description": "Huts in endless white with a radio that crackles."
+    },
+    {
+      "id": "set-old-western-town",
+      "title": "Old Western Town",
+      "description": "Saloon doors, tumbleweeds and a noon showdown."
+    },
+    {
+      "id": "set-space-elevator",
+      "title": "Space Elevator",
+      "description": "A cable climbing from the ocean all the way to orbit."
+    },
+    {
+      "id": "set-fairy-ring",
+      "title": "Fairy Ring",
+      "description": "A circle of mushrooms that opens into another world."
+    },
+    {
+      "id": "set-bakery-at-dawn",
+      "title": "Bakery at Dawn",
+      "description": "Warm ovens, flour clouds and the first bread of the day."
+    },
+    {
+      "id": "set-cardboard-fort",
+      "title": "Cardboard Fort",
+      "description": "A box castle built in a living room with tape and dreams."
+    },
+    {
+      "id": "set-haunted-arcade",
+      "title": "Haunted Arcade",
+      "description": "Machines that play themselves after closing time."
+    },
+    {
+      "id": "set-island-prison",
+      "title": "Island Prison",
+      "description": "Stone walls, cold waves and no boats in sight."
+    },
+    {
+      "id": "set-volcanic-forge",
+      "title": "Volcanic Forge",
+      "description": "A smithy built into a lava flow."
+    },
+    {
+      "id": "set-spirit-bathhouse",
+      "title": "Spirit Bathhouse",
+      "description": "Steamy baths where ghosts and gods come to rest."
+    },
+    {
+      "id": "set-glass-city",
+      "title": "Glass City",
+      "description": "Towers of glass where every secret can be seen."
+    },
+    {
+      "id": "set-wizard-s-library",
+      "title": "Wizard's Library",
+      "description": "Books that fly, whisper and sometimes bite."
+    },
+    {
+      "id": "set-abandoned-amusement-park",
+      "title": "Abandoned Amusement Park",
+      "description": "Rusted rides creaking in the wind."
+    },
+    {
+      "id": "set-coral-reef-city",
+      "title": "Coral Reef City",
+      "description": "Merfolk homes built in bright living coral."
+    },
+    {
+      "id": "set-under-the-bed",
+      "title": "Under the Bed",
+      "description": "Dust bunnies, lost socks and things that wait in the dark."
+    },
+    {
+      "id": "set-skyscraper-window-ledge",
+      "title": "Skyscraper Window Ledge",
+      "description": "A narrow strip of stone, forty floors above the street."
+    },
+    {
+      "id": "set-fishing-village",
+      "title": "Fishing Village",
+      "description": "Wooden piers, nets drying and gulls fighting over scraps."
+    },
+    {
+      "id": "set-deep-sea-trench",
+      "title": "Deep Sea Trench",
+      "description": "Pitch-black water lit by strange glowing creatures."
+    },
+    {
+      "id": "set-ancient-pyramid",
+      "title": "Ancient Pyramid",
+      "description": "Sandstone halls, traps and tombs of sleeping kings."
+    },
+    {
+      "id": "set-medieval-castle",
+      "title": "Medieval Castle",
+      "description": "Towers, moats and banners snapping in the wind."
+    },
+    {
+      "id": "set-samurai-village",
+      "title": "Samurai Village",
+      "description": "Paper doors, cherry trees and quiet tension."
+    },
+    {
+      "id": "set-cyberpunk-megacity",
+      "title": "Cyberpunk Megacity",
+      "description": "Endless towers, rain and adverts on every wall."
+    },
+    {
+      "id": "set-steampunk-airship",
+      "title": "Steampunk Airship",
+      "description": "Brass pipes, steam and a gasbag hull in the clouds."
+    },
+    {
+      "id": "set-jungle-temple",
+      "title": "Jungle Temple",
+      "description": "Vines, stone faces and treasure lost for centuries."
+    },
+    {
+      "id": "set-arctic-tundra",
+      "title": "Arctic Tundra",
+      "description": "Wind, snow and a sky lit by green lights."
+    },
+    {
+      "id": "set-savanna",
+      "title": "Savanna",
+      "description": "Golden grass, lone trees and herds on the move."
+    },
+    {
+      "id": "set-mars-colony",
+      "title": "Mars Colony",
+      "description": "Red dust, pressure domes and a long way from home."
+    },
+    {
+      "id": "set-gas-giant-station",
+      "title": "Gas Giant Station",
+      "description": "A floating platform in endless swirling storms."
+    },
+    {
+      "id": "set-asteroid-belt",
+      "title": "Asteroid Belt",
+      "description": "Tumbling rocks, mining rigs and tight flying."
+    },
+    {
+      "id": "set-time-frozen-town",
+      "title": "Time-Frozen Town",
+      "description": "Everyone stopped mid-step at the same second."
+    },
+    {
+      "id": "set-upside-down-city",
+      "title": "Upside-Down City",
+      "description": "Buildings hang from the ground into an open sky."
+    },
+    {
+      "id": "set-puddle-world",
+      "title": "Puddle World",
+      "description": "A whole kingdom inside a rain puddle."
+    },
+    {
+      "id": "set-dollhouse",
+      "title": "Dollhouse",
+      "description": "Tiny rooms with a giant eye looking through the window."
+    },
+    {
+      "id": "set-clock-tower",
+      "title": "Clock Tower",
+      "description": "Gears, bells and a view over the whole town."
+    },
+    {
+      "id": "set-laboratory-gone-wrong",
+      "title": "Laboratory Gone Wrong",
+      "description": "Broken tanks, loose experiments and flashing alarms."
+    },
+    {
+      "id": "set-bunker-below",
+      "title": "Bunker Below",
+      "description": "A sealed shelter with stores running low."
+    },
+    {
+      "id": "set-mirror-maze",
+      "title": "Mirror Maze",
+      "description": "Reflections that do not always copy you."
+    },
+    {
+      "id": "set-giant-chessboard",
+      "title": "Giant Chessboard",
+      "description": "A battlefield of black and white squares."
+    },
+    {
+      "id": "set-overgrown-greenhouse",
+      "title": "Overgrown Greenhouse",
+      "description": "Plants burst through glass and climb the frame."
+    },
+    {
+      "id": "set-hot-air-balloon-race",
+      "title": "Hot Air Balloon Race",
+      "description": "Colorful balloons drifting over hills and rivers."
+    },
+    {
+      "id": "set-endless-library",
+      "title": "Endless Library",
+      "description": "Shelves that go on forever in every direction."
+    },
+    {
+      "id": "set-kitchen-counter",
+      "title": "Kitchen Counter",
+      "description": "Crumbs, spills and mountains of dirty dishes."
+    },
+    {
+      "id": "set-sewer-kingdom",
+      "title": "Sewer Kingdom",
+      "description": "Rats rule a city of pipes and tunnels."
+    },
+    {
+      "id": "set-cathedral-ruins",
+      "title": "Cathedral Ruins",
+      "description": "Broken arches, stained glass and pigeons."
+    },
+    {
+      "id": "set-floating-lantern-festival",
+      "title": "Floating Lantern Festival",
+      "description": "A river lit by thousands of paper lanterns."
+    },
+    {
+      "id": "set-wasteland-highway",
+      "title": "Wasteland Highway",
+      "description": "Cracked roads, rust and sandstorms on the horizon."
+    },
+    {
+      "id": "set-living-painting",
+      "title": "Living Painting",
+      "description": "A world that is still wet with paint."
+    },
+    {
+      "id": "set-pinball-machine",
+      "title": "Pinball Machine",
+      "description": "Bumpers, flippers and a ball that never stops."
+    },
+    {
+      "id": "set-inside-a-teapot",
+      "title": "Inside a Teapot",
+      "description": "Warm steam, sugar cubes and a porcelain sky."
+    },
+    {
+      "id": "set-dragon-s-hoard",
+      "title": "Dragon's Hoard",
+      "description": "A cave of gold with something big asleep on top."
+    },
+    {
+      "id": "set-rainforest-river",
+      "title": "Rainforest River",
+      "description": "Muddy water, canoes and eyes in the reeds."
+    },
+    {
+      "id": "set-village-on-stilts",
+      "title": "Village on Stilts",
+      "description": "Houses on poles above a misty lake."
+    },
+    {
+      "id": "set-hospital-ward-at-night",
+      "title": "Hospital Ward at Night",
+      "description": "Beeping machines and long empty corridors."
+    },
+    {
+      "id": "set-office-cubicle-farm",
+      "title": "Office Cubicle Farm",
+      "description": "Grey walls, ringing phones and a broken printer."
+    },
+    {
+      "id": "set-shopping-cart-graveyard",
+      "title": "Shopping Cart Graveyard",
+      "description": "A lot of rusty carts that roll on their own."
+    },
+    {
+      "id": "set-thrift-store-maze",
+      "title": "Thrift Store Maze",
+      "description": "Racks and boxes stacked into winding paths."
+    },
+    {
+      "id": "set-giant-bonsai",
+      "title": "Giant Bonsai",
+      "description": "A tiny world growing on a carefully cut tree."
+    },
+    {
+      "id": "set-cliffside-monastery",
+      "title": "Cliffside Monastery",
+      "description": "Stone steps carved into a sheer mountain face."
+    },
+    {
+      "id": "set-haunted-lighthouse-keeper-s-room",
+      "title": "Haunted Lighthouse Keeper's Room",
+      "description": "A small room with a log book that writes itself."
+    },
+    {
+      "id": "set-beach-at-low-tide",
+      "title": "Beach at Low Tide",
+      "description": "Rock pools, crabs and things the sea left behind."
+    },
+    {
+      "id": "set-garage-band-basement",
+      "title": "Garage Band Basement",
+      "description": "Amps, cables and a dream of the big stage."
+    },
+    {
+      "id": "set-weather-station-peak",
+      "title": "Weather Station Peak",
+      "description": "A mountain hut where storms are measured and made."
+    },
+    {
+      "id": "set-radio-tower",
+      "title": "Radio Tower",
+      "description": "A blinking mast humming with distant voices."
+    },
+    {
+      "id": "set-floating-prison",
+      "title": "Floating Prison",
+      "description": "A jail ship drifting in clouds or sea."
+    },
+    {
+      "id": "set-shadow-realm",
+      "title": "Shadow Realm",
+      "description": "A dim copy of the world where light is rare."
+    },
+    {
+      "id": "set-soap-bubble",
+      "title": "Soap Bubble",
+      "description": "A thin rainbow sphere about to pop."
+    },
+    {
+      "id": "set-wind-farm-hills",
+      "title": "Wind Farm Hills",
+      "description": "White turbines turning over green slopes."
+    },
+    {
+      "id": "set-old-train-station",
+      "title": "Old Train Station",
+      "description": "Ticket booths, steam and departure boards."
+    },
+    {
+      "id": "set-royal-ballroom",
+      "title": "Royal Ballroom",
+      "description": "Chandeliers, masks and a dance full of secrets."
+    },
+    {
+      "id": "set-mine-shaft",
+      "title": "Mine Shaft",
+      "description": "Wooden beams, carts and the dark going down."
+    },
+    {
+      "id": "set-ski-lodge",
+      "title": "Ski Lodge",
+      "description": "Fireplace, snow boots and a storm closing the pass."
+    },
+    {
+      "id": "set-flower-shop",
+      "title": "Flower Shop",
+      "description": "Buckets of blooms and a bell over the door."
+    },
+    {
+      "id": "set-bookstore-attic",
+      "title": "Bookstore Attic",
+      "description": "Stacks of unsold books under a sloping roof."
+    },
+    {
+      "id": "set-moving-castle",
+      "title": "Moving Castle",
+      "description": "A house on legs that walks across the hills."
+    },
+    {
+      "id": "set-crashed-starship",
+      "title": "Crashed Starship",
+      "description": "A wreck in an alien forest, still sparking."
+    },
+    {
+      "id": "set-sunflower-field",
+      "title": "Sunflower Field",
+      "description": "Rows of tall flowers all turning toward the sun."
+    },
+    {
+      "id": "set-underground-river",
+      "title": "Underground River",
+      "description": "A dark stream flowing through hidden caves."
+    },
+    {
+      "id": "set-glacier-cave",
+      "title": "Glacier Cave",
+      "description": "Blue ice tunnels dripping with meltwater."
+    },
+    {
+      "id": "set-lost-highway-motel",
+      "title": "Lost Highway Motel",
+      "description": "Flickering vacancy sign and rooms no one leaves."
+    },
+    {
+      "id": "set-sandcastle-kingdom",
+      "title": "Sandcastle Kingdom",
+      "description": "A beach castle racing against the incoming tide."
+    },
+    {
+      "id": "set-lily-pad-pond",
+      "title": "Lily Pad Pond",
+      "description": "Frogs, dragonflies and stepping stones of green."
+    },
+    {
+      "id": "set-treehouse-club",
+      "title": "Treehouse Club",
+      "description": "A secret hideout with rope ladder and rules."
+    },
+    {
+      "id": "set-fortune-teller-s-tent",
+      "title": "Fortune Teller's Tent",
+      "description": "Silk drapes, a crystal ball and incense smoke."
+    },
+    {
+      "id": "set-space-diner",
+      "title": "Space Diner",
+      "description": "A roadside cafe at the edge of a galaxy."
+    },
+    {
+      "id": "set-rice-terraces",
+      "title": "Rice Terraces",
+      "description": "Green steps of water climbing a mountain."
+    },
+    {
+      "id": "set-sky-whale-migration",
+      "title": "Sky Whale Migration",
+      "description": "Huge whales swimming slowly through the clouds."
+    },
+    {
+      "id": "set-bottle-ship",
+      "title": "Bottle Ship",
+      "description": "A tiny ship and sea sealed inside glass."
+    },
+    {
+      "id": "set-workshop-desk",
+      "title": "Workshop Desk",
+      "description": "Screws, wires and half-built gadgets under a lamp."
+    },
+    {
+      "id": "set-snowy-train-platform",
+      "title": "Snowy Train Platform",
+      "description": "A lone station in a blizzard at midnight."
+    },
+    {
+      "id": "set-stormy-sea",
+      "title": "Stormy Sea",
+      "description": "Huge waves, lightning and a boat holding on."
+    },
+    {
+      "id": "set-oasis-town",
+      "title": "Oasis Town",
+      "description": "Palm trees and water in the middle of the dunes."
+    },
+    {
+      "id": "set-haunted-forest-road",
+      "title": "Haunted Forest Road",
+      "description": "A dark path where trees lean in close."
+    },
+    {
+      "id": "set-spice-market",
+      "title": "Spice Market",
+      "description": "Colorful heaps of spice and loud bargaining."
+    },
+    {
+      "id": "set-rooftop-pigeon-coop",
+      "title": "Rooftop Pigeon Coop",
+      "description": "Birds, tar paper and a view of the city."
+    },
+    {
+      "id": "set-canal-city-gondolas",
+      "title": "Canal City Gondolas",
+      "description": "Narrow waterways, arched bridges and boats for streets."
     }
   ]
 }

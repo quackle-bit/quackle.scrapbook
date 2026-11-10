@@ -100,6 +100,81 @@
       "id": "per-low-res-3d",
       "title": "Low-Res 3D",
       "description": "3D rendered small and scaled up into big pixels."
+    },
+    {
+      "id": "per-3d-tabletop-camera",
+      "title": "3D Tabletop Camera",
+      "description": "Looking down at pieces on a game board."
+    },
+    {
+      "id": "per-2d-top-down-with-height",
+      "title": "2D Top-Down With Height",
+      "description": "Flat top view that still shows jumps and cliffs."
+    },
+    {
+      "id": "per-2-5d-isometric-grid",
+      "title": "2.5D Isometric Grid",
+      "description": "Flat tiles on an angled grid with 3D units."
+    },
+    {
+      "id": "per-3d-rail-camera",
+      "title": "3D Rail Camera",
+      "description": "The camera follows a fixed track for you."
+    },
+    {
+      "id": "per-2d-split-screen-views",
+      "title": "2D Split Screen Views",
+      "description": "Several flat views on screen at once."
+    },
+    {
+      "id": "per-2d-side-cutaway",
+      "title": "2D Side Cutaway",
+      "description": "A building sliced open to show every room."
+    },
+    {
+      "id": "per-2d-radial-arena",
+      "title": "2D Radial Arena",
+      "description": "A round world seen from the middle."
+    },
+    {
+      "id": "per-3d-overhead-strategy",
+      "title": "3D Overhead Strategy",
+      "description": "A high tilted camera over a wide map."
+    },
+    {
+      "id": "per-3d-side-scroller",
+      "title": "3D Side-Scroller",
+      "description": "Full 3D scenes played on a side line."
+    },
+    {
+      "id": "per-2-5d-diorama-box",
+      "title": "2.5D Diorama Box",
+      "description": "A small 3D stage seen from a fixed front."
+    },
+    {
+      "id": "per-3d-cockpit-view",
+      "title": "3D Cockpit View",
+      "description": "Seen from inside a seat or vehicle."
+    },
+    {
+      "id": "per-2d-wraparound-screen",
+      "title": "2D Wraparound Screen",
+      "description": "Leave one edge and appear on the other."
+    },
+    {
+      "id": "per-3d-spherical-planet",
+      "title": "3D Spherical Planet",
+      "description": "Walk around a tiny round world."
+    },
+    {
+      "id": "per-2d-point-and-click-scenes",
+      "title": "2D Point and Click Scenes",
+      "description": "Still painted screens you click to explore."
+    },
+    {
+      "id": "per-3d-behind-the-back-chase",
+      "title": "3D Behind the Back Chase",
+      "description": "A camera locked behind a runner racing away."
     }
   ]
 }

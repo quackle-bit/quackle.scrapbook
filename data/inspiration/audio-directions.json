@@ -75,6 +75,426 @@
       "id": "aud-retro-arcade",
       "title": "Retro Arcade",
       "description": "Bright blips and punchy effects."
+    },
+    {
+      "id": "aud-diegetic-radio",
+      "title": "Diegetic Radio",
+      "description": "Music only comes from radios in the world."
+    },
+    {
+      "id": "aud-layered-stems-that-grow",
+      "title": "Layered Stems That Grow",
+      "description": "New instruments join as you progress."
+    },
+    {
+      "id": "aud-whistled-melodies",
+      "title": "Whistled Melodies",
+      "description": "Every main theme is simply whistled."
+    },
+    {
+      "id": "aud-kazoo-orchestra",
+      "title": "Kazoo Orchestra",
+      "description": "A full score played on silly kazoos."
+    },
+    {
+      "id": "aud-hummed-themes",
+      "title": "Hummed Themes",
+      "description": "Voices humming wordless melodies."
+    },
+    {
+      "id": "aud-toy-piano",
+      "title": "Toy Piano",
+      "description": "Plinky keys from a child's piano."
+    },
+    {
+      "id": "aud-ukulele-strums",
+      "title": "Ukulele Strums",
+      "description": "Bright, light and easy strumming."
+    },
+    {
+      "id": "aud-solo-cello",
+      "title": "Solo Cello",
+      "description": "One warm, lonely bowed voice."
+    },
+    {
+      "id": "aud-choir-pads",
+      "title": "Choir Pads",
+      "description": "Breathy voices held like synth chords."
+    },
+    {
+      "id": "aud-gregorian-chant",
+      "title": "Gregorian Chant",
+      "description": "Echoing monks in stone halls."
+    },
+    {
+      "id": "aud-bit-crushed-strings",
+      "title": "Bit-Crushed Strings",
+      "description": "Real strings ground into crunchy pixels."
+    },
+    {
+      "id": "aud-tape-wobble",
+      "title": "Tape Wobble",
+      "description": "Warped, warbly cassette sound."
+    },
+    {
+      "id": "aud-vinyl-crackle",
+      "title": "Vinyl Crackle",
+      "description": "Dusty records with soft hiss."
+    },
+    {
+      "id": "aud-body-percussion",
+      "title": "Body Percussion",
+      "description": "Claps, stomps and finger snaps."
+    },
+    {
+      "id": "aud-kitchen-percussion",
+      "title": "Kitchen Percussion",
+      "description": "Pots, pans and spoons as drums."
+    },
+    {
+      "id": "aud-glass-harmonica",
+      "title": "Glass Harmonica",
+      "description": "Ringing tones from wet glass rims."
+    },
+    {
+      "id": "aud-steel-drums",
+      "title": "Steel Drums",
+      "description": "Sunny metallic island tones."
+    },
+    {
+      "id": "aud-accordion-waltz",
+      "title": "Accordion Waltz",
+      "description": "Wheezy three-four time charm."
+    },
+    {
+      "id": "aud-brass-band",
+      "title": "Brass Band",
+      "description": "Loud, proud marching brass."
+    },
+    {
+      "id": "aud-barbershop-quartet",
+      "title": "Barbershop Quartet",
+      "description": "Close four-part vocal harmony."
+    },
+    {
+      "id": "aud-sea-shanty",
+      "title": "Sea Shanty",
+      "description": "Call-and-response work songs."
+    },
+    {
+      "id": "aud-lullabies",
+      "title": "Lullabies",
+      "description": "Soft songs for sleepy players."
+    },
+    {
+      "id": "aud-drone-only",
+      "title": "Drone Only",
+      "description": "One long tone that slowly shifts."
+    },
+    {
+      "id": "aud-heartbeat-rhythm",
+      "title": "Heartbeat Rhythm",
+      "description": "A pulse that speeds up with danger."
+    },
+    {
+      "id": "aud-breath-sounds",
+      "title": "Breath Sounds",
+      "description": "Breathing as the main texture."
+    },
+    {
+      "id": "aud-procedural-melodies",
+      "title": "Procedural Melodies",
+      "description": "Music generated from play."
+    },
+    {
+      "id": "aud-player-footsteps-make-music",
+      "title": "Player Footsteps Make Music",
+      "description": "Every step plays a note."
+    },
+    {
+      "id": "aud-combat-drums-kick-in",
+      "title": "Combat Drums Kick In",
+      "description": "Percussion only when fighting."
+    },
+    {
+      "id": "aud-music-fades-in-danger",
+      "title": "Music Fades in Danger",
+      "description": "Silence means trouble."
+    },
+    {
+      "id": "aud-biome-themes",
+      "title": "Biome Themes",
+      "description": "Each area has its own sound."
+    },
+    {
+      "id": "aud-day-and-night-mixes",
+      "title": "Day and Night Mixes",
+      "description": "The same song, two moods."
+    },
+    {
+      "id": "aud-leitmotifs",
+      "title": "Leitmotifs",
+      "description": "Each character has a tune."
+    },
+    {
+      "id": "aud-one-song-remixed",
+      "title": "One Song Remixed",
+      "description": "One theme in endless variations."
+    },
+    {
+      "id": "aud-reversed-audio",
+      "title": "Reversed Audio",
+      "description": "Everything played backwards."
+    },
+    {
+      "id": "aud-detuned-piano",
+      "title": "Detuned Piano",
+      "description": "Out of tune, slightly haunted."
+    },
+    {
+      "id": "aud-honky-tonk-piano",
+      "title": "Honky Tonk Piano",
+      "description": "Saloon keys and stomping feet."
+    },
+    {
+      "id": "aud-harpsichord",
+      "title": "Harpsichord",
+      "description": "Plucked, ornate and baroque."
+    },
+    {
+      "id": "aud-pipe-organ",
+      "title": "Pipe Organ",
+      "description": "Huge, holy and dramatic."
+    },
+    {
+      "id": "aud-bagpipes",
+      "title": "Bagpipes",
+      "description": "Loud drones from the hills."
+    },
+    {
+      "id": "aud-banjo-picking",
+      "title": "Banjo Picking",
+      "description": "Fast twangy fingerwork."
+    },
+    {
+      "id": "aud-slide-guitar",
+      "title": "Slide Guitar",
+      "description": "Lazy bends and dusty roads."
+    },
+    {
+      "id": "aud-surf-rock",
+      "title": "Surf Rock",
+      "description": "Reverb-soaked twangy guitar."
+    },
+    {
+      "id": "aud-punk-energy",
+      "title": "Punk Energy",
+      "description": "Three chords, fast and loud."
+    },
+    {
+      "id": "aud-heavy-metal-riffs",
+      "title": "Heavy Metal Riffs",
+      "description": "Slow, heavy and crushing."
+    },
+    {
+      "id": "aud-lounge-exotica",
+      "title": "Lounge Exotica",
+      "description": "Vibraphones and tiki cocktails."
+    },
+    {
+      "id": "aud-bossa-nova",
+      "title": "Bossa Nova",
+      "description": "Soft, swaying and sunny."
+    },
+    {
+      "id": "aud-big-band-swing",
+      "title": "Big Band Swing",
+      "description": "Horns and finger-snapping rhythm."
+    },
+    {
+      "id": "aud-funk-grooves",
+      "title": "Funk Grooves",
+      "description": "Slap bass and tight rhythm."
+    },
+    {
+      "id": "aud-disco-strings",
+      "title": "Disco Strings",
+      "description": "Four on the floor with sweeping violins."
+    },
+    {
+      "id": "aud-breakbeats",
+      "title": "Breakbeats",
+      "description": "Chopped drums and fast energy."
+    },
+    {
+      "id": "aud-drum-and-bass",
+      "title": "Drum and Bass",
+      "description": "Rolling bass and racing drums."
+    },
+    {
+      "id": "aud-trip-hop",
+      "title": "Trip-Hop",
+      "description": "Slow beats in a smoky haze."
+    },
+    {
+      "id": "aud-vaporwave",
+      "title": "Vaporwave",
+      "description": "Slowed-down mall music dreams."
+    },
+    {
+      "id": "aud-dungeon-synth",
+      "title": "Dungeon Synth",
+      "description": "Lo-fi keys for dark castles."
+    },
+    {
+      "id": "aud-shoegaze-haze",
+      "title": "Shoegaze Haze",
+      "description": "Walls of fuzzy dreamy guitar."
+    },
+    {
+      "id": "aud-industrial-noise",
+      "title": "Industrial Noise",
+      "description": "Machines clanking as music."
+    },
+    {
+      "id": "aud-glitch-beats",
+      "title": "Glitch Beats",
+      "description": "Broken digital errors as rhythm."
+    },
+    {
+      "id": "aud-granular-textures",
+      "title": "Granular Textures",
+      "description": "Sounds stretched into clouds."
+    },
+    {
+      "id": "aud-spoken-narration",
+      "title": "Spoken Narration",
+      "description": "A narrator voices the journey."
+    },
+    {
+      "id": "aud-gibberish-voices",
+      "title": "Gibberish Voices",
+      "description": "Characters babble cute nonsense."
+    },
+    {
+      "id": "aud-animal-chorus",
+      "title": "Animal Chorus",
+      "description": "Birds and beasts as instruments."
+    },
+    {
+      "id": "aud-weather-score",
+      "title": "Weather Score",
+      "description": "Rain and wind carry the music."
+    },
+    {
+      "id": "aud-underwater-muffle",
+      "title": "Underwater Muffle",
+      "description": "Sounds dulled as if submerged."
+    },
+    {
+      "id": "aud-cave-echo",
+      "title": "Cave Echo",
+      "description": "Big natural reverb everywhere."
+    },
+    {
+      "id": "aud-bells-and-chimes",
+      "title": "Bells and Chimes",
+      "description": "Tinkling metal everywhere."
+    },
+    {
+      "id": "aud-gamelan",
+      "title": "Gamelan",
+      "description": "Layered gongs and metallophones."
+    },
+    {
+      "id": "aud-tavern-songs",
+      "title": "Tavern Songs",
+      "description": "Rowdy tunes with clinking mugs."
+    },
+    {
+      "id": "aud-circus-march",
+      "title": "Circus March",
+      "description": "Oompah tempo and calliope."
+    },
+    {
+      "id": "aud-lone-harmonica",
+      "title": "Lone Harmonica",
+      "description": "A wistful tune by a campfire."
+    },
+    {
+      "id": "aud-mallet-percussion",
+      "title": "Mallet Percussion",
+      "description": "Marimbas and xylophones."
+    },
+    {
+      "id": "aud-hand-drums-only",
+      "title": "Hand Drums Only",
+      "description": "Warm skins and live rhythm."
+    },
+    {
+      "id": "aud-typewriter-rhythm",
+      "title": "Typewriter Rhythm",
+      "description": "Clacks and dings as a beat."
+    },
+    {
+      "id": "aud-clock-ticks",
+      "title": "Clock Ticks",
+      "description": "Time keeps the tempo."
+    },
+    {
+      "id": "aud-mechanical-clatter",
+      "title": "Mechanical Clatter",
+      "description": "Gears and springs as percussion."
+    },
+    {
+      "id": "aud-phone-line-tones",
+      "title": "Phone Line Tones",
+      "description": "Dial tones and beeps as melody."
+    },
+    {
+      "id": "aud-synth-bass-pulse",
+      "title": "Synth Bass Pulse",
+      "description": "Driving low arpeggios."
+    },
+    {
+      "id": "aud-ambient-hum",
+      "title": "Ambient Hum",
+      "description": "Room tone and gentle buzz."
+    },
+    {
+      "id": "aud-muted-trumpet",
+      "title": "Muted Trumpet",
+      "description": "Soft, smoky melancholy brass."
+    },
+    {
+      "id": "aud-sparse-piano",
+      "title": "Sparse Piano",
+      "description": "A few notes and lots of air."
+    },
+    {
+      "id": "aud-rising-tension-loop",
+      "title": "Rising Tension Loop",
+      "description": "A loop that climbs until release."
+    },
+    {
+      "id": "aud-victory-fanfares",
+      "title": "Victory Fanfares",
+      "description": "Short brassy wins for every task."
+    },
+    {
+      "id": "aud-silly-sound-effects",
+      "title": "Silly Sound Effects",
+      "description": "Boings, honks and slide whistles."
+    },
+    {
+      "id": "aud-lo-fi-voice-memos",
+      "title": "Lo-Fi Voice Memos",
+      "description": "Rough recordings, phone-mic charm."
+    },
+    {
+      "id": "aud-single-instrument-challenge",
+      "title": "Single Instrument Challenge",
+      "description": "The whole game on one instrument."
     }
   ]
 }

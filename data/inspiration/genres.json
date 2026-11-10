@@ -192,6 +192,246 @@
       "title": "Text Adventure",
       "description": "Words, imagination and a parser or choices.",
       "category": "story"
+    },
+    {
+      "id": "genre-bullet-heaven",
+      "title": "Bullet Heaven",
+      "description": "Survive endless swarms while your weapons fire on their own.",
+      "category": "action"
+    },
+    {
+      "id": "genre-bullet-hell",
+      "title": "Bullet Hell",
+      "description": "Dodge dense, beautiful patterns of enemy fire.",
+      "category": "action"
+    },
+    {
+      "id": "genre-beat-em-up",
+      "title": "Beat 'Em Up",
+      "description": "Walk forward and punch your way through gangs of enemies.",
+      "category": "action"
+    },
+    {
+      "id": "genre-twin-stick-shooter",
+      "title": "Twin-Stick Shooter",
+      "description": "Move with one stick and aim with the other.",
+      "category": "action"
+    },
+    {
+      "id": "genre-hack-and-slash",
+      "title": "Hack and Slash",
+      "description": "Fast melee combat against hordes of foes.",
+      "category": "action"
+    },
+    {
+      "id": "genre-endless-runner",
+      "title": "Endless Runner",
+      "description": "Keep running and dodge obstacles as speed rises.",
+      "category": "action"
+    },
+    {
+      "id": "genre-souls-like",
+      "title": "Souls-Like",
+      "description": "Tough combat, learned patterns and painful lessons.",
+      "category": "action"
+    },
+    {
+      "id": "genre-arena-brawler",
+      "title": "Arena Brawler",
+      "description": "Short fights in a small space until one is left.",
+      "category": "action"
+    },
+    {
+      "id": "genre-couch-co-op",
+      "title": "Couch Co-op",
+      "description": "Friends share a screen and work together.",
+      "category": "social"
+    },
+    {
+      "id": "genre-social-deduction",
+      "title": "Social Deduction",
+      "description": "Find the traitor before they win.",
+      "category": "social"
+    },
+    {
+      "id": "genre-battle-royale",
+      "title": "Battle Royale",
+      "description": "Many players drop in and only one survives.",
+      "category": "social"
+    },
+    {
+      "id": "genre-asymmetric-multiplayer",
+      "title": "Asymmetric Multiplayer",
+      "description": "One player plays by different rules than the rest.",
+      "category": "social"
+    },
+    {
+      "id": "genre-trivia-game",
+      "title": "Trivia Game",
+      "description": "Answer questions faster and better than your friends.",
+      "category": "social"
+    },
+    {
+      "id": "genre-drawing-game",
+      "title": "Drawing Game",
+      "description": "Draw something and let others guess what it is.",
+      "category": "social"
+    },
+    {
+      "id": "genre-cozy-horror",
+      "title": "Cozy Horror",
+      "description": "Gentle scares in a warm and comforting world.",
+      "category": "story"
+    },
+    {
+      "id": "genre-detective-mystery",
+      "title": "Detective Mystery",
+      "description": "Gather clues and name the culprit.",
+      "category": "story"
+    },
+    {
+      "id": "genre-dating-sim",
+      "title": "Dating Sim",
+      "description": "Build relationships through choices and conversations.",
+      "category": "story"
+    },
+    {
+      "id": "genre-interactive-fiction",
+      "title": "Interactive Fiction",
+      "description": "A story shaped by the choices you make.",
+      "category": "story"
+    },
+    {
+      "id": "genre-walking-sim",
+      "title": "Walking Sim",
+      "description": "Explore a place and piece together its story.",
+      "category": "story"
+    },
+    {
+      "id": "genre-life-sim",
+      "title": "Life Sim",
+      "description": "Live a daily life with jobs, friends and routines.",
+      "category": "story"
+    },
+    {
+      "id": "genre-grand-strategy",
+      "title": "Grand Strategy",
+      "description": "Run a whole nation across years of history.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-real-time-strategy",
+      "title": "Real-Time Strategy",
+      "description": "Build an army and command it as the clock runs.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-turn-based-tactics",
+      "title": "Turn-Based Tactics",
+      "description": "Move units on a grid and plan each turn carefully.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-auto-battler",
+      "title": "Auto Battler",
+      "description": "Build a team and watch it fight on its own.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-4x",
+      "title": "4X",
+      "description": "Explore, expand, exploit and exterminate.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-wargame",
+      "title": "Wargame",
+      "description": "Detailed battles with units, supply and terrain.",
+      "category": "strategy"
+    },
+    {
+      "id": "genre-colony-sim",
+      "title": "Colony Sim",
+      "description": "Keep a group of settlers alive and happy.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-factory-builder",
+      "title": "Factory Builder",
+      "description": "Automate production lines that grow and grow.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-crafting-survival",
+      "title": "Crafting Survival",
+      "description": "Gather, craft and stay alive in a hostile land.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-tycoon",
+      "title": "Tycoon",
+      "description": "Run a business and grow your profits.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-creature-collector",
+      "title": "Creature Collector",
+      "description": "Catch, raise and train many kinds of creatures.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-immersive-sim",
+      "title": "Immersive Sim",
+      "description": "Many systems that let you solve problems your own way.",
+      "category": "systems"
+    },
+    {
+      "id": "genre-physics-puzzle",
+      "title": "Physics Puzzle",
+      "description": "Use weight, momentum and forces to solve each level.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-logic-puzzle",
+      "title": "Logic Puzzle",
+      "description": "Clear rules and pure deduction lead to the answer.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-sokoban",
+      "title": "Sokoban",
+      "description": "Push boxes into place without getting stuck.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-escape-room",
+      "title": "Escape Room",
+      "description": "Find hidden clues to get out of a locked space.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-programming-game",
+      "title": "Programming Game",
+      "description": "Write simple instructions to make machines work.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-hidden-object",
+      "title": "Hidden Object",
+      "description": "Search busy scenes for items on a list.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-word-game",
+      "title": "Word Game",
+      "description": "Make, guess or rearrange words to score points.",
+      "category": "thinking"
+    },
+    {
+      "id": "genre-match-three",
+      "title": "Match-Three",
+      "description": "Swap tiles to line up three or more of a kind.",
+      "category": "thinking"
     }
   ]
 }

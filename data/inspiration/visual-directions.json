@@ -100,6 +100,406 @@
       "id": "vis-limited-palette",
       "title": "Limited Palette",
       "description": "Just a few colours, used carefully."
+    },
+    {
+      "id": "vis-1-bit",
+      "title": "1-Bit",
+      "description": "Pure black and white pixels, nothing in between."
+    },
+    {
+      "id": "vis-four-shades-of-green",
+      "title": "Four Shades of Green",
+      "description": "A handheld-style palette of four murky greens."
+    },
+    {
+      "id": "vis-dithered-gradients",
+      "title": "Dithered Gradients",
+      "description": "Checkerboard dots fake smooth shading."
+    },
+    {
+      "id": "vis-16-color-palette",
+      "title": "16-Color Palette",
+      "description": "Sixteen fixed colours for the whole game."
+    },
+    {
+      "id": "vis-chunky-outlines",
+      "title": "Chunky Outlines",
+      "description": "Thick dark borders around every sprite."
+    },
+    {
+      "id": "vis-pixel-watercolor",
+      "title": "Pixel Watercolor",
+      "description": "Soft bleeding washes built from pixels."
+    },
+    {
+      "id": "vis-crt-scanlines",
+      "title": "CRT Scanlines",
+      "description": "Dark lines and glow like an old tube screen."
+    },
+    {
+      "id": "vis-micro-sprites",
+      "title": "Micro Sprites",
+      "description": "Tiny 8 by 8 characters with huge personality."
+    },
+    {
+      "id": "vis-big-pixel-portraits",
+      "title": "Big Pixel Portraits",
+      "description": "Large detailed pixel faces for every speaker."
+    },
+    {
+      "id": "vis-sub-pixel-animation",
+      "title": "Sub-Pixel Animation",
+      "description": "Smooth motion made by shifting colours, not shapes."
+    },
+    {
+      "id": "vis-palette-swap-moods",
+      "title": "Palette Swap Moods",
+      "description": "The same scene recoloured for each time of day."
+    },
+    {
+      "id": "vis-two-tone-pixels",
+      "title": "Two-Tone Pixels",
+      "description": "Every screen uses just two colours."
+    },
+    {
+      "id": "vis-amber-monochrome",
+      "title": "Amber Monochrome",
+      "description": "Glowing orange pixels on a black terminal."
+    },
+    {
+      "id": "vis-pixel-glow",
+      "title": "Pixel Glow",
+      "description": "Bright pixels that bloom softly into the dark."
+    },
+    {
+      "id": "vis-rotated-pixel-sprites",
+      "title": "Rotated Pixel Sprites",
+      "description": "Sprites that spin with crunchy jagged edges."
+    },
+    {
+      "id": "vis-hand-pixeled-fonts",
+      "title": "Hand-Pixeled Fonts",
+      "description": "Custom pixel lettering everywhere on screen."
+    },
+    {
+      "id": "vis-pixel-smear-frames",
+      "title": "Pixel Smear Frames",
+      "description": "Stretched blur frames for fast action."
+    },
+    {
+      "id": "vis-no-outlines",
+      "title": "No Outlines",
+      "description": "Sprites read by colour blocks alone."
+    },
+    {
+      "id": "vis-selective-outlines",
+      "title": "Selective Outlines",
+      "description": "Outlines that shift colour with the light."
+    },
+    {
+      "id": "vis-pixel-parallax-layers",
+      "title": "Pixel Parallax Layers",
+      "description": "Many scrolling layers for deep backgrounds."
+    },
+    {
+      "id": "vis-pastel-pixels",
+      "title": "Pastel Pixels",
+      "description": "Soft candy colours with gentle contrast."
+    },
+    {
+      "id": "vis-grim-desaturated-pixels",
+      "title": "Grim Desaturated Pixels",
+      "description": "Muddy greys with one sharp accent colour."
+    },
+    {
+      "id": "vis-sepia-pixels",
+      "title": "Sepia Pixels",
+      "description": "Warm brown tones like an old photograph."
+    },
+    {
+      "id": "vis-night-vision-green",
+      "title": "Night Vision Green",
+      "description": "Everything seen through a glowing green filter."
+    },
+    {
+      "id": "vis-thermal-palette",
+      "title": "Thermal Palette",
+      "description": "Heat colours from deep blue to white hot."
+    },
+    {
+      "id": "vis-pixel-mosaic",
+      "title": "Pixel Mosaic",
+      "description": "Scenes built from square tiles like ancient floors."
+    },
+    {
+      "id": "vis-tile-built-worlds",
+      "title": "Tile-Built Worlds",
+      "description": "Every scene made from a small set of tiles."
+    },
+    {
+      "id": "vis-pixel-shadows-only",
+      "title": "Pixel Shadows Only",
+      "description": "Characters shown as dark pixel shapes in light."
+    },
+    {
+      "id": "vis-low-res-upscaled-3d",
+      "title": "Low-Res Upscaled 3D",
+      "description": "3D scenes rendered tiny and blown up."
+    },
+    {
+      "id": "vis-pixel-textured-low-poly",
+      "title": "Pixel Textured Low Poly",
+      "description": "Simple 3D shapes wrapped in pixel textures."
+    },
+    {
+      "id": "vis-prerendered-sprites",
+      "title": "Prerendered Sprites",
+      "description": "3D models baked into crisp pixel sprites."
+    },
+    {
+      "id": "vis-pixel-particle-storms",
+      "title": "Pixel Particle Storms",
+      "description": "Screens full of tiny bursting pixels."
+    },
+    {
+      "id": "vis-hue-shifted-ramps",
+      "title": "Hue Shifted Ramps",
+      "description": "Shadows turn cool and highlights turn warm."
+    },
+    {
+      "id": "vis-pixel-ink-splats",
+      "title": "Pixel Ink Splats",
+      "description": "Messy hand-placed blots and drips."
+    },
+    {
+      "id": "vis-glitch-pixels",
+      "title": "Glitch Pixels",
+      "description": "Torn rows, colour bleed and broken tiles."
+    },
+    {
+      "id": "vis-pixel-weather-layers",
+      "title": "Pixel Weather Layers",
+      "description": "Rain, snow and fog drawn in loose pixels."
+    },
+    {
+      "id": "vis-tiny-screen",
+      "title": "Tiny Screen",
+      "description": "The whole game fits a very small canvas."
+    },
+    {
+      "id": "vis-pixel-diorama",
+      "title": "Pixel Diorama",
+      "description": "A boxed little world seen like a model set."
+    },
+    {
+      "id": "vis-pixel-neon-signs",
+      "title": "Pixel Neon Signs",
+      "description": "Glowing pixel signs light dark streets."
+    },
+    {
+      "id": "vis-pixel-embroidery",
+      "title": "Pixel Embroidery",
+      "description": "Pixels look like cross-stitch on cloth."
+    },
+    {
+      "id": "vis-risograph",
+      "title": "Risograph",
+      "description": "Grainy overlapping inks in bold spot colours."
+    },
+    {
+      "id": "vis-blueprint",
+      "title": "Blueprint",
+      "description": "White technical lines on deep blue paper."
+    },
+    {
+      "id": "vis-ink-wash",
+      "title": "Ink Wash",
+      "description": "Flowing black ink with soft grey washes."
+    },
+    {
+      "id": "vis-woodcut-print",
+      "title": "Woodcut Print",
+      "description": "Carved lines and rough block shading."
+    },
+    {
+      "id": "vis-linocut",
+      "title": "Linocut",
+      "description": "Bold cut shapes with chunky texture."
+    },
+    {
+      "id": "vis-pencil-sketch",
+      "title": "Pencil Sketch",
+      "description": "Graphite lines with smudges left in."
+    },
+    {
+      "id": "vis-crayon-scribbles",
+      "title": "Crayon Scribbles",
+      "description": "Waxy childlike colouring outside the lines."
+    },
+    {
+      "id": "vis-felt-and-fabric",
+      "title": "Felt and Fabric",
+      "description": "Stitched cloth shapes with soft edges."
+    },
+    {
+      "id": "vis-origami-folds",
+      "title": "Origami Folds",
+      "description": "Everything folded from crisp paper."
+    },
+    {
+      "id": "vis-cardboard-craft",
+      "title": "Cardboard Craft",
+      "description": "Boxes, tape and marker on brown card."
+    },
+    {
+      "id": "vis-shadow-puppets",
+      "title": "Shadow Puppets",
+      "description": "Flat cut figures behind a lit screen."
+    },
+    {
+      "id": "vis-pop-up-book",
+      "title": "Pop-Up Book",
+      "description": "Layers that rise and fold like paper."
+    },
+    {
+      "id": "vis-tarot-card-art",
+      "title": "Tarot Card Art",
+      "description": "Ornate borders and symbolic flat figures."
+    },
+    {
+      "id": "vis-botanical-plates",
+      "title": "Botanical Plates",
+      "description": "Careful nature drawings with labels."
+    },
+    {
+      "id": "vis-map-doodles",
+      "title": "Map Doodles",
+      "description": "Hand-drawn maps with notes and arrows."
+    },
+    {
+      "id": "vis-wireframe",
+      "title": "Wireframe",
+      "description": "Glowing lines with no filled surfaces."
+    },
+    {
+      "id": "vis-halftone-dots",
+      "title": "Halftone Dots",
+      "description": "Print dots that build up every shade."
+    },
+    {
+      "id": "vis-duotone",
+      "title": "Duotone",
+      "description": "Two inks mixed for every tone."
+    },
+    {
+      "id": "vis-flat-vector",
+      "title": "Flat Vector",
+      "description": "Clean shapes with no texture at all."
+    },
+    {
+      "id": "vis-art-deco",
+      "title": "Art Deco",
+      "description": "Gold lines, symmetry and bold geometry."
+    },
+    {
+      "id": "vis-ukiyo-e-inspired",
+      "title": "Ukiyo-e Inspired",
+      "description": "Flat colour, fine outlines and wave patterns."
+    },
+    {
+      "id": "vis-pulp-poster",
+      "title": "Pulp Poster",
+      "description": "Bold painted heroes and faded print."
+    },
+    {
+      "id": "vis-mid-century-cartoon",
+      "title": "Mid-Century Cartoon",
+      "description": "Simple angular shapes and bright flat colour."
+    },
+    {
+      "id": "vis-rubber-hose",
+      "title": "Rubber Hose",
+      "description": "Bendy limbs and bouncy old cartoon motion."
+    },
+    {
+      "id": "vis-oil-painting",
+      "title": "Oil Painting",
+      "description": "Thick visible paint strokes."
+    },
+    {
+      "id": "vis-gouache",
+      "title": "Gouache",
+      "description": "Matte opaque paint in soft layers."
+    },
+    {
+      "id": "vis-charcoal-smudge",
+      "title": "Charcoal Smudge",
+      "description": "Dark dusty strokes and rubbed shadows."
+    },
+    {
+      "id": "vis-ballpoint-doodles",
+      "title": "Ballpoint Doodles",
+      "description": "Blue pen lines on lined notebook paper."
+    },
+    {
+      "id": "vis-sticker-sheet",
+      "title": "Sticker Sheet",
+      "description": "Glossy cutout shapes with white borders."
+    },
+    {
+      "id": "vis-tin-toy",
+      "title": "Tin Toy",
+      "description": "Shiny painted metal with visible rivets."
+    },
+    {
+      "id": "vis-knitted-wool",
+      "title": "Knitted Wool",
+      "description": "Every surface made of yarn stitches."
+    },
+    {
+      "id": "vis-candy-colours",
+      "title": "Candy Colours",
+      "description": "Glossy sweets and sugary bright hues."
+    },
+    {
+      "id": "vis-brutalist-interface",
+      "title": "Brutalist Interface",
+      "description": "Raw boxes, hard edges and plain type."
+    },
+    {
+      "id": "vis-old-photograph",
+      "title": "Old Photograph",
+      "description": "Faded, scratched and slightly blurry."
+    },
+    {
+      "id": "vis-infrared-dream",
+      "title": "Infrared Dream",
+      "description": "Strange false colours on familiar places."
+    },
+    {
+      "id": "vis-ink-and-gold-leaf",
+      "title": "Ink and Gold Leaf",
+      "description": "Black ink with shining gold accents."
+    },
+    {
+      "id": "vis-mosaic-tiles",
+      "title": "Mosaic Tiles",
+      "description": "Small coloured stones set in grout."
+    },
+    {
+      "id": "vis-snow-globe",
+      "title": "Snow Globe",
+      "description": "A small world under curved glass."
+    },
+    {
+      "id": "vis-shadowbox",
+      "title": "Shadowbox",
+      "description": "Layered cutouts in a deep frame."
+    },
+    {
+      "id": "vis-embroidered-patch",
+      "title": "Embroidered Patch",
+      "description": "Thick thread shapes with stitched borders."
     }
   ]
 }

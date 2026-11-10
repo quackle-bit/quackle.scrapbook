@@ -255,6 +255,856 @@
       "id": "twist-making-something-takes-away-something-else",
       "title": "Making something takes away something else.",
       "description": "Creation always has a cost."
+    },
+    {
+      "id": "twist-you-only-move-to-the-beat",
+      "title": "You only move to the beat.",
+      "description": "Every step, jump and swing must land on the rhythm of the music."
+    },
+    {
+      "id": "twist-the-camera-is-a-character-with-opinions",
+      "title": "The camera is a character with opinions.",
+      "description": "It wanders off, zooms in on what it likes and sulks when ignored."
+    },
+    {
+      "id": "twist-every-jump-costs-a-coin",
+      "title": "Every jump costs a coin.",
+      "description": "Movement and money share one pocket, so every leap is a purchase."
+    },
+    {
+      "id": "twist-you-can-rewind-time-but-enemies-remember",
+      "title": "You can rewind time, but enemies remember.",
+      "description": "Foes keep their memories of every rewound moment and adapt."
+    },
+    {
+      "id": "twist-the-floor-is-a-timeline",
+      "title": "The floor is a timeline.",
+      "description": "Walking left goes into the past and walking right into the future."
+    },
+    {
+      "id": "twist-your-health-bar-is-the-level-s-floor",
+      "title": "Your health bar is the level's floor.",
+      "description": "Lose health and the ground under you shrinks."
+    },
+    {
+      "id": "twist-every-door-leads-somewhere-random",
+      "title": "Every door leads somewhere random.",
+      "description": "No room connects the same way twice."
+    },
+    {
+      "id": "twist-you-can-only-speak-in-questions",
+      "title": "You can only speak in questions.",
+      "description": "Every dialogue choice must be a question, and answers shape the world."
+    },
+    {
+      "id": "twist-the-pause-menu-is-a-real-place",
+      "title": "The pause menu is a real place.",
+      "description": "Pausing drops you into a waiting room with its own secrets."
+    },
+    {
+      "id": "twist-your-reflection-moves-first",
+      "title": "Your reflection moves first.",
+      "description": "Mirrors show your next move a second before you make it."
+    },
+    {
+      "id": "twist-the-game-is-played-in-one-room",
+      "title": "The game is played in one room.",
+      "description": "Everything happens in a single room that changes as the story goes on."
+    },
+    {
+      "id": "twist-enemies-only-exist-when-you-look-at-them",
+      "title": "Enemies only exist when you look at them.",
+      "description": "Turn away and threats vanish, turn back and they are closer."
+    },
+    {
+      "id": "twist-you-lose-a-button-each-level",
+      "title": "You lose a button each level.",
+      "description": "The control scheme gets smaller as you progress."
+    },
+    {
+      "id": "twist-every-item-is-alive-and-has-feelings",
+      "title": "Every item is alive and has feelings.",
+      "description": "Tools complain, cheer and refuse to work when mistreated."
+    },
+    {
+      "id": "twist-the-hero-is-very-old",
+      "title": "The hero is very old.",
+      "description": "Your character moves slowly but knows every shortcut."
+    },
+    {
+      "id": "twist-you-play-as-the-narrator",
+      "title": "You play as the narrator.",
+      "description": "You describe the hero's actions and they try to follow your words."
+    },
+    {
+      "id": "twist-sound-is-your-only-map",
+      "title": "Sound is your only map.",
+      "description": "The screen is dark and echoes show where walls are."
+    },
+    {
+      "id": "twist-your-weapon-is-a-musical-instrument",
+      "title": "Your weapon is a musical instrument.",
+      "description": "Notes and chords replace attacks and spells."
+    },
+    {
+      "id": "twist-the-world-is-folded-paper",
+      "title": "The world is folded paper.",
+      "description": "Fold and crease the level to connect distant places."
+    },
+    {
+      "id": "twist-every-enemy-you-defeat-joins-the-level",
+      "title": "Every enemy you defeat joins the level.",
+      "description": "Beaten foes become platforms, walls or furniture."
+    },
+    {
+      "id": "twist-the-sun-follows-you",
+      "title": "The sun follows you.",
+      "description": "Wherever you go is daytime, and the dark creeps in behind you."
+    },
+    {
+      "id": "twist-you-can-swap-places-with-any-creature",
+      "title": "You can swap places with any creature.",
+      "description": "Pick any living thing and trade bodies instantly."
+    },
+    {
+      "id": "twist-everything-is-upside-down-at-night",
+      "title": "Everything is upside down at night.",
+      "description": "Gravity flips when the sun goes down."
+    },
+    {
+      "id": "twist-you-carry-your-house-on-your-back",
+      "title": "You carry your house on your back.",
+      "description": "Home is mobile, heavy and always with you."
+    },
+    {
+      "id": "twist-the-level-is-drawn-by-a-child",
+      "title": "The level is drawn by a child.",
+      "description": "Wobbly crayon logic decides how everything behaves."
+    },
+    {
+      "id": "twist-your-footsteps-stay-forever",
+      "title": "Your footsteps stay forever.",
+      "description": "Every path you walk becomes a permanent trail others follow."
+    },
+    {
+      "id": "twist-the-villain-is-your-landlord",
+      "title": "The villain is your landlord.",
+      "description": "The evil force wants rent, and you owe it every week."
+    },
+    {
+      "id": "twist-water-remembers-shapes",
+      "title": "Water remembers shapes.",
+      "description": "Puddles replay whatever passed through them."
+    },
+    {
+      "id": "twist-every-save-costs-a-memory",
+      "title": "Every save costs a memory.",
+      "description": "Saving the game erases one thing your character knows."
+    },
+    {
+      "id": "twist-you-can-t-stop-moving",
+      "title": "You can't stop moving.",
+      "description": "The hero walks forward forever, and you only steer."
+    },
+    {
+      "id": "twist-the-world-is-a-snow-globe",
+      "title": "The world is a snow globe.",
+      "description": "Shake it to rearrange everything inside."
+    },
+    {
+      "id": "twist-plants-grow-when-you-sing",
+      "title": "Plants grow when you sing.",
+      "description": "Your voice is a gardening tool and a weapon."
+    },
+    {
+      "id": "twist-your-pet-is-the-real-hero",
+      "title": "Your pet is the real hero.",
+      "description": "You are the sidekick to a brave little animal."
+    },
+    {
+      "id": "twist-you-play-backwards-from-the-ending",
+      "title": "You play backwards from the ending.",
+      "description": "The story starts at the credits and rewinds."
+    },
+    {
+      "id": "twist-colors-are-physical",
+      "title": "Colors are physical.",
+      "description": "Red is hot, blue is slippery and green grows things."
+    },
+    {
+      "id": "twist-every-coin-is-a-tiny-person",
+      "title": "Every coin is a tiny person.",
+      "description": "Spending money means sending someone off on a job."
+    },
+    {
+      "id": "twist-the-map-is-always-wrong",
+      "title": "The map is always wrong.",
+      "description": "Your only guide lies, but in a pattern you can learn."
+    },
+    {
+      "id": "twist-you-are-the-last-pixel",
+      "title": "You are the last pixel.",
+      "description": "Everything else has faded, and you must repaint the world."
+    },
+    {
+      "id": "twist-fear-makes-you-bigger",
+      "title": "Fear makes you bigger.",
+      "description": "The scarier things get, the larger and clumsier you become."
+    },
+    {
+      "id": "twist-you-can-only-see-in-a-small-circle",
+      "title": "You can only see in a small circle.",
+      "description": "A lantern radius is all the world you know."
+    },
+    {
+      "id": "twist-the-game-is-played-through-a-window",
+      "title": "The game is played through a window.",
+      "description": "You watch a neighbor's life and nudge it from outside."
+    },
+    {
+      "id": "twist-two-players-share-one-controller",
+      "title": "Two players share one controller.",
+      "description": "One person moves and the other acts, at the same time."
+    },
+    {
+      "id": "twist-every-word-you-read-becomes-an-object",
+      "title": "Every word you read becomes an object.",
+      "description": "Text in the world can be picked up and used."
+    },
+    {
+      "id": "twist-the-enemy-is-boredom",
+      "title": "The enemy is boredom.",
+      "description": "Do nothing interesting for too long and the world fades."
+    },
+    {
+      "id": "twist-the-level-loops-like-a-donut",
+      "title": "The level loops like a donut.",
+      "description": "Walk off one edge and arrive at the other."
+    },
+    {
+      "id": "twist-your-sword-is-shrinking",
+      "title": "Your sword is shrinking.",
+      "description": "Every hit wears the blade down, so choose fights carefully."
+    },
+    {
+      "id": "twist-monsters-are-scared-of-you",
+      "title": "Monsters are scared of you.",
+      "description": "Creatures flee, and the challenge is catching them gently."
+    },
+    {
+      "id": "twist-you-can-stack-anything",
+      "title": "You can stack anything.",
+      "description": "Every object in the world can be stacked into towers."
+    },
+    {
+      "id": "twist-each-life-is-a-different-character",
+      "title": "Each life is a different character.",
+      "description": "When you die, someone new picks up where you left off."
+    },
+    {
+      "id": "twist-you-can-only-act-during-thunder",
+      "title": "You can only act during thunder.",
+      "description": "Lightning flashes are the only moments you can move."
+    },
+    {
+      "id": "twist-the-ground-is-a-giant-creature",
+      "title": "The ground is a giant creature.",
+      "description": "The land breathes, itches and rolls over in its sleep."
+    },
+    {
+      "id": "twist-every-npc-is-a-past-version-of-you",
+      "title": "Every NPC is a past version of you.",
+      "description": "The townsfolk are echoes of your earlier playthroughs."
+    },
+    {
+      "id": "twist-your-shadow-is-a-separate-player",
+      "title": "Your shadow is a separate player.",
+      "description": "A friend controls the shadow that clings to your feet."
+    },
+    {
+      "id": "twist-the-world-is-a-single-long-scroll",
+      "title": "The world is a single long scroll.",
+      "description": "There is only one direction and one very long journey."
+    },
+    {
+      "id": "twist-time-passes-only-when-you-speak",
+      "title": "Time passes only when you speak.",
+      "description": "Silence freezes the world, and words make the clock tick."
+    },
+    {
+      "id": "twist-you-are-a-ghost-who-can-t-touch-anything",
+      "title": "You are a ghost who can't touch anything.",
+      "description": "You can only act by scaring living things into moving."
+    },
+    {
+      "id": "twist-the-screen-is-cracked",
+      "title": "The screen is cracked.",
+      "description": "Broken glass splits the view into pieces that move separately."
+    },
+    {
+      "id": "twist-every-building-is-a-puzzle-box",
+      "title": "Every building is a puzzle box.",
+      "description": "Houses twist and slide open when solved."
+    },
+    {
+      "id": "twist-you-eat-the-level-to-progress",
+      "title": "You eat the level to progress.",
+      "description": "Chew through walls, floors and furniture to find a way."
+    },
+    {
+      "id": "twist-your-health-is-your-score",
+      "title": "Your health is your score.",
+      "description": "Taking damage directly lowers the points you keep."
+    },
+    {
+      "id": "twist-heroes-retire-after-every-level",
+      "title": "Heroes retire after every level.",
+      "description": "You recruit a fresh team each stage from those who stayed."
+    },
+    {
+      "id": "twist-your-past-mistakes-become-enemies",
+      "title": "Your past mistakes become enemies.",
+      "description": "Every failed attempt spawns a ghost that hunts you."
+    },
+    {
+      "id": "twist-everything-is-made-of-cake",
+      "title": "Everything is made of cake.",
+      "description": "The world is edible and slowly melting."
+    },
+    {
+      "id": "twist-the-game-asks-you-for-advice",
+      "title": "The game asks you for advice.",
+      "description": "Characters stop to ask what you would do, and they listen."
+    },
+    {
+      "id": "twist-you-can-only-push-never-pull",
+      "title": "You can only push, never pull.",
+      "description": "Every puzzle has to be solved by shoving."
+    },
+    {
+      "id": "twist-the-map-rotates-when-you-blink",
+      "title": "The map rotates when you blink.",
+      "description": "Each blink turns the world ninety degrees."
+    },
+    {
+      "id": "twist-distance-is-measured-in-songs",
+      "title": "Distance is measured in songs.",
+      "description": "Journeys are as long as the tracks you play on the way."
+    },
+    {
+      "id": "twist-the-princess-is-the-knight",
+      "title": "The princess is the knight.",
+      "description": "Roles are swapped and nobody minds."
+    },
+    {
+      "id": "twist-enemies-are-on-strike",
+      "title": "Enemies are on strike.",
+      "description": "Foes refuse to fight until their demands are met."
+    },
+    {
+      "id": "twist-your-inventory-spills-when-you-run",
+      "title": "Your inventory spills when you run.",
+      "description": "Moving fast drops items behind you."
+    },
+    {
+      "id": "twist-every-room-is-a-different-time-of-day",
+      "title": "Every room is a different time of day.",
+      "description": "Step through a door and morning becomes midnight."
+    },
+    {
+      "id": "twist-you-are-a-tiny-robot-in-a-big-kitchen",
+      "title": "You are a tiny robot in a big kitchen.",
+      "description": "Ordinary household items become mountains and hazards."
+    },
+    {
+      "id": "twist-you-must-keep-someone-asleep",
+      "title": "You must keep someone asleep.",
+      "description": "Every noise risks waking a sleeper you must not disturb."
+    },
+    {
+      "id": "twist-the-level-is-a-recipe",
+      "title": "The level is a recipe.",
+      "description": "Ingredients are scattered and the order you collect them matters."
+    },
+    {
+      "id": "twist-every-attack-heals-the-target-a-little",
+      "title": "Every attack heals the target a little.",
+      "description": "Fights are delicate balancing acts, not slugfests."
+    },
+    {
+      "id": "twist-you-speak-a-language-nobody-knows",
+      "title": "You speak a language nobody knows.",
+      "description": "Communication happens through gestures and objects."
+    },
+    {
+      "id": "twist-gravity-points-toward-the-nearest-friend",
+      "title": "Gravity points toward the nearest friend.",
+      "description": "Allies are the ground you stand on."
+    },
+    {
+      "id": "twist-the-world-is-underwater-and-rising",
+      "title": "The world is underwater and rising.",
+      "description": "Every hour the water climbs higher."
+    },
+    {
+      "id": "twist-your-shoes-choose-where-you-walk",
+      "title": "Your shoes choose where you walk.",
+      "description": "Feet have a will of their own and must be bargained with."
+    },
+    {
+      "id": "twist-everyone-knows-the-ending-but-you",
+      "title": "Everyone knows the ending but you.",
+      "description": "NPCs drop hints, wink and refuse to spoil it."
+    },
+    {
+      "id": "twist-the-weather-is-controlled-by-your-mood",
+      "title": "The weather is controlled by your mood.",
+      "description": "Sad means rain, angry means storms, calm means clear skies."
+    },
+    {
+      "id": "twist-you-can-only-use-what-you-find-today",
+      "title": "You can only use what you find today.",
+      "description": "Everything resets at dawn, items included."
+    },
+    {
+      "id": "twist-light-makes-things-solid",
+      "title": "Light makes things solid.",
+      "description": "Shine a beam on fog and it becomes a bridge."
+    },
+    {
+      "id": "twist-the-town-shrinks-every-night",
+      "title": "The town shrinks every night.",
+      "description": "One building disappears each evening, and you choose which."
+    },
+    {
+      "id": "twist-your-companion-is-a-cursed-item",
+      "title": "Your companion is a cursed item.",
+      "description": "The talking object you carry has its own sinister goals."
+    },
+    {
+      "id": "twist-you-see-the-level-from-above-others-from-inside",
+      "title": "You see the level from above, others from inside.",
+      "description": "One player has the map and the other has the legs."
+    },
+    {
+      "id": "twist-doors-are-alive-and-hungry",
+      "title": "Doors are alive and hungry.",
+      "description": "Feed a door the right thing to make it open."
+    },
+    {
+      "id": "twist-you-leave-when-the-music-stops",
+      "title": "You leave when the music stops.",
+      "description": "Every stage ends when its song does, finished or not."
+    },
+    {
+      "id": "twist-every-chest-contains-a-mimic-except-one",
+      "title": "Every chest contains a mimic, except one.",
+      "description": "Loot is a gamble, and reading tells keeps you alive."
+    },
+    {
+      "id": "twist-you-play-the-clock",
+      "title": "You play the clock.",
+      "description": "You are time itself, nudging events forward or back."
+    },
+    {
+      "id": "twist-animals-can-read-your-mind",
+      "title": "Animals can read your mind.",
+      "description": "Every creature reacts to what you are planning, not doing."
+    },
+    {
+      "id": "twist-the-game-is-a-board-game-inside-a-game",
+      "title": "The game is a board game inside a game.",
+      "description": "Your moves are dice rolls on a living board."
+    },
+    {
+      "id": "twist-your-blood-is-ink",
+      "title": "Your blood is ink.",
+      "description": "Getting hurt leaves marks you can draw with."
+    },
+    {
+      "id": "twist-footsteps-make-bridges",
+      "title": "Footsteps make bridges.",
+      "description": "Walking on air works, as long as you never stop."
+    },
+    {
+      "id": "twist-your-character-is-very-forgetful",
+      "title": "Your character is very forgetful.",
+      "description": "Skills vanish unless you practice them often."
+    },
+    {
+      "id": "twist-the-city-is-built-on-a-giant-s-palm",
+      "title": "The city is built on a giant's palm.",
+      "description": "When the hand closes, the city must be ready."
+    },
+    {
+      "id": "twist-every-jump-is-permanent",
+      "title": "Every jump is permanent.",
+      "description": "Wherever you land becomes your new home base."
+    },
+    {
+      "id": "twist-you-can-trade-years-of-your-life",
+      "title": "You can trade years of your life.",
+      "description": "Age is a currency, spent for power and earned by resting."
+    },
+    {
+      "id": "twist-the-enemies-are-your-neighbors",
+      "title": "The enemies are your neighbors.",
+      "description": "Everyone on the street is a rival by day and a friend by night."
+    },
+    {
+      "id": "twist-you-can-only-fight-with-words",
+      "title": "You can only fight with words.",
+      "description": "Arguments, insults and compliments are your moves."
+    },
+    {
+      "id": "twist-shadows-are-solid",
+      "title": "Shadows are solid.",
+      "description": "Walk on shadows like platforms and dodge the light."
+    },
+    {
+      "id": "twist-everything-dies-slowly-including-you",
+      "title": "Everything dies slowly, including you.",
+      "description": "A gentle decay timer touches every living thing in the game."
+    },
+    {
+      "id": "twist-each-level-has-a-different-gravity",
+      "title": "Each level has a different gravity.",
+      "description": "Moon jumps, heavy feet and floating rooms rotate."
+    },
+    {
+      "id": "twist-the-player-is-a-building",
+      "title": "The player is a building.",
+      "description": "You grow, add rooms and shelter those inside."
+    },
+    {
+      "id": "twist-there-is-no-game-over-only-detours",
+      "title": "There is no game over, only detours.",
+      "description": "Failure sends you down a different, stranger path."
+    },
+    {
+      "id": "twist-every-key-opens-the-wrong-door",
+      "title": "Every key opens the wrong door.",
+      "description": "Learn which key matches which lock by its quirks."
+    },
+    {
+      "id": "twist-the-world-reacts-to-your-voice-volume",
+      "title": "The world reacts to your voice volume.",
+      "description": "Shout to break things, whisper to sneak."
+    },
+    {
+      "id": "twist-you-are-a-stagehand-not-the-star",
+      "title": "You are a stagehand, not the star.",
+      "description": "Move scenery and props so the actors' show goes well."
+    },
+    {
+      "id": "twist-the-bosses-are-friendly",
+      "title": "The bosses are friendly.",
+      "description": "Big battles are dances, debates or cooking contests."
+    },
+    {
+      "id": "twist-you-see-what-enemies-see",
+      "title": "You see what enemies see.",
+      "description": "The screen shows the guard's view, not yours."
+    },
+    {
+      "id": "twist-your-score-is-printed-on-a-receipt",
+      "title": "Your score is printed on a receipt.",
+      "description": "Every action adds a line, and the total decides the ending."
+    },
+    {
+      "id": "twist-you-must-hold-your-breath-to-act",
+      "title": "You must hold your breath to act.",
+      "description": "Doing things uses air, and breathing makes you vulnerable."
+    },
+    {
+      "id": "twist-the-game-shrinks-its-window-over-time",
+      "title": "The game shrinks its window over time.",
+      "description": "The playable screen gets smaller until you finish."
+    },
+    {
+      "id": "twist-cats-rule-the-world",
+      "title": "Cats rule the world.",
+      "description": "You live in a feline society with feline priorities."
+    },
+    {
+      "id": "twist-you-can-paste-copies-of-yourself",
+      "title": "You can paste copies of yourself.",
+      "description": "Clone your character to hold buttons and block lasers."
+    },
+    {
+      "id": "twist-the-world-is-a-dream-someone-is-waking-from",
+      "title": "The world is a dream someone is waking from.",
+      "description": "Edges blur and fade as the dreamer stirs."
+    },
+    {
+      "id": "twist-rain-makes-you-stronger",
+      "title": "Rain makes you stronger.",
+      "description": "Storms are power-ups and sunny days are hard."
+    },
+    {
+      "id": "twist-you-see-the-future-not-the-present",
+      "title": "You see the future, not the present.",
+      "description": "The screen shows two seconds ahead, so you play by prediction."
+    },
+    {
+      "id": "twist-every-enemy-is-a-tiny-version-of-the-boss",
+      "title": "Every enemy is a tiny version of the boss.",
+      "description": "Learning small foes teaches you the final fight."
+    },
+    {
+      "id": "twist-your-hearts-are-actual-hearts",
+      "title": "Your hearts are actual hearts.",
+      "description": "Each health point is a beating creature you must keep happy."
+    },
+    {
+      "id": "twist-you-are-delivering-the-level",
+      "title": "You are delivering the level.",
+      "description": "The stage is a package you carry and assemble on arrival."
+    },
+    {
+      "id": "twist-furniture-holds-grudges",
+      "title": "Furniture holds grudges.",
+      "description": "Bump into a chair and it will trip you later."
+    },
+    {
+      "id": "twist-the-game-is-a-radio-broadcast",
+      "title": "The game is a radio broadcast.",
+      "description": "You hear the world through stations and tune into events."
+    },
+    {
+      "id": "twist-you-can-only-move-along-lines-you-draw",
+      "title": "You can only move along lines you draw.",
+      "description": "Sketch a path first, then the hero follows it."
+    },
+    {
+      "id": "twist-everything-echoes-for-ten-seconds",
+      "title": "Everything echoes for ten seconds.",
+      "description": "Your past actions repeat once, like an echo."
+    },
+    {
+      "id": "twist-the-world-is-a-museum-after-closing",
+      "title": "The world is a museum after closing.",
+      "description": "Exhibits come alive and you play by night."
+    },
+    {
+      "id": "twist-each-step-costs-a-word",
+      "title": "Each step costs a word.",
+      "description": "You have a limited vocabulary to spend as fuel."
+    },
+    {
+      "id": "twist-you-are-both-the-cop-and-the-thief",
+      "title": "You are both the cop and the thief.",
+      "description": "Swap roles each round and chase your own trail."
+    },
+    {
+      "id": "twist-healing-comes-from-helping-strangers",
+      "title": "Healing comes from helping strangers.",
+      "description": "Kindness is the only way to restore health."
+    },
+    {
+      "id": "twist-the-village-moves-every-morning",
+      "title": "The village moves every morning.",
+      "description": "Wake up and the houses have wandered somewhere new."
+    },
+    {
+      "id": "twist-your-character-is-made-of-sand",
+      "title": "Your character is made of sand.",
+      "description": "Wind and water wear you down, and stillness rebuilds you."
+    },
+    {
+      "id": "twist-you-must-lose-every-fight-to-win-the-war",
+      "title": "You must lose every fight to win the war.",
+      "description": "Defeats unlock secrets that victories hide."
+    },
+    {
+      "id": "twist-the-map-is-tattooed-on-your-back",
+      "title": "The map is tattooed on your back.",
+      "description": "You can only read it in mirrors."
+    },
+    {
+      "id": "twist-you-can-teleport-only-into-darkness",
+      "title": "You can teleport only into darkness.",
+      "description": "Blink to any shadow, but never into light."
+    },
+    {
+      "id": "twist-every-level-is-a-single-screen",
+      "title": "Every level is a single screen.",
+      "description": "No scrolling, just one dense, layered puzzle scene."
+    },
+    {
+      "id": "twist-you-can-bribe-the-rules",
+      "title": "You can bribe the rules.",
+      "description": "Pay the game to suspend one rule at a time."
+    },
+    {
+      "id": "twist-the-monster-under-the-bed-is-your-ally",
+      "title": "The monster under the bed is your ally.",
+      "description": "The creature you feared helps you through the night."
+    },
+    {
+      "id": "twist-your-vision-is-a-polaroid",
+      "title": "Your vision is a polaroid.",
+      "description": "You only see snapshots you take, not the live world."
+    },
+    {
+      "id": "twist-the-world-gets-colder-as-you-get-richer",
+      "title": "The world gets colder as you get richer.",
+      "description": "Wealth drains warmth from everything around you."
+    },
+    {
+      "id": "twist-you-command-a-swarm-not-a-hero",
+      "title": "You command a swarm, not a hero.",
+      "description": "Hundreds of tiny creatures act together under your lead."
+    },
+    {
+      "id": "twist-everything-you-touch-turns-to-gold",
+      "title": "Everything you touch turns to gold.",
+      "description": "Useful at first, then a growing problem."
+    },
+    {
+      "id": "twist-every-npc-is-lying",
+      "title": "Every NPC is lying.",
+      "description": "Truth hides between contradicting stories."
+    },
+    {
+      "id": "twist-you-can-only-walk-on-what-you-have-read",
+      "title": "You can only walk on what you have read.",
+      "description": "Books unfold into floors beneath your feet."
+    },
+    {
+      "id": "twist-doors-only-open-when-you-knock-politely",
+      "title": "Doors only open when you knock politely.",
+      "description": "Etiquette is the key to every lock."
+    },
+    {
+      "id": "twist-seasons-change-with-each-level",
+      "title": "Seasons change with each level.",
+      "description": "Spring, summer, fall and winter rewrite the same map."
+    },
+    {
+      "id": "twist-you-are-a-small-fish-getting-bigger",
+      "title": "You are a small fish getting bigger.",
+      "description": "Eat smaller things and avoid bigger ones as you grow."
+    },
+    {
+      "id": "twist-the-level-is-a-crossword-puzzle",
+      "title": "The level is a crossword puzzle.",
+      "description": "Fill in the right word to raise the right platform."
+    },
+    {
+      "id": "twist-your-feet-are-magnets",
+      "title": "Your feet are magnets.",
+      "description": "Stick to metal anywhere, but wood and stone fight back."
+    },
+    {
+      "id": "twist-the-game-wants-you-to-quit",
+      "title": "The game wants you to quit.",
+      "description": "It nags, begs and tricks you into stopping."
+    },
+    {
+      "id": "twist-you-must-keep-a-candle-lit",
+      "title": "You must keep a candle lit.",
+      "description": "Wind, water and running all threaten your tiny flame."
+    },
+    {
+      "id": "twist-the-world-is-drawn-as-you-explore",
+      "title": "The world is drawn as you explore.",
+      "description": "Unvisited areas are blank paper until you arrive."
+    },
+    {
+      "id": "twist-every-hit-swaps-your-weapon",
+      "title": "Every hit swaps your weapon.",
+      "description": "Your attack changes each time you land a blow."
+    },
+    {
+      "id": "twist-you-can-bottle-anything",
+      "title": "You can bottle anything.",
+      "description": "Catch fire, wind, sound or light in jars for later."
+    },
+    {
+      "id": "twist-gravity-follows-the-music-s-pitch",
+      "title": "Gravity follows the music's pitch.",
+      "description": "High notes lift you and low notes drag you down."
+    },
+    {
+      "id": "twist-you-can-only-save-others-never-yourself",
+      "title": "You can only save others, never yourself.",
+      "description": "Your own health never restores, but you can heal everyone else."
+    },
+    {
+      "id": "twist-the-level-grows-a-new-room-every-visit",
+      "title": "The level grows a new room every visit.",
+      "description": "Return to a place and it has expanded."
+    },
+    {
+      "id": "twist-strangers-swap-your-items-while-you-sleep",
+      "title": "Strangers swap your items while you sleep.",
+      "description": "Every rest brings a mysterious new inventory."
+    },
+    {
+      "id": "twist-you-are-the-tutorial",
+      "title": "You are the tutorial.",
+      "description": "You teach a confused hero how the game works."
+    },
+    {
+      "id": "twist-every-bridge-needs-a-password",
+      "title": "Every bridge needs a password.",
+      "description": "Trolls and gates demand secret words found on the way."
+    },
+    {
+      "id": "twist-the-world-speaks-in-rhyme",
+      "title": "The world speaks in rhyme.",
+      "description": "Answers, spells and doors respond only to rhyming lines."
+    },
+    {
+      "id": "twist-the-hero-is-allergic-to-the-treasure",
+      "title": "The hero is allergic to the treasure.",
+      "description": "The thing you seek makes you sneeze and stumble."
+    },
+    {
+      "id": "twist-time-is-a-liquid-you-can-pour",
+      "title": "Time is a liquid you can pour.",
+      "description": "Fill a cup with time to speed up or slow down an area."
+    },
+    {
+      "id": "twist-you-are-trapped-inside-a-vending-machine",
+      "title": "You are trapped inside a vending machine.",
+      "description": "Navigate coils, coins and snacks to escape."
+    },
+    {
+      "id": "twist-the-final-boss-is-a-mirror",
+      "title": "The final boss is a mirror.",
+      "description": "You fight a copy of every choice you made."
+    },
+    {
+      "id": "twist-your-sidekick-gets-all-the-credit",
+      "title": "Your sidekick gets all the credit.",
+      "description": "Do the work while your partner earns the fame."
+    },
+    {
+      "id": "twist-each-level-is-a-page-of-a-diary",
+      "title": "Each level is a page of a diary.",
+      "description": "The writer's moods and doodles shape the stage."
+    },
+    {
+      "id": "twist-you-can-split-in-two",
+      "title": "You can split in two.",
+      "description": "Divide into halves that move separately and rejoin later."
+    },
+    {
+      "id": "twist-every-death-leaves-a-gravestone-with-advice",
+      "title": "Every death leaves a gravestone with advice.",
+      "description": "Your past selves leave notes for the next attempt."
+    },
+    {
+      "id": "twist-the-world-is-a-vinyl-record",
+      "title": "The world is a vinyl record.",
+      "description": "You run the groove, and scratching skips time."
+    },
+    {
+      "id": "twist-you-build-the-dungeon-then-raid-it",
+      "title": "You build the dungeon, then raid it.",
+      "description": "Design a lair in one phase and invade it in the next."
     }
   ]
 }

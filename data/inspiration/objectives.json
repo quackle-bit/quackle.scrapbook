@@ -200,6 +200,306 @@
       "id": "obj-prove-them-wrong",
       "title": "Prove them wrong.",
       "description": "Do what everyone said couldn't be done."
+    },
+    {
+      "id": "obj-find-a-home-for-every-stray",
+      "title": "Find a home for every stray.",
+      "description": "Rescue lost animals and match each one with the right owner."
+    },
+    {
+      "id": "obj-light-every-lighthouse-on-the-coast",
+      "title": "Light every lighthouse on the coast.",
+      "description": "Climb each tower and get its lamp burning before the ships arrive."
+    },
+    {
+      "id": "obj-win-back-the-stolen-crown",
+      "title": "Win back the stolen crown.",
+      "description": "Track down the thief and bring the crown back before the coronation."
+    },
+    {
+      "id": "obj-deliver-the-letter-before-midnight",
+      "title": "Deliver the letter before midnight.",
+      "description": "One important message must reach its reader in time."
+    },
+    {
+      "id": "obj-repair-the-broken-robot",
+      "title": "Repair the broken robot.",
+      "description": "Find parts scattered around town to bring a friend back online."
+    },
+    {
+      "id": "obj-climb-out-of-the-well",
+      "title": "Climb out of the well.",
+      "description": "Use whatever has fallen in to work your way up to daylight."
+    },
+    {
+      "id": "obj-catch-the-runaway-train",
+      "title": "Catch the runaway train.",
+      "description": "Chase down a speeding train and stop it before the bridge."
+    },
+    {
+      "id": "obj-plant-a-forest",
+      "title": "Plant a forest.",
+      "description": "Turn barren land green one tree at a time."
+    },
+    {
+      "id": "obj-cook-the-perfect-meal",
+      "title": "Cook the perfect meal.",
+      "description": "Gather ingredients and serve a dish that pleases a picky guest."
+    },
+    {
+      "id": "obj-get-the-band-back-together",
+      "title": "Get the band back together.",
+      "description": "Find the scattered musicians and reunite them for one last show."
+    },
+    {
+      "id": "obj-sneak-into-the-castle",
+      "title": "Sneak into the castle.",
+      "description": "Get past guards and walls without raising the alarm."
+    },
+    {
+      "id": "obj-wake-up-from-the-dream",
+      "title": "Wake up from the dream.",
+      "description": "Find the exit of a strange dream before it becomes permanent."
+    },
+    {
+      "id": "obj-save-the-last-dragon-egg",
+      "title": "Save the last dragon egg.",
+      "description": "Protect a fragile egg until it hatches safely."
+    },
+    {
+      "id": "obj-open-the-shop-on-time",
+      "title": "Open the shop on time.",
+      "description": "Stock, clean and prepare a little store before customers arrive."
+    },
+    {
+      "id": "obj-fix-the-town-clock",
+      "title": "Fix the town clock.",
+      "description": "Restore the gears so time works properly again."
+    },
+    {
+      "id": "obj-guide-the-ghosts-home",
+      "title": "Guide the ghosts home.",
+      "description": "Lead lost spirits to the place where they can finally rest."
+    },
+    {
+      "id": "obj-escape-the-sinking-ship",
+      "title": "Escape the sinking ship.",
+      "description": "Find a way off the boat before the water fills every deck."
+    },
+    {
+      "id": "obj-tame-the-wild-beast",
+      "title": "Tame the wild beast.",
+      "description": "Earn the trust of a creature everyone fears."
+    },
+    {
+      "id": "obj-finish-the-race-in-one-piece",
+      "title": "Finish the race in one piece.",
+      "description": "Cross the finish line without breaking your fragile vehicle."
+    },
+    {
+      "id": "obj-collect-all-the-lost-socks",
+      "title": "Collect all the lost socks.",
+      "description": "Hunt down every missing sock in a house full of hiding places."
+    },
+    {
+      "id": "obj-bring-color-back-to-the-world",
+      "title": "Bring color back to the world.",
+      "description": "Find and restore the colors that have drained away."
+    },
+    {
+      "id": "obj-rebuild-the-bridge",
+      "title": "Rebuild the bridge.",
+      "description": "Gather materials to reconnect two villages across a river."
+    },
+    {
+      "id": "obj-keep-the-fire-burning-all-night",
+      "title": "Keep the fire burning all night.",
+      "description": "Feed the campfire to keep the dark and its creatures away."
+    },
+    {
+      "id": "obj-win-the-town-election",
+      "title": "Win the town election.",
+      "description": "Earn enough votes by helping residents with their problems."
+    },
+    {
+      "id": "obj-hatch-every-egg-in-the-nest",
+      "title": "Hatch every egg in the nest.",
+      "description": "Keep eggs warm and safe until each one cracks open."
+    },
+    {
+      "id": "obj-find-the-source-of-the-noise",
+      "title": "Find the source of the noise.",
+      "description": "Track down a mysterious sound echoing through the building."
+    },
+    {
+      "id": "obj-herd-the-sheep-into-the-pen",
+      "title": "Herd the sheep into the pen.",
+      "description": "Guide a stubborn flock home before the wolves come."
+    },
+    {
+      "id": "obj-wake-everyone-up-in-time",
+      "title": "Wake everyone up in time.",
+      "description": "Rouse a sleeping town before disaster strikes."
+    },
+    {
+      "id": "obj-unlock-the-final-door",
+      "title": "Unlock the final door.",
+      "description": "Collect the keys and clues needed to open the last door."
+    },
+    {
+      "id": "obj-return-the-moon-to-the-sky",
+      "title": "Return the moon to the sky.",
+      "description": "The moon has fallen, and you must lift it back up."
+    },
+    {
+      "id": "obj-fill-the-empty-library",
+      "title": "Fill the empty library.",
+      "description": "Recover lost books and put them back on their shelves."
+    },
+    {
+      "id": "obj-keep-the-shopkeeper-happy",
+      "title": "Keep the shopkeeper happy.",
+      "description": "Run errands and solve problems to stay in their good graces."
+    },
+    {
+      "id": "obj-find-a-cure-for-the-town",
+      "title": "Find a cure for the town.",
+      "description": "Gather rare ingredients to heal a sick village."
+    },
+    {
+      "id": "obj-escape-before-the-tide-comes-in",
+      "title": "Escape before the tide comes in.",
+      "description": "Leave the beach caves before the sea floods them."
+    },
+    {
+      "id": "obj-build-a-raft-and-sail-away",
+      "title": "Build a raft and sail away.",
+      "description": "Gather wood and rope to leave a deserted island."
+    },
+    {
+      "id": "obj-make-the-grumpy-neighbor-smile",
+      "title": "Make the grumpy neighbor smile.",
+      "description": "Find what makes the crankiest person in town happy."
+    },
+    {
+      "id": "obj-close-every-portal",
+      "title": "Close every portal.",
+      "description": "Seal the rifts before more creatures come through."
+    },
+    {
+      "id": "obj-reach-the-summit-before-sunset",
+      "title": "Reach the summit before sunset.",
+      "description": "Climb the mountain while daylight lasts."
+    },
+    {
+      "id": "obj-collect-enough-stars-to-wish",
+      "title": "Collect enough stars to wish.",
+      "description": "Gather fallen stars to make one wish come true."
+    },
+    {
+      "id": "obj-throw-the-best-party-ever",
+      "title": "Throw the best party ever.",
+      "description": "Plan, decorate and invite guests to an unforgettable night."
+    },
+    {
+      "id": "obj-find-out-who-you-are",
+      "title": "Find out who you are.",
+      "description": "Piece together your forgotten identity from clues around you."
+    },
+    {
+      "id": "obj-defend-the-bakery-from-pests",
+      "title": "Defend the bakery from pests.",
+      "description": "Keep hungry critters away from the bread."
+    },
+    {
+      "id": "obj-get-the-cat-down-from-the-tree",
+      "title": "Get the cat down from the tree.",
+      "description": "A simple rescue that becomes a whole adventure."
+    },
+    {
+      "id": "obj-clear-the-haunted-house",
+      "title": "Clear the haunted house.",
+      "description": "Help each ghost move on so the house is livable again."
+    },
+    {
+      "id": "obj-win-the-fishing-contest",
+      "title": "Win the fishing contest.",
+      "description": "Catch the biggest fish before the whistle blows."
+    },
+    {
+      "id": "obj-map-every-star-in-the-sky",
+      "title": "Map every star in the sky.",
+      "description": "Name and chart the constellations from your rooftop."
+    },
+    {
+      "id": "obj-restore-the-power-plant",
+      "title": "Restore the power plant.",
+      "description": "Bring a dead generator back to life to light the city."
+    },
+    {
+      "id": "obj-guide-the-lost-traveler",
+      "title": "Guide the lost traveler.",
+      "description": "Help a stranger find their way through a confusing land."
+    },
+    {
+      "id": "obj-save-the-sinking-city",
+      "title": "Save the sinking city.",
+      "description": "Pump, patch and build to keep the streets above water."
+    },
+    {
+      "id": "obj-hide-from-the-hunter-until-dawn",
+      "title": "Hide from the hunter until dawn.",
+      "description": "Stay out of sight through one long night."
+    },
+    {
+      "id": "obj-deliver-a-pizza-through-chaos",
+      "title": "Deliver a pizza through chaos.",
+      "description": "Get a hot pizza across town through traffic and trouble."
+    },
+    {
+      "id": "obj-build-a-snowman-before-it-melts",
+      "title": "Build a snowman before it melts.",
+      "description": "Race the sun to finish a winter masterpiece."
+    },
+    {
+      "id": "obj-recover-the-lost-recipe",
+      "title": "Recover the lost recipe.",
+      "description": "Find a family recipe hidden in old memories and places."
+    },
+    {
+      "id": "obj-return-home-from-space",
+      "title": "Return home from space.",
+      "description": "Repair your ship and plot a course back to Earth."
+    },
+    {
+      "id": "obj-teach-the-robot-to-love",
+      "title": "Teach the robot to love.",
+      "description": "Show a cold machine what kindness means."
+    },
+    {
+      "id": "obj-solve-the-riddle-of-the-sphinx",
+      "title": "Solve the riddle of the sphinx.",
+      "description": "Answer a series of riddles to pass the ancient guardian."
+    },
+    {
+      "id": "obj-calm-the-angry-volcano",
+      "title": "Calm the angry volcano.",
+      "description": "Find out what is upsetting the mountain and soothe it."
+    },
+    {
+      "id": "obj-reunite-the-twins",
+      "title": "Reunite the twins.",
+      "description": "Bring two siblings separated long ago back together."
+    },
+    {
+      "id": "obj-escape-the-giant-s-kitchen",
+      "title": "Escape the giant's kitchen.",
+      "description": "Get out of a huge kitchen without becoming dinner."
+    },
+    {
+      "id": "obj-grow-the-biggest-pumpkin",
+      "title": "Grow the biggest pumpkin.",
+      "description": "Tend your crop to win the harvest fair."
     }
   ]
 }

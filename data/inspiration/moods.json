@@ -125,6 +125,481 @@
       "id": "mood-bittersweet",
       "title": "Bittersweet",
       "description": "Joy and loss in the same moment."
+    },
+    {
+      "id": "mood-hopeful-dread",
+      "title": "Hopeful Dread",
+      "description": "Things might be fine. Probably not."
+    },
+    {
+      "id": "mood-sunday-afternoon",
+      "title": "Sunday Afternoon",
+      "description": "Lazy light and nowhere to be."
+    },
+    {
+      "id": "mood-fever-dream",
+      "title": "Fever Dream",
+      "description": "Hot, looping and hard to trust."
+    },
+    {
+      "id": "mood-petty-rivalry",
+      "title": "Petty Rivalry",
+      "description": "Small stakes, enormous grudges."
+    },
+    {
+      "id": "mood-cabin-fever",
+      "title": "Cabin Fever",
+      "description": "Too long indoors, and it shows."
+    },
+    {
+      "id": "mood-smug",
+      "title": "Smug",
+      "description": "Pleased with itself and rightly so."
+    },
+    {
+      "id": "mood-giddy",
+      "title": "Giddy",
+      "description": "Can't stop grinning at nothing."
+    },
+    {
+      "id": "mood-frantic",
+      "title": "Frantic",
+      "description": "Everything at once, right now."
+    },
+    {
+      "id": "mood-claustrophobic",
+      "title": "Claustrophobic",
+      "description": "The walls are closer than before."
+    },
+    {
+      "id": "mood-awestruck",
+      "title": "Awestruck",
+      "description": "Small you, huge everything."
+    },
+    {
+      "id": "mood-ominous",
+      "title": "Ominous",
+      "description": "A storm you can feel coming."
+    },
+    {
+      "id": "mood-tender",
+      "title": "Tender",
+      "description": "Gentle hands and soft voices."
+    },
+    {
+      "id": "mood-defiant",
+      "title": "Defiant",
+      "description": "Chin up against the whole world."
+    },
+    {
+      "id": "mood-mischievous",
+      "title": "Mischievous",
+      "description": "Up to something, clearly."
+    },
+    {
+      "id": "mood-paranoid",
+      "title": "Paranoid",
+      "description": "Someone is watching. Maybe."
+    },
+    {
+      "id": "mood-reverent",
+      "title": "Reverent",
+      "description": "Hushed, as if in a temple."
+    },
+    {
+      "id": "mood-feral",
+      "title": "Feral",
+      "description": "Wild, hungry and unashamed."
+    },
+    {
+      "id": "mood-sleepy",
+      "title": "Sleepy",
+      "description": "Heavy eyelids and slow thoughts."
+    },
+    {
+      "id": "mood-pensive",
+      "title": "Pensive",
+      "description": "Quietly turning a thought over."
+    },
+    {
+      "id": "mood-bustling",
+      "title": "Bustling",
+      "description": "Crowds, noise and busy errands."
+    },
+    {
+      "id": "mood-desolate",
+      "title": "Desolate",
+      "description": "Empty for miles in every way."
+    },
+    {
+      "id": "mood-euphoric",
+      "title": "Euphoric",
+      "description": "A rush that lifts you off the ground."
+    },
+    {
+      "id": "mood-grim-humor",
+      "title": "Grim Humor",
+      "description": "Laughing because the alternative is worse."
+    },
+    {
+      "id": "mood-smoldering",
+      "title": "Smoldering",
+      "description": "Anger kept on a low flame."
+    },
+    {
+      "id": "mood-uncanny-valley",
+      "title": "Uncanny Valley",
+      "description": "Almost human, and that is the problem."
+    },
+    {
+      "id": "mood-last-day-of-summer",
+      "title": "Last Day of Summer",
+      "description": "Golden, warm and ending soon."
+    },
+    {
+      "id": "mood-snow-day",
+      "title": "Snow Day",
+      "description": "The world paused and went soft."
+    },
+    {
+      "id": "mood-midnight-snack",
+      "title": "Midnight Snack",
+      "description": "Sneaky comfort in a dark kitchen."
+    },
+    {
+      "id": "mood-road-trip",
+      "title": "Road Trip",
+      "description": "Open roads and shared playlists."
+    },
+    {
+      "id": "mood-rainy-window",
+      "title": "Rainy Window",
+      "description": "Drops racing down the glass."
+    },
+    {
+      "id": "mood-slumber-party",
+      "title": "Slumber Party",
+      "description": "Whispers and giggles after lights out."
+    },
+    {
+      "id": "mood-haunted-childhood",
+      "title": "Haunted Childhood",
+      "description": "Old toys that remember you."
+    },
+    {
+      "id": "mood-abandoned-mall",
+      "title": "Abandoned Mall",
+      "description": "Fluorescent hum in empty halls."
+    },
+    {
+      "id": "mood-late-night-diner",
+      "title": "Late Night Diner",
+      "description": "Coffee, neon and strangers."
+    },
+    {
+      "id": "mood-first-love",
+      "title": "First Love",
+      "description": "Clumsy, bright and very sincere."
+    },
+    {
+      "id": "mood-quiet-grief",
+      "title": "Quiet Grief",
+      "description": "Missing someone without saying it."
+    },
+    {
+      "id": "mood-forbidden-curiosity",
+      "title": "Forbidden Curiosity",
+      "description": "You know you shouldn't open it."
+    },
+    {
+      "id": "mood-underdog-spirit",
+      "title": "Underdog Spirit",
+      "description": "Nobody believes in you. Yet."
+    },
+    {
+      "id": "mood-cozy-apocalypse",
+      "title": "Cozy Apocalypse",
+      "description": "The world ended and we made tea."
+    },
+    {
+      "id": "mood-polite-menace",
+      "title": "Polite Menace",
+      "description": "Smiling threats over tea."
+    },
+    {
+      "id": "mood-gentle-absurdity",
+      "title": "Gentle Absurdity",
+      "description": "Odd things treated as normal."
+    },
+    {
+      "id": "mood-heroic-exhaustion",
+      "title": "Heroic Exhaustion",
+      "description": "Saving the day on no sleep."
+    },
+    {
+      "id": "mood-bureaucratic-hell",
+      "title": "Bureaucratic Hell",
+      "description": "Forms, stamps and endless queues."
+    },
+    {
+      "id": "mood-festival-night",
+      "title": "Festival Night",
+      "description": "Lanterns, music and fried food."
+    },
+    {
+      "id": "mood-solemn-duty",
+      "title": "Solemn Duty",
+      "description": "A job that must be done well."
+    },
+    {
+      "id": "mood-simmering-tension",
+      "title": "Simmering Tension",
+      "description": "Nobody says it, everybody feels it."
+    },
+    {
+      "id": "mood-comfortable-silence",
+      "title": "Comfortable Silence",
+      "description": "Nothing to say, and that is fine."
+    },
+    {
+      "id": "mood-daydream",
+      "title": "Daydream",
+      "description": "Drifting off mid-task."
+    },
+    {
+      "id": "mood-morning-dew",
+      "title": "Morning Dew",
+      "description": "Fresh, cool and new."
+    },
+    {
+      "id": "mood-overcast",
+      "title": "Overcast",
+      "description": "Flat grey light and muted moods."
+    },
+    {
+      "id": "mood-heatwave",
+      "title": "Heatwave",
+      "description": "Sticky, slow and shimmering."
+    },
+    {
+      "id": "mood-deep-sea-calm",
+      "title": "Deep Sea Calm",
+      "description": "Dark, slow and pressurized."
+    },
+    {
+      "id": "mood-clockwork-precision",
+      "title": "Clockwork Precision",
+      "description": "Every tick in its right place."
+    },
+    {
+      "id": "mood-gleeful-destruction",
+      "title": "Gleeful Destruction",
+      "description": "Breaking things feels great."
+    },
+    {
+      "id": "mood-unrequited",
+      "title": "Unrequited",
+      "description": "Wanting what won't want you back."
+    },
+    {
+      "id": "mood-homesick",
+      "title": "Homesick",
+      "description": "Far away and missing it."
+    },
+    {
+      "id": "mood-wanderlust",
+      "title": "Wanderlust",
+      "description": "The horizon keeps calling."
+    },
+    {
+      "id": "mood-survivor-s-guilt",
+      "title": "Survivor's Guilt",
+      "description": "You made it. They didn't."
+    },
+    {
+      "id": "mood-small-victories",
+      "title": "Small Victories",
+      "description": "Tiny wins worth celebrating."
+    },
+    {
+      "id": "mood-rebellious",
+      "title": "Rebellious",
+      "description": "Rules are for breaking."
+    },
+    {
+      "id": "mood-noir",
+      "title": "Noir",
+      "description": "Smoke, rain and bad decisions."
+    },
+    {
+      "id": "mood-pastoral",
+      "title": "Pastoral",
+      "description": "Fields, sheep and slow seasons."
+    },
+    {
+      "id": "mood-gothic-romance",
+      "title": "Gothic Romance",
+      "description": "Candles, castles and longing."
+    },
+    {
+      "id": "mood-cosmic-insignificance",
+      "title": "Cosmic Insignificance",
+      "description": "The universe doesn't notice you."
+    },
+    {
+      "id": "mood-holy-terror",
+      "title": "Holy Terror",
+      "description": "Divine and deeply frightening."
+    },
+    {
+      "id": "mood-sugar-rush",
+      "title": "Sugar Rush",
+      "description": "Bright, loud and about to crash."
+    },
+    {
+      "id": "mood-hangover",
+      "title": "Hangover",
+      "description": "Too bright, too loud, too late."
+    },
+    {
+      "id": "mood-reunion",
+      "title": "Reunion",
+      "description": "Old friends, changed faces."
+    },
+    {
+      "id": "mood-farewell",
+      "title": "Farewell",
+      "description": "One last look before leaving."
+    },
+    {
+      "id": "mood-stage-fright",
+      "title": "Stage Fright",
+      "description": "Everyone is watching you now."
+    },
+    {
+      "id": "mood-showtime",
+      "title": "Showtime",
+      "description": "Lights up, here we go."
+    },
+    {
+      "id": "mood-graveyard-shift",
+      "title": "Graveyard Shift",
+      "description": "Alone at work while the city sleeps."
+    },
+    {
+      "id": "mood-lazy-river",
+      "title": "Lazy River",
+      "description": "Floating along, no plans."
+    },
+    {
+      "id": "mood-treasure-fever",
+      "title": "Treasure Fever",
+      "description": "Gold is close, greed is closer."
+    },
+    {
+      "id": "mood-vengeful",
+      "title": "Vengeful",
+      "description": "Someone has to pay."
+    },
+    {
+      "id": "mood-redemptive",
+      "title": "Redemptive",
+      "description": "A chance to make it right."
+    },
+    {
+      "id": "mood-lighthearted-peril",
+      "title": "Lighthearted Peril",
+      "description": "Danger, but with a wink."
+    },
+    {
+      "id": "mood-dread-countdown",
+      "title": "Dread Countdown",
+      "description": "Time is running out."
+    },
+    {
+      "id": "mood-isolation-calm",
+      "title": "Isolation Calm",
+      "description": "Alone and finally at peace."
+    },
+    {
+      "id": "mood-puzzling",
+      "title": "Puzzling",
+      "description": "Something here doesn't add up."
+    },
+    {
+      "id": "mood-sacred-ritual",
+      "title": "Sacred Ritual",
+      "description": "Old steps done with care."
+    },
+    {
+      "id": "mood-carnival-creep",
+      "title": "Carnival Creep",
+      "description": "Fun fair with something off."
+    },
+    {
+      "id": "mood-toybox-wonder",
+      "title": "Toybox Wonder",
+      "description": "Everything is tiny and magic."
+    },
+    {
+      "id": "mood-secret-hideout",
+      "title": "Secret Hideout",
+      "description": "A place only you know about."
+    },
+    {
+      "id": "mood-inside-joke",
+      "title": "Inside Joke",
+      "description": "Funny if you were there."
+    },
+    {
+      "id": "mood-domestic-bliss",
+      "title": "Domestic Bliss",
+      "description": "Chores, pets and a full fridge."
+    },
+    {
+      "id": "mood-industrial-grind",
+      "title": "Industrial Grind",
+      "description": "Machines, sweat and long shifts."
+    },
+    {
+      "id": "mood-frontier-grit",
+      "title": "Frontier Grit",
+      "description": "Dust, hardship and stubborn hope."
+    },
+    {
+      "id": "mood-post-party-mess",
+      "title": "Post Party Mess",
+      "description": "Confetti, quiet and regret."
+    },
+    {
+      "id": "mood-exam-panic",
+      "title": "Exam Panic",
+      "description": "You forgot to study."
+    },
+    {
+      "id": "mood-vacation-mode",
+      "title": "Vacation Mode",
+      "description": "Sunscreen and no alarms."
+    },
+    {
+      "id": "mood-dust-and-memory",
+      "title": "Dust and Memory",
+      "description": "Old attic boxes full of stories."
+    },
+    {
+      "id": "mood-electric-anticipation",
+      "title": "Electric Anticipation",
+      "description": "Something big is about to start."
+    },
+    {
+      "id": "mood-awkward",
+      "title": "Awkward",
+      "description": "Nobody knows what to say."
+    },
+    {
+      "id": "mood-spiteful-joy",
+      "title": "Spiteful Joy",
+      "description": "Winning just to annoy them."
     }
   ]
 }
