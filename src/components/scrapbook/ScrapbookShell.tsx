@@ -36,7 +36,15 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
     if (index >= 0 || !book) return;
     const i = PAGES.findIndex((p) => p.id === book.progress.lastPage);
     setIndex(i >= 0 ? i : 0);
-  }, [index, book]);
+  }, [index, book, PAGES]);
+
+  // The route can stay mounted in the background; follow a new ?page= when coming back to it.
+  const [seenStart, setSeenStart] = useState(startPage);
+  if (startPage !== seenStart) {
+    setSeenStart(startPage);
+    const i = PAGES.findIndex((p) => p.id === startPage);
+    if (i >= 0) setIndex(i);
+  }
 
   const page = PAGES[Math.max(0, index)];
   useEffect(() => {
@@ -83,7 +91,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       const i = PAGES.findIndex((p) => p.id === id);
       if (i >= 0) void goTo(i);
     },
-    [goTo],
+    [goTo, PAGES],
   );
 
   const groups = useMemo(() => {
@@ -94,7 +102,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       else out.push({ name: p.group, pages: [p] });
     });
     return out;
-  }, []);
+  }, [PAGES]);
 
   if (!ready || (book && index < 0)) return <DeskRoot className="dk-shell" />;
   if (!book || !concept)

@@ -50,7 +50,10 @@ export function ClosePage({ book, concept, page }: PageCtx) {
         <ForgeOverlay
           pieces={pieces}
           title={cur.title}
-          onOpen={() => router.push(`/scrapbook/summary?id=${book.id}&concept=${concept.id}`)}
+          onOpen={() => {
+            setForging(false);
+            router.push(`/scrapbook/summary?id=${book.id}&concept=${concept.id}`);
+          }}
           onClose={() => setForging(false)}
         />
       )}
