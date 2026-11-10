@@ -88,7 +88,7 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
   const closePop = useCallback(() => setPop(null), []);
 
   const set = useCallback((i: number) => setIndex(i), []);
-  const { binding, turn: active, goTo } = usePageCurl(Math.max(0, index), PAGES.length, set);
+  const { binding, turning, goTo } = usePageCurl(Math.max(0, index), PAGES.length, set);
   const goToId = useCallback(
     (id: PageId) => {
       const i = PAGES.findIndex((p) => p.id === id);
@@ -147,28 +147,15 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </div>
 
       <main className="dk-stage">
-        <div
-          ref={binding}
-          className={`dk-binding${active ? (active.dir === 1 ? " turning turn-fwd" : " turning turn-back") : ""}`}
-        >
+        <div ref={binding} className={`dk-binding${turning ? " turning" : ""}`}>
           <div className="dk-stack" aria-hidden />
-          {(active ? [active.from, active.to].sort((a, b) => a - b) : [index]).map((i) => {
-            // The page being left always moves; the page arriving always waits, still, underneath.
-            const moving = active && i === active.from;
-            const under = active && !moving;
-            return (
-              <div
-                key={PAGES[i].id}
-                className={`dk-leaf${moving ? " dk-moving" : ""}${under ? " dk-under" : ""}`}
-                aria-live={moving || under ? undefined : "polite"}
-                inert={!!active}
-              >
-                <PageScreen book={book} concept={concept} page={PAGES[i]} goTo={goToId} />
-                {/* always there (opacity 0), so nothing mounts during a turn */}
-                <span className="dk-turn-shade" aria-hidden />
-              </div>
-            );
-          })}
+          <div key={page.id} className="dk-leaf" aria-live="polite" inert={!!turning}>
+            <PageScreen book={book} concept={concept} page={page} goTo={goToId} />
+          </div>
+          {/* The blank sheet that does the page turn; always here, hidden until a turn. */}
+          <div className="dk-turn-sheet" aria-hidden>
+            <span className="dk-turn-shade" />
+          </div>
         </div>
       </main>
 

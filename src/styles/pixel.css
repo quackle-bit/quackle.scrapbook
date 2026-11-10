@@ -2904,3 +2904,26 @@ html[data-dark="1"] .dk .pp-badge {
 .dk-moving {
   backface-visibility: hidden;
 }
+
+/* ══════════ PAGE TURN: a blank sheet swings; content fades out/in ══════════ */
+.dk-turn-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  will-change: transform;
+}
+.dk-turn-sheet .dk-turn-shade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(36, 33, 31, 0.9), rgba(36, 33, 31, 0.5));
+}
+.dk-binding.revealing .dk-leaf .dk-page {
+  opacity: 0;
+}

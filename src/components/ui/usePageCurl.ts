@@ -1,105 +1,118 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { feel } from "@/feel";
 import { haptic } from "@/lib/motion";
 import { settings } from "@/lib/settings";
 import { sfx } from "@/lib/sound";
 
-/** A turn in progress: which page is the leaf that moves, and which way. */
-export type Turn = { from: number; to: number; dir: 1 | -1 };
-
-const TURN_MS = 460;
+const FADE_OUT = 120;
+const SWING = 440;
+const FADE_IN = 240;
 const EASE = "cubic-bezier(.45,.05,.55,.95)";
 
+/** Next frame (or 50 ms, if frames are paused in a background tab). */
+const frame = () =>
+  new Promise<void>((r) => {
+    requestAnimationFrame(() => r());
+    setTimeout(r, 50);
+  });
+/** A hidden tab can pause animations: never wait on one longer than it should take. */
+const done = (a: Animation | undefined, ms: number) =>
+  Promise.race([
+    a?.finished.then(
+      () => undefined,
+      () => undefined,
+    ) ?? Promise.resolve(),
+    new Promise<void>((r) => setTimeout(r, ms + 250)),
+  ]);
+
 /**
- * Book page turns, played by the Back/Next buttons and arrow keys. The page you leave swings like a
- * real leaf (over the spine on Next, away to the right on Back) and darkens as it turns; the page
- * you go to waits, perfectly still, underneath. The new page never animates and gets two frames to
- * be drawn before the turn starts: phones show a freshly mounted layer half-drawn during an
- * animation, which was the blink. Transform + opacity only, Web Animations, no React re-renders.
+ * Book page turns (Back/Next buttons, arrow keys), built so nothing heavy ever animates:
+ *   1. the current page's content fades out,
+ *   2. the page switches instantly (exactly like speed mode, which never blinked), new content hidden,
+ *   3. a blank paper sheet (always in the book, hidden) swings over the spine like a real leaf,
+ *   4. the new content fades in.
+ * Only a plain sheet and opacity move, so phones never show a half-drawn page.
  */
 export function usePageCurl(index: number, count: number, setIndex: (i: number) => void) {
   const binding = useRef<HTMLDivElement>(null);
-  const [turn, setTurn] = useState<Turn | null>(null);
+  const [turning, setTurning] = useState<1 | -1 | null>(null);
   const busy = useRef(false);
 
   const goTo = useCallback(
-    (to: number) => {
+    async (to: number) => {
       if (busy.current || to < 0 || to >= count || to === index) return;
       const s = settings.get();
       sfx.peel();
-      if (s.reducedMotion || s.speed) {
+      const root = binding.current;
+      if (s.reducedMotion || s.speed || !root) {
         setIndex(to);
         return;
       }
       busy.current = true;
-      setTurn({ from: index, to, dir: to > index ? 1 : -1 });
+      const fwd = to > index;
+      setTurning(fwd ? 1 : -1);
+
+      // 1. Old content out.
+      const oldPage = root.querySelector<HTMLElement>(".dk-leaf .dk-page");
+      const out = oldPage?.animate({ opacity: [1, 0] }, { duration: FADE_OUT, fill: "forwards" });
+      await done(out, FADE_OUT);
+
+      // 2. Switch now, new content hidden (the .revealing class), then let it be drawn.
+      root.classList.add("revealing");
+      flushSync(() => setIndex(to));
+      out?.cancel();
+      await frame();
+      await frame();
+
+      // 3. The blank sheet swings: away over the spine on Next, back onto the page on Back.
+      const sheet = root.querySelector<HTMLElement>(".dk-turn-sheet");
+      const shade = sheet?.querySelector<HTMLElement>(".dk-turn-shade");
+      const flat = "perspective(1100px) rotateY(0deg)";
+      const over = "perspective(1100px) rotateY(-100deg)";
+      let swing: Animation | undefined;
+      let dim: Animation | undefined;
+      if (sheet) {
+        sheet.style.visibility = "visible";
+        swing = sheet.animate(
+          { transform: fwd ? [flat, over] : [over, flat] },
+          { duration: SWING, easing: EASE, fill: "forwards" },
+        );
+        dim = shade?.animate(
+          { opacity: fwd ? [0, 0.5] : [0.5, 0] },
+          { duration: SWING, easing: EASE, fill: "forwards" },
+        );
+      }
+      haptic(feel.haptic.tear);
+
+      // 4. New content in: as the sheet clears (Next) or once it has landed (Back).
+      const reveal = async () => {
+        const page = root.querySelector<HTMLElement>(".dk-leaf .dk-page");
+        const fade = page?.animate({ opacity: [0, 1] }, { duration: FADE_IN, fill: "forwards" });
+        root.classList.remove("revealing");
+        await done(fade, FADE_IN);
+        fade?.cancel();
+      };
+      if (fwd) {
+        await new Promise((r) => setTimeout(r, SWING * 0.45));
+        const r = reveal();
+        await done(swing, SWING);
+        await r;
+      } else {
+        await done(swing, SWING);
+        if (sheet) sheet.style.visibility = "hidden";
+        await reveal();
+      }
+      if (sheet) sheet.style.visibility = "hidden";
+      swing?.cancel();
+      dim?.cancel();
+      setTurning(null);
+      busy.current = false;
     },
     [count, index, setIndex],
   );
-
-  // Runs right after React has put both leaves in the DOM (before the browser paints them),
-  // so the turn always starts from its first frame, however slow the phone is.
-  useLayoutEffect(() => {
-    if (!turn) return;
-    const leaf = binding.current?.querySelector<HTMLElement>(".dk-moving");
-    const fwd = turn.dir === 1;
-    // The page you're leaving (already fully drawn) is the one that moves: off to the left on Next,
-    // off to the right on Back. The page you're going to sits still underneath and never animates,
-    // so the phone never shows it half-drawn (that was the blink).
-    const all: Animation[] = [];
-    let done = false;
-    let raf = 0;
-    const finish = (stalled = false) => {
-      if (done) return;
-      done = true;
-      cancelAnimationFrame(raf);
-      if (stalled) all.forEach((a) => a.cancel());
-      haptic(feel.haptic.tear);
-      setIndex(turn.to);
-      setTurn(null);
-      busy.current = false;
-      // The moving page is unmounted by then; drop its animation on the next frame.
-      requestAnimationFrame(() => all.forEach((a) => a.cancel()));
-    };
-    // Give the phone two frames to draw the new page behind the old one before anything moves.
-    raf = requestAnimationFrame(() => {
-      raf = requestAnimationFrame(() => {
-        if (done || !leaf) return finish();
-        // A real page swing: Next lifts the page off the right edge and turns it over the spine;
-        // Back swings it away to the right. Perspective + rotateY only (transform), plus its own
-        // shade darkening as it turns from the light. The page underneath never moves.
-        leaf.style.transformOrigin = fwd ? "left center" : "right center";
-        const main = leaf.animate(
-          {
-            transform: [
-              "perspective(1100px) rotateY(0deg)",
-              `perspective(1100px) rotateY(${fwd ? -100 : 100}deg)`,
-            ],
-          },
-          { duration: TURN_MS, easing: EASE, fill: "forwards" },
-        );
-        const shade = leaf
-          .querySelector<HTMLElement>(".dk-turn-shade")
-          ?.animate({ opacity: [0, 0.55] }, { duration: TURN_MS, easing: EASE, fill: "forwards" });
-        if (shade) all.push(shade);
-        all.push(main);
-        void main.finished.then(
-          () => finish(),
-          () => finish(),
-        );
-      });
-    });
-    // Safety net only: a hidden tab can pause frames and animations.
-    const t = setTimeout(() => finish(true), TURN_MS * 4);
-    return () => {
-      clearTimeout(t);
-      cancelAnimationFrame(raf);
-      if (!done) all.forEach((a) => a.cancel());
-      done = true; // StrictMode re-runs this effect; only the live run may finish the turn.
-    };
-  }, [turn, setIndex]);
 
   // Arrow keys turn pages too.
   useEffect(() => {
@@ -114,5 +127,5 @@ export function usePageCurl(index: number, count: number, setIndex: (i: number) 
     return () => window.removeEventListener("keydown", onKey);
   }, [goTo, index]);
 
-  return { binding, turn, goTo };
+  return { binding, turning, goTo };
 }
