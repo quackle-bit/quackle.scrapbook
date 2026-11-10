@@ -1,5 +1,6 @@
 "use client";
 
+import { PUBLIC_URL } from "./site";
 import type { Concept, SparkNote } from "@/components/book/SpreadView";
 import { SLOT_LABEL, type CardData, type SlotId } from "./deck";
 import type { Ledger } from "./ledger";
@@ -21,7 +22,7 @@ export function spreadMarkdown(s: ExportSpread, bookTitle: string): string {
     "",
     s.concept?.logline ? `> ${s.concept.logline}` : "",
     "",
-    `*From “${bookTitle}”${s.status ? ` · status: ${s.status}` : ""} · quackle.scrapbook*`,
+    `*From “${bookTitle}”${s.status ? ` · status: ${s.status}` : ""} · [Quackle Scrapbook](${PUBLIC_URL})*`,
     "",
     "## Cards",
     "",

@@ -174,3 +174,6 @@ Follows `docs/phase-10-plan.md` (from phone testing). Supersedes Phase 9's "no p
 - The blank-sheet page turn still needs checking on a real phone.
 - Static hosting (GitHub Pages) needs a static export and the server-only routes removed; see `HANDOFF.md`.
 - Studio and Jam still use the old street look.
+
+- **Address:** published at [quacklebit.com/scrapbook](https://quacklebit.com/scrapbook). `PUBLIC_URL` in
+  `src/lib/site.ts`; build with `NEXT_PUBLIC_BASE_PATH=/scrapbook` (drives `basePath` and share links). See `HANDOFF.md`.

@@ -1,6 +1,7 @@
 # Quackle Scrapbook
 
-A cozy desk for game ideas, by [Quackle.bit](https://quacklebit.com). Open packs, collect what sparks
+A cozy desk for game ideas, by [Quackle.bit](https://quacklebit.com). Lives at
+[quacklebit.com/scrapbook](https://quacklebit.com/scrapbook). Open packs, collect what sparks
 something, stamp it into your scrapbook, and end up with a game pitch your team can read, compare and
 vote on. **Less thinking. More tinkering.**
 

@@ -1,3 +1,4 @@
+import { BASE_PATH, PUBLIC_URL } from "../site";
 import {
   ASSET_KINDS,
   SCOPE_AREAS,
@@ -295,7 +296,7 @@ export function pitchMarkdown(m: PitchModel): string {
     );
     if (m.assetNotes) L.push("", m.assetNotes);
   }
-  L.push("", "_Made with Quackle Scrapbook_");
+  L.push("", `_Made with [Quackle Scrapbook](${PUBLIC_URL})_`);
   return (
     L.join("\n")
       .replace(/\n{3,}/g, "\n\n")
@@ -406,4 +407,5 @@ export function decodePitch(hash: string): PitchModel | null {
   }
 }
 
-export const pitchUrl = (m: PitchModel) => `${window.location.origin}/s#${encodePitch(m)}`;
+export const pitchUrl = (m: PitchModel) =>
+  `${window.location.origin}${BASE_PATH}/s#${encodePitch(m)}`;

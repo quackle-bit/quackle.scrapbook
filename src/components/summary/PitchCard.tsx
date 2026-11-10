@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { PUBLIC_URL_LABEL } from "@/lib/site";
 import type { PitchCardLine, PitchModel } from "@/lib/scrapbook/pitch";
 
 const names = (xs: PitchCardLine[], n: number) => xs.slice(0, n).map((x) => x.title);
@@ -77,7 +78,7 @@ export const PitchCard = forwardRef<HTMLDivElement, { model: PitchModel }>(funct
         )}
       </div>
       {m.status === "pitched" && <span className="pcard-stamp">Pitched</span>}
-      <p className="pcard-foot">made with quackle.scrapbook</p>
+      <p className="pcard-foot">made with Quackle Scrapbook · {PUBLIC_URL_LABEL}</p>
     </div>
   );
 });

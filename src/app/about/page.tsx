@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PUBLIC_URL, PUBLIC_URL_LABEL } from "@/lib/site";
 import Link from "next/link";
 import { DeskRoot } from "@/components/ui/DeskRoot";
 
@@ -73,6 +74,13 @@ export default function About() {
                 </a>
                 , a small studio telling stories in pixels. The music on the radio is generated live
                 in your browser.
+              </p>
+              <p>
+                Quackle Scrapbook lives at{" "}
+                <a href={PUBLIC_URL} rel="noopener">
+                  {PUBLIC_URL_LABEL}
+                </a>
+                .
               </p>
             </section>
           </div>

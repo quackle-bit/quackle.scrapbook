@@ -1,5 +1,9 @@
 # Handoff: copying quackle.scrapbook into the web repo
 
+**Where it will live: [quacklebit.com/scrapbook](https://quacklebit.com/scrapbook).** Quackle Scrapbook is published on the
+studio site under the `/scrapbook` path. Links in the app already point there (pitch image footer, About page, text
+exports); see "The address" below for the build settings.
+
 For the session that copies this project into the website repo and pushes it.
 
 ## What to copy
@@ -66,6 +70,22 @@ links) runs fully in the browser and stores data in localStorage, so it can be s
 
 To deploy there, the app needs a static export (`output: "export"` in `next.config.ts`, a `basePath` matching the repo
 path, and the server-only routes above removed or moved out). That work has not been started.
+
+## The address: quacklebit.com/scrapbook
+
+- `src/lib/site.ts` holds the public address (`PUBLIC_URL = https://quacklebit.com/scrapbook`), used by the pitch image
+  footer, the About page, Copy as text and other exports, and (in production) page metadata and the sitemap.
+- Because the app sits under `/scrapbook`, build it with the base path set. One variable drives both Next's `basePath`
+  (in `next.config.ts`) and the share links (`/scrapbook/s#…`):
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/scrapbook npm run build
+```
+
+This build passes. Local dev needs nothing: without the variable the app runs at `/` as before.
+
+- The scrapbook's own pages then sit at `quacklebit.com/scrapbook/scrapbook?id=…` and the pitch at
+  `quacklebit.com/scrapbook/scrapbook/summary?id=…`. That works; renaming those routes is optional cleanup.
 
 ## Where things stand
 

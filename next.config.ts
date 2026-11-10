@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Served under a sub-path on the studio site (quacklebit.com/scrapbook): set NEXT_PUBLIC_BASE_PATH=/scrapbook
+  // when building for it. Empty in local dev. Share links read the same variable (src/lib/site.ts).
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   cacheComponents: true,
   partialPrefetching: true,
   // Dev only: let phones on the local network load the dev server (e.g. http://192.168.x.x:3000).

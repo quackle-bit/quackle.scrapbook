@@ -10,6 +10,7 @@
  *   5. Details    one short keyword line per stall (mechanic, world, mood, look, twist, rule…)
  *   6. Notes      optional
  */
+import { PUBLIC_URL } from "./site";
 import { SLOT_LABEL, type CardData, type SlotId } from "./deck";
 import type { Rng } from "./rng";
 
@@ -215,7 +216,7 @@ export function pitchMarkdown(p: Pitch, cards: Partial<Record<SlotId, CardData>>
     ...filledDetails(p, cards).map((d) => `- **${d.label}:** ${d.text}`),
   ];
   if (p.notes.trim()) lines.push("", "**Notes**", "", p.notes.trim());
-  lines.push("", "_Made with quackle.scrapbook_");
+  lines.push("", `_Made with [Quackle Scrapbook](${PUBLIC_URL})_`);
   return (
     lines
       .filter((l, i, a) => !(l === "" && a[i - 1] === ""))

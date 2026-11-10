@@ -1,6 +1,15 @@
-/** The public site URL (set NEXT_PUBLIC_SITE_URL in production; Vercel's URL is the fallback). */
+/** Where Quackle Scrapbook lives once published: on the studio site, under /scrapbook. */
+export const PUBLIC_URL = "https://quacklebit.com/scrapbook";
+/** The same address without the protocol, for text on images and pages. */
+export const PUBLIC_URL_LABEL = "quacklebit.com/scrapbook";
+
+/**
+ * The path the app is served under (e.g. "/scrapbook" on quacklebit.com). Empty in local dev.
+ * Set NEXT_PUBLIC_BASE_PATH (and Next's basePath) when building for the studio site.
+ */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+/** The site URL for metadata and the sitemap: NEXT_PUBLIC_SITE_URL, else the public address in production. */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+  (process.env.NODE_ENV === "production" ? PUBLIC_URL : "http://localhost:3000");
