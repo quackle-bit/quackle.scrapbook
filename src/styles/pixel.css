@@ -3646,3 +3646,152 @@ html[data-dark="1"] .dk.dk-desk {
   color: var(--ink);
   text-underline-offset: 3px;
 }
+
+/* ══════════ PC LAYOUT (900 px and up only; phones are untouched) ══════════ */
+.dk-leftpage {
+  display: none;
+}
+@media (min-width: 900px) {
+  /* The scrapbook opens as a two-page spread: page index on the left, the page on the right. */
+  .dk-shell .dk-topbar,
+  .dk-shell .dk-progress,
+  .dk-shell .dk-bottomnav {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dk-shell .dk-stage {
+    display: grid !important;
+    grid-template-columns: 280px minmax(0, 760px);
+    justify-content: center;
+    align-items: stretch;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .dk-leftpage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    overflow: auto;
+    padding: 20px 22px 16px 18px;
+    border: 2px solid var(--ink);
+    border-right: 0;
+    background: var(--paper);
+    box-shadow: -4px 4px 0 var(--ink);
+  }
+  .dk-leftpage::after {
+    /* the gutter shadow where the two pages meet the spine */
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    background: linear-gradient(90deg, transparent, rgba(36, 33, 31, 0.12));
+    pointer-events: none;
+  }
+  .dk-shell .dk-binding {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .dk-leftpage-book {
+    margin: 0;
+    font-family: var(--font-pixel), monospace;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  .dk-leftpage ol {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dk-leftpage button {
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 8px;
+    border: 2px solid transparent;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .dk-leftpage button:hover {
+    border-color: #d9d3c7;
+  }
+  .dk-leftpage button[aria-current="page"] {
+    border-color: var(--ink);
+    background: var(--amber);
+  }
+  .dk-leftpage .n {
+    font-family: var(--font-pixel), monospace;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+  .dk-leftpage .v {
+    color: var(--ink-soft);
+  }
+  .dk-leftpage-hint {
+    margin: auto 0 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* Cover: icons in the screen corners, a bigger book. */
+  .dk-desk .dk-desk-top {
+    position: fixed;
+    left: 24px;
+    right: 24px;
+    top: 20px;
+    z-index: 4;
+    width: auto !important;
+    max-width: none;
+  }
+  .dk-desk .dk-desk-main {
+    padding-top: 80px !important;
+    max-width: 560px;
+  }
+  .dk-desk .cv-book {
+    width: min(340px, 44dvh);
+  }
+  .dk-desk .dk-desk-actions {
+    width: min(360px, 100%);
+    margin: 0 auto;
+  }
+
+  /* Pitch: the document on the left, actions and asset list in a column beside it. */
+  .dk-summary-main {
+    grid-template-columns: minmax(0, 680px) 300px !important;
+    justify-content: center;
+    align-items: start;
+    column-gap: 28px;
+    padding: 24px 24px 40px !important;
+  }
+  .dk-summary-main > .pp {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    max-width: 680px;
+  }
+  .dk-summary-main > .pp-actions {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 16px;
+    margin-top: 6px;
+  }
+  .dk-summary-main > .ap {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 16px;
+  }
+}

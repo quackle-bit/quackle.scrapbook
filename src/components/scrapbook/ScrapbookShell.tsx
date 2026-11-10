@@ -147,6 +147,28 @@ export function ScrapbookShell({ bookId, startPage }: { bookId: string; startPag
       </div>
 
       <main className="dk-stage">
+        {/* PC only (hidden on phones): the left page of the open book, a page index to jump around. */}
+        <aside className="dk-leftpage" aria-label="Pages in this scrapbook">
+          <p className="dk-leftpage-book">{book.name.trim() || "Untitled scrapbook"}</p>
+          <ol>
+            {PAGES.map((p, i) => (
+              <li key={p.id}>
+                <button
+                  type="button"
+                  aria-current={p.id === page.id ? "page" : undefined}
+                  onClick={() => goToId(p.id)}
+                >
+                  <span className="n">{i + 1}</span>
+                  <span className="t">{p.title}</span>
+                  {book.progress.visitedPages.includes(p.id) && (
+                    <Icon name="check" size={14} className="v" />
+                  )}
+                </button>
+              </li>
+            ))}
+          </ol>
+          <p className="dk-leftpage-hint">Use ← → to turn pages</p>
+        </aside>
         <div ref={binding} className={`dk-binding${turning ? " turning" : ""}`}>
           <div className="dk-stack" aria-hidden />
           <div key={page.id} className="dk-leaf" aria-live="polite" inert={!!turning}>
