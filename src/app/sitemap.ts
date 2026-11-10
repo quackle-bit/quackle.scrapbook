@@ -8,3 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: p === "" ? 1 : 0.6,
   }));
 }
+
+// Static file, so it works in the GitHub Pages export too.
+export const dynamic = "force-static";

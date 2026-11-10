@@ -45,7 +45,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body>
         {children}
-        <Analytics />
+        {/* Vercel analytics only exists on Vercel hosting, not in the GitHub Pages export. */}
+        {process.env.STATIC_EXPORT !== "1" && <Analytics />}
       </body>
     </html>
   );

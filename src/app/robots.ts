@@ -11,3 +11,6 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
+
+// Static file, so it works in the GitHub Pages export too.
+export const dynamic = "force-static";

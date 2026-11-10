@@ -172,11 +172,11 @@ Follows `docs/phase-10-plan.md` (from phone testing). Supersedes Phase 9's "no p
 ### Known gaps
 
 - The blank-sheet page turn still needs checking on a real phone.
-- Static hosting (GitHub Pages) needs a static export and the server-only routes removed; see `HANDOFF.md`.
+- Static hosting (GitHub Pages) needs a static export and the server-only routes removed; see `DEPLOY.md`.
 - Studio and Jam still use the old street look.
 
 - **Address:** published at [quacklebit.com/scrapbook](https://quacklebit.com/scrapbook). `PUBLIC_URL` in
-  `src/lib/site.ts`; build with `NEXT_PUBLIC_BASE_PATH=/scrapbook` (drives `basePath` and share links). See `HANDOFF.md`.
+  `src/lib/site.ts`; build with `NEXT_PUBLIC_BASE_PATH=/scrapbook` (drives `basePath` and share links). See `DEPLOY.md`.
 - **Bigger decks (so games stay varied):** mechanics 256, twists 221, settings 170, moods 120, looks 100, audio 99,
   objectives 100, genres 72, perspectives 35. Drafted, deduped and checked by `npm run content:lint`, whose minimums
   were raised so decks can't shrink back.
