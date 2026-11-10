@@ -1764,3 +1764,226 @@ textarea.dk-input {
   color: var(--terra);
   font-weight: 700;
 }
+
+/* ══════════ PITCH WALL ══════════ */
+.dk-wall-note {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(20, 12, 8, 0.4);
+  color: var(--amber-soft);
+  font-size: 15px;
+}
+.dk-wall-bar {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+.dk-wall-bar h2 {
+  font-size: 22px;
+}
+.dk-voter {
+  font-size: 17px;
+}
+.dk-wall-result {
+  font-family: var(--font-display), serif;
+  font-size: 20px;
+  line-height: 1.3;
+}
+.dk-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.dk-results li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px 28px;
+  gap: 10px;
+  align-items: center;
+  font-weight: 700;
+}
+.dk-results li > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dk-bar {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.dk-bar i {
+  display: block;
+  height: 100%;
+  background: var(--terra);
+}
+.dk-wall-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .dk-wall-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.dk-wall-card {
+  position: relative;
+  display: grid;
+  gap: 0;
+  align-content: start;
+  background: var(--grain), var(--paper);
+  color: var(--ink);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.dk-wall-card.voted {
+  box-shadow:
+    0 0 0 4px var(--amber),
+    var(--shadow);
+}
+.dk-wall-card.winner {
+  box-shadow:
+    0 0 0 4px var(--olive),
+    var(--shadow);
+}
+.dk-wall-crown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--olive);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+}
+.dk-wall-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  height: 54px;
+}
+.dk-wall-strip span {
+  --tc: var(--dusty);
+  display: grid;
+  place-items: center;
+  padding: 4px 6px;
+  background: var(--tc);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+}
+.dk-wall-body {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px 8px;
+}
+.dk-wall-body h3 {
+  font-size: 24px;
+  padding-right: 70px;
+}
+.dk-wall-tag {
+  font-family: var(--font-display), serif;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.dk-wall-meta {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+.dk-wall-desc {
+  font-size: 15px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dk-wall-votes b {
+  font-size: 22px;
+  font-family: var(--font-display), serif;
+}
+.dk-wall-votes small {
+  color: var(--ink-soft);
+}
+.dk-wall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 16px 16px;
+}
+.dk-wall-actions .dk-btn {
+  flex: 1;
+}
+.dk-compare-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(20, 12, 8, 0.85);
+}
+.dk-compare {
+  display: grid;
+  gap: 10px;
+}
+.dk-compare-head,
+.dk-compare-row > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.dk-compare-head strong {
+  font-family: var(--font-display), serif;
+  font-size: 18px;
+}
+.dk-compare-row {
+  display: grid;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+.dk-compare-row small {
+  font-weight: 800;
+  color: var(--terra);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+.dk-compare-row p {
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.dk-sheet-pitch .dk-spread {
+  box-shadow: none;
+  padding: 18px 4px 4px;
+}
+.dk-comments {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.dk-comments li {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--paper-2);
+}
+.dk-comments small {
+  color: var(--ink-soft);
+  font-weight: 700;
+}

@@ -106,3 +106,19 @@ title · tagline · genre · platform · details (short keyword lines: mechanic,
 - "Flip all" stays visible after every card is up.
 - Not yet play-tested on a real phone (only emulated).
 - Spark pools are 8–12 per stop (plan: 15–30). Seed-type choice at the Gate (word / mechanic / mood) not built.
+
+## Phase 8 — Cozy desk redesign (branch `phase-8-desk`)
+
+Follows `docs/redesign-plan.md`. The street is replaced by a scrapbook of pages on a desk.
+
+- **8.1 Foundation:** design tokens (walnut/amber/cream), Fraunces + Nunito, the Desk home (lamp, radio, book, envelopes), autosaving scrapbook store, shell with 12 pages (swipe / arrows / buttons / index sheet), progress that never decreases, Setup page, procedural radio (5 stations, opt-in, volume, mute), settings sheet.
+- **8.2 Scrapbook experience:** `data/inspiration/*.json` + `npm run content:lint`; BoosterPack (envelope tear or tap, flip, keep / favorite / set aside, reroll, open another, write my own); pages: title (word tray + candidates), tagline (suggestions only from your own picks), high concept template, genre primary/secondary, mechanics, tap-to-build core loop with variations, objective, hook (twist combiner), moodboard (4 collections, primaries, notes), 10-point scope + Must/Nice/Cut.
+- **8.3 Pitch:** pitch spread (only filled sections, edit links, "not in your pitch yet"), several concepts per scrapbook, Save as pitched, image export, print/PDF, copy as Markdown, share links v2 (validated on read; v1 links still open), old-pitch import, redirects (`/book`, `/prototype`, `/play`), new About and 404.
+- **8.4 Pitch Wall:** cards with moodboard strip and counts, explore-first (no voting until a round starts), pass-the-phone voters, one vote each (changeable until close), anonymous option, results with winner/tie, compare two, comments. Everything is labelled "saved on this device"; `WallRepo` is the seam for a shared wall.
+
+### Known gaps / next
+
+- **Shared wall is not built.** The data layer is ready (`src/lib/wall/types.ts`), but a shared wall needs new Supabase tables (sessions, pitches, votes, comments), RLS and a join flow. Nothing in the UI claims sharing.
+- Studio and Jam (from the first version) still use the old street (`src/components/route/*`, `/play?mode=`); they were not redesigned. The old street files are kept for them only.
+- Not tried on a real phone (only in phone-sized browser windows); radio audio not listened to.
+- Moodboard image references are not supported (text cards only).

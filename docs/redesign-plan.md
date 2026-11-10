@@ -1,5 +1,7 @@
 # Quackle Scrapbook: redesign implementation plan
 
+> **Status:** phases 8.1–8.4 are built on branch `phase-8-desk` (see PROGRESS.md for what differs: the street files stayed in place for Studio/Jam instead of moving to `src/legacy/`, and the shared-wall seam is the `WallRepo` interface only).
+
 Source brief: the "Product Requirements & Implementation Brief" (cozy desk, 8 stages, scrapbook of a
 game concept, pitch wall). This plan maps that brief onto the **existing** codebase so it can be
 executed phase by phase. Branch: `phase-8-desk` (from `phase-7-pitch`).

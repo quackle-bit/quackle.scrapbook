@@ -162,6 +162,9 @@ export function SummaryRoute() {
           >
             Duplicate concept
           </button>
+          <Link className="dk-btn" href={`/wall?id=${book.id}`}>
+            Pitch Wall
+          </Link>
           <button
             type="button"
             className="dk-btn"

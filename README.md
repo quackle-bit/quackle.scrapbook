@@ -1,19 +1,18 @@
-# quackle.scrapbook
+# Quackle Scrapbook
 
-A game-idea toy by [quackle.bit](https://quacklebit.com). You're a card hunter on a market street:
-open card packs, **QUACK** the bad ideas into the bin, tape the good ones into your scrapbook, and
-forge each finished spread into a pixel-art game concept.
+A cozy desk for game ideas, by [Quackle.bit](https://quacklebit.com). Open packs, collect what sparks
+something, stamp it into your scrapbook, and end up with a game pitch your team can read, compare and
+vote on. **Less thinking. More tinkering.**
 
-| Route        | What                                                                     |
-| ------------ | ------------------------------------------------------------------------ |
-| `/`          | Home                                                                     |
-| `/play`      | The street (Visitor). `?mode=jam` / `?mode=studio` for the other streets |
-| `/book`      | Your local book: cover, spreads, discard pile, collection                |
-| `/s#…`       | A read-only shared spread (encoded in the URL hash)                      |
-| `/studio`    | Studio library, Back Room, Ledger, Appraiser (members)                   |
-| `/jam`       | Jam rooms: join with a code, or open one (members)                       |
-| `/about`     | Case study                                                               |
-| `/prototype` | The original feel lab                                                    |
+| Route                             | What                                                                                 |
+| --------------------------------- | ------------------------------------------------------------------------------------ |
+| `/`                               | **The Desk**: Continue / New scrapbook / My scrapbooks, radio, settings              |
+| `/scrapbook?id=&page=`            | The scrapbook: 12 pages (setup, identity, playground, atmosphere, production, close) |
+| `/scrapbook/summary?id=&concept=` | The pitch spread: edit links, save as pitched, export image / PDF / text, share link |
+| `/wall?id=`                       | **Pitch Wall**: browse pitches, compare, local voting rounds, comments               |
+| `/s#…`                            | A shared, read-only pitch (the pitch lives in the link itself)                       |
+| `/about`                          | What it is and how it works                                                          |
+| `/studio`, `/jam`, `/play?mode=`  | Studio library, Jam rooms and their streets (from the first version, unchanged)      |
 
 ## Run it
 
@@ -22,36 +21,36 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Everything works without any keys: Studio and Jam run as **local
-previews** (Jam: open the room in a second tab to play as a second guest).
+Open http://localhost:3000. Everything works without keys. Scrapbooks, the wall and votes are saved in the
+browser (`localStorage`); share links carry the pitch inside the URL, so nothing is uploaded.
 
 ## Scripts
 
-| Script                                       |                                                                 |
-| -------------------------------------------- | --------------------------------------------------------------- |
-| `npm run dev` / `build` / `start`            | Next.js                                                         |
-| `npm run lint` / `typecheck` / `format`      | Quality                                                         |
-| `npm run vocab:lint` / `vocab:sample [seed]` | Card banks in `data/vocab`                                      |
-| `npm run db:test`                            | Runs the Supabase migration in PGlite and checks every RLS rule |
-| `python3 scripts/make-brand-assets.py`       | Regenerates icons + link-preview image from the duck sprite     |
+| Script                                  |                                                                 |
+| --------------------------------------- | --------------------------------------------------------------- |
+| `npm run dev` / `build` / `start`       | Next.js                                                         |
+| `npm run lint` / `typecheck` / `format` | Quality                                                         |
+| `npm run content:lint`                  | Checks the card content in `data/inspiration`                   |
+| `npm run vocab:lint` / `vocab:sample`   | Older vocab banks (used by the Studio/Jam street)               |
+| `npm run db:test`                       | Runs the Supabase migration in PGlite and checks every RLS rule |
+| `python3 scripts/make-brand-assets.py`  | Regenerates icons + link-preview image from the duck sprite     |
+
+## Where things live
+
+- `data/inspiration/*.json`: all pack content (genres, mechanics, objectives, twists, moods, settings, visual/audio directions, words, tagline templates). Edit these to add cards.
+- `src/lib/inspiration.ts`: loads content, draws packs (no duplicates), tagline suggestions from the user's own picks.
+- `src/lib/scrapbook/`: data model (`types.ts`), autosaving store, pitch model + exports + share links (`pitch.ts`), old-pitch import.
+- `src/lib/wall/`: `WallRepo` interface + the local implementation (a shared wall can plug in later).
+- `src/components/desk/`, `scrapbook/`, `cards/`, `summary/`, `wall/`, `radio/`, `ui/`: the screens.
+- `src/lib/radio.ts`: the radio's five stations, generated live with Web Audio (no audio files).
+- `src/styles/desk.css`: the design system (tokens, desk scene, shell, cards, spread, wall, print).
+- `docs/redesign-plan.md`: the plan this redesign followed.
 
 ## Going live
 
 1. **Vercel:** import the GitHub repo; defaults are fine. Set `NEXT_PUBLIC_SITE_URL` to the final URL.
-2. **Supabase** (Studio + Jam): follow [`supabase/README.md`](supabase/README.md).
-3. **Claude Appraiser:** set `ANTHROPIC_API_KEY` on the server (never `NEXT_PUBLIC_`).
+2. **Studio / Jam** (optional, from the first version): follow [`supabase/README.md`](supabase/README.md).
 
 Keys go in `.env.local` locally (git-ignored) and in Vercel's environment variables; see `.env.example`.
 
-## Where things live
-
-- `src/feel.ts`: every timing, gesture threshold and sound level.
-- `src/lib/deck.ts`, `data/vocab/`: cards, packs, the Back Room, pool rules.
-- `src/lib/route.ts`: stops, streets per mode, spark questions, weather.
-- `src/components/route/`: the street and every stop's mini-game.
-- `src/lib/store.ts`: the visitor's local book and daily coins.
-- `src/lib/studio/`, `src/lib/jam/`: local and Supabase backends behind one interface each.
-- `src/lib/server/appraiser.ts`, `src/app/api/appraise/`: the Appraiser (server-only).
-- `supabase/migrations/`: schema, RLS and server-side rules.
-
-See `CLAUDE.md` for the original plan and `PROGRESS.md` for what was built, phase by phase.
+See `CLAUDE.md` for the original plan and `PROGRESS.md` for what was built.

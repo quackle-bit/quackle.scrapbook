@@ -120,7 +120,10 @@ export type VotingSession = {
   votes: Vote[];
   status: VotingStatus;
   anonymous: boolean;
+  /** 0 = no round yet: the team is still exploring and nobody can vote. */
   round: number;
+  /** Everyone who has voted or been added as a voter this session (pass-the-phone names). */
+  voters: string[];
 };
 export type WallComment = {
   id: string;
