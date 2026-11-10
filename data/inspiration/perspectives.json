@@ -2,104 +2,104 @@
   "type": "perspective",
   "cards": [
     {
-      "id": "per-top-down",
-      "title": "Top-Down",
-      "description": "Looking straight down at the world."
+      "id": "per-2d-top-down",
+      "title": "2D Top-Down",
+      "description": "Flat sprites, looking straight down."
     },
     {
-      "id": "per-three-quarter",
-      "title": "Three-Quarter",
-      "description": "Top-down, tilted so you see fronts and roofs."
+      "id": "per-2d-side",
+      "title": "2D Side View",
+      "description": "Flat sprites in profile, left to right."
     },
     {
-      "id": "per-isometric",
-      "title": "Isometric",
-      "description": "Angled grid view, like a little diorama."
+      "id": "per-2d-three-quarter",
+      "title": "2D Three-Quarter",
+      "description": "Top-down, tilted so you see fronts of things."
     },
     {
-      "id": "per-side-view",
-      "title": "Side View",
-      "description": "Flat profile, left to right."
+      "id": "per-2d-isometric",
+      "title": "2D Isometric",
+      "description": "Angled pixel grid, like a tiny diorama."
     },
     {
-      "id": "per-side-lanes",
-      "title": "Side View with Lanes",
-      "description": "Side-on, but you can step between depth lanes."
+      "id": "per-2d-vertical",
+      "title": "2D Vertical Scroller",
+      "description": "Flat view that moves up or down the screen."
     },
     {
-      "id": "per-first-person",
-      "title": "First Person",
+      "id": "per-2d-single-screen",
+      "title": "2D Single Screen",
+      "description": "The whole level fits on one fixed screen."
+    },
+    {
+      "id": "per-25d-side",
+      "title": "2.5D Side-Scroller",
+      "description": "3D world, but you only move left and right."
+    },
+    {
+      "id": "per-25d-top-down",
+      "title": "2.5D Top-Down",
+      "description": "3D world seen from above, played on a flat plane."
+    },
+    {
+      "id": "per-25d-lanes",
+      "title": "2.5D Lanes",
+      "description": "Side view with a few depth lanes to step between."
+    },
+    {
+      "id": "per-hd-2d",
+      "title": "2D Sprites in a 3D World",
+      "description": "Pixel characters in a lit 3D scene."
+    },
+    {
+      "id": "per-3d-on-2d",
+      "title": "3D Characters on 2D Backgrounds",
+      "description": "Models walking over painted or pixel scenes."
+    },
+    {
+      "id": "per-3d-isometric",
+      "title": "3D Isometric",
+      "description": "3D scene with a fixed angled camera."
+    },
+    {
+      "id": "per-3d-top-down",
+      "title": "3D Top-Down",
+      "description": "3D models seen from high above."
+    },
+    {
+      "id": "per-3d-third-person",
+      "title": "3D Third Person",
+      "description": "Camera behind and above the character."
+    },
+    {
+      "id": "per-3d-over-shoulder",
+      "title": "3D Over the Shoulder",
+      "description": "Close third person, camera at the shoulder."
+    },
+    {
+      "id": "per-3d-first-person",
+      "title": "3D First Person",
       "description": "Through the character's own eyes."
     },
     {
-      "id": "per-over-shoulder",
-      "title": "Over the Shoulder",
-      "description": "Close third person, camera behind them."
+      "id": "per-3d-fixed-camera",
+      "title": "3D Fixed Camera",
+      "description": "Set camera angles per room, like a stage."
     },
     {
-      "id": "per-third-person-far",
-      "title": "Wide Third Person",
-      "description": "Camera pulled back to show the space around."
+      "id": "per-3d-free-orbit",
+      "title": "3D Free Orbit",
+      "description": "Spin the camera freely around the scene."
     },
     {
-      "id": "per-fixed-diorama",
-      "title": "Fixed Diorama",
-      "description": "One still camera per room, like a stage set."
+      "id": "per-voxel",
+      "title": "Voxel 3D",
+      "description": "A 3D world built from little cubes."
     },
     {
-      "id": "per-free-orbit",
-      "title": "Free Orbit",
-      "description": "Spin the camera around the scene."
-    },
-    {
-      "id": "per-flip-screen",
-      "title": "Flip Screen",
-      "description": "Each screen is a room; walk off the edge to the next."
-    },
-    {
-      "id": "per-birds-eye-map",
-      "title": "Bird's-Eye Map",
-      "description": "Zoomed far out over a whole map."
-    },
-    {
-      "id": "per-cockpit",
-      "title": "Cockpit",
-      "description": "Seated inside a vehicle, looking out."
-    },
-    {
-      "id": "per-auto-scroll",
-      "title": "Auto-Scroll",
-      "description": "The camera keeps moving and you keep up."
-    },
-    {
-      "id": "per-split-screen",
-      "title": "Split Screen",
-      "description": "Two views at once, side by side."
-    },
-    {
-      "id": "per-diegetic-screen",
-      "title": "Through a Screen",
-      "description": "You see it all through a device in the world."
-    },
-    {
-      "id": "per-tabletop",
-      "title": "Tabletop",
-      "description": "Looking down at pieces on a table."
-    },
-    {
-      "id": "per-tight-zoom",
-      "title": "Tight Zoom",
-      "description": "Close in and claustrophobic; you see very little."
-    },
-    {
-      "id": "per-single-screen",
-      "title": "Single Screen",
-      "description": "The whole game fits on one fixed screen."
-    },
-    {
-      "id": "per-vertical-scroll",
-      "title": "Vertical Scroll",
-      "description": "Top to bottom, climbing or falling."
+      "id": "per-low-res-3d",
+      "title": "Low-Res 3D",
+      "description": "3D rendered small and scaled up into big pixels."
     }
   ]
 }

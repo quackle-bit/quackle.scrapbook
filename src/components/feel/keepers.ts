@@ -85,7 +85,7 @@ export const KEEPERS: Record<CardType, Keeper> = {
   perspective: {
     stall: "The Lookout",
     who: "a lookout with a brass spyglass",
-    greet: ["From where do we watch?", "Every game needs a place to stand."],
+    greet: ["Flat or deep? Above or beside?", "Every game needs a place to stand."],
     kept: ["Good vantage point.", "I can see it all from here."],
     trashed: ["Can't see a thing from there.", "Wrong angle."],
     pack: "Perspective pack",

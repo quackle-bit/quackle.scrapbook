@@ -51,7 +51,7 @@ const TABS: {
     label: "Perspective",
     pack: "Perspective pack",
     prim: "perspective",
-    hint: "Where is the camera?",
+    hint: "2D or 3D? Top-down, side view, first person?",
   },
   {
     id: "audio",
