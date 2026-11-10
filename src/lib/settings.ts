@@ -16,6 +16,8 @@ export type Settings = {
   motionOverride: boolean | null;
   /** Show the pages hidden from the short pitch (high concept, objective, audio, extra options). */
   showExtras: boolean;
+  /** Dark mode: the paper is inverted (art keeps its colours). */
+  dark: boolean;
 };
 
 const KEY = "qs.settings";
@@ -28,6 +30,7 @@ let state: Settings = {
   musicOn: false,
   motionOverride: null,
   showExtras: false,
+  dark: false,
 };
 let osReduced = false;
 const listeners = new Set<() => void>();
@@ -49,6 +52,7 @@ function start() {
         : "lofi",
       motionOverride: typeof saved.motionOverride === "boolean" ? saved.motionOverride : null,
       showExtras: !!saved.showExtras,
+      dark: !!saved.dark,
     };
   } catch {
     /* storage unavailable: keep defaults */
@@ -75,6 +79,7 @@ function setState(patch: Partial<Settings>) {
         station: state.station,
         motionOverride: state.motionOverride,
         showExtras: state.showExtras,
+        dark: state.dark,
       }),
     );
   } catch {
@@ -105,6 +110,7 @@ const SERVER: Settings = {
   musicOn: false,
   motionOverride: null,
   showExtras: false,
+  dark: false,
 };
 
 export function useSettings(): Settings {

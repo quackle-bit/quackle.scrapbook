@@ -2688,3 +2688,52 @@
   margin: 4px 0 0;
   white-space: pre-wrap;
 }
+
+/* ══════════ DARK MODE: the paper is inverted; art is flipped back to its real colours ══════════ */
+/* On the root element, so fixed things (sheets, the duck, the forge) still pin to the screen. */
+html:has(.dk[data-dark="1"]) {
+  filter: invert(1) hue-rotate(180deg);
+  background: #fff;
+}
+.dk[data-dark="1"]
+  :is(
+    .duck-sprite,
+    .px-gacha-machine,
+    .pb-pack,
+    .sl-machine,
+    .dk-book,
+    .pb-burst,
+    .px-card-back,
+    .fg-stamp,
+    img,
+    video
+  ) {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Quick buttons at the top of Settings */
+.dk-quick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.dk-quick .dk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+}
+.dk-quick .dk-btn[aria-pressed="true"] {
+  background: var(--amber);
+}
+/* Keep the duck and the amber accents in their real colours in dark mode. */
+.dk[data-dark="1"] .duck-sprite,
+.dk[data-dark="1"] .dk-btn.primary,
+.dk[data-dark="1"] .dk-quick .dk-btn[aria-pressed="true"],
+.dk[data-dark="1"] .px-tickets button[aria-pressed="true"],
+.dk[data-dark="1"] .dk-stamps i.here,
+.dk[data-dark="1"] .pp-badge {
+  filter: invert(1) hue-rotate(180deg) !important;
+}

@@ -1,6 +1,10 @@
 import {
   Check,
   Copy,
+  Maximize,
+  Minimize,
+  Moon,
+  Sun,
   Image,
   Printer,
   Share2,
@@ -34,6 +38,10 @@ const ICONS = {
   image: Image,
   copy: Copy,
   print: Printer,
+  fullscreen: Maximize,
+  exitFullscreen: Minimize,
+  moon: Moon,
+  sun: Sun,
 } satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof ICONS;

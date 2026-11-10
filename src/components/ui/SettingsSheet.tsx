@@ -5,10 +5,12 @@ import { useState } from "react";
 import { radio } from "@/lib/radio";
 import { settings, useSettings } from "@/lib/settings";
 import { BottomSheet } from "./BottomSheet";
+import { useFullscreen } from "./useFullscreen";
 
 export function SettingsButton() {
   const [open, setOpen] = useState(false);
   const s = useSettings();
+  const fs = useFullscreen();
   return (
     <>
       <button
@@ -21,6 +23,22 @@ export function SettingsButton() {
       </button>
       <BottomSheet open={open} title="Settings" onClose={() => setOpen(false)}>
         <div className="dk-settings">
+          <div className="dk-quick">
+            <button
+              type="button"
+              className="dk-btn"
+              aria-pressed={s.dark}
+              onClick={() => settings.set({ dark: !s.dark })}
+            >
+              <Icon name={s.dark ? "sun" : "moon"} /> {s.dark ? "Light mode" : "Dark mode"}
+            </button>
+            {fs.supported && (
+              <button type="button" className="dk-btn" aria-pressed={fs.on} onClick={fs.toggle}>
+                <Icon name={fs.on ? "exitFullscreen" : "fullscreen"} />{" "}
+                {fs.on ? "Exit full screen" : "Full screen"}
+              </button>
+            )}
+          </div>
           <label className="dk-switch">
             <input
               type="checkbox"
