@@ -56,10 +56,16 @@ export function SummaryRoute() {
   async function cardFile() {
     if (!card.current) return null;
     const { toBlob } = await import("html-to-image");
-    const blob = await toBlob(card.current, {
+    const el = card.current;
+    const blob = await toBlob(el, {
       pixelRatio: 2,
       backgroundColor: "#ffffff",
       cacheBust: true,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      // The copy is hidden off-screen (position: fixed; left: -10000px). Draw it at 0,0 instead,
+      // or the image comes out blank.
+      style: { position: "static", left: "0", top: "0", margin: "0", transform: "none" },
     });
     return blob ? new File([blob], `${fname}.png`, { type: "image/png" }) : null;
   }
