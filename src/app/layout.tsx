@@ -14,20 +14,24 @@ const hand = Caveat({ variable: "--font-hand", subsets: ["latin"] });
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"] });
 const nunito = Nunito({ variable: "--font-ui", subsets: ["latin"] });
 
+/** What a shared link says: what it is, what you do, what you get, what it costs. */
+const TITLE = "Quackle Scrapbook · Game idea generator for jams";
+const DESCRIPTION =
+  "Stuck on a game idea? Open card packs for mechanics, a twist, mood and look, keep what sparks, and get a one-page game pitch to share with your team. Free, no sign-up. By quackle.bit.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(METADATA_BASE),
-  title: { default: "quackle.scrapbook", template: "%s" },
-  description:
-    "A cozy desk for game ideas by quackle.bit. Open packs, collect what sparks something, stamp it into your scrapbook and end up with a game pitch. Less thinking. More tinkering.",
-  applicationName: "quackle.scrapbook",
+  title: { default: TITLE, template: "%s" },
+  description: DESCRIPTION,
+  applicationName: "Quackle Scrapbook",
   authors: [{ name: "quackle.bit", url: "https://quacklebit.com" }],
   openGraph: {
     type: "website",
-    siteName: "quackle.scrapbook",
-    title: "quackle.scrapbook",
-    description: "Open packs, collect ideas, build a game pitch. Less thinking. More tinkering.",
+    siteName: "Quackle Scrapbook by quackle.bit",
+    title: TITLE,
+    description: DESCRIPTION,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
 export const viewport: Viewport = {
