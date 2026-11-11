@@ -12,7 +12,7 @@ export const STUDIO = {
   connect: "https://quacklebit.com/social/",
   itch: "https://quacklebit.itch.io/",
   email: "contact@quacklebit.com",
-  hashtag: "#quackleScrapbook",
+  hashtag: "#quacklescrapbook",
 };
 
 export const GAMES: { title: string; year: number; line: string; href: string }[] = [

@@ -3785,8 +3785,6 @@ html[data-dark="1"] .dk.dk-desk {
   .dk-summary-main > .pp-actions {
     grid-column: 2;
     grid-row: 1;
-    position: sticky;
-    top: 16px;
     margin-top: 6px;
   }
   .dk-summary-main > .ap {
